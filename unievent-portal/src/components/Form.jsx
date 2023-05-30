@@ -1,39 +1,75 @@
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
-import Input from '@mui/material/Input';
+import { Button , Input ,  Container ,TextField } from '@mui/material';
+import { useFormControl } from '@mui/material/FormControl';
+
 
 const Form = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      firstName: '',
-      select: {}
+      eventName: '',
+      eventDescription: '',
+      eventFilters: '',
+      date: '',
+      time: '',
+      duration: '',
+      location: '',
+      sendNotification: {},
+      photo: '',
     }
   });
   const onSubmit = data => console.log(data);
 
   return (
-    <div>
+    <Container fixed>
     <form onSubmit={handleSubmit(onSubmit)}>
       <Controller
-        name="firstName"
+        name="eventName"
         control={control}
-        render={({ field }) => <Input {...field} />}
-      />
+        render={({ field }) => <TextField id="event-name" label="Event Name" variant="outlined" {...field} />}
+      /><br/>
+
       <Controller
-        name="select"
+        name="eventDescription"
         control={control}
-        render={({ field }) => <Select 
-          {...field} 
-          options={[
-            { value: "chocolate", label: "Chocolate" },
-            { value: "strawberry", label: "Strawberry" },
-            { value: "vanilla", label: "Vanilla" }
-          ]} 
-        />}
-      />
-      <input type="submit" />
+        render={({ field }) => <TextField id="event-description" label="Description" variant="outlined" {...field} />}
+      /><br/>
+      <Controller
+        name="eventFilters"
+        control={control}
+        render={({ field }) => <TextField id="event-Filters" label="Filters" variant="outlined" {...field} />}
+      /><br/>
+      <Controller
+        name="date"
+        control={control}
+        render={({ field }) => <TextField id="event-Filters" label="Filters" variant="outlined" {...field} />}
+      /><br/>
+      <Controller
+        name="time"
+        control={control}
+        render={({ field }) => <TextField id="event-Filters" label="Filters" variant="outlined" {...field} />}
+      /><br/>
+      <Controller
+        name="duration"
+        control={control}
+        render={({ field }) => <TextField id="event-Filters" label="Filters" variant="outlined" {...field} />}
+      /><br/>
+      <Controller
+        name="sendNotification"
+        control={control}
+        render={({ field }) => <TextField id="event-Filters" label="Filters" variant="outlined" {...field} />}
+      /><br/>
+      <Controller
+        name="photo"
+        control={control}
+        render={({ field }) => <TextField id="event-Filters" label="Filters" variant="outlined" {...field} />}
+      /><br/>
+
+      
+    
+      <Button type="submit" variant="outlined"> Post Event </Button>
     </form>
-    </div>
+    </Container>
     
   );
 };
