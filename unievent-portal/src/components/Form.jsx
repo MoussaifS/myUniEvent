@@ -1,77 +1,128 @@
-import Select from "react-select";
-import { useForm, Controller } from "react-hook-form";
-import { Button , Input ,  Container ,TextField } from '@mui/material';
-import { useFormControl } from '@mui/material/FormControl';
+import React from 'react';
+import { TextField, Switch, FormControlLabel, FormGroup, Grid, Button } from '@mui/material';
+import Select from 'react-select';
+import { useForm } from "react-hook-form";
 
 
 const Form = () => {
-  const { control, handleSubmit } = useForm({
-    defaultValues: {
-      eventName: '',
-      eventDescription: '',
-      eventFilters: '',
-      date: '',
-      time: '',
-      duration: '',
-      location: '',
-      sendNotification: {},
-      photo: '',
-    }
-  });
-  const onSubmit = data => console.log(data);
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const tagOptions = [
+    { value: "Academic Events", label: "Academic Events" },
+    { value: "Career Development", label: "Career Development" },
+    { value: "Arts and Culture", label: "Arts and Culture" },
+    { value: "Sports and Recreation", label: "Sports and Recreation" },
+    { value: "Social Impact", label: "Social Impact" },
+    { value: "Student Organizations", label: "Student Organizations" },
+    { value: "Campus Life", label: "Campus Life" },
+    { value: "Guest Speakers", label: "Guest Speakers" },
+    { value: "Alumni Events", label: "Alumni Events" },
+    { value: "Festivals and Celebrations", label: "Festivals and Celebrations" },
+  ];
+
+  const onSubmit = (data) => {
+    console.log(data); // Do something with the form data
+  };
 
   return (
-    <Container fixed>
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Controller
-        name="eventName"
-        control={control}
-        render={({ field }) => <TextField id="event-name" label="Event Name" variant="outlined" {...field} />}
-      /><br/>
+    <form onSubmit={handleSubmit(onSubmit)} >
+      <Grid container spacing={2}>
 
-      <Controller
-        name="eventDescription"
-        control={control}
-        render={({ field }) => <TextField id="event-description" label="Description" variant="outlined" {...field} />}
-      /><br/>
-      <Controller
-        name="eventFilters"
-        control={control}
-        render={({ field }) => <TextField id="event-Filters" label="Filters" variant="outlined" {...field} />}
-      /><br/>
-      <Controller
-        name="date"
-        control={control}
-        render={({ field }) => <TextField id="event-Filters" label="Filters" variant="outlined" {...field} />}
-      /><br/>
-      <Controller
-        name="time"
-        control={control}
-        render={({ field }) => <TextField id="event-Filters" label="Filters" variant="outlined" {...field} />}
-      /><br/>
-      <Controller
-        name="duration"
-        control={control}
-        render={({ field }) => <TextField id="event-Filters" label="Filters" variant="outlined" {...field} />}
-      /><br/>
-      <Controller
-        name="sendNotification"
-        control={control}
-        render={({ field }) => <TextField id="event-Filters" label="Filters" variant="outlined" {...field} />}
-      /><br/>
-      <Controller
-        name="photo"
-        control={control}
-        render={({ field }) => <TextField id="event-Filters" label="Filters" variant="outlined" {...field} />}
-      /><br/>
+        {/* Name */}
+        <Grid item xs={12}>
+          <TextField   
+            placeholder="Enter Name Event" 
+            variant="filled"
+            label="Event Name" 
+            fullWidth
+            {...register('name', { required: true })}
+            error={!!errors.name}
+            helperText={errors.name && 'Name is required'}
+            />
+        </Grid>
 
-      
-    
-      <Button type="submit" variant="outlined"> Post Event </Button>
+        {/* Description */}
+        <Grid item xs={12}>
+          <TextField
+            variant="filled"
+            multiline
+            required
+            minRows={3}
+            maxRows={5}
+            placeholder="Event Description"
+            style={{ width: '100%' }}
+            {...register('description')}
+            
+          />
+        </Grid>
+
+        {/* Tags */}
+        <Grid item xs={12}>
+          <Select
+            {...register('tags')}
+            menuPortalTarget={document.body} 
+            required
+            name= 'tags'
+            styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+            isMulti
+            options={tagOptions}
+            variant="filled"
+            placeholder="Tags"
+          />
+        </Grid>
+
+        {/* Start Time */}
+        <Grid item xs={6}>
+          <TextField
+          {...register('stratTime', { required: true })}
+            label="Start Time"
+            required
+            type="datetime-local"
+            variant="filled"
+            fullWidth
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+
+        {/* End Time */}
+        <Grid item xs={6}>
+          <TextField
+          {...register('endTime', { required: true })}
+            variant="filled"
+            required
+            label="End Time"
+            type="datetime-local"
+            fullWidth
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+
+        {/* Send Notification */}
+        <Grid item xs={12}>
+          <FormGroup>
+            <FormControlLabel
+              control={<Switch />}
+              label="Send Notification"
+            />
+          </FormGroup>
+        </Grid>
+
+        {/* Photo */}
+        <Grid item xs={12}>
+        
+          <Button variant="contained" required component="label">
+            Upload Photo
+            <input type="file" hidden />
+          </Button>
+        </Grid>
+
+      </Grid>
+
+      <Button type="submit" variant="contained" color="primary">
+            Submit
+      </Button>
     </form>
-    </Container>
-    
   );
 };
 
-export default Form
+export default Form;
