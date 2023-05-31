@@ -5,3 +5,18 @@ HTML{
 .Button{
   background-color: #333333 ;
 }
+
+#btn-publish{
+  background-color: rgba(255, 0, 0, 0.26);
+}
+
+#form-container{
+  background-color: #c8cec47a;
+  padding: 20px;
+  border-radius: 5px;
+  border: dashed #C8CEC4;
+}
+
+#form-tag{
+  border: #C8CEC4;
+}

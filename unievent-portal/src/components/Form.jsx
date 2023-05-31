@@ -1,6 +1,8 @@
 import React from 'react';
-import { Container , TextField, Switch,Radio , RadioGroup, FormLabel ,FormControlLabel, FormGroup, Grid, Button } from '@mui/material';
+import {  Container , TextField, Switch,Radio , RadioGroup, FormLabel ,FormControlLabel, FormGroup, Grid, Button, colors } from '@mui/material';
 import Select from 'react-select';
+import PublishIcon from '@mui/icons-material/Publish';
+import SendSharpIcon from '@mui/icons-material/SendSharp';
 import { useForm } from "react-hook-form";
 
 
@@ -20,12 +22,19 @@ const Form = () => {
     { value: "Festivals and Celebrations", label: "Festivals and Celebrations" },
   ];
 
+  const studentEventInvitations = [
+    { type: "Local Student", invitation: "Local Student" },
+    { type: "Outsider Student", invitation: "Outsider Student" },
+    { type: "Invitation Only", invitation: "Invitation Only" },
+    { type: "Open for All", invitation: "Open for All" }
+  ];
+
   const onSubmit = (data) => {
     console.log(data); // Do something with the form data
   };
 
   return (
-    <Container maxWidth="sm" >
+    <Container maxWidth="sm" id='form-container' >
     <form onSubmit={handleSubmit(onSubmit)} >
       <Grid container spacing={2}>
 
@@ -61,9 +70,9 @@ const Form = () => {
         <Grid item xs={12}>
           <Select
             {...register('tags')}
+            id='form-tag'
             menuPortalTarget={document.body} 
             required
-            name= 'tags'
             styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
             isMulti
             options={tagOptions}
@@ -99,7 +108,26 @@ const Form = () => {
         </Grid>
 
         {/* target audience*/}
-      <Grid item xs={12}>
+
+
+        <Grid item xs={12}>
+          <Select
+            {...register('tags')}
+            id='form-tag'
+            menuPortalTarget={document.body} 
+            required
+            styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+            isMulti
+            options={tagOptions}
+            variant="filled"
+            placeholder="Tags"
+          />
+        </Grid>
+
+
+
+        
+      <Grid item  xs={12}>
       <FormLabel>The Target Audience Are: </FormLabel>
       <RadioGroup row>
         <FormControlLabel 
@@ -133,17 +161,34 @@ const Form = () => {
         {/* Photo */}
         <Grid item xs={12}>
         
-          <Button variant="contained" required component="label">
+          <Button 
+            variant="outlined"
+            endIcon={<PublishIcon />}
+            component="label"
+            >
             Upload Photo
-            <input type="file" hidden />
+            <input 
+            type="file"
+            {...register("picture", {
+              required: "Recipe picture is required",
+            })}
+            hidden />
           </Button>
         </Grid>
 
+        <Grid item xs={12}>
+        <Button 
+          id='btn-publish'
+          type="submit"
+          variant="contained" 
+          endIcon={<SendSharpIcon/>} color="primary"
+          >
+            Publish Event
+        </Button>
+      </Grid>
       </Grid>
 
-      <Button type="submit" variant="contained" color="primary">
-            Submit
-      </Button>
+      
     </form>
   </Container>
   );
