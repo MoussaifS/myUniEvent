@@ -1,12 +1,12 @@
 import React from 'react';
-import { TextField, Switch, FormControlLabel, FormGroup, Grid, Button } from '@mui/material';
+import { Container , TextField, Switch,Radio , RadioGroup, FormLabel ,FormControlLabel, FormGroup, Grid, Button } from '@mui/material';
 import Select from 'react-select';
 import { useForm } from "react-hook-form";
 
 
 const Form = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-
+  
   const tagOptions = [
     { value: "Academic Events", label: "Academic Events" },
     { value: "Career Development", label: "Career Development" },
@@ -25,6 +25,7 @@ const Form = () => {
   };
 
   return (
+    <Container maxWidth="sm" >
     <form onSubmit={handleSubmit(onSubmit)} >
       <Grid container spacing={2}>
 
@@ -97,15 +98,37 @@ const Form = () => {
           />
         </Grid>
 
-        {/* Send Notification */}
-        <Grid item xs={12}>
-          <FormGroup>
-            <FormControlLabel
-              control={<Switch />}
-              label="Send Notification"
-            />
-          </FormGroup>
-        </Grid>
+        {/* target audience*/}
+      <Grid item xs={12}>
+      <FormLabel>The Target Audience Are: </FormLabel>
+      <RadioGroup row>
+        <FormControlLabel 
+          value="local"
+          control={<Radio />} 
+          label="local-students" 
+          {...register('targetAudience')}
+        />
+        <FormControlLabel 
+          value="outsider"
+          control={<Radio />}
+          label="outsider-students"
+          {...register('targetAudience')}
+        />
+      </RadioGroup>
+      </Grid>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         {/* Photo */}
         <Grid item xs={12}>
@@ -122,6 +145,7 @@ const Form = () => {
             Submit
       </Button>
     </form>
+  </Container>
   );
 };
 
