@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 const Form = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   
-  const tagOptions = [
+  const eventTag = [
     { value: "Academic Events", label: "Academic Events" },
     { value: "Career Development", label: "Career Development" },
     { value: "Arts and Culture", label: "Arts and Culture" },
@@ -22,11 +22,11 @@ const Form = () => {
     { value: "Festivals and Celebrations", label: "Festivals and Celebrations" },
   ];
 
-  const studentEventInvitations = [
-    { type: "Local Student", invitation: "Local Student" },
-    { type: "Outsider Student", invitation: "Outsider Student" },
-    { type: "Invitation Only", invitation: "Invitation Only" },
-    { type: "Open for All", invitation: "Open for All" }
+  const EventInvitations = [
+    { value: "Local Student", label: "Local Student" },
+    { value: "Outsider Student", label: "Outsider Student" },
+    { value: "Invitation Only", label: "Invitation Only" },
+    { value: "Open for All", label: "Open for All" }
   ];
 
   const onSubmit = (data) => {
@@ -44,6 +44,7 @@ const Form = () => {
             placeholder="Enter Name Event" 
             variant="filled"
             label="Event Name" 
+            required
             fullWidth
             {...register('name', { required: true })}
             error={!!errors.name}
@@ -60,25 +61,24 @@ const Form = () => {
             minRows={3}
             maxRows={5}
             placeholder="Event Description"
-            style={{ width: '100%' }}
-            {...register('description')}
-            
+            fullWidth
+            {...register('description')}  
           />
         </Grid>
 
         {/* Tags */}
         <Grid item xs={12}>
-          <Select
-            {...register('tags')}
-            id='form-tag'
-            menuPortalTarget={document.body} 
-            required
-            styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-            isMulti
-            options={tagOptions}
-            variant="filled"
-            placeholder="Tags"
-          />
+        <Select
+          {...register('eventTag')}
+          menuPortalTarget={document.body} 
+          name="eventTag"
+          required
+          styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+          isMulti
+          options={eventTag}
+          variant="filled"
+          placeholder="Type Of Event"
+        />
         </Grid>
 
         {/* Start Time */}
@@ -108,42 +108,21 @@ const Form = () => {
         </Grid>
 
         {/* target audience*/}
-
-
         <Grid item xs={12}>
           <Select
-            {...register('tags')}
-            id='form-tag'
+            {...register('invitation-tag')}
             menuPortalTarget={document.body} 
             required
+            name="invitationTag"
             styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
             isMulti
-            options={tagOptions}
+            options={EventInvitations}
             variant="filled"
-            placeholder="Tags"
+            placeholder="Type Of Invitation"
           />
         </Grid>
 
 
-
-        
-      <Grid item  xs={12}>
-      <FormLabel>The Target Audience Are: </FormLabel>
-      <RadioGroup row>
-        <FormControlLabel 
-          value="local"
-          control={<Radio />} 
-          label="local-students" 
-          {...register('targetAudience')}
-        />
-        <FormControlLabel 
-          value="outsider"
-          control={<Radio />}
-          label="outsider-students"
-          {...register('targetAudience')}
-        />
-      </RadioGroup>
-      </Grid>
 
 
 
@@ -165,6 +144,7 @@ const Form = () => {
             variant="outlined"
             endIcon={<PublishIcon />}
             component="label"
+            fullWidth
             >
             Upload Photo
             <input 
@@ -177,7 +157,8 @@ const Form = () => {
         </Grid>
 
         <Grid item xs={12}>
-        <Button 
+        <Button
+          fullWidth 
           id='btn-publish'
           type="submit"
           variant="contained" 
