@@ -46,9 +46,7 @@ const Form = () => {
             label="Event Name" 
             required
             fullWidth
-            {...register('name', { required: true })}
-            error={!!errors.name}
-            helperText={errors.name && 'Name is required'}
+            {...register('name')}
             />
         </Grid>
 
