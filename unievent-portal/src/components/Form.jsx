@@ -102,13 +102,26 @@ const Form = () => {
             />
           </Grid>
 
-          {/* Start Time */}
-          <Grid item xs={6}>
+          {/* Start Date */}
+          <Grid item xs={5}>
             <TextField
-              {...register("stratTime", { required: true })}
+              {...register("startDate", { required: true })}
+              label="Start Date"
+              required
+              type="date"
+              variant="filled"
+              fullWidth
+              InputLabelProps={{ shrink: true }}
+            />
+          </Grid>
+
+          {/* Start Time */}
+          <Grid item xs={3.5}>
+            <TextField
+              {...register("startTime", { required: true })}
               label="Start Time"
               required
-              type="datetime-local"
+              type="time"
               variant="filled"
               fullWidth
               InputLabelProps={{ shrink: true }}
@@ -116,13 +129,13 @@ const Form = () => {
           </Grid>
 
           {/* End Time */}
-          <Grid item xs={6}>
+          <Grid item xs={3.5}>
             <TextField
               {...register("endTime", { required: true })}
               variant="filled"
               required
               label="End Time"
-              type="datetime-local"
+              type="time"
               fullWidth
               InputLabelProps={{ shrink: true }}
             />

@@ -1,11 +1,11 @@
-import Button from '@mui/material/Button';
 import Form from './components/Form';
-
+import Card from './components/Cards';
 function App() {
 
   return (
     <div>
-      <Form/>
+    <Form/>
+      <Card/>
     </div>
   )
 }
