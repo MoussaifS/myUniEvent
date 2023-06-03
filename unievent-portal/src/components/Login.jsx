@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, TextField, Grid, Button } from "@mui/material";
+import { Container, TextField, Grid, Button, Divider } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import { useForm } from "react-hook-form";
 
@@ -41,7 +41,7 @@ const Login = () => {
           <Grid item xs={12}>
             <Button
               fullWidth
-              id="btn-publish"
+              id="btn-login"
               type="submit"
               variant="contained"
               endIcon={<LoginIcon />}
@@ -51,6 +51,14 @@ const Login = () => {
             </Button>
           </Grid>
         </Grid>
+
+        <Divider>Or Sign In With</Divider>
+        <Button
+          variant="contained"
+          color="primary"
+        >
+          Sign In with Microsoft
+        </Button>
       </form>
     </Container>
   );
