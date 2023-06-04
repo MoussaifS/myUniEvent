@@ -2,11 +2,21 @@ import React from "react";
 import { Container, TextField, Grid, Button, Divider } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import { useForm } from "react-hook-form";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { Email, Password } from "@mui/icons-material";
+import { auth } from "../FireBase";
 
 const Login = () => {
   const { handleSubmit, register } = useForm();
-  const onSubmit = (data) => {
-    console.log(data); // Do something with the form data
+  const onSubmit = (e) => {
+    console.log(e)
+    signInWithEmailAndPassword(auth, e.email, e.password).then(
+      (userCredential) => {
+        console.log(userCredential);
+      }
+    ).catch((error) => console.log(error));
+
+    console.log(e); // Do something with the form data
   };
 
   return (
@@ -55,7 +65,6 @@ const Login = () => {
         <Button
           variant="contained"
           color="primary"
-          onClick={handleMicrosoftLogin()}
         >
           Sign In with Microsoft
         </Button>

@@ -17,6 +17,8 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Form/>} />
         <Route exact path="/sign-up" element={<SignUp />} />
+        <Route exact path="/login" element={<Login />} />
+
       </Routes>
     </Router>
   );
