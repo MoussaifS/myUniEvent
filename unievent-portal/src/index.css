@@ -1,33 +1,47 @@
-HTML{
-  background-color:  #EBEBE7 ;
+HTML {
+  background-color: #ebebe7;
 }
 
-.Button{
-  background-color: #333333 ;
+
+html {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
 }
 
-.css-13cymwt-control{
+body {
+  margin: 0px;
+  min-height: 100%;
+  width: 100%;
   background-color: red;
 }
 
-#select-tags{
+.Button {
+  background-color: #333333;
+}
+
+.css-13cymwt-control {
+  background-color: red;
+}
+
+#select-tags {
   background-color: red !important;
 }
 
-#btn-publish{
+#btn-publish {
   background-color: rgba(255, 0, 0, 0.26);
 }
 
-#btn-login{
+#btn-login {
 }
 
-#form-container{
+#form-container {
   background-color: #c8cec47a;
   padding: 20px;
   border-radius: 5px;
-  border: dashed #C8CEC4;
+  border: dashed #c8cec4;
 }
 
-#form-tag{
-  border: #C8CEC4;
+#form-tag {
+  border: #c8cec4;
 }
