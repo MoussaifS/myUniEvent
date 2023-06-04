@@ -6,12 +6,13 @@ import {
 import Form from './components/Form';
 import Card from './components/Cards';
 import Landing from './pages/Landing';
-import Login from './components/Login'
+// import Login from './components/Login';
+import SignUp from  './components/SignUp'
 function App() {
 
   return (
     <div>
-      <Login/>
+      <SignUp/>
     </div>
   )
 }
