@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, TextField, Grid, Button, Divider } from "@mui/material";
+import { Container, Box  , TextField, Grid, Button, Divider } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -9,12 +9,12 @@ import { auth } from "../FireBase";
 const Login = () => {
   const { handleSubmit, register } = useForm();
   const onSubmit = (e) => {
-    console.log(e)
-    signInWithEmailAndPassword(auth, e.email, e.password).then(
-      (userCredential) => {
+    console.log(e);
+    signInWithEmailAndPassword(auth, e.email, e.password)
+      .then((userCredential) => {
         console.log(userCredential);
-      }
-    ).catch((error) => console.log(error));
+      })
+      .catch((error) => console.log(error));
 
     console.log(e); // Do something with the form data
   };
@@ -22,7 +22,7 @@ const Login = () => {
   return (
     <Container maxWidth="sm" id="form-container">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
           {/* Name */}
           <Grid item xs={12}>
             <TextField
@@ -59,15 +59,9 @@ const Login = () => {
               Log In
             </Button>
           </Grid>
-        </Grid>
 
-        <Divider>Or Sign In With</Divider>
-        <Button
-          variant="contained"
-          color="primary"
-        >
-          Sign In with Microsoft
-        </Button>
+
+        </Grid>
       </form>
     </Container>
   );

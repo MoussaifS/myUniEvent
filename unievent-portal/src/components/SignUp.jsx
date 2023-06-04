@@ -217,6 +217,18 @@ const SignUp = () => {
             />
           </Grid>
 
+          {/* email */}
+          <Grid item xs={12}>
+            <TextField
+              placeholder="Enter Your Password"
+              variant="filled"
+              label="Password"
+              required
+              fullWidth
+              {...register("password")}
+            />
+          </Grid>
+
           {/* uni name */}
           <Grid item xs={12}>
             <Controller
