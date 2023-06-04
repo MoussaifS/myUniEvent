@@ -1,17 +1,18 @@
 import * as React from "react";
+import { Container, TextField, Grid, Button } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-
+import Login from "../components/Login";
 const Landing = () => {
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <Container maxWidth="sm">
-        <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }} />
-        <p>this us </p>
-      </Container>
-    </React.Fragment>
+    <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <Login/>
+      </Grid>
+      <Grid item xs={6}>
+        
+      </Grid>
+    </Grid>
   );
 };
 

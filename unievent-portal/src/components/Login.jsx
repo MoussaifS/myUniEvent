@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 
 const Login = () => {
   const { handleSubmit, register } = useForm();
-
   const onSubmit = (data) => {
     console.log(data); // Do something with the form data
   };
@@ -56,6 +55,7 @@ const Login = () => {
         <Button
           variant="contained"
           color="primary"
+          onClick={handleMicrosoftLogin()}
         >
           Sign In with Microsoft
         </Button>
