@@ -2,23 +2,15 @@ HTML {
   background-color: #ebebe7;
 }
 
-
-html {
-  margin: 0px;
-  height: 100%;
-  width: 100%;
-}
-
-body {
-  margin: 0px;
-  min-height: 100%;
-  width: 100%;
-}
-
 .Button {
   background-color: #333333;
 }
 
+
+.MuiTypography-root {
+  color: #333333;
+  font-weight: bold;
+}
 .css-13cymwt-control {
   background-color: red;
 }

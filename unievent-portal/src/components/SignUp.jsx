@@ -1,30 +1,11 @@
-import { useState } from "react";
-import {
-  Container,
-  TextField,
-  Switch,
-  Radio,
-  RadioGroup,
-  FormLabel,
-  FormControlLabel,
-  FormGroup,
-  Grid,
-  Button,
-  MenuItem,
-  colors,
-} from "@mui/material";
+import { Container, TextField, Grid, Button } from "@mui/material";
 import Select from "react-select";
-import PublishIcon from "@mui/icons-material/Publish";
-import SendSharpIcon from "@mui/icons-material/SendSharp";
 import { useForm, Controller } from "react-hook-form";
+import { auth } from "../FireBase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = () => {
-  const { control, handleSubmit, register } = useForm({
-    defaultValues: {
-      eventTag: "",
-      eventInvitation: "",
-    },
-  });
+  const { control, handleSubmit, register } = useForm();
 
   const institutions = [
     { name: "University of Malaya", label: "University of Malaya" },
@@ -162,20 +143,26 @@ const SignUp = () => {
   ];
 
   const roles = [
-    { role: "Professor", label: "Professor" },
-    { role: "Lecturer", label: "Lecturer" },
-    { role: "Dean", label: "Dean" },
-    { role: "Student Advisor", label: "Student Advisor" },
-    { role: "Academic Advisor", label: "Academic Advisor" },
-    { role: "Facilities Manager", label: "Facilities Manager" },
-    { role: "Student Club Advisor", label: "Student Club Advisor" },
+    { role: "Professor" },
+    { role: "Lecturer" },
+    { role: "Dean" },
+    { role: "Student Advisor" },
+    { role: "Academic Advisor" },
+    { role: "Facilities Manager" },
+    { role: "Student Club Advisor" },
+    { role: "Student Club President" },
   ];
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const onSubmit = (e) => {
+    console.log(e);
+    createUserWithEmailAndPassword(auth, e.email, e.password)
+      .then((userCredential) => {
+        console.log(userCredential);
+      })
+      .catch((error) => console.log(error));
 
-  const [isSearchable, setIsSearchable] = useState(true);
+    console.log(e); // Do something with the form data
+  };
 
   return (
     <Container maxWidth="sm" id="form-container">
@@ -233,7 +220,7 @@ const SignUp = () => {
           <Grid item xs={12}>
             <Controller
               name="institution"
-              placeholder='Institution Name'
+              placeholder="Institution Name"
               control={control}
               render={({ field }) => (
                 <Select
@@ -249,18 +236,16 @@ const SignUp = () => {
 
           {/* Role */}
           <Grid item xs={12}>
-           
-
             <Controller
               name="role"
               control={control}
               render={({ field }) => (
                 <Select
-                  placeholder='Enter your role in this institution '
+                  placeholder="Enter your role in this institution "
                   {...field}
                   options={roles.map((role) => ({
                     value: role.role,
-                    label: role.label,
+                    label: role.role,
                   }))}
                 />
               )}
@@ -273,10 +258,9 @@ const SignUp = () => {
               id="btn-publish"
               type="submit"
               variant="contained"
-              endIcon={<SendSharpIcon />}
               color="primary"
             >
-              Publish Event
+              Create Account
             </Button>
           </Grid>
         </Grid>
