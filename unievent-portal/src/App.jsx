@@ -8,9 +8,10 @@ import {
 import Form from './components/Form';
 import Card from './components/Cards';
 import Landing from './pages/Landing';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
+import Login from './components/auth/Login';
+import SignUp from './components/auth/SignUp';
 import DashBoard from './pages/DashBoard';
+
 function App() {
   return (
     <Router>

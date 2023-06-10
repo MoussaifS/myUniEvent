@@ -9,8 +9,8 @@ import {
   Grid,
   Button,
 } from "@mui/material";
-import Login from "../components/Login";
-import SignUp from "../components/SignUp";
+import Login from "../components/auth/Login";
+import SignUp from "../components/auth/SignUp";
 import Nav from "../components/Nav";
 import Form from "../components/Form";
 import Cards from "../components/EventCard";

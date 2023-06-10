@@ -4,15 +4,19 @@ import LoginIcon from "@mui/icons-material/Login";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Email, Password } from "@mui/icons-material";
-import { auth } from "../FireBase";
+import { auth } from "../../FireBase";
+import { Navigate , Outlet  ,useLocation, useNavigate} from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  
   const { handleSubmit, register } = useForm();
   const onSubmit = (e) => {
-    console.log(e);
     signInWithEmailAndPassword(auth, e.email, e.password)
       .then((userCredential) => {
         console.log(userCredential);
+        navigate("/dashboard", { replace: true, state: { from: location } });
       })
       .catch((error) => console.log(error));
 

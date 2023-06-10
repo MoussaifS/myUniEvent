@@ -9,9 +9,8 @@ import {
   Grid,
   Button,
 } from "@mui/material";
-import CssBaseline from "@mui/material/CssBaseline";
-import Login from "../components/Login";
-import SignUp from "../components/SignUp";
+import Login from "../components/auth/Login";
+import SignUp from "../components/auth/SignUp";
 const Landing = () => {
   const [toggle, setToggle] = useState(false);
 
@@ -21,6 +20,7 @@ const Landing = () => {
 
   return (
     <Container maxWidth="xl">
+     
       <Grid container spacing={8}>
         <Grid item xs={6}>
           <Container maxWidth="sm" id="landing-prom">

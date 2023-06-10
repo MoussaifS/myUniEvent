@@ -1,7 +1,7 @@
 import { Container, TextField, Grid, Button } from "@mui/material";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
-import { auth } from "../FireBase";
+import { auth } from "../../FireBase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = () => {
@@ -225,6 +225,7 @@ const SignUp = () => {
               render={({ field }) => (
                 <Select
                   {...field}
+                  placeholder="Enter The Name Of The Institution "
                   options={institutions.map((institution) => ({
                     value: institution.name,
                     label: institution.label,
@@ -241,7 +242,7 @@ const SignUp = () => {
               control={control}
               render={({ field }) => (
                 <Select
-                  placeholder="Enter your role in this institution "
+                  placeholder="Enter Your Role In This Institution "
                   {...field}
                   options={roles.map((role) => ({
                     value: role.role,
