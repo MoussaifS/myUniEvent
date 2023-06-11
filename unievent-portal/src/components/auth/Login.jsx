@@ -1,11 +1,9 @@
-import React from "react";
-import { Container, Box  , TextField, Grid, Button, Divider } from "@mui/material";
+import { Container  , TextField, Grid, Button } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Email, Password } from "@mui/icons-material";
 import { auth } from "../../FireBase";
-import { Navigate , Outlet  ,useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();

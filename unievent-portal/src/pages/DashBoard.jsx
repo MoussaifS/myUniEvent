@@ -14,7 +14,7 @@ import SignUp from "../components/auth/SignUp";
 import Nav from "../components/Nav";
 import Form from "../components/Form";
 import Cards from "../components/EventCard";
-import CardDisplay from "../components/CardDisplay"
+import CardDisplay from "../components/CardDisplay";
 const DashBoard = () => {
   const [toggle, setToggle] = useState(false);
 
@@ -25,16 +25,41 @@ const DashBoard = () => {
 
   return (
     <Container maxWidth="xl">
-      <Nav />
+      <Nav/>
       <Grid container spacing={8}>
         <Grid item xs={6}>
-        <Form/>
+          <Container maxWidth="sm" id="landing-prom">
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "100vh",
+              }}
+            >
+              <Form />
+            </Box>
+          </Container>
         </Grid>
- 
 
-      
         <Grid item xs={6}>
-        <CardDisplay/>
+          <Container maxWidth="xl" id="form-container" sx={{
+            margin: "20px",
+          }}>
+            <Box
+              sx={{
+                minHeight: "100vh",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+              }}
+            >
+              
+              {1 == 1  ?  <p>there is no events</p> : <CardDisplay /> } 
+              </Box>
+          </Container>
         </Grid>
       </Grid>
     </Container>

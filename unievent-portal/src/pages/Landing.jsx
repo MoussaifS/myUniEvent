@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useState } from "react";
 import pic from "../assets/image1-removebg.png";
 import {
