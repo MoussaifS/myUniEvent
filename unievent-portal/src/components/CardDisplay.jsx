@@ -9,11 +9,12 @@ import {
   import SendSharpIcon from "@mui/icons-material/SendSharp";
   import { useForm, Controller } from "react-hook-form";
   import EventCard from "./EventCard";
+  import {data} from "../FireBase"
   const CardDisplay = () => {
     
-    const onSubmit = (data) => {
-      console.log(data); // Do something with the form data
-    };
+
+
+    console.log(data)
   
     return (
       <Container maxWidth="sm" id="form-container">

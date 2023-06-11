@@ -43,21 +43,30 @@ const DashBoard = () => {
           </Container>
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={6}
+        sx={{
+
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
+        
+        >
           <Container maxWidth="xl" id="form-container" sx={{
-            margin: "20px",
+            marginTop: "10px",
           }}>
             <Box
               sx={{
-                minHeight: "100vh",
+                minHeight: "50vh",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 flexDirection: "column",
               }}
             >
               
-              {1 == 1  ?  <p>there is no events</p> : <CardDisplay /> } 
+              {1 == 2  ?  <h1>there is no events</h1> : <CardDisplay /> } 
               </Box>
           </Container>
         </Grid>
