@@ -9,6 +9,7 @@ import {
   import SendSharpIcon from "@mui/icons-material/SendSharp";
   import { useForm, Controller } from "react-hook-form";
   import EventCard from "./EventCard";
+  import Cards from "./Cards"
   import {data} from "../FireBase"
   const CardDisplay = () => {
     
@@ -18,6 +19,7 @@ import {
   
     return (
       <Container maxWidth="sm" id="form-container">
+        <Cards/>
         <EventCard/>
       </Container>
     );

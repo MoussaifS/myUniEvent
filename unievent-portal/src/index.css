@@ -28,9 +28,14 @@ HTML {
 
 #form-container {
   background-color: #c8cec47a;
-  padding: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
   border: dashed #c8cec4;
+  gap: 10px;
 }
 
 #form-tag {

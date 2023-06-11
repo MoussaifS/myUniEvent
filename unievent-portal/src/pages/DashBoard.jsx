@@ -13,8 +13,10 @@ import Login from "../components/auth/Login";
 import SignUp from "../components/auth/SignUp";
 import Nav from "../components/Nav";
 import Form from "../components/Form";
-import Cards from "../components/EventCard";
+
 import CardDisplay from "../components/CardDisplay";
+import EventCard from "../components/EventCard";
+import Cards from "../components/Cards";
 const DashBoard = () => {
   const [toggle, setToggle] = useState(false);
 
@@ -25,7 +27,7 @@ const DashBoard = () => {
 
   return (
     <Container maxWidth="xl">
-      <Nav/>
+      <Nav />
       <Grid container spacing={8}>
         <Grid item xs={6}>
           <Container maxWidth="sm" id="landing-prom">
@@ -43,19 +45,23 @@ const DashBoard = () => {
           </Container>
         </Grid>
 
-        <Grid item xs={6}
-        sx={{
-
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-        }}
-        
+        <Grid
+          item
+          xs={6}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
         >
-          <Container maxWidth="xl" id="form-container" sx={{
-            marginTop: "10px",
-          }}>
+          <Container
+            maxWidth="xl"
+            id="form-container"
+            sx={{
+              marginTop: "10px",
+            }}
+          >
             <Box
               sx={{
                 minHeight: "50vh",
@@ -65,9 +71,8 @@ const DashBoard = () => {
                 flexDirection: "column",
               }}
             >
-              
-              {1 == 2  ?  <h1>there is no events</h1> : <CardDisplay /> } 
-              </Box>
+              {1 == 2 ? <h1>there is no events</h1> : <Cards />}
+            </Box>
           </Container>
         </Grid>
       </Grid>
