@@ -10,12 +10,12 @@ import {
   import { useForm, Controller } from "react-hook-form";
   import EventCard from "./EventCard";
   import Cards from "./Cards"
-  import {data} from "../FireBase"
+  import {db} from "../FireBase"
   const CardDisplay = () => {
     
 
 
-    console.log(data)
+    console.log(db)
   
     return (
       <Container maxWidth="sm" id="form-container">

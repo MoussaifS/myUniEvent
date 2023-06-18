@@ -8,15 +8,12 @@ import Select from "react-select";
 import PublishIcon from "@mui/icons-material/Publish";
 import SendSharpIcon from "@mui/icons-material/SendSharp";
 import { useForm, Controller } from "react-hook-form";
-
+import { collection, addDoc } from "firebase/firestore"; 
+import {db} from "../FireBase"
 const Form = () => {
-  const { control, handleSubmit, register } = useForm({
-    defaultValues: {
-      eventTag: "",
-      eventInvitation: "",
-    },
-  });
+  const { control, handleSubmit, register } = useForm();
 
+  
   const eventTags = [
     { value: "Academic Events", label: "Academic Events" },
     { value: "Career Development", label: "Career Development" },
@@ -40,8 +37,13 @@ const Form = () => {
     { value: "Open for All", label: "Open for All" },
   ];
 
-  const onSubmit = (data) => {
-    console.log(data); // Do something with the form data
+  const onSubmit = async (data) => {
+    console.log(data)
+
+    const docRef = await addDoc(collection(db, "events"), data); 
+
+    console.log(docRef)
+
   };
 
   return (
@@ -154,24 +156,7 @@ const Form = () => {
             />
           </Grid>
 
-          {/* Photo */}
-          <Grid item xs={12}>
-            <Button
-              variant="outlined"
-              endIcon={<PublishIcon />}
-              component="label"
-              fullWidth
-            >
-              Upload Photo
-              <input
-                type="file"
-                {...register("picture", {
-                  required: "Recipe picture is required",
-                })}
-                hidden
-              />
-            </Button>
-          </Grid>
+         
 
           <Grid item xs={12}>
             <Button

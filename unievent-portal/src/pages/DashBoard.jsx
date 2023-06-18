@@ -13,21 +13,19 @@ import Login from "../components/auth/Login";
 import SignUp from "../components/auth/SignUp";
 import Nav from "../components/Nav";
 import Form from "../components/Form";
-
+import {db , auth} from "../FireBase"
 import CardDisplay from "../components/CardDisplay";
 import EventCard from "../components/EventCard";
 import Cards from "../components/Cards";
 const DashBoard = () => {
   const [toggle, setToggle] = useState(false);
 
-  console.log(<Form />);
-  const handleToggle = () => {
-    setToggle((t) => !t);
-  };
+
+
 
   return (
     <Container maxWidth="xl">
-      <Nav />
+      <Nav/>
       <Grid container spacing={8}>
         <Grid item xs={6}>
           <Container maxWidth="sm" id="landing-prom">
@@ -71,7 +69,7 @@ const DashBoard = () => {
                 flexDirection: "column",
               }}
             >
-              {1 == 2 ? <h1>there is no events</h1> : <Cards />}
+              {1 == 2 ? <h1>there is no events</h1> : <Cards/>}
             </Box>
           </Container>
         </Grid>
