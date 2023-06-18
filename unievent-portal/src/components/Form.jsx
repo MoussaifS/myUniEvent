@@ -32,7 +32,7 @@ const Form = () => {
   ];
 
   const onSubmit = async (data) => {
-    data.uid = auth.currentUser.email 
+    data.email = auth.currentUser.email 
 
     console.log(auth.currentUser.email )
     // const docRef = await addDoc(collection(db, "events"), data);

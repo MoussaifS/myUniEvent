@@ -1,149 +1,21 @@
 import { Container, TextField, Grid, Button } from "@mui/material";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
-import { auth } from "../../FireBase";
+import { auth, db} from "../../FireBase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { collection, addDoc } from "firebase/firestore";
 
 const SignUp = () => {
   const { control, handleSubmit, register } = useForm();
 
   const institutions = [
-    { name: "University of Malaya", label: "University of Malaya" },
-    { name: "University Putra Malaysia", label: "University Putra Malaysia" },
-    {
-      name: "University of Science, Malaysia",
-      label: "University of Science, Malaysia",
-    },
-    {
-      name: "National University of Malaysia",
-      label: "National University of Malaysia",
-    },
-    {
-      name: "University of Technology, Malaysia",
-      label: "University of Technology, Malaysia",
-    },
-    {
-      name: "International Islamic University Malaysia",
-      label: "International Islamic University Malaysia",
-    },
-    {
-      name: "Petronas University of Technology",
-      label: "Petronas University of Technology",
-    },
-    {
-      name: "University of Malaysia, Pahang",
-      label: "University of Malaysia, Pahang",
-    },
-    { name: "Universiti Teknologi MARA", label: "Universiti Teknologi MARA" },
-    { name: "Monash University Malaysia", label: "Monash University Malaysia" },
-    {
-      name: "University of Malaysia, Perlis",
-      label: "University of Malaysia, Perlis",
-    },
-    {
-      name: "Tun Hussein Onn University of Malaysia",
-      label: "Tun Hussein Onn University of Malaysia",
-    },
-    { name: "Taylors University", label: "Taylors University" },
-    {
-      name: "International Medical University",
-      label: "International Medical University",
-    },
-    {
-      name: "University of Nottingham, Malaysia Campus",
-      label: "University of Nottingham, Malaysia Campus",
-    },
-    {
-      name: "Curtin University, Malaysia",
-      label: "Curtin University, Malaysia",
-    },
-    {
-      name: "University of Malaysia Sabah",
-      label: "University of Malaysia Sabah",
-    },
-    {
-      name: "Swinburne University of Technology, Sarawak Campus",
-      label: "Swinburne University of Technology, Sarawak Campus",
-    },
-    { name: "AIMST University", label: "AIMST University" },
-    {
-      name: "University Tunku Abdul Rahman",
-      label: "University Tunku Abdul Rahman",
-    },
-    { name: "Tenaga National University", label: "Tenaga National University" },
-    {
-      name: "University of Malaysia, Sarawak",
-      label: "University of Malaysia, Sarawak",
-    },
-    {
-      name: "University Malaysia Terengganu",
-      label: "University Malaysia Terengganu",
-    },
-    { name: "Multimedia University", label: "Multimedia University" },
-    { name: "Sunway University", label: "Sunway University" },
-    {
-      name: "Technical University of Malaysia, Melaka",
-      label: "Technical University of Malaysia, Melaka",
-    },
-    {
-      name: "Heriot-Watt University Malaysia",
-      label: "Heriot-Watt University Malaysia",
-    },
-    { name: "UCSI University", label: "UCSI University" },
-    { name: "University of Kuala Lumpur", label: "University of Kuala Lumpur" },
-    {
-      name: "University of Malaysia Kelantan",
-      label: "University of Malaysia Kelantan",
-    },
-    {
-      name: "Sultan Idris University of Education",
-      label: "Sultan Idris University of Education",
-    },
-    {
-      name: "Northern University of Malaysia",
-      label: "Northern University of Malaysia",
-    },
-    {
-      name: "National Defence University of Malaysia",
-      label: "National Defence University of Malaysia",
-    },
-    {
-      name: "Sultan Zainal Abidin University",
-      label: "Sultan Zainal Abidin University",
-    },
-    {
-      name: "Melaka Manipal Medical College",
-      label: "Melaka Manipal Medical College",
-    },
-    { name: "SEGi University", label: "SEGi University" },
-    {
-      name: "Islamic Science University of Malaysia",
-      label: "Islamic Science University of Malaysia",
-    },
-    {
-      name: "Lincoln University College, Kuala Lumpur",
-      label: "Lincoln University College, Kuala Lumpur",
-    },
-    {
-      name: "Management and Science University",
-      label: "Management and Science University",
-    },
-    {
-      name: "Tunku Abdul Rahman University College",
-      label: "Tunku Abdul Rahman University College",
-    },
-    {
-      name: "INTI International University & Colleges",
-      label: "INTI International University & Colleges",
-    },
-    {
-      name: "Asia Pacific University of Technology and Innovation",
-      label: "Asia Pacific University of Technology and Innovation",
-    },
+    { name: "Universiti Sains Islam Malaysia" },
+    { name: "Manipal International University" },
+    { name: "Nilai University" },
+    { name: "INTI International University" },
   ];
 
   const roles = [
-    { role: "Professor" },
     { role: "Lecturer" },
     { role: "Dean" },
     { role: "Student Advisor" },
@@ -153,11 +25,11 @@ const SignUp = () => {
     { role: "Student Club President" },
   ];
 
-  const onSubmit = (e) => {
-    console.log(e);
-    createUserWithEmailAndPassword(auth, e.email, e.password)
-      .then((userCredential) => {
-        console.log(userCredential);
+  const onSubmit =  (e) => {
+     createUserWithEmailAndPassword(auth, e.email, e.password)
+      .then(async(userCredential) => {
+          delete e.password;
+          await addDoc(collection(db, "organizers"), e);
       })
       .catch((error) => console.log(error));
 
@@ -195,6 +67,18 @@ const SignUp = () => {
           {/* email */}
           <Grid item xs={12}>
             <TextField
+              placeholder="Enter Your Phone number"
+              variant="filled"
+              label="Phone number"
+              required
+              fullWidth
+              {...register("phone")}
+            />
+          </Grid>
+
+          {/* email */}
+          <Grid item xs={12}>
+            <TextField
               placeholder="Enter Your Email"
               variant="filled"
               label="Email"
@@ -204,7 +88,7 @@ const SignUp = () => {
             />
           </Grid>
 
-          {/* email */}
+          {/* password */}
           <Grid item xs={12}>
             <TextField
               placeholder="Enter Your Password"
@@ -228,7 +112,7 @@ const SignUp = () => {
                   placeholder="Enter The Name Of The Institution "
                   options={institutions.map((institution) => ({
                     value: institution.name,
-                    label: institution.label,
+                    label: institution.name,
                   }))}
                 />
               )}
