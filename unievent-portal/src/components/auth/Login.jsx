@@ -30,7 +30,7 @@ const Login = () => {
             <TextField
               placeholder="Email"
               variant="filled"
-              label="enter your email"
+              label="Enter Your Email"
               required
               fullWidth
               {...register("email")}
@@ -42,7 +42,8 @@ const Login = () => {
             <TextField
               placeholder="Password"
               variant="filled"
-              label="enter your password"
+              label="Enter Your Password"
+              type="password"
               required
               fullWidth
               {...register("password")}

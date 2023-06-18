@@ -1,7 +1,7 @@
 import { Container, TextField, Grid, Button } from "@mui/material";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
-import { auth, db} from "../../FireBase";
+import { auth, db } from "../../FireBase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 
@@ -25,11 +25,11 @@ const SignUp = () => {
     { role: "Student Club President" },
   ];
 
-  const onSubmit =  (e) => {
-     createUserWithEmailAndPassword(auth, e.email, e.password)
-      .then(async(userCredential) => {
-          delete e.password;
-          await addDoc(collection(db, "organizers"), e);
+  const onSubmit = (e) => {
+    createUserWithEmailAndPassword(auth, e.email, e.password)
+      .then(async (userCredential) => {
+        delete e.password;
+        await addDoc(collection(db, "organizers"), e);
       })
       .catch((error) => console.log(error));
 
@@ -64,12 +64,14 @@ const SignUp = () => {
             />
           </Grid>
 
-          {/* email */}
+          {/* phone */}
           <Grid item xs={12}>
             <TextField
               placeholder="Enter Your Phone number"
               variant="filled"
               label="Phone number"
+              defaultValue="+60"
+              type="number"
               required
               fullWidth
               {...register("phone")}
@@ -109,7 +111,7 @@ const SignUp = () => {
               render={({ field }) => (
                 <Select
                   {...field}
-                  placeholder="Enter The Name Of The Institution "
+                  placeholder="Institution Name "
                   options={institutions.map((institution) => ({
                     value: institution.name,
                     label: institution.name,
@@ -126,7 +128,7 @@ const SignUp = () => {
               control={control}
               render={({ field }) => (
                 <Select
-                  placeholder="Enter Your Role In This Institution "
+                  placeholder="Your Role In This Institution "
                   {...field}
                   options={roles.map((role) => ({
                     value: role.role,
