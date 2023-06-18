@@ -1,19 +1,13 @@
-import {
-  Container,
-  TextField,
-  Grid,
-  Button,
-} from "@mui/material";
+import { Container, TextField, Grid, Button } from "@mui/material";
 import Select from "react-select";
 import PublishIcon from "@mui/icons-material/Publish";
 import SendSharpIcon from "@mui/icons-material/SendSharp";
 import { useForm, Controller } from "react-hook-form";
-import { collection, addDoc } from "firebase/firestore"; 
-import {db} from "../FireBase"
+import { collection, addDoc } from "firebase/firestore";
+import { db , auth } from "../FireBase";
 const Form = () => {
   const { control, handleSubmit, register } = useForm();
 
-  
   const eventTags = [
     { value: "Academic Events", label: "Academic Events" },
     { value: "Career Development", label: "Career Development" },
@@ -38,12 +32,12 @@ const Form = () => {
   ];
 
   const onSubmit = async (data) => {
-    console.log(data)
+    data.uid = auth.currentUser.email 
 
-    const docRef = await addDoc(collection(db, "events"), data); 
+    console.log(auth.currentUser.email )
+    // const docRef = await addDoc(collection(db, "events"), data);
 
-    console.log(docRef)
-
+    console.log(data);
   };
 
   return (
@@ -155,8 +149,6 @@ const Form = () => {
               )}
             />
           </Grid>
-
-         
 
           <Grid item xs={12}>
             <Button
