@@ -12,7 +12,7 @@ import Landing from "../pages/Landing";
 const Nav = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  
+  console.log(auth)
   const handleLogout = () => {
     const authUser = null;
     const listen = onAuthStateChanged(auth, (user) => {

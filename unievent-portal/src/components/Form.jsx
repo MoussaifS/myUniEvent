@@ -35,8 +35,7 @@ const Form = () => {
     data.email = auth.currentUser.email 
 
     console.log(auth.currentUser.email )
-    // const docRef = await addDoc(collection(db, "events"), data);
-
+    const docRef = await addDoc(collection(db, "events"), data);
     console.log(data);
   };
 
