@@ -12,13 +12,10 @@ import Landing from "../pages/Landing";
 const Nav = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(auth)
   const handleLogout = () => {
     const authUser = null;
     const listen = onAuthStateChanged(auth, (user) => {
-      console.log(user)
       user = authUser;
-      console.log(user)
       auth.signOut()
           .then(() => {
             navigate("/", { replace: true, state: { from: location } });

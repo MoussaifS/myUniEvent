@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import pic from "../assets/image1-removebg.png";
 import {
   Box,
@@ -17,7 +17,34 @@ import { db, auth } from "../FireBase";
 import CardDisplay from "../components/CardDisplay";
 import EventCard from "../components/EventCard";
 import Cards from "../components/Cards";
+import {
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+  QuerySnapshot,
+} from "firebase/firestore";
+
+const fetchEventsByEmail = async () => {
+  const eventsRef = collection(db, "events");
+  const q = query(eventsRef, where("email", "==", `${auth.currentUser.email}`));
+
+  const querySnapshot = await getDocs(q);
+
+  querySnapshot.forEach((doc) => {
+    console.log(doc.id, " => ", doc.data());
+  });
+};
+
 const DashBoard = () => {
+  
+
+  const xxx = 
+  console.log(xxx)
+  
+
+
   const [toggle, setToggle] = useState(false);
 
   return (

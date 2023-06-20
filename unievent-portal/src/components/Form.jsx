@@ -3,9 +3,16 @@ import Select from "react-select";
 import PublishIcon from "@mui/icons-material/Publish";
 import SendSharpIcon from "@mui/icons-material/SendSharp";
 import { useForm, Controller } from "react-hook-form";
-import { collection, addDoc } from "firebase/firestore";
 import { db , auth } from "../FireBase";
+
+
+
 const Form = () => {
+
+
+
+
+
   const { control, handleSubmit, register } = useForm();
 
   const eventTags = [
@@ -33,10 +40,7 @@ const Form = () => {
 
   const onSubmit = async (data) => {
     data.email = auth.currentUser.email 
-
-    console.log(auth.currentUser.email )
     const docRef = await addDoc(collection(db, "events"), data);
-    console.log(data);
   };
 
   return (

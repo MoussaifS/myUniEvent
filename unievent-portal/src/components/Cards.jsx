@@ -8,7 +8,7 @@ import image from '../assets/3c1aa898-cc8f-476c-ba1b-2ffff0a65461.jpeg';
 
 import { Container } from "@mui/material";
 
-const Cards = () => {
+const Cards = (props) => {
   
   return (
     <Container>
