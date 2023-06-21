@@ -1,19 +1,21 @@
-import { Container  , TextField, Grid, Button } from "@mui/material";
+import { Container, TextField, Grid, Button } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../FireBase";
-import {useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   const { handleSubmit, register } = useForm();
   const onSubmit = (e) => {
     signInWithEmailAndPassword(auth, e.email, e.password)
       .then((userCredential) => {
-        console.log(userCredential);
+        const cookies = new Cookies();
+        cookies.set("email", e.email, { path: "/" });
         navigate("/dashboard", { replace: true, state: { from: location } });
       })
       .catch((error) => console.log(error));
@@ -62,8 +64,6 @@ const Login = () => {
               Log In
             </Button>
           </Grid>
-
-
         </Grid>
       </form>
     </Container>

@@ -9,40 +9,32 @@ import {
   Grid,
   Button,
 } from "@mui/material";
-import Login from "../components/auth/Login";
-import SignUp from "../components/auth/SignUp";
 import Nav from "../components/Nav";
 import Form from "../components/Form";
 import { db, auth } from "../FireBase";
-import CardDisplay from "../components/CardDisplay";
-import EventCard from "../components/EventCard";
 import Cards from "../components/Cards";
 import {
   collection,
-  addDoc,
   query,
   where,
   getDocs,
-  QuerySnapshot,
 } from "firebase/firestore";
-
-const fetchEventsByEmail = async () => {
-  const eventsRef = collection(db, "events");
-  const q = query(eventsRef, where("email", "==", `${auth.currentUser.email}`));
-
-  const querySnapshot = await getDocs(q);
-
-  querySnapshot.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data());
-  });
-};
+import Cookies from "universal-cookie";
+import { ReactSession } from "react-client-session";
 
 const DashBoard = () => {
+  const fetchEventsByEmail = async () => {
+    const eventsRef = collection(db, "events");
+    const cookies = new Cookies();
+    const currentUserEmail = cookies.get("email");
+    const q = query(eventsRef, where("email", "==", currentUserEmail.toLowerCase() ));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+    });
+  };
   
-
-  const xxx = 
-  console.log(xxx)
-  
+  fetchEventsByEmail();
 
 
   const [toggle, setToggle] = useState(false);

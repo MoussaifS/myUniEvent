@@ -5,8 +5,6 @@ import SendSharpIcon from "@mui/icons-material/SendSharp";
 import { useForm, Controller } from "react-hook-form";
 import { db , auth } from "../FireBase";
 
-
-
 const Form = () => {
 
 
