@@ -4,15 +4,10 @@ import PublishIcon from "@mui/icons-material/Publish";
 import SendSharpIcon from "@mui/icons-material/SendSharp";
 import { useForm, Controller } from "react-hook-form";
 import { db , auth } from "../FireBase";
+import { collection, addDoc } from "firebase/firestore";
 
 const Form = () => {
-
-
-
-
-
   const { control, handleSubmit, register } = useForm();
-
   const eventTags = [
     { value: "Academic Events", label: "Academic Events" },
     { value: "Career Development", label: "Career Development" },
@@ -39,6 +34,7 @@ const Form = () => {
   const onSubmit = async (data) => {
     data.email = auth.currentUser.email 
     const docRef = await addDoc(collection(db, "events"), data);
+    window.location.reload(true)
   };
 
   return (
@@ -132,23 +128,22 @@ const Form = () => {
 
           {/* target audience*/}
           <Grid item xs={12}>
+            
+
+
+
             <Controller
-              name="eventInvitation"
-              control={control}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  menuPortalTarget={document.body}
-                  required
-                  name="invitationTag"
-                  styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-                  isMulti
-                  options={EventInvitations}
-                  variant="filled"
-                  placeholder="Type Of Invitation"
-                />
-              )}
-            />
+            name="eventInvitation"
+            placeholder="Type Of Invitation"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                placeholder="Type Of Invitation"
+                options={EventInvitations}
+              />
+            )}
+          />
           </Grid>
 
           <Grid item xs={12}>

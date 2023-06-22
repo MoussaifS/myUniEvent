@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useState, useEffect } from "react";
 import pic from "../assets/image1-removebg.png";
 import {
@@ -13,30 +12,55 @@ import Nav from "../components/Nav";
 import Form from "../components/Form";
 import { db, auth } from "../FireBase";
 import Cards from "../components/Cards";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import Cookies from "universal-cookie";
-import { ReactSession } from "react-client-session";
 
 const DashBoard = () => {
-  const fetchEventsByEmail = async () => {
-    const eventsRef = collection(db, "events");
-    const cookies = new Cookies();
-    const currentUserEmail = cookies.get("email");
-    const q = query(eventsRef, where("email", "==", currentUserEmail.toLowerCase() ));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
-    });
-  };
-  
-  fetchEventsByEmail();
+  const [events, setEvents] = useState([]);
+  const [uni, setUni] = useState("");
 
+  useEffect(() => {
+    let isMounted = true;
 
+    async function fetchDataByEmail() {
+      const eventsRef = collection(db, "events");
+      const uniRef = collection(db, "organizers");
+      const cookies = new Cookies();
+      const currentUserEmail = cookies.get("email");
+
+      const eventsQuery = query(
+        eventsRef,
+        where("email", "==", currentUserEmail.toLowerCase())
+      );
+
+      const uniQuery = query(
+        uniRef,
+        where("email", "==", currentUserEmail.toLowerCase())
+      );
+
+      try {
+        const eventsSnapshot = await getDocs(eventsQuery);
+        const uniSnapshot = await getDocs(uniQuery);
+
+        if (isMounted) {
+          const updatedEvents = eventsSnapshot.docs.map((doc) => doc.data());
+          setEvents(updatedEvents);
+
+          uniSnapshot.forEach((doc) => {
+            setUni(doc.data().institution.label);
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchDataByEmail();
+
+    return () => {
+      isMounted = false; // Set flag to false on component unmount
+    };
+  }, []);
   const [toggle, setToggle] = useState(false);
 
   return (
@@ -85,7 +109,13 @@ const DashBoard = () => {
                 flexDirection: "column",
               }}
             >
-              {1 == 2 ? <h1>there is no events</h1> : <Cards />}
+              {events == undefined || uni == undefined ? (
+                <h1>There are no events</h1>
+              ) : (
+                events.map((event, index) => (
+                  <Cards key={index} event={event} uni={uni} />
+                ))
+              )}
             </Box>
           </Container>
         </Grid>

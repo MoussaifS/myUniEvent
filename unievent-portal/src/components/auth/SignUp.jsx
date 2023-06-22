@@ -2,11 +2,14 @@ import { Container, TextField, Grid, Button } from "@mui/material";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
 import { auth, db } from "../../FireBase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, reload } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
+import { useLocation, useNavigate, redirect } from "react-router-dom";
 
 const SignUp = () => {
   const { control, handleSubmit, register } = useForm();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const institutions = [
     { name: "Universiti Sains Islam Malaysia" },
@@ -16,13 +19,9 @@ const SignUp = () => {
   ];
 
   const roles = [
-    { role: "Lecturer" },
-    { role: "Dean" },
     { role: "Student Advisor" },
-    { role: "Academic Advisor" },
-    { role: "Facilities Manager" },
     { role: "Student Club Advisor" },
-    { role: "Student Club President" },
+    { role: "Student Club Representative" },
   ];
 
   const onSubmit = (e) => {
@@ -30,10 +29,10 @@ const SignUp = () => {
       .then(async (userCredential) => {
         delete e.password;
         await addDoc(collection(db, "organizers"), e);
+        alert("accout is created you will be redirected to login");
+        window.location.reload(true);
       })
       .catch((error) => console.log(error));
-
-    console.log(e); // Do something with the form data
   };
 
   return (
@@ -127,14 +126,28 @@ const SignUp = () => {
               name="role"
               control={control}
               render={({ field }) => (
-                <Select
-                  placeholder="Your Role In This Institution "
-                  {...field}
-                  options={roles.map((role) => ({
-                    value: role.role,
-                    label: role.role,
-                  }))}
-                />
+                <div>
+                  <Select
+                    placeholder="Your Role In This Institution"
+                    {...field}
+                    options={roles.map((role) => ({
+                      value: role.role,
+                      label: role.role,
+                    }))}
+                  />
+                  {field.value === "Student Club Representative" && (
+                    <>
+                      <TextField
+                        placeholder="Club Name"
+                        variant="filled"
+                        label="Club Name that you Represent"
+                        required
+                        fullWidth
+                        {...register("clubName")}
+                      />
+                    </>
+                  )}
+                </div>
               )}
             />
           </Grid>
