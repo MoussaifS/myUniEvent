@@ -19,6 +19,7 @@ const DashBoard = () => {
   const [events, setEvents] = useState([]);
   const [uni, setUni] = useState("");
   const [club, setClub] = useState("");
+  const [userName , setName] = useState("");
 
   useEffect(() => {
     let isMounted = true;
@@ -50,6 +51,7 @@ const DashBoard = () => {
           uniSnapshot.forEach((doc) => {
             setUni(doc.data().institution.label);
             setClub(doc.data().clubName);
+            setName(doc.data().lastName)
           });
         }
       } catch (error) {
@@ -67,7 +69,7 @@ const DashBoard = () => {
   console.log(events, uni);
   return (
     <Container maxWidth="xl">
-      <Nav />
+      <Nav userName={userName}/>
       <Grid container spacing={8}>
         <Grid item xs={6}>
           <Container maxWidth="sm" id="landing-prom">

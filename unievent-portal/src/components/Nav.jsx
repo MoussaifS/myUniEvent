@@ -9,7 +9,7 @@ import { Navigate, Outlet, useLocation , useNavigate} from "react-router-dom";
 import DashBoard from "../pages/DashBoard";
 import Landing from "../pages/Landing";
 
-const Nav = () => {
+const Nav = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const handleLogout = () => {
@@ -30,7 +30,7 @@ const Nav = () => {
           Uni-Event
         </Typography>
         <Typography variant="body1" sx={{ mr: 2 }}>
-          Welcome, User!
+          {`Welcome,  ${props.userName}`}
         </Typography>
         <Button color="inherit" onClick={handleLogout}>
           Logout
