@@ -8,13 +8,17 @@ import image from "../assets/3c1aa898-cc8f-476c-ba1b-2ffff0a65461.jpeg";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
+import ReactWhatsapp from "react-whatsapp";
 
 import { Container } from "@mui/material";
 
 const Cards = (props) => {
-  
+  const handleShare = () => {
+    const message = encodeURIComponent("Hello! This is my preset message.");
+    const whatsappUrl = `whatsapp://send?text=${message}`;
 
-
+    window.location.href = whatsappUrl;
+  };
 
   return (
     <Container sx={{ marginBottom: "10px" }}>
@@ -31,7 +35,9 @@ const Cards = (props) => {
           <Box sx={{ display: "inlineBlock" }}>
             <Stack direction={{ xs: "column", sm: "row" }} spacing={1}>
               {props.event.eventTag.map((tag, index) => (
-                <Chip key={index} label={tag.label} variant="outlined" />
+                <Box key={index} display={{ xs: "block", sm: "inline" }}>
+                  <Chip label={tag.label} variant="outlined" />
+                </Box>
               ))}
             </Stack>
             <br />
@@ -52,12 +58,19 @@ const Cards = (props) => {
             hours
             <br />
             <strong>Location:</strong> {props.uni}
+            <br />
+            {console.log(props.club)}
+            <strong>Organized by:</strong>{" "}
+            {props.club.length > 0 ? props.club : props.uni}
+            <br />
           </Typography>
         </CardContent>
 
         <CardActions sx={{ justifyContent: "flex-start" }}>
           <Button size="small">Delete</Button>
-          <Button size="small">Share</Button>
+          <Button size="small" onClick={handleShare}>
+            Share
+          </Button>
         </CardActions>
       </Card>
     </Container>

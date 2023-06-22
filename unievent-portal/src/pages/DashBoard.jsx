@@ -18,6 +18,7 @@ import Cookies from "universal-cookie";
 const DashBoard = () => {
   const [events, setEvents] = useState([]);
   const [uni, setUni] = useState("");
+  const [club, setClub] = useState("");
 
   useEffect(() => {
     let isMounted = true;
@@ -48,6 +49,7 @@ const DashBoard = () => {
 
           uniSnapshot.forEach((doc) => {
             setUni(doc.data().institution.label);
+            setClub(doc.data().clubName);
           });
         }
       } catch (error) {
@@ -62,7 +64,7 @@ const DashBoard = () => {
     };
   }, []);
   const [toggle, setToggle] = useState(false);
-
+  console.log(events, uni);
   return (
     <Container maxWidth="xl">
       <Nav />
@@ -109,11 +111,11 @@ const DashBoard = () => {
                 flexDirection: "column",
               }}
             >
-              {events == undefined || uni == undefined ? (
+              {events.length == 0 ? (
                 <h1>There are no events</h1>
               ) : (
                 events.map((event, index) => (
-                  <Cards key={index} event={event} uni={uni} />
+                  <Cards key={index} event={event} uni={uni} club={club} />
                 ))
               )}
             </Box>

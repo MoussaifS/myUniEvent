@@ -135,8 +135,10 @@ const SignUp = () => {
                       label: role.role,
                     }))}
                   />
-                  {field.value === "Student Club Representative" && (
+                  {console.log(field.value.value)}
+                  {field.value.value === "Student Club Representative" && (
                     <>
+                      <br/>
                       <TextField
                         placeholder="Club Name"
                         variant="filled"
