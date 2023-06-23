@@ -5,11 +5,14 @@ import { auth, db } from "../../FireBase";
 import { createUserWithEmailAndPassword, reload } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { useLocation, useNavigate, redirect } from "react-router-dom";
+import { useState } from "react";
 
 const SignUp = () => {
   const { control, handleSubmit, register } = useForm();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [role , setRole] = useState('')
 
   const institutions = [
     { name: "Universiti Sains Islam Malaysia" },
@@ -135,8 +138,7 @@ const SignUp = () => {
                       label: role.role,
                     }))}
                   />
-                  {console.log(field.value.value)}
-                  {field.value.value === "Student Club Representative" && (
+                  {field.value && field.value.value === "Student Club Representative" && (
                     <>
                       <br/>
                       <TextField

@@ -2,13 +2,28 @@ import { Container, TextField, Grid, Button } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../FireBase";
+import { auth , db } from "../../FireBase";
 import { useLocation, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { useState, useEffect } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [userName, setName] = useState("");
+
+    async function fetchDataByEmail(email) {
+      const uniRef = collection(db, "organizers");
+      const uniQuery = query(
+        uniRef,
+        where("email", "==", email.toLowerCase())
+      );
+    }
+
+    
+
 
   const { handleSubmit, register } = useForm();
   const onSubmit = (e) => {
@@ -16,6 +31,7 @@ const Login = () => {
       .then((userCredential) => {
         const cookies = new Cookies();
         cookies.set("email", e.email, { path: "/" });
+        fetchDataByEmail(e.email);
         navigate("/dashboard", { replace: true, state: { from: location } });
       })
       .catch((error) => console.log(error));

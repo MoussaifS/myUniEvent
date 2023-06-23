@@ -21,6 +21,9 @@ const DashBoard = () => {
   const [club, setClub] = useState("");
   const [userName , setName] = useState("");
 
+  
+
+
   useEffect(() => {
     let isMounted = true;
 
@@ -51,7 +54,8 @@ const DashBoard = () => {
           uniSnapshot.forEach((doc) => {
             setUni(doc.data().institution.label);
             setClub(doc.data().clubName);
-            setName(doc.data().lastName)
+            const cookies = new Cookies();
+            cookies.set("userName",doc.data().lastName, { path: "/" });
           });
         }
       } catch (error) {

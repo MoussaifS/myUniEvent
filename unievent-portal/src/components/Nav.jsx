@@ -8,17 +8,25 @@ import { auth } from "../FireBase";
 import { Navigate, Outlet, useLocation , useNavigate} from "react-router-dom";
 import DashBoard from "../pages/DashBoard";
 import Landing from "../pages/Landing";
+import Cookies from "universal-cookie";
 
 const Nav = (props) => {
+
   const navigate = useNavigate();
   const location = useLocation();
+  const cookies = new Cookies();
+ 
+
   const handleLogout = () => {
     const authUser = null;
     const listen = onAuthStateChanged(auth, (user) => {
       user = authUser;
       auth.signOut()
           .then(() => {
+            cookies.remove('userName');
+            cookies.remove('email');
             navigate("/", { replace: true, state: { from: location } });
+
           })
     });
   };
@@ -30,7 +38,7 @@ const Nav = (props) => {
           Uni-Event
         </Typography>
         <Typography variant="body1" sx={{ mr: 2 }}>
-          {`Welcome,  ${props.userName}`}
+          {`Welcome`}
         </Typography>
         <Button color="inherit" onClick={handleLogout}>
           Logout
