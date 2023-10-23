@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Nav from "../components/Nav";
 import Form from "../components/Form";
-import { db, auth } from "../FireBase";
+import { db } from "../FireBase";
 import Cards from "../components/Cards";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import Cookies from "universal-cookie";

@@ -18,10 +18,9 @@ const Landing = () => {
   };
 
   return (
-    <Container maxWidth="xl">
-     
-      <Grid container spacing={8}>
-        <Grid item xs={6}>
+    <div>
+      <div>
+        <div>
           <Container maxWidth="sm" id="landing-prom">
             <Box
               sx={{
@@ -45,11 +44,10 @@ const Landing = () => {
               />
             </Box>
           </Container>
-        </Grid>
+        </div>
 
-        <Grid item xs={6}>
-          <Container maxWidth="sm" id="form-container">
-          
+        <div>
+          <div id="form-container">
             <Box
               sx={{
                 minHeight: "100vh",
@@ -59,25 +57,20 @@ const Landing = () => {
                 flexDirection: "column",
               }}
             >
-            {toggle == false ? <Login /> : <SignUp />}
+              {toggle == false ? <Login /> : <SignUp />}
 
-              <Box sx={{ marginTop: "20px", marginBottom: "20px" }}>
-                <Divider>-------------  Or {toggle == false ? 'Sign up':'Log in' } With A New Account  -------------</Divider>
-              </Box>
+              <div>
+                <span> or </span>
+              </div>
 
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={handleToggle}
-              >
-              {toggle == false ? 'Sign up':'Log in' }
-              </Button>
+              <button className="filledButton" onClick={handleToggle}>
+                {toggle == false ? "Create new account" : "Sign in"}
+              </button>
             </Box>
-          </Container>
-        </Grid>
-      </Grid>
-    </Container>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

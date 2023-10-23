@@ -1,11 +1,44 @@
 HTML {
-  background-color: #ebebe7;
+  background-color: var(--m-3-sys-light-surface, #fef7ff);
 }
 
 .Button {
   background-color: #333333;
 }
 
+.elevatedButton {
+  border-radius: 10rem;
+  color: var(--m-3-sys-light-primary, #6750A4);
+  background-color: #F7F2FA;
+  border: 1px solid var(--m-3-sys-light-outline, #79747E);
+}
+
+.filledButton {
+  background: var(--m-3-sys-light-primary, #6750a4);
+  color: white;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3),
+    0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+  border: 0px;
+}
+
+button {
+  display: inline-flex;
+  padding: 1rem 2.4rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  width: 70%;
+  flex-shrink: 0;
+  border-radius: 10rem;
+
+  text-align: center;
+  /* M3/label/large */
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: bold;
+}
 
 .MuiTypography-root {
   color: #333333;
