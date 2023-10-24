@@ -1,24 +1,142 @@
-HTML {
+html {
   background-color: var(--m-3-sys-light-surface, #fef7ff);
+  height: 100%;
+  width: 100%;
+  font-family: "Roboto";
+}
+
+.paper-landing {
+  padding: 20px;
+  max-width: 800px;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3),
+    0px 4px 8px 3px rgba(0, 0, 0, 0.15)
+}
+
+#main-container {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 900px) {
+  #main-container {
+    flex-direction: column;
+  }
+  
+  #landing-desc-desktop{
+    display: none;
+  }
+
+
+  
+
+  .purple {
+    color: red;
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 500px) {
+
+  #landing-desc-mobile{
+    display: none;
+    
+    }
+
+  .banerText{
+    font-size: 50px;
+  }
+
+  .purple {
+    font-size: 50px;
+  }
+}
+
+.banerText {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.purple {
+  color: #6750a4;
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0;
+}
+
+
+
+#landingPage {
+  margin: 0;
+  top: 0;
+  left: 0;
+}
+
+#landing-desc-mobile{
+  font-size: 18px;
+  TEXT-ALIGN: center;
+}
+
+
+#landing-desc-desktop{
+  font-size: 18px;
+}
+#accessPanel {
+  width: 369px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#login {
+  text-align: center;
+}
+
+.container {
+  width: 940px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: red;
 }
 
 .Button {
   background-color: #333333;
 }
 
+.text-areabutton:focus {
+  color: var(--m-3-sys-light-primary, #6750a4);
+  color: white;
+}
+
 .elevatedButton {
   border-radius: 10rem;
-  color: var(--m-3-sys-light-primary, #6750A4);
-  background-color: #F7F2FA;
-  border: 1px solid var(--m-3-sys-light-outline, #79747E);
+  color: var(--m-3-sys-light-primary, #1D192B);
+  background-color: #f7f2fa;
+  border: 1px solid var(--m-3-sys-light-outline, #79747e);
+  margin-top: 15px;
+  margin-bottom: 15px;
+  max-width: 320px;
+  padding: 16px 0px 16px 0px; 
 }
 
 .filledButton {
   background: var(--m-3-sys-light-primary, #6750a4);
   color: white;
+  padding: 16px 0px 16px 0px; 
+  border-radius: 10rem;
+  margin-top: 15px;
+  margin-bottom: 15px;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3),
     0px 4px 8px 3px rgba(0, 0, 0, 0.15);
   border: 0px;
+  max-width: 320px;
 }
 
 button {
@@ -52,12 +170,7 @@ button {
   background-color: red !important;
 }
 
-#btn-publish {
-  background-color: rgba(255, 0, 0, 0.26);
-}
 
-#btn-login {
-}
 
 #form-container {
   background-color: #c8cec47a;
@@ -69,6 +182,7 @@ button {
   border-radius: 5px;
   border: dashed #c8cec4;
   gap: 10px;
+  z-index: 100;
 }
 
 #form-tag {

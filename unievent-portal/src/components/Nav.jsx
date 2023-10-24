@@ -32,18 +32,14 @@ const Nav = (props) => {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#9BA8A8 " }}>
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Uni-Event
+    <AppBar position="static" disableshadow sx={{ backgroundColor: "transparent ", boxShadow:"0" }}>
+      <Toolbar variant="dense"	>
+        <Typography variant="h6" sx={{ flexGrow: 10 }}>
+          UE
         </Typography>
-        <Typography variant="body1" sx={{ mr: 2 }}>
-          {`Welcome`}
-        </Typography>
-        <Button color="inherit" onClick={handleLogout}>
-          Logout
-        </Button>
+        
       </Toolbar>
+
     </AppBar>
   );
 };

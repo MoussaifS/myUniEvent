@@ -1,16 +1,17 @@
-import { Container, TextField, Grid, Button } from "@mui/material";
-import LoginIcon from "@mui/icons-material/Login";
+import {TextField} from "@mui/material";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../FireBase";
 import { useLocation, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { useState, useEffect } from "react";
+import { collection, query, where } from "firebase/firestore";
+import { useState } from "react";
+import { deepPurple } from "@mui/material/colors";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  console.log(deepPurple)
 
   const [userName, setName] = useState("");
 
@@ -18,6 +19,10 @@ const Login = () => {
     const uniRef = collection(db, "organizers");
     const uniQuery = query(uniRef, where("email", "==", email.toLowerCase()));
   }
+
+
+ 
+  
 
   const { handleSubmit, register } = useForm();
   const onSubmit = (e) => {
@@ -34,40 +39,36 @@ const Login = () => {
   };
 
   return (
-    <Container maxWidth="sm" id="form-container">
+    <div id="login">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={3}>
-          {/* Name */}
-          <Grid item xs={12}>
-            <TextField
-              placeholder="Email"
-              variant="filled"
-              label="Enter Your Email"
-              required
-              fullWidth
-              {...register("email")}
-            />
-          </Grid>
-
-          {/* Description */}
-          <Grid item xs={12}>
-            <TextField
-              placeholder="Password"
-              variant="filled"
-              label="Enter Your Password"
-              type="password"
-              required
-              fullWidth
-              {...register("password")}
-            />
-          </Grid>
-
-          <Grid item xs={12}>
-            <button className="elevatedButton" >Log in</button>
-          </Grid>
-        </Grid>
+        <div>
+          {/* Email */}
+          <TextField
+            placeholder="Email"
+            variant="outlined"
+            label="Enter Your Email"
+            margin="normal"
+            required
+            fullWidth
+            {...register("email")}
+          />
+          {/* Password */}
+          <TextField
+            placeholder="Password"
+            variant="outlined"
+            label="Enter Your Password"
+            type="password"
+            margin="normal"
+            required
+            fullWidth
+            {...register("password")}
+          />
+        </div>
+        <button className="elevatedButton">Log in</button>
       </form>
-    </Container>
+
+      
+    </div>
   );
 };
 

@@ -12,7 +12,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [role , setRole] = useState('')
+  const [role, setRole] = useState("");
 
   const institutions = [
     { name: "Universiti Sains Islam Malaysia" },
@@ -39,7 +39,8 @@ const SignUp = () => {
   };
 
   return (
-    <Container maxWidth="sm" id="form-container">
+    <div id="duck">
+    <Container maxWidth="xl" id="form-container">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={2}>
           {/* fisrt Name */}
@@ -138,38 +139,34 @@ const SignUp = () => {
                       label: role.role,
                     }))}
                   />
-                  {field.value && field.value.value === "Student Club Representative" && (
-                    <>
-                      <br/>
-                      <TextField
-                        placeholder="Club Name"
-                        variant="filled"
-                        label="Club Name that you Represent"
-                        required
-                        fullWidth
-                        {...register("clubName")}
-                      />
-                    </>
-                  )}
+                  {field.value &&
+                    field.value.value === "Student Club Representative" && (
+                      <>
+                        <br />
+                        <TextField
+                          placeholder="Club Name"
+                          variant="filled"
+                          label="Club Name that you Represent"
+                          required
+                          fullWidth
+                          {...register("clubName")}
+                        />
+                      </>
+                    )}
                 </div>
               )}
             />
           </Grid>
 
           <Grid item xs={12}>
-            <Button
-              fullWidth
-              id="btn-publish"
-              type="submit"
-              variant="contained"
-              color="primary"
-            >
+            <button className="filledButton" type="submit">
               Create Account
-            </Button>
+            </button>
           </Grid>
         </Grid>
       </form>
     </Container>
+    </div>
   );
 };
 
