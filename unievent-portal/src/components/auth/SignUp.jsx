@@ -39,15 +39,14 @@ const SignUp = () => {
   };
 
   return (
-    <div id="duck">
-    <Container maxWidth="xl" id="form-container">
+    <div id="login">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={2}>
           {/* fisrt Name */}
           <Grid item xs={12}>
             <TextField
               placeholder="Enter Your First Name "
-              variant="filled"
+              variant="outlined"
               label="First Name"
               required
               fullWidth
@@ -59,7 +58,7 @@ const SignUp = () => {
           <Grid item xs={12}>
             <TextField
               placeholder="Enter Your Last Name"
-              variant="filled"
+              variant="outlined"
               label="Last Name"
               required
               fullWidth
@@ -71,7 +70,7 @@ const SignUp = () => {
           <Grid item xs={12}>
             <TextField
               placeholder="Enter Your Phone number"
-              variant="filled"
+              variant="outlined"
               label="Phone number"
               defaultValue="+60"
               type="number"
@@ -85,7 +84,7 @@ const SignUp = () => {
           <Grid item xs={12}>
             <TextField
               placeholder="Enter Your Email"
-              variant="filled"
+              variant="outlined"
               label="Email"
               required
               fullWidth
@@ -97,7 +96,7 @@ const SignUp = () => {
           <Grid item xs={12}>
             <TextField
               placeholder="Enter Your Password"
-              variant="filled"
+              variant="outlined"
               label="Password"
               required
               fullWidth
@@ -145,7 +144,7 @@ const SignUp = () => {
                         <br />
                         <TextField
                           placeholder="Club Name"
-                          variant="filled"
+                          variant="outlined"
                           label="Club Name that you Represent"
                           required
                           fullWidth
@@ -159,13 +158,12 @@ const SignUp = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <button className="filledButton" type="submit">
+            <button className="elevatedButton" type="submit">
               Create Account
             </button>
           </Grid>
         </Grid>
       </form>
-    </Container>
     </div>
   );
 };

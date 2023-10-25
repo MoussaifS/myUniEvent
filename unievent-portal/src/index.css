@@ -8,7 +8,6 @@ html {
 .paper-landing {
   padding: 20px;
   max-width: 800px;
-  height: 380px;
   display: flex;
   flex-direction: column;
   justify-content: center;
