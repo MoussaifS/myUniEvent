@@ -32,11 +32,16 @@ const Nav = (props) => {
   };
 
   return (
+    
     <AppBar position="static" disableshadow sx={{ backgroundColor: "transparent ", boxShadow:"0" }}>
       <Toolbar variant="dense"	>
-        <Typography variant="h6" sx={{ flexGrow: 10 }}>
-          UE
+      <div>
+      <Typography id="logo" variant="h6" sx={{ flexGrow: 10 }}>
+          ue
         </Typography>
+        
+        </div>
+        
         
       </Toolbar>
 

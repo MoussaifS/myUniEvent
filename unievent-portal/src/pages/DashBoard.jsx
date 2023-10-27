@@ -1,28 +1,20 @@
 import { useState, useEffect } from "react";
 import pic from "../assets/image1-removebg.png";
-import {
-  Box,
-  Container,
-  Divider,
-  Typography,
-  Grid,
-  Button,
-} from "@mui/material";
 import Nav from "../components/Nav";
 import Form from "../components/Form";
 import { db } from "../FireBase";
 import Cards from "../components/Cards";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import Cookies from "universal-cookie";
+import "@material/web/fab/fab.js";
+import "@material/web/icon/icon.js";
+import "@material/web/ripple/ripple.js";
 
 const DashBoard = () => {
   const [events, setEvents] = useState([]);
   const [uni, setUni] = useState("");
   const [club, setClub] = useState("");
-  const [userName , setName] = useState("");
-
-  
-
+  const [userName, setName] = useState("");
 
   useEffect(() => {
     let isMounted = true;
@@ -55,7 +47,7 @@ const DashBoard = () => {
             setUni(doc.data().institution.label);
             setClub(doc.data().clubName);
             const cookies = new Cookies();
-            cookies.set("userName",doc.data().lastName, { path: "/" });
+            cookies.set("userName", doc.data().lastName, { path: "/" });
           });
         }
       } catch (error) {
@@ -72,63 +64,40 @@ const DashBoard = () => {
   const [toggle, setToggle] = useState(false);
   console.log(events, uni);
   return (
-    <Container maxWidth="xl">
-      <Nav userName={userName}/>
-      <Grid container spacing={8}>
-        <Grid item xs={6}>
-          <Container maxWidth="sm" id="landing-prom">
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "100vh",
-              }}
-            >
-              <Form />
-            </Box>
-          </Container>
-        </Grid>
-
-        <Grid
-          item
-          xs={6}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-          }}
+    <div>
+    
+      <md-ripple>
+        <md-fab
+          id="create-new-ev-btn"
+          size="large"
+          aria-label="Edit"
+          label="Create new event"
         >
-          <Container
-            maxWidth="xl"
-            id="form-container"
-            sx={{
-              marginTop: "10px",
-            }}
-          >
-            <Box
-              sx={{
-                minHeight: "50vh",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-                flexDirection: "column",
-              }}
-            >
-              {events.length == 0 ? (
-                <h1>There are no events</h1>
-              ) : (
-                events.map((event, index) => (
-                  <Cards key={index} event={event} uni={uni} club={club} />
-                ))
-              )}
-            </Box>
-          </Container>
-        </Grid>
-      </Grid>
-    </Container>
+          <md-icon slot="icon">+</md-icon>
+        </md-fab>
+      </md-ripple>
+
+      <div>
+        <Nav userName={userName} />
+        <div>
+          <div>
+            <Form />
+          </div>
+        </div>
+
+        <div>
+          <div>
+            {events.length == 0 ? (
+              <h1>There are no events</h1>
+            ) : (
+              events.map((event, index) => (
+                <Cards key={index} event={event} uni={uni} club={club} />
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Container, TextField, Grid, Button } from "@mui/material";
+import { Container, TextField, Grid, Paper, Button } from "@mui/material";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
 import { auth, db } from "../../FireBase";
@@ -6,6 +6,10 @@ import { createUserWithEmailAndPassword, reload } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { useLocation, useNavigate, redirect } from "react-router-dom";
 import { useState } from "react";
+import "@material/web/textfield/outlined-text-field.js";
+import "@material/web/button/outlined-button.js";
+import "@material/web/select/select-option.js";
+import "@material/web/select/outlined-select.js";
 
 const SignUp = () => {
   const { control, handleSubmit, register } = useForm();
@@ -40,72 +44,60 @@ const SignUp = () => {
 
   return (
     <div id="login">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={2}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           {/* fisrt Name */}
-          <Grid item xs={12}>
-            <TextField
-              placeholder="Enter Your First Name "
-              variant="outlined"
-              label="First Name"
-              required
-              fullWidth
-              {...register("first-name")}
-            />
-          </Grid>
+          <md-outlined-text-field
+            id="text-field-credentials"
+            {...register("first-name")}
+            required
+            label="Name"
+            placeholder="Enter First Name "
+          ></md-outlined-text-field>
 
           {/* last name */}
-          <Grid item xs={12}>
-            <TextField
-              placeholder="Enter Your Last Name"
-              variant="outlined"
-              label="Last Name"
-              required
-              fullWidth
-              {...register("last-name")}
-            />
-          </Grid>
+          <md-outlined-text-field
+            id="text-field-credentials"
+            {...register("last-name")}
+            required
+            label="Last Name"
+            placeholder="Enter Last Name "
+          ></md-outlined-text-field>
 
           {/* phone */}
-          <Grid item xs={12}>
-            <TextField
-              placeholder="Enter Your Phone number"
-              variant="outlined"
-              label="Phone number"
-              defaultValue="+60"
-              type="number"
-              required
-              fullWidth
-              {...register("phone")}
-            />
-          </Grid>
+          <md-outlined-text-field
+            id="text-field-credentials"
+            {...register("phone")}
+            required
+            defaultValue="+60"
+            type="number"
+            label="Phone number"
+            placeholder="Enter Phone Number"
+          ></md-outlined-text-field>
 
           {/* email */}
-          <Grid item xs={12}>
-            <TextField
-              placeholder="Enter Your Email"
-              variant="outlined"
-              label="Email"
-              required
-              fullWidth
-              {...register("email")}
-            />
-          </Grid>
+          <md-outlined-text-field
+            id="text-field-credentials"
+            {...register("email")}
+            required
+            type="email"
+            label="Email"
+            placeholder="Enter E-mail"
+          ></md-outlined-text-field>
 
           {/* password */}
-          <Grid item xs={12}>
-            <TextField
-              placeholder="Enter Your Password"
-              variant="outlined"
-              label="Password"
-              required
-              fullWidth
-              {...register("password")}
-            />
-          </Grid>
+          <md-outlined-text-field
+            id="text-field-credentials"
+            {...register("password")}
+            required
+            type="Password"
+            label="Password"
+            placeholder="Enter Password"
+          ></md-outlined-text-field>
 
           {/* uni name */}
-          <Grid item xs={12}>
+          <div></div>
+
+          <div>
             <Controller
               name="institution"
               placeholder="Institution Name"
@@ -121,10 +113,12 @@ const SignUp = () => {
                 />
               )}
             />
-          </Grid>
+          </div>
 
           {/* Role */}
-          <Grid item xs={12}>
+
+          <div>
+          <br/>
             <Controller
               name="role"
               control={control}
@@ -140,30 +134,25 @@ const SignUp = () => {
                   />
                   {field.value &&
                     field.value.value === "Student Club Representative" && (
-                      <>
-                        <br />
-                        <TextField
-                          placeholder="Club Name"
-                          variant="outlined"
-                          label="Club Name that you Represent"
+                      <div>
+                        <md-outlined-text-field
+                          id="text-field-credentials"
+                          {...register("email")}
                           required
-                          fullWidth
-                          {...register("clubName")}
-                        />
-                      </>
+                          type="text"
+                          label="Club Name"
+                        ></md-outlined-text-field>
+                      </div>
                     )}
                 </div>
               )}
             />
-          </Grid>
+          </div>
 
-          <Grid item xs={12}>
-            <button className="elevatedButton" type="submit">
-              Create Account
-            </button>
-          </Grid>
-        </Grid>
-      </form>
+          <div>
+          <md-outlined-button id="button"> Create new account </md-outlined-button>
+          </div>
+        </form>
     </div>
   );
 };

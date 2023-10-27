@@ -1,4 +1,5 @@
-import {TextField} from "@mui/material";
+import "@material/web/textfield/outlined-text-field.js";
+import "@material/web/button/outlined-button.js";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../FireBase";
@@ -6,12 +7,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { collection, query, where } from "firebase/firestore";
 import { useState } from "react";
-import { deepPurple } from "@mui/material/colors";
+
+
+
+
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(deepPurple)
 
   const [userName, setName] = useState("");
 
@@ -20,12 +23,9 @@ const Login = () => {
     const uniQuery = query(uniRef, where("email", "==", email.toLowerCase()));
   }
 
-
- 
-  
-
   const { handleSubmit, register } = useForm();
   const onSubmit = (e) => {
+    
     signInWithEmailAndPassword(auth, e.email, e.password)
       .then((userCredential) => {
         const cookies = new Cookies();
@@ -35,7 +35,7 @@ const Login = () => {
       })
       .catch((error) => console.log(error));
 
-    console.log(e); // Do something with the form data
+    console.log(e); // duck >
   };
 
   return (
@@ -43,31 +43,15 @@ const Login = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           {/* Email */}
-          <TextField
-            placeholder="Email"
-            variant="outlined"
-            label="Enter Your Email"
-            margin="normal"
-            required
-            fullWidth
-            {...register("email")}
-          />
-          {/* Password */}
-          <TextField
-            placeholder="Password"
-            variant="outlined"
-            label="Enter Your Password"
-            type="password"
-            margin="normal"
-            required
-            fullWidth
-            {...register("password")}
-          />
-        </div>
-        <button className="elevatedButton">Log in</button>
-      </form>
+          <md-outlined-text-field  id="text-field-credentials" {...register("email")} required label="Enter Your Email" >
+          </md-outlined-text-field>
 
-      
+          {/* Password */}
+          <md-outlined-text-field id="text-field-credentials" {...register("password")} required  type="password" placeholder="Password" label="Enter Your Password" >
+          </md-outlined-text-field>
+        </div>
+        <md-outlined-button id="button"> Log in </md-outlined-button>
+      </form>
     </div>
   );
 };

@@ -3,6 +3,12 @@ import Login from "../components/auth/Login";
 import SignUp from "../components/auth/SignUp";
 import Nav from "../components/Nav";
 import { motion } from "framer-motion";
+import "@material/web/button/filled-tonal-button.js";
+import "@material/web/divider/divider.js";
+import { Typewriter } from 'react-simple-typewriter'
+
+
+import Popup from "reactjs-popup";
 
 import { useState, useEffect } from "react";
 
@@ -14,7 +20,7 @@ const Landing = () => {
   useEffect(() => {
     setInterval(() => {
       setBannerText(luck[Math.floor(Math.random() * 5)]);
-    }, 1000);
+    }, 3000);
   }, []);
 
   const bannerMotion = {
@@ -24,19 +30,36 @@ const Landing = () => {
     },
   };
 
+  const [toggle, setToggle] = useState(false);
+  const handleToggle = () => {
+    setToggle((t) => !t);
+  };
+
   console.log(bannerText);
 
   return (
     <div id="landingPage">
-      <Nav />
-      <Container maxWidth="lg" id="main-container" sx={{ hight: "100%" }}>
-        <Container maxWidth="lg">
+      <Nav/>
+
+      <Container maxWidth="lg" id="main-container" sx={{ height: "100%"}}>
+        <Container maxWidth="lg" sx={{ height: "150px",  }}>
           <p className="banerText">
-            <h1 className="purple">University Event</h1>
-            <motion.span {...bannerMotion}>
-              <h1>{bannerText}</h1>
-            </motion.span>
-            <span> made easy for</span> <span className="purple"> FREE </span>
+            <h1 className="purple">University Events</h1>
+
+
+            <Typewriter 
+              words= {["Sharing", "Managing", "Elevating", "Hosting", "Promoting"]}
+              cursor
+              loop={Infinity}
+              cursorColor= "#6750a4"
+              cursorStyle='|'
+            typeSpeed={70}
+            deleteSpeed={70}
+            delaySpeed={2000}
+            
+              />
+
+            <span>for</span> <span className="purple"> FREE </span>
           </p>
           <p id="landing-desc-desktop">
             <b> Create, Manage, Share, and Promote </b>
@@ -56,15 +79,14 @@ const Landing = () => {
             padding: "0px 15px 0px 15px",
           }}
         >
-          <SignUp />
-          <Login />
-
-          <Box sx={{ height: "10px", textAlign: "center", paddingx: "0px" }}>
-            <b>OR</b>
-          </Box>
-
-          <button className="filledButton">Create new account</button>
+          {toggle == false ? <Login /> : <SignUp />}
+          <md-divider></md-divider>
+          <md-filled-tonal-button onClick={handleToggle} id="button">
+            {" "}
+            {toggle == false ? "Create new account" : "I have account"}{" "}
+          </md-filled-tonal-button>
         </Paper>
+
         <p id="landing-desc-mobile">
           <b> Create, Manage, Share, and Promote </b>
           events with our <span>UniEvent</span> platform. And explore more

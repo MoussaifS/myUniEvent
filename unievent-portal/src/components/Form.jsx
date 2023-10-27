@@ -1,94 +1,128 @@
-import { Container, TextField, Grid, Button } from "@mui/material";
+import { Container, TextField, Button, Slider } from "@mui/material";
+
 import Select from "react-select";
-import PublishIcon from "@mui/icons-material/Publish";
-import SendSharpIcon from "@mui/icons-material/SendSharp";
 import { useForm, Controller } from "react-hook-form";
-import { db , auth } from "../FireBase";
+import { db, auth } from "../FireBase";
 import { collection, addDoc } from "firebase/firestore";
+import "react-day-picker/dist/style.css";
+import "@material/web/textfield/outlined-text-field.js";
+import "@material/web/button/outlined-button.js";
+import "@material/web/select/select-option.js";
+import "@material/web/select/outlined-select.js";
+import "@material/web/icon/icon.js";
+import "@material/web/chips/chip-set.js";
+import "@material/web/chips/assist-chip.js";
+import "@material/web/chips/filter-chip.js";
+import "@material/web/chips/input-chip.js";
+import "@material/web/chips/suggestion-chip.js";
+import "@material/web/slider/slider.js";
 
 const Form = () => {
   const { control, handleSubmit, register } = useForm();
+
   const eventTags = [
-    { value: "Academic Events", label: "Academic Events" },
-    { value: "Career Development", label: "Career Development" },
-    { value: "Arts and Culture", label: "Arts and Culture" },
-    { value: "Sports and Recreation", label: "Sports and Recreation" },
-    { value: "Social Impact", label: "Social Impact" },
-    { value: "Student Organizations", label: "Student Organizations" },
-    { value: "Campus Life", label: "Campus Life" },
-    { value: "Guest Speakers", label: "Guest Speakers" },
-    { value: "Alumni Events", label: "Alumni Events" },
+    { tag: "Academic Events" },
+    { tag: "Career Development" },
+    { tag: "Sports and activity" },
+    { tag: "Social Impact" },
+    { tag: "Guest Speakers" },
+    { tag: "Festivals" },
+    { tag: "Workshops" },
+    { tag: "Hackathons" },
+    { tag: "Meetups" },
+  ];
+
+  const marks = [
     {
-      value: "Festivals and Celebrations",
-      label: "Festivals and Celebrations",
+      value: "1 Hour",
+      label: "1 Hour",
+    },
+    {
+      value: "2 Hours",
+      label: "2 Hours",
+    },
+    {
+      value: "3 Hours",
+      label: "3 Hours",
+    },
+    {
+      value: "5 Hours",
+      label: "5 Hour",
+    },
+    {
+      value: "1 Day",
+      label: "1 Day",
     },
   ];
 
-  const EventInvitations = [
-    { value: "Local Student", label: "Local Student" },
-    { value: "Outsider Student", label: "Outsider Student" },
-    { value: "Invitation Only", label: "Invitation Only" },
-    { value: "Open for All", label: "Open for All" },
+  console.log(eventTags[0].tag);
+  const eventType = [
+    { type: "Exclusive to University Students" },
+    { type: "Open to Everyone" },
   ];
 
   const onSubmit = async (data) => {
-    data.email = auth.currentUser.email 
+    data.email = auth.currentUser.email;
     const docRef = await addDoc(collection(db, "events"), data);
-    window.location.reload(true)
+    window.location.reload(true);
   };
+
+  function valuetext(value) {
+    return `${value}°C`;
+  }
 
   return (
     <Container maxWidth="sm" id="form-container">
+      <md-outlined-text-field
+        id="text-field-form"
+        {...register("startDate", { required: true })}
+        required
+        type="date"
+        placeholder="Enter Event Name"
+      ></md-outlined-text-field>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={2}>
-          {/* Name */}
-          <Grid item xs={12}>
-            <TextField
-              placeholder="Enter Name Event"
-              variant="filled"
-              label="Event Name"
-              required
-              fullWidth
-              {...register("name")}
-            />
-          </Grid>
+        {/* fisrt Name */}
+        <div>
+          <h3 id="dates-label">Event title</h3>
+          <md-outlined-text-field
+            id="text-field-form"
+            {...register("name")}
+            required
+            placeholder="Enter Event Name"
+          ></md-outlined-text-field>
+        </div>
 
-          {/* Description */}
-          <Grid item xs={12}>
-            <TextField
-              variant="filled"
-              multiline
-              required
-              minRows={3}
-              maxRows={5}
-              placeholder="Event Description"
-              fullWidth
-              {...register("description")}
-            />
-          </Grid>
+        {/* Description */}
+        <div>
+          <h3 id="dates-label">Event description</h3>
 
-          {/* Tags */}
-          <Grid item xs={12}>
-            <Controller
-              name="eventTag"
-              control={control}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  menuPortalTarget={document.body}
-                  required
-                  styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-                  isMulti
-                  options={eventTags}
-                  variant="filled"
-                  placeholder="Type Of Event"
-                />
-              )}
-            />
-          </Grid>
+          
+        </div>
 
-          {/* Start Date */}
-          <Grid item xs={5}>
+        {/* Tags */}
+        <div>
+          <h3 id="dates-label">Type of Event</h3>
+          <span id="mini-text">
+            Pick the chips that work best for your event
+          </span>
+          <md-chip-set aria-labelledby="dates-label">
+            {eventTags.map((tag) => (
+              <md-filter-chip
+                key={tag.id}
+                label={tag.tag}
+                required
+                elevated
+                aria-label={tag.tag}
+              ></md-filter-chip>
+            ))}
+          </md-chip-set>
+        </div>
+
+        {/*start date and time */}
+        <div>
+          <h3 id="dates-label">Event Date & time</h3>
+
+          <div id="form-date-div">
             <TextField
               {...register("startDate", { required: true })}
               label="Start Date"
@@ -96,12 +130,9 @@ const Form = () => {
               type="date"
               variant="filled"
               fullWidth
+              id="form-date-input"
               InputLabelProps={{ shrink: true }}
             />
-          </Grid>
-
-          {/* Start Time */}
-          <Grid item xs={3.5}>
             <TextField
               {...register("startTime", { required: true })}
               label="Start Time"
@@ -109,56 +140,48 @@ const Form = () => {
               type="time"
               variant="filled"
               fullWidth
+              id="form-time-input"
               InputLabelProps={{ shrink: true }}
             />
-          </Grid>
+          </div>
+        </div>
 
-          {/* End Time */}
-          <Grid item xs={3.5}>
-            <TextField
-              {...register("endTime", { required: true })}
-              variant="filled"
-              required
-              label="End Time"
-              type="time"
-              fullWidth
-              InputLabelProps={{ shrink: true }}
-            />
-          </Grid>
+        {/* Duration */}
+        <h3 id="dates-label">Event Estimated Duration</h3>
 
-          {/* target audience*/}
-          <Grid item xs={12}>
-            
+        <Slider
+            disabled={false}
+            marks={marks}
+            size="medium"
+            track={false}
+            getAriaValueText={valuetext}
 
-
-
-            <Controller
-            name="eventInvitation"
-            placeholder="Type Of Invitation"
-            control={control}
-            render={({ field }) => (
-              <Select
-                {...field}
-                placeholder="Type Of Invitation"
-                options={EventInvitations}
-              />
-            )}
           />
-          </Grid>
 
-          <Grid item xs={12}>
-            <Button
-              fullWidth
-              id="btn-publish"
-              type="submit"
-              variant="contained"
-              endIcon={<SendSharpIcon />}
-              color="primary"
-            >
-              Publish Event
-            </Button>
-          </Grid>
-        </Grid>
+        {/* target audience*/}
+
+        <Controller
+          name="eventInvitation"
+          placeholder="Type Of Invitation"
+          control={control}
+          render={({ field }) => (
+            <Select
+              {...field}
+              placeholder="Type Of Invitation"
+              options={eventType}
+            />
+          )}
+        />
+
+        <Button
+          fullWidth
+          id="btn-publish"
+          type="submit"
+          variant="contained"
+          color="primary"
+        >
+          Publish Event
+        </Button>
       </form>
     </Container>
   );
