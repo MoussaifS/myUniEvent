@@ -22,9 +22,33 @@ html {
 
 #mini-text {
   font-size: 12px;
-  margin-bottom: 10px;
+  margin-top: 23px;
 }
 
+.mt-0{
+  margin-top: 0px;
+}
+.mt-10{
+  margin-top: 10px;
+}
+.w100{
+  width: 100%;
+}
+
+#margin-top{
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+
+
+
+#ducl{
+  margin: 15px 0px 15px 0px;
+}
+
+.margin-left{
+  margin-left: 10px;
+}
 
 
 
@@ -32,6 +56,13 @@ html {
 #form-date-div {
   display: flex;
   gap: 2px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+#form-title-text{
+  margin-bottom: 0px;
+  margin-top: 4px;
 }
 
 
@@ -186,13 +217,10 @@ html {
 #button {
   font-size: 1rem;
   font-weight: 500;
-
   padding: 0px 0px 16px 0px;
   margin-top: 15px;
-  margin-bottom: 15px;
-
   border: 0px;
-  width: 250px;
+  width: 300px;
 }
 
 button {
@@ -227,18 +255,19 @@ button {
 }
 
 #form-container {
-  background-color: #c8cec47a;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  border: dashed #c8cec4;
-  gap: 10px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px solid #6750a4;
   z-index: 100;
 }
 
 #form-tag {
   border: #c8cec4;
+}
+
+.fc{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

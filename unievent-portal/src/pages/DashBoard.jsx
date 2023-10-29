@@ -63,39 +63,30 @@ const DashBoard = () => {
   }, []);
   const [toggle, setToggle] = useState(false);
   console.log(events, uni);
+
+
   return (
     <div>
-    
-      <md-ripple>
-        <md-fab
-          id="create-new-ev-btn"
-          size="large"
-          aria-label="Edit"
-          label="Create new event"
-        >
-          <md-icon slot="icon">+</md-icon>
-        </md-fab>
-      </md-ripple>
+      <Nav userName={userName} />
+
+      <Form/>
 
       <div>
-        <Nav userName={userName} />
-        <div>
-          <div>
-            <Form />
-          </div>
-        </div>
+        <md-ripple>
+          <md-fab size="large" aria-label="Edit" label="Create new event">
+            <md-icon>+</md-icon>
+          </md-fab>
+        </md-ripple>
+      </div>
 
-        <div>
-          <div>
-            {events.length == 0 ? (
-              <h1>There are no events</h1>
-            ) : (
-              events.map((event, index) => (
-                <Cards key={index} event={event} uni={uni} club={club} />
-              ))
-            )}
-          </div>
-        </div>
+      <div>
+        {events.length == 0 ? (
+          <h1>There are no events</h1>
+        ) : (
+          events.map((event, index) => (
+            <Cards key={index} event={event} uni={uni} club={club} />
+          ))
+        )}
       </div>
     </div>
   );
