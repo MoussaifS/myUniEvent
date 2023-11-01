@@ -40,7 +40,9 @@ html {
   margin-bottom: 0px;
 }
 
-
+.z-index-999{
+  z-index: 999;
+}
 
 #ducl{
   margin: 15px 0px 15px 0px;
@@ -135,10 +137,10 @@ html {
   margin: 0;
 }
 
-#create-new-ev-btn {
+#createNewEvent-btn {
   position: fixed;
-  z-index: 999;
-  bottom: 30px;
+  z-index: 1;
+  bottom: 40px;
   right: 12px;
 }
 
@@ -266,8 +268,41 @@ button {
   border: #c8cec4;
 }
 
+.testing{
+  max-height: min(800px, 100% - 48px);
+  max-width: min(560px, 100% - 25px);
+}
+
+
+/* fix this shit  */
 .fc{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.cf{
+  margin-top: 15px;
+}
+
+.p-0{
+  padding-bottom: 0;
+}
+
+.p-15{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+#nav{
+  margin-top: 20px;
+  border: 1px red solid; 
+  width: 100%;
+  height: 35px;
+
+}
+
+.fd-c{
+  display: flex;
+  flex-direction: column;
 }

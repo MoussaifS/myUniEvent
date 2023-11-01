@@ -35,8 +35,6 @@ const Landing = () => {
     setToggle((t) => !t);
   };
 
-  console.log(bannerText);
-
   return (
     <div id="landingPage">
       <Nav/>

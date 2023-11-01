@@ -1,10 +1,9 @@
-import { Container, TextField, Button, styled } from "@mui/material";
+import { TextField } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { db, auth , storage } from "../FireBase";
+import {ref, uploadBytes} from "firebase/storage"
 
-import Select from "react-select";
-import { useForm, Controller } from "react-hook-form";
-import { db, auth } from "../FireBase";
-import { collection, addDoc } from "firebase/firestore";
-import "react-day-picker/dist/style.css";
+import { collection, addDoc  ,setDoc , doc  } from "firebase/firestore";
 import "@material/web/textfield/outlined-text-field.js";
 import "@material/web/button/outlined-button.js";
 import "@material/web/button/filled-button.js";
@@ -18,11 +17,7 @@ import "@material/web/chips/filter-chip.js";
 import "@material/web/chips/input-chip.js";
 import "@material/web/radio/radio.js";
 import "@material/web/divider/divider.js";
-import "@material/web/checkbox/checkbox.js";
-
-import "@material/web/chips/suggestion-chip.js";
 import { useState } from "react";
-import { da } from "date-fns/locale";
 
 const Form = () => {
   const { control, handleSubmit, register } = useForm();
@@ -30,7 +25,6 @@ const Form = () => {
   const [imageUrl, setImageUrl] = useState("");
 
   const handleTags = function (e) {
-    console.log(tags)
     if (tags.includes(e)) {
       const updatedTags = tags.filter((tag) => tag !== e);
       setTags(updatedTags);
@@ -38,6 +32,9 @@ const Form = () => {
       const updatedTags = [...tags, e];
       setTags(updatedTags);
     }
+  };
+
+  const handleImage = (event) => {
   };
 
   const eventTags = [
@@ -65,22 +62,25 @@ const Form = () => {
     { audience: "Open to Everyone" },
   ];
 
+  const uploadImage = (data) => {
+    const ImageRef  = ref(storage , `events/${data.title}`)
+    uploadBytes(ImageRef, data.image).then(()=>{
+      alert("shit works")
+    })
+  } 
+
   const onSubmit = async (data) => {
     data.email = auth.currentUser.email;
     data.tags = tags;
-    console.log(data);
-    const docRef = await addDoc(collection(db, "events"), data);
+    uploadImage(data)
+    const docRef = await addDoc(collection(db, "events"), data );
+    console.log(docRef)
     window.location.reload(true);
   };
 
-  const handleChange = (event) => {
-    const file = event.target.files[0];
-    setImageUrl(URL.createObjectURL(file));
-  };
-
   return (
-    <Container maxWidth="sm" id="form-container">
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div >
+      <form onSubmit={handleSubmit(onSubmit)} method="dialog">
         {/* title */}
         <div>
           <h3 id="form-title-text">Event Title</h3>
@@ -112,14 +112,12 @@ const Form = () => {
             type="file"
             required
             accept="image/*"
-            {...register("image")}
-            onChange={handleChange}
+            onChange={handleImage}
           />
         </div>
 
         <md-divider></md-divider>
         {/* Tags */}
-
         <div>
           {/* target audience*/}
           <h3 id="form-title-text">Type of Event</h3>
@@ -188,15 +186,12 @@ const Form = () => {
         <md-divider className></md-divider>
 
         <div className="fc">
-          <md-filled-button type="submit" id="button">
+          <md-filled-button className="p-0" type="submit" id="button">
             Publish Event
           </md-filled-button>
-
-          <md-text-button trailing-icon>Discard</md-text-button>
         </div>
       </form>
-    </Container>
+    </div>
   );
 };
-
 export default Form;
