@@ -313,9 +313,22 @@ button {
   height: 35px;
   display: inline-flex; 
   justify-content: space-between;
-  
-
 }
+
+#noEvent-span{
+  font-size: 25px;
+  font-weight: bolder;
+}
+
+#noEvent-container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 300px;
+}
+
 
 #card-btns{
   margin: 10px;

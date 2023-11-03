@@ -91,8 +91,12 @@ const DashBoard = () => {
 
       {state ? (
         <div id="card-container">
-          {events.length === 0 ? (
-            <h1>There are no events</h1>
+          {events.length > 0 ? (
+            <div id="noEvent-container" >
+            <span id="noEvent-span">No events found  😕</span>
+            <p>To create a new event, please click the button below 🚀.</p>
+          </div>
+            
           ) : (
             events.map((event, index) => (
               <Cards key={index} user={user} uni={uni} event={event} />
