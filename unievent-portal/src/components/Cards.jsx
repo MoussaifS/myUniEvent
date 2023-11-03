@@ -1,6 +1,5 @@
 import Card from "@mui/material/Card";
 
-import CardActions from "@mui/material/CardActions";
 import "@material/web/divider/divider.js";
 import "@material/web/icon/icon.js";
 import "@material/web/chips/chip-set.js";
@@ -9,6 +8,7 @@ import "@material/web/chips/filter-chip.js";
 import "@material/web/chips/input-chip.js";
 import "@material/web/chips/suggestion-chip.js";
 import { format, parseISO } from "date-fns";
+import ShowMoreText from "react-show-more-text";
 
 const Cards = (props) => {
   return (
@@ -36,31 +36,35 @@ const Cards = (props) => {
         </div>
       </div>
 
-      <div className="fd-c">
-        <p id="card-description">{props.event.description}</p>
+      <div className="m-10">
+        <ShowMoreText
+          /* Default options */
+          lines={2}
+          more="Show more"
+          less="Show less"
+          className="content-css"
+          anchorClass="show-more-less-clickable"
+          expanded={false}
+          truncatedEndingComponent={"... "}
+        >
+          <p id="card-description">{props.event.description}</p>
+        </ShowMoreText>
+      </div>
+      <md-divider inset></md-divider>
 
-        <md-divider></md-divider>
+      <div className="fd-c">
 
         <div className="m-10">
-          <h4 className="mtb-10">Event Tags:</h4>
-
-          <md-chip-set alwaysFocusable>
+          <h4 className="m-5">Event Tags:</h4>
+          <md-chip-set >
             {props.event.tags.map((tag, index) => (
               <md-suggestion-chip key={index} label={tag}></md-suggestion-chip>
             ))}
           </md-chip-set>
         </div>
-
-        <div>
-          <p className="grid-container">
-            <span>Location:</span> {props.uni}
-            <span>Organized by:</span>
-            {props.user.role}
-          </p>
-        </div>
       </div>
-
-      <div>
+      <md-divider inset></md-divider>
+      <div className="m-10" >
         <md-filled-button>Share event</md-filled-button>
         <md-filled-tonal-button>delete</md-filled-tonal-button>
         <md-filled-tonal-button>edit</md-filled-tonal-button>
