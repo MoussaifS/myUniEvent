@@ -19,30 +19,7 @@ const DashBoard = () => {
   const cookies = new Cookies();
   const userEmail = cookies.get("email");
   const [state , setState] = useState(false)
-  // const fetchUserInfo = async function () {
-  //   const userInfoQuery = await query(
-  //     collection(db, "organizers"),
-  //     where("email", "==", userEmail)
-  //   );
-  //   const userInfoSnapshot = await getDocs(userInfoQuery);
-  //   //refactore this shit asap
-  //   const userDataArray = await userInfoSnapshot.docs[0].data();
-  //   setUser(userDataArray);
-  //   setUni(userDataArray.institution);
-  // };
 
-  // const load = async () => {
-  //   try {
-  //     setloading(true);
-  //     const data = (await axios.get("/api/rooms/getallrooms")).data;
-  //     setrooms(data);
-  //     setloading(false);
-  //   } catch (error) {
-  //     seterror(true);
-  //     console.log(error);
-  //     setloading(false);
-  //   }
-  // };
 
   //duck explain
   useEffect(() => {
@@ -91,7 +68,7 @@ const DashBoard = () => {
 
   return (
     <div className="fd-c">
-      <Nav />
+      <Nav className="mb-25"/>
       <md-fab
         id="createNewEvent-btn"
         size="large"
