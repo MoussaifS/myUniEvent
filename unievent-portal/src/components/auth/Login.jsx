@@ -5,37 +5,24 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../FireBase";
 import { useLocation, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
-import { collection, query, where } from "firebase/firestore";
 import { useState } from "react";
-
-
-
-
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [userName, setName] = useState("");
-
-  async function fetchDataByEmail(email) {
-    const uniRef = collection(db, "organizers");
-    const uniQuery = query(uniRef, where("email", "==", email.toLowerCase()));
-  }
+  const [error, setError] = useState(false);
 
   const { handleSubmit, register } = useForm();
   const onSubmit = (e) => {
-    
     signInWithEmailAndPassword(auth, e.email, e.password)
-      .then((userCredential) => {
+      .then(() => {
         const cookies = new Cookies();
         cookies.set("email", e.email, { path: "/" });
-        fetchDataByEmail(e.email);
         navigate("/dashboard", { replace: true, state: { from: location } });
       })
-      .catch((error) => console.log(error));
-
-    console.log(e); // duck >
+      .catch(() => {
+        setError(true);
+      });
   };
 
   return (
@@ -43,14 +30,27 @@ const Login = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           {/* Email */}
-          <md-outlined-text-field  id="text-field-credentials" {...register("email")} required label="Enter Your Email" >
-          </md-outlined-text-field>
+          <md-outlined-text-field
+            id="text-field-credentials"
+            {...register("email")}
+            type="email"
+            required
+            label="Enter Your Email"
+          ></md-outlined-text-field>
 
           {/* Password */}
-          <md-outlined-text-field id="text-field-credentials" {...register("password")} required  type="password" placeholder="Password" label="Enter Your Password" >
-          </md-outlined-text-field>
+          <md-outlined-text-field
+            id="text-field-credentials"
+            {...register("password")}
+            required
+            type="password"
+            placeholder="Password"
+            label="Enter Your Password"
+          ></md-outlined-text-field>
+          <div>{error ?  <div id="error-email-password">Wrong Email Address or Password</div> : null}</div>
         </div>
-        <md-outlined-button id="button"> Log in </md-outlined-button>
+
+        <md-outlined-button id="button"> Log In </md-outlined-button>
       </form>
     </div>
   );

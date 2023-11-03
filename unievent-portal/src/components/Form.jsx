@@ -1,41 +1,96 @@
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { db, auth , storage } from "../FireBase";
-import {ref, uploadBytes} from "firebase/storage"
-
-import { collection, addDoc  ,setDoc , doc  } from "firebase/firestore";
+import { db, auth, storage } from "../FireBase";
+import { ref, uploadBytes } from "firebase/storage";
+import { collection, addDoc } from "firebase/firestore";
 import "@material/web/textfield/outlined-text-field.js";
 import "@material/web/button/outlined-button.js";
 import "@material/web/button/filled-button.js";
-
-import "@material/web/select/select-option.js";
-import "@material/web/select/outlined-select.js";
 import "@material/web/icon/icon.js";
 import "@material/web/chips/chip-set.js";
-import "@material/web/chips/assist-chip.js";
 import "@material/web/chips/filter-chip.js";
-import "@material/web/chips/input-chip.js";
 import "@material/web/radio/radio.js";
 import "@material/web/divider/divider.js";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { format, parseISO } from "date-fns";
 
 const Form = () => {
   const { control, handleSubmit, register } = useForm();
   const [tags, setTags] = useState([]);
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(null);
+  const dddd = "/src/assets/3c1aa898-cc8f-476c-ba1b-2ffff0a65461.jpeg";
+  const [date, setDate] = useState(null);
+  const [errorDate, setErrorDate] = useState(false);
+
+  const checkDateValue = function (e) {
+    setDate(e.target.value);
+    const currentDate = format(new Date(), "yyyy-MM-dd");
+    const eventPotentialDate = format(parseISO(date), "yyyy-MM-dd");
+    currentDate >= eventPotentialDate
+      ? setErrorDate(true)
+      : setErrorDate(false);
+  };
 
   const handleTags = function (e) {
     if (tags.includes(e)) {
       const updatedTags = tags.filter((tag) => tag !== e);
-      setTags(updatedTags);
+      setTags(updatedTags.data);
     } else {
       const updatedTags = [...tags, e];
       setTags(updatedTags);
     }
   };
 
-  const handleImage = (event) => {
+  const [imageUpload, setImageUpload] = useState(null);
+
+  const uploadImage = async (data) => {
+    console.log('in' , imageUpload)
+    const imageRef = ref(storage, `events/${data}`);
+    await uploadBytes(imageRef, imageUpload).then((respons) => {
+      console.log('duck', respons);
+    });
   };
+
+  
+
+  // const handleImage = (event) => {
+  //   const reader = new FileReader();
+
+  //   reader.onload = async (e) => {
+  //     const imageUrl = e.target.result;
+  //     await localStorage.setItem("recent-image", imageUrl);
+  //     await setImageUrl(imageUrl);
+  //     console.log('onload ', imageUrl);
+  //   };
+
+  //     setImageUrl(reader.readAsDataURL(event.target.files[0]));
+  //     console.log('if ', imageUrl);
+
+  // };
+
+  // const uploadImage = async (dataUrl) => {
+  //   const imageRef = ref(storage, `events/${dataUrl.title}`);
+
+  //   await uploadBytes(imageRef, dataUrl.image).then(() => {
+  //     alert("Upload successful!");
+  //   });
+  // };
+
+  // const handleImage = (event) => {
+  //   const img = new Image();
+  //   const reader = new FileReader();
+
+  //   reader.onload = (e) => {
+  //     console.log(e.target.result);
+  //     localStorage.setItem("recent-image", e.target.result);
+  //     setImageUrl(e.target.result);
+  //     console.log(imageUrl);
+  //   };
+  //   if (event.target.files[0]) {
+  //     reader.readAsDataURL(event.target.files[0]);
+  //     console.log(reader.readAsDataURL(event.target.files[0]));
+  //   }
+  // };
 
   const eventTags = [
     { tag: "Academic Events" },
@@ -62,29 +117,36 @@ const Form = () => {
     { audience: "Open to Everyone" },
   ];
 
-  const uploadImage = (data) => {
-    const ImageRef  = ref(storage , `events/${data.title}`)
-    uploadBytes(ImageRef, data.image).then(()=>{
-      alert("shit works")
-    })
-  } 
-
   const onSubmit = async (data) => {
-    data.email = auth.currentUser.email;
-    data.tags = tags;
-    uploadImage(data)
-    const docRef = await addDoc(collection(db, "events"), data );
-    console.log(docRef)
-    window.location.reload(true);
+    if (errorDate) {
+      console.log("Error: Invalid Date");
+    } else {
+      try {
+        data.email = auth.currentUser.email;
+        data.tags = tags;
+        await uploadImage(data.title)
+        const docRef = await addDoc(collection(db, "events"), data);
+        console.log("Document added:", docRef);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
   };
 
   return (
-    <div >
+    <div>
       <form onSubmit={handleSubmit(onSubmit)} method="dialog">
         {/* title */}
+
+        <d src={imageUrl} alt="this is a car" />
+
+        <di></di>
+
         <div>
           <h3 id="form-title-text">Event Title</h3>
           <md-outlined-text-field
+            maxlength="50"
+            minlength="2"
             id="text-field-form"
             {...register("title")}
             required
@@ -99,9 +161,10 @@ const Form = () => {
             id="text-field-form"
             {...register("description")}
             required
+            minlength="2"
             rows="3"
             type="textarea"
-            placeholder="Write the best description for you event"
+            placeholder="Write the best description for your event"
           ></md-outlined-text-field>
         </div>
 
@@ -112,7 +175,9 @@ const Form = () => {
             type="file"
             required
             accept="image/*"
-            onChange={handleImage}
+            onChange={(e) => {
+              setImageUpload(e.target.files[0]) ;
+            }}
           />
         </div>
 
@@ -168,6 +233,7 @@ const Form = () => {
               variant="filled"
               fullWidth
               id="form-date-input"
+              onChange={(e) => checkDateValue(e)}
               InputLabelProps={{ shrink: true }}
             />
             <TextField
@@ -181,9 +247,12 @@ const Form = () => {
               InputLabelProps={{ shrink: true }}
             />
           </div>
+          {errorDate ? (
+            <span id="error-span">Date should be equal to or after today</span>
+          ) : null}
         </div>
 
-        <md-divider className></md-divider>
+        <md-divider></md-divider>
 
         <div className="fc">
           <md-filled-button className="p-0" type="submit" id="button">

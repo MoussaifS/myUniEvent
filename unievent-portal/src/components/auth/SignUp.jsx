@@ -1,12 +1,13 @@
-import { useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { auth, db } from "../../FireBase";
-//RELAOD FIREBASE 
+//RELAOD FIREBASE
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import "@material/web/textfield/outlined-text-field.js";
 import "@material/web/button/outlined-button.js";
 import "@material/web/select/select-option.js";
 import "@material/web/select/outlined-select.js";
+import "@material/web/divider/divider.js";
 
 const SignUp = () => {
   const { handleSubmit, register } = useForm();
@@ -16,11 +17,11 @@ const SignUp = () => {
     { name: "Manipal International University" },
     { name: "Nilai University" },
     { name: "INTI International University" },
+    { name: "Other" },
   ];
 
   const roles = [
-    { role: "Student Advisor" },
-    { role: "Student Club Advisor" },
+    { role: "University staff member" },
     { role: "Student Club Representative" },
   ];
 
@@ -44,6 +45,8 @@ const SignUp = () => {
           id="text-field-credentials"
           {...register("first-name")}
           required
+          maxlength="10"
+          minlength="2"
           label="Name"
           placeholder="Enter First Name "
         ></md-outlined-text-field>
@@ -53,6 +56,8 @@ const SignUp = () => {
           id="text-field-credentials"
           {...register("last-name")}
           required
+          minlength="2"
+          maxlength="10"
           label="Last Name"
           placeholder="Enter Last Name "
         ></md-outlined-text-field>
@@ -62,9 +67,10 @@ const SignUp = () => {
           id="text-field-credentials"
           {...register("phone")}
           required
-          defaultValue="+60"
           type="number"
           label="Phone number"
+          maxlength="10"
+          minlength="2"
           placeholder="Enter Phone Number"
         ></md-outlined-text-field>
 
@@ -88,7 +94,10 @@ const SignUp = () => {
           placeholder="Enter Password"
         ></md-outlined-text-field>
 
+        <md-divider></md-divider>
+
         {/* institution name */}
+        <h4>Select the closer option</h4>
         <md-outlined-select
           id="text-field-credentials"
           required
@@ -134,8 +143,8 @@ const SignUp = () => {
           {...register("representing")}
           required
           type="text"
-          label="representing"
-          placeholder="I am Representing"
+          label="I Represent..."
+          supporting-text="Which club do you with Represent"
         ></md-outlined-text-field>
 
         <div>
