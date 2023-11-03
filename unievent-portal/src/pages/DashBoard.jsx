@@ -113,7 +113,7 @@ const DashBoard = () => {
       </md-dialog>
 
       {state ? (
-        <div>
+        <div id="card-container">
           {events.length === 0 ? (
             <h1>There are no events</h1>
           ) : (
