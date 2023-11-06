@@ -11,24 +11,35 @@ import "@material/web/chips/chip-set.js";
 import "@material/web/chips/filter-chip.js";
 import "@material/web/radio/radio.js";
 import "@material/web/divider/divider.js";
-import { useState, useRef } from "react";
+import { useState, React, useRef, useEffect } from "react";
 import { format, parseISO } from "date-fns";
+import { ta } from "date-fns/locale";
 
 const Form = () => {
-  const { control, handleSubmit, register } = useForm();
+  const { handleSubmit, register } = useForm();
   const [tags, setTags] = useState([]);
   const [imageUrl, setImageUrl] = useState(null);
-  const dddd = "/src/assets/3c1aa898-cc8f-476c-ba1b-2ffff0a65461.jpeg";
   const [date, setDate] = useState(null);
   const [errorDate, setErrorDate] = useState(false);
+  const [audienceType, setAudienceType] = useState("");
+
+
+  const handleAudience = async (e) => {
+    console.log('now', e);
+    const currentAudienceSelect = e;
+    await setAudienceType(currentAudienceSelect);
+  }
+
+  useEffect(() => {
+    console.log('after', audienceType);
+  }, [audienceType]);
 
   const checkDateValue = function (e) {
-    setDate(e.target.value);
     const currentDate = format(new Date(), "yyyy-MM-dd");
     const eventPotentialDate = format(parseISO(date), "yyyy-MM-dd");
     currentDate >= eventPotentialDate
       ? setErrorDate(true)
-      : setErrorDate(false);
+      : setDate(e.target.value);
   };
 
   const handleTags = function (e) {
@@ -44,53 +55,12 @@ const Form = () => {
   const [imageUpload, setImageUpload] = useState(null);
 
   const uploadImage = async (data) => {
-    console.log('in' , imageUpload)
+    console.log("in", imageUpload);
     const imageRef = ref(storage, `events/${data}`);
     await uploadBytes(imageRef, imageUpload).then((respons) => {
-      console.log('duck', respons);
+      console.log("duck", respons);
     });
   };
-
-  
-
-  // const handleImage = (event) => {
-  //   const reader = new FileReader();
-
-  //   reader.onload = async (e) => {
-  //     const imageUrl = e.target.result;
-  //     await localStorage.setItem("recent-image", imageUrl);
-  //     await setImageUrl(imageUrl);
-  //     console.log('onload ', imageUrl);
-  //   };
-
-  //     setImageUrl(reader.readAsDataURL(event.target.files[0]));
-  //     console.log('if ', imageUrl);
-
-  // };
-
-  // const uploadImage = async (dataUrl) => {
-  //   const imageRef = ref(storage, `events/${dataUrl.title}`);
-
-  //   await uploadBytes(imageRef, dataUrl.image).then(() => {
-  //     alert("Upload successful!");
-  //   });
-  // };
-
-  // const handleImage = (event) => {
-  //   const img = new Image();
-  //   const reader = new FileReader();
-
-  //   reader.onload = (e) => {
-  //     console.log(e.target.result);
-  //     localStorage.setItem("recent-image", e.target.result);
-  //     setImageUrl(e.target.result);
-  //     console.log(imageUrl);
-  //   };
-  //   if (event.target.files[0]) {
-  //     reader.readAsDataURL(event.target.files[0]);
-  //     console.log(reader.readAsDataURL(event.target.files[0]));
-  //   }
-  // };
 
   const eventTags = [
     { tag: "Academic Events" },
@@ -104,14 +74,6 @@ const Form = () => {
     { tag: "Meetups" },
   ];
 
-  // const eventDuration = [
-  //   { duration: "1 Hour" },
-  //   { duration: "2 Hours" },
-  //   { duration: "3 Hours" },
-  //   { duration: "5 Hours" },
-  //   { duration: "1 Day" },
-  // ];
-
   const eventType = [
     { audience: "Exclusive to My Uni Students" },
     { audience: "Open to Everyone" },
@@ -124,7 +86,8 @@ const Form = () => {
       try {
         data.email = auth.currentUser.email;
         data.tags = tags;
-        await uploadImage(data.title)
+        data.audience = audienceType;
+        await uploadImage(data.title);
         const docRef = await addDoc(collection(db, "events"), data);
         console.log("Document added:", docRef);
       } catch (error) {
@@ -139,8 +102,6 @@ const Form = () => {
         {/* title */}
 
         <d src={imageUrl} alt="this is a car" />
-
-        <di></di>
 
         <div>
           <h3 id="form-title-text">Event Title</h3>
@@ -176,7 +137,7 @@ const Form = () => {
             required
             accept="image/*"
             onChange={(e) => {
-              setImageUpload(e.target.files[0]) ;
+              setImageUpload(e.target.files[0]);
             }}
           />
         </div>
@@ -186,13 +147,11 @@ const Form = () => {
         <div>
           {/* target audience*/}
           <h3 id="form-title-text">Type of Event</h3>
-          <span id="mini-text">
-            Pick the chips that work best for your event
-          </span>
+          <span id="mini-text">Pick the tags work best for your event</span>
           <md-chip-set id="margin-top" aria-labelledby="dates-label">
-            {eventTags.map((tag) => (
+            {eventTags.map((tag, index) => (
               <md-filter-chip
-                key={tag.id}
+                key={index}
                 onClick={() => handleTags(tag.tag)}
                 label={tag.tag}
                 required
@@ -212,8 +171,13 @@ const Form = () => {
                 value={e.audience}
                 aria-label={e.audience}
                 {...register("audience")}
+                onClick={() => handleAudience(e)}
               ></md-radio>
-              <label className="margin-left" htmlFor={e.audience}>
+              <label
+                className="margin-left"
+                name="audience"
+                htmlFor={e.audience}
+              >
                 {e.audience}
               </label>
             </div>

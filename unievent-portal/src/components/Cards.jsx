@@ -10,11 +10,9 @@ import "@material/web/icon/icon.js";
 import "@material/web/button/outlined-button.js";
 import "@material/web/iconbutton/outlined-icon-button.js";
 import "@material/web/iconbutton/filled-tonal-icon-button.js";
-
-
-
-
-import { format, parseISO } from "date-fns";
+import ShareIcon from '../assets/share_icon.svg';
+import DeleteIcon from '../assets/delete_icon.svg'
+import { format } from "date-fns";
 import ShowMoreText from "react-show-more-text";
 
 const Cards = (props) => {
@@ -71,13 +69,17 @@ const Cards = (props) => {
       </div>
       <md-divider inset></md-divider>
       <div id="card-btns">
-        <md-filled-tonal-icon-button>
-          <md-icon><svg xmlns="" viewBox="0 0 48 48"><path d="M10 40V24H4L24 6l10 8.85V9h4v9.55L44 24h-6v16H26.5V28h-5v12Zm3-3h5.5V25h11v12H35V19.95l-11-10-11 10Zm5.5-12h11-11Zm1.25-5.5h8.5q0-1.65-1.275-2.725Q25.7 15.7 24 15.7q-1.7 0-2.975 1.075Q19.75 17.85 19.75 19.5Z"/></svg></md-icon>
-        </md-filled-tonal-icon-button>
-
         <md-outlined-icon-button>
-        <md-icon><svg xmlns="" viewBox="0 0 48 48"><path d="M10 40V24H4L24 6l10 8.85V9h4v9.55L44 24h-6v16H26.5V28h-5v12Zm3-3h5.5V25h11v12H35V19.95l-11-10-11 10Zm5.5-12h11-11Zm1.25-5.5h8.5q0-1.65-1.275-2.725Q25.7 15.7 24 15.7q-1.7 0-2.975 1.075Q19.75 17.85 19.75 19.5Z"/></svg></md-icon>
+          <md-icon>
+          <img src={DeleteIcon} alt="Share" />
+          </md-icon>
         </md-outlined-icon-button>
+
+        <md-filled-tonal-icon-button>
+          <md-icon>
+            <img src={ShareIcon} alt="Share" />
+          </md-icon>
+        </md-filled-tonal-icon-button>
       </div>
     </Card>
   );

@@ -40,11 +40,9 @@ const Landing = () => {
       <Nav/>
 
       <Container maxWidth="lg" id="main-container" sx={{ height: "100%"}}>
-        <Container maxWidth="lg" sx={{ height: "150px",  }}>
-          <p className="banerText">
+        <Container maxWidth="lg" sx={{ height: "100px", margin: "10px"  }}>
+          <div className="banerText">
             <h1 className="purple">University Events</h1>
-
-
             <Typewriter 
               words= {["Sharing", "Managing", "Elevating", "Hosting", "Promoting"]}
               cursor
@@ -58,7 +56,7 @@ const Landing = () => {
               />
 
             <span>for</span> <span className="purple"> FREE </span>
-          </p>
+          </div>
           <p id="landing-desc-desktop">
             <b> Create, Manage, Share, and Promote </b>
             events with our <span>UniEvent</span> platform. And explore more
@@ -67,7 +65,7 @@ const Landing = () => {
         </Container>
 
         <Paper
-          elevation={3}
+          elevation={0}
           variant="outlined"
           className="paper-landing"
           sx={{
