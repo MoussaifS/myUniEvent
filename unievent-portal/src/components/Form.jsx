@@ -13,7 +13,6 @@ import "@material/web/radio/radio.js";
 import "@material/web/divider/divider.js";
 import { useState, React, useRef, useEffect } from "react";
 import { format, parseISO } from "date-fns";
-import { ta } from "date-fns/locale";
 
 const Form = () => {
   const { handleSubmit, register } = useForm();
@@ -23,15 +22,14 @@ const Form = () => {
   const [errorDate, setErrorDate] = useState(false);
   const [audienceType, setAudienceType] = useState("");
 
-
   const handleAudience = async (e) => {
-    console.log('now', e);
+    console.log("now", e);
     const currentAudienceSelect = e;
     await setAudienceType(currentAudienceSelect);
-  }
+  };
 
   useEffect(() => {
-    console.log('after', audienceType);
+    setAudienceType(audienceType);
   }, [audienceType]);
 
   const checkDateValue = function (e) {
@@ -42,15 +40,24 @@ const Form = () => {
       : setDate(e.target.value);
   };
 
-  const handleTags = function (e) {
-    if (tags.includes(e)) {
-      const updatedTags = tags.filter((tag) => tag !== e);
-      setTags(updatedTags.data);
+  const [selectedTags, setSelectedTags] = useState([]);
+
+
+  const handleTags = (tag) => {
+    if (selectedTags.includes(tag)) {
+      // If the tag is already selected, remove it
+      const updatedTags = selectedTags.filter((selectedTag) => selectedTag !== tag);
+      setSelectedTags(updatedTags);
     } else {
-      const updatedTags = [...tags, e];
-      setTags(updatedTags);
+      // If the tag is not selected, add it
+      const updatedTags = [...selectedTags, tag];
+      setSelectedTags(updatedTags);
     }
   };
+
+   useEffect(() => {
+    setSelectedTags(selectedTags)
+  }, [selectedTags]);
 
   const [imageUpload, setImageUpload] = useState(null);
 
@@ -79,14 +86,16 @@ const Form = () => {
     { audience: "Open to Everyone" },
   ];
 
+
   const onSubmit = async (data) => {
     if (errorDate) {
       console.log("Error: Invalid Date");
     } else {
       try {
         data.email = auth.currentUser.email;
-        data.tags = tags;
-        data.audience = audienceType;
+        data.tags = selectedTags;
+        data.audience = audienceType.audience;
+        data.id = 
         await uploadImage(data.title);
         const docRef = await addDoc(collection(db, "events"), data);
         console.log("Document added:", docRef);
@@ -155,9 +164,8 @@ const Form = () => {
                 onClick={() => handleTags(tag.tag)}
                 label={tag.tag}
                 required
-                elevated
+                elevated// Add elevated class if selected
                 aria-label={tag.tag}
-                {...register("tags")}
               ></md-filter-chip>
             ))}
           </md-chip-set>

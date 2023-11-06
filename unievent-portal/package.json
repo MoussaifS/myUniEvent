@@ -21,6 +21,7 @@
     "date-fns": "^2.30.0",
     "firebase": "^9.22.1",
     "framer-motion": "^10.16.4",
+    "generate-unique-id": "^2.0.3",
     "react": "^17.0.2",
     "react-client-session": "^0.0.8",
     "react-cookie": "^4.1.1",
@@ -35,7 +36,8 @@
     "react-whatsapp": "^0.3.0",
     "reactjs-popup": "^2.0.6",
     "styled-components": "^5.3.11",
-    "universal-cookie": "^4.0.4"
+    "universal-cookie": "^4.0.4",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

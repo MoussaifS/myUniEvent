@@ -14,8 +14,21 @@ import ShareIcon from '../assets/share_icon.svg';
 import DeleteIcon from '../assets/delete_icon.svg'
 import { format } from "date-fns";
 import ShowMoreText from "react-show-more-text";
+import { db } from "../FireBase";
 
 const Cards = (props) => {
+  console.log(props)
+//   const docRef = db.collection('events').doc('your_document_id');
+
+// // Delete the document
+// docRef.delete()
+//   .then(() => {
+//     console.log('Document successfully deleted!');
+//   })
+//   .catch((error) => {
+//     console.error('Error removing document: ', error);
+//   });
+
   return (
     <Card sx={{ maxWidth: 700 }}>
       <div className="fd-r">

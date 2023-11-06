@@ -11,6 +11,7 @@ import "@material/web/fab/fab.js";
 import "@material/web/icon/icon.js";
 import "@material/web/ripple/ripple.js";
 import { Flag } from "@mui/icons-material";
+import shareIcon from "../assets/share_icon.svg"
 
 const DashBoard = () => {
   const [events, setEvents] = useState([]);

@@ -232,6 +232,9 @@ html {
   border: 3px solid #6750a4;
   padding: 5px;
   border-radius: 20%;
+  font-size: larger;
+  font-weight: bold;
+  margin-right: 5px;
 }
 
 #button {
@@ -315,10 +318,16 @@ button {
 #nav{
   margin-top: 20px;
   margin-bottom: 10px;
-  width: 100%;
-  height: 35px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 25px;
   display: inline-flex; 
   justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  position: sticky;
+  box-shadow: rgb(85, 91, 255) 0px 0px 0px 2px, rgb(31, 193, 27) 0px 0px 0px 4px, rgb(255, 217, 19) 0px 0px 0px 7px, rgb(255, 85, 85) 0px 0px 0px 10px;
+  
 }
 
 #noEvent-span{
