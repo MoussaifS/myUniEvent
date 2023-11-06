@@ -15,20 +15,9 @@ import DeleteIcon from '../assets/delete_icon.svg'
 import { format } from "date-fns";
 import ShowMoreText from "react-show-more-text";
 import { db } from "../FireBase";
+import { collection, addDoc ,setDoc , doc } from "firebase/firestore";
 
 const Cards = (props) => {
-  console.log(props)
-//   const docRef = db.collection('events').doc('your_document_id');
-
-// // Delete the document
-// docRef.delete()
-//   .then(() => {
-//     console.log('Document successfully deleted!');
-//   })
-//   .catch((error) => {
-//     console.error('Error removing document: ', error);
-//   });
-
   return (
     <Card sx={{ maxWidth: 700 }}>
       <div className="fd-r">
@@ -40,7 +29,7 @@ const Cards = (props) => {
 
       <div className="fd-r">
         <img
-          src="/src/assets/3c1aa898-cc8f-476c-ba1b-2ffff0a65461.jpeg"
+          src={props.event.image}
           width="150"
           height="150"
         />

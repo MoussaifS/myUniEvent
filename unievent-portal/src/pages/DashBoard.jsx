@@ -3,7 +3,7 @@ import Nav from "../components/Nav";
 import Form from "../components/Form";
 import { db } from "../FireBase";
 import Cards from "../components/Cards";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs , orderBy } from "firebase/firestore";
 import Cookies from "universal-cookie";
 import "@material/web/dialog/dialog.js";
 import "@material/web/button/outlined-button.js";
@@ -28,15 +28,19 @@ const DashBoard = () => {
       try {
         const eventDataQuery = await query(
           collection(db, "events"),
-          where("email", "==", userEmail)
+          where("email", "==", userEmail),
+          orderBy("startDate", "asc") // Add this line to order events by startDate in ascending order.
         );
         const eventInfoSnapshot = await getDocs(eventDataQuery);
+        
         await setEvents(eventInfoSnapshot.docs.map((doc) => doc.data())); 
       } catch (error) {
-        console.log("eat a shit and have this ", error);
+        console.log("An error occurred:", error);
       }
     };
     fetchEventData();
+
+    
 
     const fetchUserInfo = async () => {
       try {

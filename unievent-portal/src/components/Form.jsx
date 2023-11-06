@@ -1,8 +1,8 @@
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { db, auth, storage } from "../FireBase";
-import { ref, uploadBytes } from "firebase/storage";
-import { collection, addDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
+import { collection, addDoc ,setDoc , doc } from "firebase/firestore";
 import "@material/web/textfield/outlined-text-field.js";
 import "@material/web/button/outlined-button.js";
 import "@material/web/button/filled-button.js";
@@ -11,13 +11,13 @@ import "@material/web/chips/chip-set.js";
 import "@material/web/chips/filter-chip.js";
 import "@material/web/radio/radio.js";
 import "@material/web/divider/divider.js";
-import { useState, React, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { format, parseISO } from "date-fns";
+import { v4 as uuidv4 } from 'uuid';
 
 const Form = () => {
   const { handleSubmit, register } = useForm();
   const [tags, setTags] = useState([]);
-  const [imageUrl, setImageUrl] = useState(null);
   const [date, setDate] = useState(null);
   const [errorDate, setErrorDate] = useState(false);
   const [audienceType, setAudienceType] = useState("");
@@ -42,11 +42,12 @@ const Form = () => {
 
   const [selectedTags, setSelectedTags] = useState([]);
 
-
   const handleTags = (tag) => {
     if (selectedTags.includes(tag)) {
       // If the tag is already selected, remove it
-      const updatedTags = selectedTags.filter((selectedTag) => selectedTag !== tag);
+      const updatedTags = selectedTags.filter(
+        (selectedTag) => selectedTag !== tag
+      );
       setSelectedTags(updatedTags);
     } else {
       // If the tag is not selected, add it
@@ -55,19 +56,11 @@ const Form = () => {
     }
   };
 
-   useEffect(() => {
-    setSelectedTags(selectedTags)
+  useEffect(() => {
+    setSelectedTags(selectedTags);
   }, [selectedTags]);
 
-  const [imageUpload, setImageUpload] = useState(null);
 
-  const uploadImage = async (data) => {
-    console.log("in", imageUpload);
-    const imageRef = ref(storage, `events/${data}`);
-    await uploadBytes(imageRef, imageUpload).then((respons) => {
-      console.log("duck", respons);
-    });
-  };
 
   const eventTags = [
     { tag: "Academic Events" },
@@ -82,36 +75,70 @@ const Form = () => {
   ];
 
   const eventType = [
-    { audience: "Exclusive to My Uni Students" },
+    { audience: "My Uni Students Only" },
     { audience: "Open to Everyone" },
   ];
 
 
+  const [imageUpload, setImageUpload] = useState(null);
+  const [imageUrl , setImageUrl] = useState("");
+
+
+  const getImageUrl = (destination) => {
+    const storage = getStorage();
+    getDownloadURL(ref(storage, destination)).then(async (url) => {
+      await setImageUrl(url)
+      console.log('url' , destination)
+      console.log(url)
+    })
+  }
+
+
+  const uploadImage = async (data , docId) => {
+    const folderDestination = `events/${data}:${docId}`
+    const imageRef = ref(storage, folderDestination );
+    await uploadBytes(imageRef, imageUpload).then(async () => {
+      await getImageUrl(folderDestination)
+      console.log('upload' , folderDestination)
+    });
+  };
+    
+
+  
+  
+      
+  
   const onSubmit = async (data) => {
     if (errorDate) {
       console.log("Error: Invalid Date");
     } else {
       try {
+        const docId  = uuidv4()
+        await uploadImage(data.title , docId );
+        console.log('sub', docId);
         data.email = auth.currentUser.email;
+        data.image = imageUrl;
         data.tags = selectedTags;
+        data.docId = docId
         data.audience = audienceType.audience;
-        data.id = 
-        await uploadImage(data.title);
-        const docRef = await addDoc(collection(db, "events"), data);
-        console.log("Document added:", docRef);
+        await setDoc(doc(db, "events", docId ), data);
+        console.log("Document set");
       } catch (error) {
         console.error("Error:", error);
       }
     }
   };
+  
+  
+  
+  
+  
+  
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} method="dialog">
         {/* title */}
-
-        <d src={imageUrl} alt="this is a car" />
-
         <div>
           <h3 id="form-title-text">Event Title</h3>
           <md-outlined-text-field
@@ -157,15 +184,16 @@ const Form = () => {
           {/* target audience*/}
           <h3 id="form-title-text">Type of Event</h3>
           <span id="mini-text">Pick the tags work best for your event</span>
-          <md-chip-set id="margin-top" aria-labelledby="dates-label">
+          <md-chip-set id="margin-top" aria-labelledby="dates-label" supporting-text="Which club do you with Represent">
             {eventTags.map((tag, index) => (
               <md-filter-chip
                 key={index}
                 onClick={() => handleTags(tag.tag)}
                 label={tag.tag}
                 required
-                elevated// Add elevated class if selected
+                elevated // Add elevated class if selected
                 aria-label={tag.tag}
+                supporting-text="Which club do you with Represent"
               ></md-filter-chip>
             ))}
           </md-chip-set>
