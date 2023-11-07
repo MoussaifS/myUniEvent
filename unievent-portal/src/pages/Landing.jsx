@@ -17,10 +17,16 @@ const Landing = () => {
   const [bannerText, setBannerText] = useState();
 
   useEffect(() => {
-    setInterval(() => {
+    const intervalId = setInterval(() => {
       setBannerText(luck[Math.floor(Math.random() * 5)]);
     }, 3000);
-  }, []);
+
+    // Cleanup function to clear the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []); 
+
 
   const bannerMotion = {
     transition: {
