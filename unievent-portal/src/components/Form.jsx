@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { db, auth, storage } from "../FireBase";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
-import { collection, addDoc ,setDoc , doc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import "@material/web/textfield/outlined-text-field.js";
 import "@material/web/button/outlined-button.js";
 import "@material/web/button/filled-button.js";
@@ -13,7 +13,7 @@ import "@material/web/radio/radio.js";
 import "@material/web/divider/divider.js";
 import { useState, useEffect } from "react";
 import { format, parseISO } from "date-fns";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const Form = () => {
   const { handleSubmit, register } = useForm();
@@ -60,8 +60,6 @@ const Form = () => {
     setSelectedTags(selectedTags);
   }, [selectedTags]);
 
-
-
   const eventTags = [
     { tag: "Academic Events" },
     { tag: "Career Development" },
@@ -79,60 +77,44 @@ const Form = () => {
     { audience: "Open to Everyone" },
   ];
 
-
   const [imageUpload, setImageUpload] = useState(null);
-  const [imageUrl , setImageUrl] = useState("");
+  const [imageUrl , setImageUrl] = useState(null)
+ 
 
-
-  const getImageUrl = (destination) => {
+  const uploadImage = (title, docId) => {
     const storage = getStorage();
-    let imgUrl
-    getDownloadURL(ref(storage, destination)).then( (url) => {
-      imgUrl = url
-      console.log('url' , destination)
-      console.log(url)
-    })
-    return imgUrl
-  }
-
-
-  const uploadImage = async (data , docId) => {
-    const folderDestination = `events/${data}:${docId}`
-    const imageRef = ref(storage, folderDestination );
-    let url
-    await uploadBytes(imageRef, imageUpload).then(async () => {
-      url = getImageUrl(folderDestination)
-      console.log('upload' , folderDestination)
+    const imageStorageRef = ref(storage, `events/${title}:${docId}`);
+    const imageUrlRef = ref(storage, `events/${title}:${docId}`);
+    uploadBytes(imageStorageRef, imageUpload).then(() => {
+      getDownloadURL(ref(storage, imageUrlRef)).then(async (url) => {
+       await setImageUrl(url)
+      console.log('in' , imageUrl)
+      });
     });
-    return url
   };
-      
+
   const onSubmit = async (data) => {
     if (errorDate) {
       console.log("Error: Invalid Date");
     } else {
       try {
-        const docId  = uuidv4()
-        const imageUrl = await uploadImage(data.title , docId );
-        console.log('sub', docId);
+        const docId = uuidv4();
+        uploadImage(data.title, docId);
+        data.image = imageUrl
+        console.log('out' , imageUrl)
+        console.log(data.image)
         data.email = auth.currentUser.email;
-        data.image = imageUrl;
         data.tags = selectedTags;
-        data.docId = docId
+        data.docId = docId;
         data.audience = audienceType.audience;
-        await setDoc(doc(db, "events", docId ), data);
+        await setDoc(doc(db, "events", docId), data);
         console.log("Document set");
       } catch (error) {
         console.error("Error:", error);
+        console.log(data)
       }
     }
   };
-  
-  
-  
-  
-  
-  
 
   return (
     <div>
@@ -183,7 +165,11 @@ const Form = () => {
           {/* target audience*/}
           <h3 id="form-title-text">Type of Event</h3>
           <span id="mini-text">Pick the tags work best for your event</span>
-          <md-chip-set id="margin-top" aria-labelledby="dates-label" supporting-text="Which club do you with Represent">
+          <md-chip-set
+            id="margin-top"
+            aria-labelledby="dates-label"
+            supporting-text="Which club do you with Represent"
+          >
             {eventTags.map((tag, index) => (
               <md-filter-chip
                 key={index}
