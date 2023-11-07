@@ -86,35 +86,34 @@ const Form = () => {
 
   const getImageUrl = (destination) => {
     const storage = getStorage();
-    getDownloadURL(ref(storage, destination)).then(async (url) => {
-      await setImageUrl(url)
+    let imgUrl
+    getDownloadURL(ref(storage, destination)).then( (url) => {
+      imgUrl = url
       console.log('url' , destination)
       console.log(url)
     })
+    return imgUrl
   }
 
 
   const uploadImage = async (data , docId) => {
     const folderDestination = `events/${data}:${docId}`
     const imageRef = ref(storage, folderDestination );
+    let url
     await uploadBytes(imageRef, imageUpload).then(async () => {
-      await getImageUrl(folderDestination)
+      url = getImageUrl(folderDestination)
       console.log('upload' , folderDestination)
     });
+    return url
   };
-    
-
-  
-  
       
-  
   const onSubmit = async (data) => {
     if (errorDate) {
       console.log("Error: Invalid Date");
     } else {
       try {
         const docId  = uuidv4()
-        await uploadImage(data.title , docId );
+        const imageUrl = await uploadImage(data.title , docId );
         console.log('sub', docId);
         data.email = auth.currentUser.email;
         data.image = imageUrl;

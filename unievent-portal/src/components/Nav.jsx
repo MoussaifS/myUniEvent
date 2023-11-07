@@ -35,7 +35,7 @@ const Nav = () => {
 
   return (
     <div id="nav">
-      <div>
+      <div >
         <span id="logo">ue</span>
         <span>UniEvent</span>
       </div>

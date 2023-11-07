@@ -3,7 +3,7 @@ import Nav from "../components/Nav";
 import Form from "../components/Form";
 import { db } from "../FireBase";
 import Cards from "../components/Cards";
-import { collection, query, where, getDocs , orderBy } from "firebase/firestore";
+import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import Cookies from "universal-cookie";
 import "@material/web/dialog/dialog.js";
 import "@material/web/button/outlined-button.js";
@@ -11,7 +11,7 @@ import "@material/web/fab/fab.js";
 import "@material/web/icon/icon.js";
 import "@material/web/ripple/ripple.js";
 import { Flag } from "@mui/icons-material";
-import shareIcon from "../assets/share_icon.svg"
+import shareIcon from "../assets/share_icon.svg";
 
 const DashBoard = () => {
   const [events, setEvents] = useState([]);
@@ -19,8 +19,7 @@ const DashBoard = () => {
   const [user, setUser] = useState();
   const cookies = new Cookies();
   const userEmail = cookies.get("email");
-  const [state , setState] = useState(false)
-
+  const [state, setState] = useState(false);
 
   //duck explain
   useEffect(() => {
@@ -32,15 +31,13 @@ const DashBoard = () => {
           orderBy("startDate", "asc") // Add this line to order events by startDate in ascending order.
         );
         const eventInfoSnapshot = await getDocs(eventDataQuery);
-        
-        await setEvents(eventInfoSnapshot.docs.map((doc) => doc.data())); 
+
+        await setEvents(eventInfoSnapshot.docs.map((doc) => doc.data()));
       } catch (error) {
         console.log("An error occurred:", error);
       }
     };
     fetchEventData();
-
-    
 
     const fetchUserInfo = async () => {
       try {
@@ -51,11 +48,11 @@ const DashBoard = () => {
         const userInfoSnapshot = await getDocs(userInfoQuery);
         const userDataArray = await userInfoSnapshot.docs[0].data();
         await setUser(userDataArray);
-        await setUni(userDataArray.institution)
-        setState(true)
+        await setUni(userDataArray.institution);
+        setState(true);
       } catch (error) {
-        setState(false)
-        console.log("eat a dick and have this" , error);
+        setState(false);
+        console.log("eat a dick and have this", error);
       }
     };
     fetchUserInfo();
@@ -73,7 +70,10 @@ const DashBoard = () => {
 
   return (
     <div className="fd-c">
-      <Nav className="mb-25"/>
+      
+        <Nav />
+
+
       <md-fab
         id="createNewEvent-btn"
         size="large"
@@ -97,11 +97,10 @@ const DashBoard = () => {
       {state ? (
         <div id="card-container">
           {events.length == 0 ? (
-            <div id="noEvent-container" >
-            <span id="noEvent-span">No events found  😕</span>
-            <p>To create a new event, please click the button below 🚀.</p>
-          </div>
-            
+            <div id="noEvent-container">
+              <span id="noEvent-span">No events found 😕</span>
+              <p>To create a new event, please click the button below 🚀.</p>
+            </div>
           ) : (
             events.map((event, index) => (
               <Cards key={index} user={user} uni={uni} event={event} />

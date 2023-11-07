@@ -5,8 +5,7 @@ import Nav from "../components/Nav";
 import { motion } from "framer-motion";
 import "@material/web/button/filled-tonal-button.js";
 import "@material/web/divider/divider.js";
-import { Typewriter } from 'react-simple-typewriter'
-
+import { Typewriter } from "react-simple-typewriter";
 
 import Popup from "reactjs-popup";
 
@@ -37,25 +36,31 @@ const Landing = () => {
 
   return (
     <div id="landingPage">
-      <Nav/>
+      
+        <Nav />
+      
 
-      <Container maxWidth="lg" id="main-container" sx={{ height: "100%"}}>
-        <Container maxWidth="lg" sx={{ height: "100px", margin: "10px"  }}>
+      <Container maxWidth="lg" id="main-container" sx={{ height: "100%" }}>
+        <Container maxWidth="lg" sx={{ height: "100px", margin: "10px" }}>
           <div className="banerText">
             <h1 className="purple">University Events</h1>
-            <Typewriter 
-              words= {["Sharing", "Managing", "Elevating", "Hosting", "Promoting"]}
+            <Typewriter
+              words={[
+                "Sharing",
+                "Managing",
+                "Elevating",
+                "Hosting",
+                "Promoting",
+              ]}
               cursor
               loop={Infinity}
-              cursorColor= "#6750a4"
-              cursorStyle='|'
-            typeSpeed={70}
-            deleteSpeed={70}
-            delaySpeed={2000}
-            
-              />
-
-            <span>for</span> <span className="purple"> FREE </span>
+              cursorColor="#6750a4"
+              cursorStyle="|"
+              typeSpeed={70}
+              deleteSpeed={70}
+              delaySpeed={2000}
+            />
+            <span> for</span> <span className="purple"> FREE </span>
           </div>
           <p id="landing-desc-desktop">
             <b> Create, Manage, Share, and Promote </b>

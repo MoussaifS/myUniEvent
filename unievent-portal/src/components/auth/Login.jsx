@@ -36,6 +36,7 @@ const Login = () => {
             type="email"
             required
             label="Enter Your Email"
+            autocomplete="email"
           ></md-outlined-text-field>
 
           {/* Password */}
@@ -46,6 +47,7 @@ const Login = () => {
             type="password"
             placeholder="Password"
             label="Enter Your Password"
+            autocomplete="current-password"
           ></md-outlined-text-field>
           <div>{error ?  <div id="error-email-password">Wrong Email Address or Password</div> : null}</div>
         </div>

@@ -8,9 +8,24 @@ import "@material/web/button/outlined-button.js";
 import "@material/web/select/select-option.js";
 import "@material/web/select/outlined-select.js";
 import "@material/web/divider/divider.js";
+import { useState } from "react";
 
 const SignUp = () => {
   const { handleSubmit, register } = useForm();
+  const [step , setStep] = useState(1)
+ 
+  const prevStep = () => {
+    setStep(step - 1 );
+  }
+
+  const nextStep = () => {
+    setStep(step + 1 );
+  }
+
+
+
+
+
 
   const institutions = [
     { name: "Universiti Sains Islam Malaysia" },
