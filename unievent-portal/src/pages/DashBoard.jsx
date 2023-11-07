@@ -8,14 +8,9 @@ import Cookies from "universal-cookie";
 import "@material/web/dialog/dialog.js";
 import "@material/web/button/outlined-button.js";
 import "@material/web/fab/fab.js";
-
 import "@material/web/fab/branded-fab.js";
-
-
 import "@material/web/icon/icon.js";
 import "@material/web/ripple/ripple.js";
-import { Flag } from "@mui/icons-material";
-import shareIcon from "../assets/share_icon.svg";
 
 const DashBoard = () => {
   const [events, setEvents] = useState([]);

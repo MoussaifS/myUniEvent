@@ -10,14 +10,45 @@ import "@material/web/icon/icon.js";
 import "@material/web/button/outlined-button.js";
 import "@material/web/iconbutton/outlined-icon-button.js";
 import "@material/web/iconbutton/filled-tonal-icon-button.js";
-import ShareIcon from '../assets/share_icon.svg';
-import DeleteIcon from '../assets/delete_icon.svg'
+import ShareIcon from "../assets/share_icon.svg";
+import DeleteIcon from "../assets/delete_icon.svg";
 import { format } from "date-fns";
 import ShowMoreText from "react-show-more-text";
 import { db } from "../FireBase";
-import { collection, addDoc ,setDoc , doc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+  deleteDoc
+} from "firebase/firestore";
+
+
+import { ref, uploadBytes, getDownloadURL, deleteObject , getStorage } from "firebase/storage";
+
 
 const Cards = (props) => {
+  
+
+
+  const deleteEvent = () => {
+    const storage = getStorage();
+    console.log('in func');
+    const imageStorageRef = ref(storage, `events/${props.event.title}:${props.event.docId}`);
+
+    deleteObject(imageStorageRef)
+      .then(async () => {
+        await deleteDoc(doc(db, "events", props.event.docId));
+        console.log('Event and image deleted successfully');
+      })
+      .catch((error) => {
+        console.error('Error deleting image or event:', error);
+      });
+  };
+  
+
+  
+
   return (
     <Card sx={{ maxWidth: 700 }}>
       <div className="fd-r">
@@ -28,11 +59,7 @@ const Cards = (props) => {
       </div>
 
       <div className="fd-r">
-        <img
-          src={props.event.image}
-          width="150"
-          height="150"
-        />
+        <img src={props.event.image} width="150" height="150" />
         <div>
           <h2 className="m-10">{props.event.title}</h2>
           <div className="m-5">
@@ -71,9 +98,9 @@ const Cards = (props) => {
       </div>
       <md-divider inset></md-divider>
       <div id="card-btns">
-        <md-outlined-icon-button>
+        <md-outlined-icon-button onclick={deleteEvent()} >
           <md-icon>
-          <img src={DeleteIcon} alt="Share" />
+            <img src={DeleteIcon} alt="Share" />
           </md-icon>
         </md-outlined-icon-button>
 
