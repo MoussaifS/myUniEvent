@@ -157,9 +157,13 @@ html {
 
 #createNewEvent-btn {
   position: fixed;
-  z-index: 0;
+  z-index: 1;
   bottom: 40px;
   right: 16px;
+}
+
+.zi-99{
+  z-index: 99;
 }
 
 #landingPage {

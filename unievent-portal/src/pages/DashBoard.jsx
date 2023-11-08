@@ -37,7 +37,7 @@ const DashBoard = () => {
         </svg>
       </md-branded-fab>
 
-      <md-dialog ref={inputRef}>
+      <md-dialog className="zi-99" ref={inputRef}>
         <div className="fd-c" slot="content" method="dialog">
           <Form />
           <md-outlined-button onClick={handleCloseFormClick}>
