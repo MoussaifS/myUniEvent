@@ -2,13 +2,9 @@ import { Box, Container, Paper } from "@mui/material";
 import Login from "../components/auth/Login";
 import SignUp from "../components/auth/SignUp";
 import Nav from "../components/Nav";
-import { motion } from "framer-motion";
 import "@material/web/button/filled-tonal-button.js";
 import "@material/web/divider/divider.js";
 import { Typewriter } from "react-simple-typewriter";
-
-import Popup from "reactjs-popup";
-
 import { useState, useEffect } from "react";
 
 const Landing = () => {

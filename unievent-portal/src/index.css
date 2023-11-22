@@ -1,14 +1,11 @@
 html {
-  background-color: var(--m-3-sys-light-surface, #fef7ff);
   height: 100%;
   width: 100%;
   font-family: "Roboto";
+  background-color: var(--m-3-sys-light-surface, #fffafa);
+
 }
 
-#text-field-form {
-  margin: 15px 0px 15px 0px;
-  display: block;
-}
 
 #text-field-credentials {
   margin: 15px 0px 15px 0px;
@@ -16,7 +13,7 @@ html {
 }
 
 #text-field-form {
-  margin: 15px 0px 15px 0px;
+  margin: 5px 0px 15px 0px;
   display: block;
 }
 
@@ -45,6 +42,7 @@ html {
   font-size: 16px;
   margin-top: 10px;
   margin-bottom: 16px;
+  
 }
 
 #margin-top{
@@ -106,7 +104,38 @@ html {
 #main-container {
   display: flex;
   flex-direction: row;
+  border-radius: 25px;
 }
+
+#pe-none{
+  pointer-events: none;
+}
+
+.tag-chips{
+  flex-wrap: nowrap;
+    max-width: 512px;
+    overflow: scroll;
+    padding: 8px;
+}
+
+.mt-5{
+  margin-top: 5px;
+} 
+
+#filter-byDate{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.filter-chip{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
 
 @media (max-width: 900px) {
   #main-container {

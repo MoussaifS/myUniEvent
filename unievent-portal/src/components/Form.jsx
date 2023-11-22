@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { db, auth, storage } from "../FireBase";
+import { db, auth } from "../FireBase";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 import { setDoc, doc } from "firebase/firestore";
 import "@material/web/textfield/outlined-text-field.js";
@@ -17,11 +17,29 @@ import { v4 as uuidv4 } from "uuid";
 
 const Form = () => {
   const { handleSubmit, register } = useForm();
-  const [tags, setTags] = useState([]);
-  const [date, setDate] = useState(null);
-  const [errorDate, setErrorDate] = useState(false);
   const [audienceType, setAudienceType] = useState("");
+  const [date, setDate] = useState(null);
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [errorDate, setErrorDate] = useState(null);
 
+  const eventType = [
+    { audience: "My Uni Students Only" },
+    { audience: "Open to Everyone" },
+  ];
+
+  const eventTags = [
+    { tag: "Academic Events" },
+    { tag: "Career Development" },
+    { tag: "Sports and activity" },
+    { tag: "Social Impact" },
+    { tag: "Guest Speakers" },
+    { tag: "Chill and fun" },
+    { tag: "Workshops" },
+    { tag: "Hackathons" },
+    { tag: "Meetups" },
+  ];
+
+  //audience type
   const handleAudience = async (e) => {
     console.log("now", e);
     const currentAudienceSelect = e;
@@ -32,6 +50,7 @@ const Form = () => {
     setAudienceType(audienceType);
   }, [audienceType]);
 
+  //date checker
   const checkDateValue = function (e) {
     const currentDate = format(new Date(), "yyyy-MM-dd");
     const eventPotentialDate = format(parseISO(date), "yyyy-MM-dd");
@@ -40,8 +59,7 @@ const Form = () => {
       : setDate(e.target.value);
   };
 
-  const [selectedTags, setSelectedTags] = useState([]);
-
+  //tags
   const handleTags = (tag) => {
     if (selectedTags.includes(tag)) {
       // If the tag is already selected, remove it
@@ -60,38 +78,20 @@ const Form = () => {
     setSelectedTags(selectedTags);
   }, [selectedTags]);
 
-  const eventTags = [
-    { tag: "Academic Events" },
-    { tag: "Career Development" },
-    { tag: "Sports and activity" },
-    { tag: "Social Impact" },
-    { tag: "Guest Speakers" },
-    { tag: "Festivals" },
-    { tag: "Workshops" },
-    { tag: "Hackathons" },
-    { tag: "Meetups" },
-  ];
-
-  const eventType = [
-    { audience: "My Uni Students Only" },
-    { audience: "Open to Everyone" },
-  ];
-
   const [imageUpload, setImageUpload] = useState(null);
-  const [imageUrl , setImageUrl] = useState(null)
- 
+  const [imageUrl, setImageUrl] = useState(null);
 
-  const uploadImage = (title, docId) => {
-    const storage = getStorage();
-    const imageStorageRef = ref(storage, `events/${title}:${docId}`);
-    const imageUrlRef = ref(storage, `events/${title}:${docId}`);
-    uploadBytes(imageStorageRef, imageUpload).then(() => {
-      getDownloadURL(ref(storage, imageUrlRef)).then(async (url) => {
-       await setImageUrl(url)
-      console.log('in' , imageUrl)
-      });
-    });
-  };
+  // const uploadImage = (title, docId) => {
+  //   const storage = getStorage();
+  //   const imageStorageRef = ref(storage, `events/${title}:${docId}`);
+  //   const imageUrlRef = ref(storage, `events/${title}:${docId}`);
+  //   uploadBytes(imageStorageRef, imageUpload).then(() => {
+  //     getDownloadURL(ref(storage, imageUrlRef)).then(async (url) => {
+  //      await setImageUrl(url)
+  //     console.log('in' , imageUrl)
+  //     });
+  //   });
+  // };
 
   const onSubmit = async (data) => {
     if (errorDate) {
@@ -99,19 +99,25 @@ const Form = () => {
     } else {
       try {
         const docId = uuidv4();
-        uploadImage(data.title, docId);
-        data.image = imageUrl
-        console.log('out' , imageUrl)
-        console.log(data.image)
-        data.email = auth.currentUser.email;
-        data.tags = selectedTags;
-        data.docId = docId;
-        data.audience = audienceType.audience;
-        await setDoc(doc(db, "events", docId), data);
+
+        const storage = getStorage();
+        const imageStorageRef = ref(storage, `events/${data.title}:${docId}`);
+        const imageUrlRef = ref(storage, `events/${data.title}:${docId}`);
+
+        await uploadBytes(imageStorageRef, imageUpload).then(() => {
+          getDownloadURL(ref(storage, imageUrlRef)).then(async (url) => {
+            data.image = url;
+            data.email = auth.currentUser.email;
+            data.tags = selectedTags;
+            data.docId = docId;
+            data.audience = audienceType.audience;
+            await setDoc(doc(db, "events", docId), data);
+          });
+        });
         console.log("Document set");
       } catch (error) {
         console.error("Error:", error);
-        console.log(data)
+        console.log(data);
       }
     }
   };
@@ -158,6 +164,24 @@ const Form = () => {
             }}
           />
         </div>
+
+        <div>
+          <h3 id="form-title-text">Event fees:</h3>
+          <span id="mini-text">If the Event Free Type 0</span>
+
+          <md-outlined-text-field
+            className="mt-5"
+            maxlength="4"
+            minlength="1"
+            type="number"
+            value="0"
+            prefix-text="from RM"
+            id="text-field-form"
+            {...register("fees")}
+            required
+          ></md-outlined-text-field>
+        </div>
+        
 
         <md-divider></md-divider>
         {/* Tags */}

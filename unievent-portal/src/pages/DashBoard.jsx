@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import Nav from "../components/Nav";
+import Filter from "../components/Filter";
 import CardContainer from "../components/dashbord-events /CardContainer"
 import Form from "../components/Form";
 import "@material/web/dialog/dialog.js";
@@ -8,7 +9,7 @@ import "@material/web/fab/fab.js";
 import "@material/web/fab/branded-fab.js";
 import "@material/web/icon/icon.js";
 import "@material/web/ripple/ripple.js";
-
+import { ImportContacts } from "@mui/icons-material";
 const DashBoard = () => {
   const inputRef = useRef(null);
 
@@ -36,7 +37,6 @@ const DashBoard = () => {
           <path fill="none" d="M0 0h36v36H0z"></path>
         </svg>
       </md-branded-fab>
-
       <md-dialog className="zi-99" ref={inputRef}>
         <div className="fd-c" slot="content" method="dialog">
           <Form />
@@ -45,7 +45,6 @@ const DashBoard = () => {
           </md-outlined-button>
         </div>
       </md-dialog>
-
 
       <CardContainer/>
       

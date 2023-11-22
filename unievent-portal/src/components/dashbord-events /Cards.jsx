@@ -29,8 +29,6 @@ import { ref, uploadBytes, getDownloadURL, deleteObject , getStorage } from "fir
 
 const Cards = (props) => {
   
-
-
   const deleteEvent = () => {
     const storage = getStorage();
     console.log('in func');
@@ -39,6 +37,7 @@ const Cards = (props) => {
     deleteObject(imageStorageRef)
       .then(async () => {
         await deleteDoc(doc(db, "events", props.event.docId));
+        window.location.reload();
         console.log('Event and image deleted successfully');
       })
       .catch((error) => {
@@ -98,7 +97,7 @@ const Cards = (props) => {
       </div>
       <md-divider inset></md-divider>
       <div id="card-btns">
-        <md-outlined-icon-button onclick={deleteEvent()} >
+        <md-outlined-icon-button onclick={deleteEvent} >
           <md-icon>
             <img src={DeleteIcon} alt="Share" />
           </md-icon>
