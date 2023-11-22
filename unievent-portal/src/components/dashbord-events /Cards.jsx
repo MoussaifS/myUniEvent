@@ -1,5 +1,4 @@
 import Card from "@mui/material/Card";
-
 import "@material/web/divider/divider.js";
 import "@material/web/chips/chip-set.js";
 import "@material/web/chips/assist-chip.js";
@@ -10,43 +9,34 @@ import "@material/web/icon/icon.js";
 import "@material/web/button/outlined-button.js";
 import "@material/web/iconbutton/outlined-icon-button.js";
 import "@material/web/iconbutton/filled-tonal-icon-button.js";
-import ShareIcon from "../../assets/share_icon.svg";
 import DeleteIcon from "/home/duck/Documents/fyp-unievent-protal/unievent-portal/dist/assets/delete_icon-ff05d68a.svg";
 import { format } from "date-fns";
 import ShowMoreText from "react-show-more-text";
 import { db } from "../../FireBase";
-import {
-  collection,
-  addDoc,
-  setDoc,
-  doc,
-  deleteDoc
-} from "firebase/firestore";
+import { doc, deleteDoc } from "firebase/firestore";
 
-
-import { ref, uploadBytes, getDownloadURL, deleteObject , getStorage } from "firebase/storage";
-
+import { ref, deleteObject, getStorage } from "firebase/storage";
+import ShareWhatsappBtn from "../buttons/ShareWhatsappBtn";
 
 const Cards = (props) => {
-  
-  const deleteEvent = () => {
+  const deleteEvent = function () {
     const storage = getStorage();
-    console.log('in func');
-    const imageStorageRef = ref(storage, `events/${props.event.title}:${props.event.docId}`);
+    console.log("in func");
+    const imageStorageRef = ref(
+      storage,
+      `events/${props.event.title}:${props.event.docId}`
+    );
 
     deleteObject(imageStorageRef)
       .then(async () => {
         await deleteDoc(doc(db, "events", props.event.docId));
         window.location.reload();
-        console.log('Event and image deleted successfully');
+        console.log("Event and image deleted successfully");
       })
       .catch((error) => {
-        console.error('Error deleting image or event:', error);
+        console.error("Error deleting image or event:", error);
       });
   };
-  
-
-  
 
   return (
     <Card sx={{ maxWidth: 700 }}>
@@ -97,17 +87,13 @@ const Cards = (props) => {
       </div>
       <md-divider inset></md-divider>
       <div id="card-btns">
-        <md-outlined-icon-button onclick={deleteEvent} >
+        <md-outlined-icon-button onClick={() => deleteEvent()}>
           <md-icon>
-            <img src={DeleteIcon} alt="Share" />
+            <img src={DeleteIcon} alt="delete" />
           </md-icon>
         </md-outlined-icon-button>
 
-        <md-filled-tonal-icon-button>
-          <md-icon>
-            <img src={ShareIcon} alt="Share" />
-          </md-icon>
-        </md-filled-tonal-icon-button>
+        <ShareWhatsappBtn {...props} />
       </div>
     </Card>
   );

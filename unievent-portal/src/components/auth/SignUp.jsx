@@ -58,7 +58,7 @@ const SignUp = () => {
         {/* fisrt Name */}
         <md-outlined-text-field
           id="text-field-credentials"
-          {...register("first-name")}
+          {...register("firstName")}
           required
           maxlength="10"
           minlength="2"
@@ -69,7 +69,7 @@ const SignUp = () => {
         {/* last name */}
         <md-outlined-text-field
           id="text-field-credentials"
-          {...register("last-name")}
+          {...register("lastName")}
           required
           minlength="2"
           maxlength="10"
