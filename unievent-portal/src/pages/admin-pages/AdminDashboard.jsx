@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import Nav from "../../components/Nav";
 import Filter from "../../components/Filter";
-import CardContainer from "../../components/dashbord-events /CardContainer";
+import CardContainer from "../../components/dashbord-events /AdminCardContainer";
 import Form from "../../components/Form";
 import "@material/web/dialog/dialog.js";
 import "@material/web/button/outlined-button.js";

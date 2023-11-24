@@ -4,9 +4,9 @@ import { db } from "../../FireBase";
 
 import Cookies from "universal-cookie";
 import Cards from "./Cards";
-import Filter from "../Filter";
+import Filter from "../../components/Filter";
 
-const CardContainer = () => {
+const CardContainer = (props) => {
   const [events, setEvents] = useState([]);
   const [uni, setUni] = useState("");
   const [user, setUser] = useState();
@@ -18,8 +18,8 @@ const CardContainer = () => {
   const fetchEventData = async () => {
     try {
       const eventDataQuery = await query(
-        collection(db, "events"),
-        where("email", "==", userEmail),
+        collection(db, "events"), 
+        where("audience", "==", "Open to Everyone"),
         orderBy("startDate", "asc") // Add this line to order events by startDate in ascending order.
       );
       const eventInfoSnapshot = await getDocs(eventDataQuery);
@@ -61,9 +61,9 @@ const CardContainer = () => {
       {state ? (
         <div id="card-container">
           {events.length == 0 ? (
-            <div id="noEvent-container">
-              <span id="noEvent-span">No events found 😕</span>
-              <p>To create a new event, please click the button below 🚀.</p>
+            <div id="noEvent">
+              <span id="noEvent-span">No events found in the moment 😕</span>
+              <p>Sign in to be updated 🚀.</p>
             </div>
           ) : (
             events.map((event, index) => (

@@ -98,6 +98,7 @@ html {
   display: flex;
   flex-direction: row;
   border-radius: 25px;
+  margin-bottom: 30px;
 }
 
 #pe-none {
@@ -361,11 +362,8 @@ button {
   font-weight: bolder;
 }
 
-#noEvent-container {
+#noEvent {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   text-align: center;
   width: 300px;
 }
@@ -430,3 +428,36 @@ button {
   color: red;
   text-align: center;
 }
+
+#landing-image{
+  width: 50%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+#landing-bannar{
+  display: flex;
+  background-color: #F6EEFF;
+  padding: 5px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+} 
+
+#landing-text-bannar{
+  font-size: large;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+  margin-left: 5px;
+}
+
+#landing-btn{
+  border: none;
+  font-weight: bolder;
+  cursor: pointer;
+  display: inline-block;
+  color: #4F378A;
+  
+}
+
+
