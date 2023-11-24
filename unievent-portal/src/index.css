@@ -3,13 +3,11 @@ html {
   width: 100%;
   font-family: "Roboto";
   background-color: var(--m-3-sys-light-surface, #fffafa);
-
 }
 
-.light-green{
-  background-color: #51dea0;  
+.light-green {
+  background-color: #51dea0;
 }
-
 
 #text-field-credentials {
   margin: 15px 0px 15px 0px;
@@ -26,48 +24,43 @@ html {
   margin-top: 23px;
 }
 
-.mt-0{
+.mt-0 {
   margin-top: 0px;
 }
-.mt-10{
+.mt-10 {
   margin-top: 10px;
 }
-.w100{
+.w100 {
   width: 100%;
 }
 
-.mtb-10{
+.mtb-10 {
   margin-bottom: 10px;
   margin-top: 10px;
 }
 
-
-#card-description{
+#card-description {
   font-size: 16px;
   margin-top: 10px;
   margin-bottom: 16px;
-  
 }
 
-#margin-top{
+#margin-top {
   margin-top: 15px;
   margin-bottom: 0px;
 }
 
-.z-index-999{
+.z-index-999 {
   z-index: 999;
 }
 
-#ducl{
+#ducl {
   margin: 15px 0px 15px 0px;
 }
 
-.margin-left{
+.margin-left {
   margin-left: 10px;
 }
-
-
-
 
 #form-date-div {
   display: flex;
@@ -76,14 +69,10 @@ html {
   margin-bottom: 15px;
 }
 
-#form-title-text{
+#form-title-text {
   margin-bottom: 0px;
   margin-top: 4px;
 }
-
-
-
-
 
 /* @media all and (max-width:30em){
    #text-field{
@@ -111,35 +100,34 @@ html {
   border-radius: 25px;
 }
 
-#pe-none{
+#pe-none {
   pointer-events: none;
 }
 
-.tag-chips{
+.tag-chips {
   flex-wrap: nowrap;
-    max-width: 512px;
-    overflow: scroll;
-    padding: 8px;
+  max-width: 512px;
+  overflow: scroll;
+  padding: 8px;
 }
 
-.mt-5{
+.mt-5 {
   margin-top: 5px;
-} 
-
-#filter-byDate{
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    border-radius: 20px;
-    margin-bottom: 20px;
 }
 
-.filter-chip{
+#filter-byDate {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.filter-chip {
   margin-top: 10px;
   margin-bottom: 10px;
   font-weight: bold;
 }
-
 
 @media (max-width: 900px) {
   #main-container {
@@ -156,7 +144,7 @@ html {
   }
 }
 
-.whatsapp-btn{
+.whatsapp-btn {
   background: #51dea0 !important;
 }
 
@@ -167,24 +155,23 @@ html {
 
   .banerText {
     font-size: 50px;
-    
   }
 
-
-  .purple {
-    font-size: 50px;
-  }
 }
 
 .banerText {
-  font-size: 30px;
-  font-weight: 700;
+  font-size: 2.4rem;
+  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
 }
 
 .purple {
   color: #6750a4;
-  font-size: 30px;
-  font-weight: 700;
+  font-size: 2.4rem;
+  font-weight: 800;
   margin: 0;
 }
 
@@ -195,7 +182,7 @@ html {
   right: 16px;
 }
 
-.zi-99{
+.zi-99 {
   z-index: 99;
 }
 
@@ -326,57 +313,55 @@ button {
   border: #c8cec4;
 }
 
-.testing{
+.testing {
   max-height: min(800px, 100% - 48px);
   max-width: min(560px, 100% - 25px);
 }
 
-
 /* fix this shit  */
-.fc{
+.fc {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.cf{
+.cf {
   margin-top: 15px;
 }
 
-.p-0{
+.p-0 {
   padding-bottom: 0;
 }
 
-.p-15{
+.p-15 {
   padding-top: 15px;
   padding-bottom: 15px;
 }
 
-#nav-component{
+#nav-component {
   margin: 20px;
   margin-top: 30px;
   margin-bottom: 30px;
 }
 
-#nav{
-  display: flex; 
+#nav {
+  display: flex;
   font-size: 18px;
   font-weight: bolder;
   align-items: center;
   justify-content: space-between;
-  padding: 15px ;
-  box-shadow: #6750A4 0px 0px 0px 2px, rgb(255, 217, 19) 0px 0px 0px 4px, rgb(255, 156, 85) 0px 0px 0px 6px, black 0px 0px 0px 8px;
+  padding: 15px;
   margin: 20px;
   margin-top: 30px;
   margin-bottom: 30px;
 }
 
-#noEvent-span{
+#noEvent-span {
   font-size: 25px;
   font-weight: bolder;
 }
 
-#noEvent-container{
+#noEvent-container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -385,8 +370,7 @@ button {
   width: 300px;
 }
 
-
-#card-btns{
+#card-btns {
   margin: 10px;
   display: flex;
   flex-direction: row;
@@ -394,42 +378,40 @@ button {
   gap: 10px;
 }
 
-#card-container{
+#card-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.fd-c{
+.fd-c {
   display: flex;
   flex-direction: column;
 }
 
-.fd-r{
+.fd-r {
   display: flex;
   flex-direction: row;
 }
 
-.m-10{
+.m-10 {
   margin: 10px;
 }
-.m-5{
+.m-5 {
   margin: 5px;
   margin-left: 5px;
 }
 
-.mb-25{
+.mb-25 {
   margin-bottom: 25px;
 }
 
-#span-card-date{
+#span-card-date {
   margin: 10px;
   font-weight: bold;
-  color: #6750A4;
+  color: #6750a4;
   font-size: large;
-
 }
-
 
 .grid-container {
   display: grid;
@@ -437,13 +419,13 @@ button {
   row-gap: 10px;
 }
 
-#error-email-password{
+#error-email-password {
   font-size: 12px;
   color: red;
   text-align: center;
 }
 
-#error-span{
+#error-span {
   font-size: 13px;
   color: red;
   text-align: center;
