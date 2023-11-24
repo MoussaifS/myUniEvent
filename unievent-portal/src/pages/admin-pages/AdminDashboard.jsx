@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
-import Nav from "../components/Nav";
-import Filter from "../components/Filter";
-import CardContainer from "../components/dashbord-events /CardContainer";
-import Form from "../components/Form";
+import Nav from "../../components/Nav";
+import Filter from "../../components/Filter";
+import CardContainer from "../../components/dashbord-events /CardContainer";
+import Form from "../../components/Form";
 import "@material/web/dialog/dialog.js";
 import "@material/web/button/outlined-button.js";
 import "@material/web/fab/fab.js";
@@ -10,7 +10,7 @@ import "@material/web/fab/branded-fab.js";
 import "@material/web/icon/icon.js";
 import "@material/web/ripple/ripple.js";
 import { ImportContacts } from "@mui/icons-material";
-const DashBoard = () => {
+const AdminDashboard = () => {
   const inputRef = useRef(null);
 
   function handleOpenFormClick() {
@@ -51,4 +51,4 @@ const DashBoard = () => {
   );
 };
 
-export default DashBoard;
+export default AdminDashboard;

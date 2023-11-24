@@ -4,19 +4,17 @@ import {
   Route,
 } from 'react-router-dom';
 
-import Form from './components/Form';
-import Landing from './pages/Landing';
-import Login from './components/auth/Login';
-import SignUp from './components/auth/SignUp';
-import DashBoard from './pages/DashBoard';
+import AdminLanding from './pages/admin-pages/AdminLanding';
+import AdminDashboard from './pages/admin-pages/AdminDashboard';
+
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Landing/>} />
-        <Route exact path="/dashboard" element={<DashBoard/>} />
 
+        <Route exact path="/admin" element={<AdminLanding/>} />
+        <Route exact path="/admin/dashboard" element={<AdminDashboard/>} />
       </Routes>
     </Router>
   );
