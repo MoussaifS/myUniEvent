@@ -16,59 +16,53 @@ import { doc, deleteDoc } from "firebase/firestore";
 
 import { ref, deleteObject, getStorage } from "firebase/storage";
 import ShareWhatsappBtn from "../../components/buttons/ShareWhatsappBtn";
+import locationIcon from "../../../dist/assets/location-pin-svgrepo-com.svg";
+import FeeIcon from "../../../dist/assets/fee-label-price-svgrepo-com.svg";
 
 const Cards = (props) => {
+  console.log(props);
   return (
-    <Card sx={{ maxWidth: 700 }}>
+    <Card class="pr" sx={{ maxWidth: 700 }}>
+      <img src={props.event.image} id="image-card" />
       <div className="fd-r">
         <span id="span-card-date">
-          {format(new Date(props.event.startDate), "iii , LLL d")} •{" "}
+          {format(new Date(props.event.startDate), "iii, LLL d")} •{" "}
           {props.event.startTime}
         </span>
       </div>
 
       <div className="fd-r">
-        <img src={props.event.image} width="150" height="150" />
         <div>
           <h2 className="m-10">{props.event.title}</h2>
-          <div className="m-5">
-            <md-suggestion-chip
-              label={props.event.audience}
-            ></md-suggestion-chip>
+          <div className="fd-r">
+            <img src={locationIcon} alt="Share" className="m-5" />
+            <p className="card-helper-text">manipal internationl university</p>
+          </div>
+          <div className="fd-r">
+            <img src={FeeIcon} alt="Share" className="m-5" />
+            <p className="card-helper-text">for 200 ringit</p>
           </div>
         </div>
       </div>
+      
+      <md-divider inset></md-divider>
 
       <div className="m-10">
-        <ShowMoreText
-          /* Default options */
-          lines={2}
-          more="Show more"
-          less="Show less"
-          className="content-css"
-          anchorClass="show-more-less-clickable"
-          expanded={false}
-          truncatedEndingComponent={"... "}
-        >
-          <p id="card-description">{props.event.description}</p>
-        </ShowMoreText>
-      </div>
-      <md-divider inset></md-divider>
-
-      <div className="fd-c">
-        <div className="m-10">
-          <h4 className="m-5">Event Tags:</h4>
-          <md-chip-set>
-            {props.event.tags.map((tag, index) => (
-              <md-suggestion-chip key={index} label={tag}></md-suggestion-chip>
-            ))}
-          </md-chip-set>
+        <span className="card-helper-text">Tags:</span>
+        <div id="card-horzintal-scroll">
+          {props.event.tags.map((tag, index) => (
+            <md-suggestion-chip
+              id="tags-horzintal"
+              key={index}
+              label={tag}
+            ></md-suggestion-chip>
+          ))}
         </div>
       </div>
-      <md-divider inset></md-divider>
-      <div id="card-btns">
-        <ShareWhatsappBtn {...props} />
-      </div>
+
+        <div id="card-btns">
+          <ShareWhatsappBtn {...props} />
+        </div>
     </Card>
   );
 };

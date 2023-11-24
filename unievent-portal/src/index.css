@@ -157,7 +157,6 @@ html {
   .banerText {
     font-size: 50px;
   }
-
 }
 
 .banerText {
@@ -407,8 +406,19 @@ button {
 #span-card-date {
   margin: 10px;
   font-weight: bold;
-  color: #6750a4;
+  color: white;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20px;
   font-size: large;
+  background-color: #6750a4;
+  top: 0;
+  right: 0;
+  position: absolute;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .grid-container {
@@ -429,21 +439,27 @@ button {
   text-align: center;
 }
 
-#landing-image{
+#landing-image {
   width: 50%;
   object-fit: cover;
   border-radius: 20px;
 }
 
-#landing-bannar{
+#image-card {
+  object-fit: cover;
+  border-radius: 20px;
+  width: 100%;
+}
+
+#landing-bannar {
   display: flex;
-  background-color: #F6EEFF;
+  background-color: #f6eeff;
   padding: 5px;
   border-radius: 20px;
   margin-bottom: 10px;
-} 
+}
 
-#landing-text-bannar{
+#landing-text-bannar {
   font-size: large;
   font-weight: bold;
   letter-spacing: 0.5px;
@@ -451,13 +467,50 @@ button {
   margin-left: 5px;
 }
 
-#landing-btn{
+#landing-btn {
   border: none;
   font-weight: bolder;
   cursor: pointer;
   display: inline-block;
-  color: #4F378A;
-  
+  color: #4f378a;
 }
 
+#popular-events {
+  font-weight: bolder;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
 
+.pr {
+  position: relative;
+  background-color: #F6EEFF;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 5px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+#card-horzintal-scroll {
+  overflow: auto;
+  white-space: nowrap;
+  padding: 8px;
+}
+
+#tags-horzintal {
+  margin-left: 5px;
+}
+
+#whatsapp-btn{
+  border: none; /* Remove borders */
+  padding: 10px 10px; /* Some padding */
+  cursor: pointer; /* Mouse pointer on hover */
+  word-wrap: break-word;
+  width: auto;
+  background-color: #adf1d4;
+}
+
+.card-helper-text {
+  margin: 5px;
+  color: #4a4458;
+  font-weight: bold;
+}

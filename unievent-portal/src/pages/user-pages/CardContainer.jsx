@@ -15,41 +15,26 @@ const CardContainer = (props) => {
   const [state, setState] = useState(false);
   const [fetch, setFetch] = useState(false);
 
+  console.log(props)
+
+
   const fetchEventData = async () => {
     try {
       const eventDataQuery = await query(
         collection(db, "events"), 
-        where("audience", "==", "Open to Everyone"),
-        orderBy("startDate", "asc") // Add this line to order events by startDate in ascending order.
       );
       const eventInfoSnapshot = await getDocs(eventDataQuery);
 
       await setEvents(eventInfoSnapshot.docs.map((doc) => doc.data()));
     } catch (error) {
-      console.log("An error occurred:", error);
+      console.log("eat a fat dick and fix it:", error);
     }
   };
 
-  const fetchUserInfo = async () => {
-    try {
-      const userInfoQuery = await query(
-        collection(db, "organizers"),
-        where("email", "==", userEmail)
-      );
-      const userInfoSnapshot = await getDocs(userInfoQuery);
-      const userDataArray = await userInfoSnapshot.docs[0].data();
-      await setUser(userDataArray);
-      await setUni(userDataArray.institution);
-      setState(true);
-    } catch (error) {
-      setState(false);
-      console.log("eat a dick and have this", error);
-    }
-  };
+  
 
   useEffect(() => {
     fetchEventData();
-    fetchUserInfo();
     return () => {
       setState({});
     };
@@ -57,7 +42,7 @@ const CardContainer = (props) => {
 
   return (
     <div id="cards-container">
-      <Filter />
+      {props.landing ?  null : <Filter />}
       {state ? (
         <div id="card-container">
           {events.length == 0 ? (
@@ -67,7 +52,7 @@ const CardContainer = (props) => {
             </div>
           ) : (
             events.map((event, index) => (
-              <Cards key={index} user={user} uni={uni} event={event} />
+              <Cards landing={props.landing} key={index} user={user} uni={uni} event={event} />
             ))
           )}
         </div>

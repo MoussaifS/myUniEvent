@@ -3,8 +3,8 @@ import "@material/web/icon/icon.js";
 import ShareIcon from "../../assets/share_icon.svg";
 
 const ShareWhatsappBtn = (props) => {
-  console.log(props.event.title);
   const handleShare = () => {
+    console.log('in')
     const message =
       `🌟 *Event Alert! Join us for "${props.event.title}" at ${props.uni}* 🌟%0a%0a` +
       `📅 *Date:* ${props.event.startDate}%0a` +
@@ -12,7 +12,7 @@ const ShareWhatsappBtn = (props) => {
       `📝 *Description:* "${props.event.description}"%0a%0a` +
       `📍 *Audience:* ${props.event.audience}%0a` +
       `🎟️ *Fees:* ${ parseInt(props.event.fees) < 1 ? "For free" : props.event.fees}rm%0a` +
-      `📞 *Contact ${props.user.lastName}:* ${props.user.phone}%0a%0a` +
+      // `📞 *Contact ${props.user.lastName}:* ${props.user.phone}%0a%0a` +
       `For more details or to register, contact us at the provided number! 📲`;
 
     const whatsappUrl = `https://api.whatsapp.com/send?text=${message}`;
@@ -21,11 +21,11 @@ const ShareWhatsappBtn = (props) => {
   };
 
   return (
-    <md-filled-tonal-icon-button onClick={() => handleShare()}>
+    <button id="whatsapp-btn" onClick={() => handleShare()}>
       <md-icon>
         <img src={ShareIcon} alt="Share" />
       </md-icon>
-    </md-filled-tonal-icon-button>
+    </button>
   );
 };
 

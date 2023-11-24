@@ -8,6 +8,7 @@ import Nav from "../components/Nav";
 import CardContainer from "./user-pages/CardContainer";
 import { Divider } from "antd";
 const MainLandingPage = () => {
+  const cards = 10;
   return (
     <div className="fd-c">
       <Nav />
@@ -28,7 +29,7 @@ const MainLandingPage = () => {
             </div>
             <span className="purple">University Events</span>
             <span> Made Easy with </span>
-            <span className="purple">✨ UniEvent ✨ </span>
+            <span className="purple">✨ myUniEvent ✨ </span>
           </div>
         </div>
       </Container>
@@ -55,7 +56,10 @@ const MainLandingPage = () => {
       </div>
 
       <div id="landing-bannar">
-      <img src="/dist/assets/product-school-nOvIa_x_tfo-unsplash.jpg" id="landing-image"></img>
+        <img
+          src="/dist/assets/product-school-nOvIa_x_tfo-unsplash.jpg"
+          id="landing-image"
+        ></img>
         <p id="landing-text-bannar">
           <a id="landing-btn">
             {" "}
@@ -75,9 +79,9 @@ const MainLandingPage = () => {
         </p>
       </div>
 
-        <Divider/>
-        <span >Event for this month</span>
-      <CardContainer/>
+      <Divider />
+      <span id="popular-events">Popular Events around You 🇲🇾</span>
+      <CardContainer card={cards} landing={true} />
     </div>
   );
 };
