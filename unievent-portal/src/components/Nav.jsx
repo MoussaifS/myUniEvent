@@ -1,13 +1,15 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../FireBase";
-import { useLocation, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import "@material/web/iconbutton/outlined-icon-button.js";
 import "@material/web/iconbutton/filled-tonal-icon-button.js";
 import { useState, useEffect } from "react";
 import LogoutIcone from "../assets/logout_icon.svg";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const Nav = () => {
+const Nav = (props) => {
+  console.log(props);
+  const login = props.login;
   const navigate = useNavigate();
   const location = useLocation();
   const cookies = new Cookies();
@@ -21,7 +23,7 @@ const Nav = () => {
   }, [emailCookie]);
 
   const handleLogout = () => {
-    setUserEmail(null); 
+    setUserEmail(null);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       auth.signOut().then(() => {
         console.log("Logged out successfully");
@@ -33,20 +35,29 @@ const Nav = () => {
     unsubscribe();
   };
 
+  const handleLogin = () => {
+    navigate("/user-auth", { replace: true, state: { from: location } });
+  };
+
   return (
     <div id="nav">
       <div>
         <span id="logo">ue</span>
         <span>UniEvent</span>
       </div>
-
       <div>
-        {userEmail != undefined ? (
+        {userEmail !== undefined ? (
           <md-outlined-icon-button onClick={() => handleLogout()}>
             <md-icon>
-              <img src={LogoutIcone} />
+              <img src={LogoutIcone} alt="Logout" />
             </md-icon>
           </md-outlined-icon-button>
+        ) : props.login ? (
+          <div>
+            <button id="nav-login" onClick={handleLogin}>
+              Log in
+            </button>
+          </div>
         ) : null}
       </div>
     </div>

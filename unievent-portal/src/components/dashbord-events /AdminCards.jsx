@@ -9,7 +9,8 @@ import "@material/web/icon/icon.js";
 import "@material/web/button/outlined-button.js";
 import "@material/web/iconbutton/outlined-icon-button.js";
 import "@material/web/iconbutton/filled-tonal-icon-button.js";
-import DeleteIcon from "/home/duck/Documents/fyp-unievent-protal/unievent-portal/dist/assets/delete_icon-ff05d68a.svg";
+import DeleteIcon from "../../assets/delete_icon.svg"
+
 import { format } from "date-fns";
 import ShowMoreText from "react-show-more-text";
 import { db } from "../../FireBase";

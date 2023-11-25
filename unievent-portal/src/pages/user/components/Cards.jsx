@@ -10,15 +10,10 @@ import "@material/web/button/outlined-button.js";
 import "@material/web/iconbutton/outlined-icon-button.js";
 import "@material/web/iconbutton/filled-tonal-icon-button.js";
 import { format } from "date-fns";
-import ShowMoreText from "react-show-more-text";
-import { db } from "../../FireBase";
-import { doc, deleteDoc } from "firebase/firestore";
 
-import { ref, deleteObject, getStorage } from "firebase/storage";
-import ShareWhatsappBtn from "../../components/buttons/ShareWhatsappBtn";
-import locationIcon from "../../../dist/assets/location-pin-svgrepo-com.svg";
-import FeeIcon from "../../../dist/assets/fee-label-price-svgrepo-com.svg";
-
+import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
+import locationIcon from "../../../assets/location-pin-svgrepo-com(1).svg";
+import FeeIcon from "../../../assets/fee-label-price-svgrepo-com.svg";
 const Cards = (props) => {
   console.log(props);
   return (

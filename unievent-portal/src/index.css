@@ -416,11 +416,8 @@ button {
   top: 0;
   right: 0;
   position: absolute;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
-
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -513,4 +510,14 @@ button {
   margin: 5px;
   color: #4a4458;
   font-weight: bold;
+}
+
+
+#nav-login{
+  background-color: transparent;
+  border: 1px solid #D0BCFF;
+  color: #381E72;
+  width: 100%;
+  padding: 15px 10px 15px 10px;
+  margin: 0px;
 }

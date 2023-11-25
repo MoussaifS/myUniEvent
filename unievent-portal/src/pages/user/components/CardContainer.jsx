@@ -1,10 +1,10 @@
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { useState, useEffect, useRef } from "react";
-import { db } from "../../FireBase";
+import { db } from "../../../FireBase";
 
 import Cookies from "universal-cookie";
 import Cards from "./Cards";
-import Filter from "../../components/Filter";
+import Filter from "../../../components/Filter";
 
 const CardContainer = (props) => {
   const [events, setEvents] = useState([]);
@@ -22,6 +22,8 @@ const CardContainer = (props) => {
     try {
       const eventDataQuery = await query(
         collection(db, "events"), 
+        where("audience", "==", "Open to Everyone"),
+        orderBy("startDate", "asc") // Add this line to order events by startDate in ascending order.
       );
       const eventInfoSnapshot = await getDocs(eventDataQuery);
 
