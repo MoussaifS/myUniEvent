@@ -8,7 +8,6 @@ import LogoutIcone from "../assets/logout_icon.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Nav = (props) => {
-  console.log(props);
   const login = props.login;
   const navigate = useNavigate();
   const location = useLocation();
@@ -17,7 +16,6 @@ const Nav = (props) => {
   const [userEmail, setUserEmail] = useState(null);
   // setUserEmail(emailCookie ? null : emailCookie)
 
-  console.log(userEmail);
   useEffect(() => {
     setUserEmail(emailCookie);
   }, [emailCookie]);

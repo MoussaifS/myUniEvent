@@ -251,7 +251,7 @@ html {
 }
 
 .text-areabutton:focus {
-  color: var(--m-3-sys-light-primary, #6750a4);
+  color: var(--m-3-sys-light-primary, #F6EEFF);
   color: white;
 }
 
@@ -510,8 +510,11 @@ button {
   position: relative;
   background-color: #f6eeff;
   border-radius: 20px;
-  margin: 10px;
-  padding: 5px;
+ 
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }

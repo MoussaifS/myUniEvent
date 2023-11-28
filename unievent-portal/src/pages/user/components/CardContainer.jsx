@@ -12,49 +12,53 @@ const CardContainer = (props) => {
   const [user, setUser] = useState();
   const cookies = new Cookies();
   const userEmail = cookies.get("email");
-  const [state, setState] = useState(false);
+  const [state, setState] = useState(true);
   const [fetch, setFetch] = useState(false);
-
-
 
   const fetchEventData = async () => {
     try {
-      const eventDataQuery = await query(
-        collection(db, "events"), 
-        orderBy("startDate", "asc") // Add this line to order events by startDate in ascending order.
+      const eventDataQuery = query(
+        collection(db, "events"),
       );
-      const eventInfoSnapshot = await getDocs(eventDataQuery);
 
-      await setEvents(eventInfoSnapshot.docs.map((doc) => doc.data()));
+      const eventInfoSnapshot = await getDocs(eventDataQuery);
+      const eventsData = eventInfoSnapshot.docs.map((doc) => doc.data());
+      setEvents(eventsData);
     } catch (error) {
       console.log("eat a fat dick and fix it:", error);
     }
   };
 
-  
+  console.log(events);
 
   useEffect(() => {
     fetchEventData();
-
   }, []);
 
+  console.log(props.landing);
   return (
     <div id="cards-container">
-      {props.landing ?  null : <Filter />}
-      {state ? (
-        <div id="card-container">
-          {events.length == 0 ? (
-            <div id="noEvent">
-              <span id="noEvent-span">No events found in the moment 😕</span>
-              <p>Sign in to be updated 🚀.</p>
-            </div>
-          ) : (
-            events.map((event, index) => (
-              <Cards landing={props.landing} key={index} user={user} uni={uni} event={event} />
-            ))
-          )}
-        </div>
-      ) : null}
+      {props.landing ? null : <Filter />}
+
+      <div id="card-container">
+        {events.length == 0 ? (
+          <div id="noEvent">
+            <span id="noEvent-span">No events found in the moment 😕</span>
+            <p>Sign in to be updated 🚀.</p>
+          </div>
+        ) : (
+          events.map((event, index) => (
+            <Cards
+              landing={props.landing}
+              key={index}
+              user={user}
+              uni={uni}
+              event={event}
+            />
+          ))
+        )}
+        
+      </div>
     </div>
   );
 };
