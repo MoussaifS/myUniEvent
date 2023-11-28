@@ -2,7 +2,6 @@ html {
   height: 100%;
   width: 100%;
   font-family: "Roboto";
-  background-color: var(--m-3-sys-light-surface, #fffafa);
 }
 
 .light-green {
@@ -142,9 +141,14 @@ html {
   justify-content: space-around;
   text-align: center;
   border-radius: 20px;
-  margin-bottom: 20px;
 }
 
+#filter-secondary-span{
+  font-weight: bold;
+  font-size: smaller;
+  color: #332D41;
+
+}
 .filter-chip {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -374,7 +378,7 @@ button {
   padding: 10px ;
   margin-top: 5px;
   position: sticky;
-  
+  border-radius: 20px;
   margin-bottom: 20px;
 
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
@@ -515,7 +519,7 @@ button {
 #card-horzintal-scroll {
   overflow: auto;
   white-space: nowrap;
-  padding: 8px;
+  padding: 9px;
 }
 
 #tags-horzintal {

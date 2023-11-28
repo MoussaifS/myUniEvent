@@ -15,7 +15,6 @@ const CardContainer = (props) => {
   const [state, setState] = useState(false);
   const [fetch, setFetch] = useState(false);
 
-  console.log(props)
 
 
   const fetchEventData = async () => {
