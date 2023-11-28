@@ -22,7 +22,6 @@ const CardContainer = (props) => {
     try {
       const eventDataQuery = await query(
         collection(db, "events"), 
-        where("audience", "==", "Open to Everyone"),
         orderBy("startDate", "asc") // Add this line to order events by startDate in ascending order.
       );
       const eventInfoSnapshot = await getDocs(eventDataQuery);
@@ -37,9 +36,7 @@ const CardContainer = (props) => {
 
   useEffect(() => {
     fetchEventData();
-    return () => {
-      setState({});
-    };
+
   }, []);
 
   return (

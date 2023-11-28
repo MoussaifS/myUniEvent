@@ -361,7 +361,7 @@ button {
 
 #nav-component {
   margin: 20px;
-  margin-top: 30px;
+  margin-top: 0px;
   margin-bottom: 30px;
 }
 
@@ -371,10 +371,13 @@ button {
   font-weight: bolder;
   align-items: center;
   justify-content: space-between;
-  padding: 15px;
-  margin: 20px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  padding: 10px ;
+  margin-top: 5px;
+  position: sticky;
+  
+  margin-bottom: 20px;
+
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 #noEvent-span {
