@@ -520,6 +520,8 @@ button {
 }
 
 #card-horzintal-scroll {
+  display: flex;
+  flex-direction: row ;
   overflow: auto;
   white-space: nowrap;
   padding: 9px;

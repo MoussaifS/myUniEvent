@@ -9,13 +9,14 @@ const Filter = (props) => {
   
   return (
     <div id="duck">
-      <div id="filter-byDate">
-        <md-filter-chip class="filter-chip" label="This Week"></md-filter-chip>
-        <md-filter-chip class="filter-chip" label="This Month"></md-filter-chip>
-        <md-filter-chip class="filter-chip" label="All Events"></md-filter-chip>
-      </div>
+      
       <span id="filter-secondary-span">Categories:</span>
       <div id="card-horzintal-scroll">
+      <div >
+        <md-filter-chip id="tags-horzintal" label="This Week"></md-filter-chip>
+        <md-filter-chip id="tags-horzintal" label="This Month"></md-filter-chip>
+        <md-filter-chip id="tags-horzintal" label="All Events"></md-filter-chip>
+      </div>
         {eventTagList.map((eventTag, index) => (
           <md-filter-chip
             id="tags-horzintal"
