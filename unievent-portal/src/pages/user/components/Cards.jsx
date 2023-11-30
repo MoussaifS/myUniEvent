@@ -15,11 +15,6 @@ import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
 import locationIcon from "../../../assets/location-pin-svgrepo-com(1).svg";
 import FeeIcon from "../../../assets/fee-label-price-svgrepo-com.svg";
 const Cards = (props) => {
-  console.log('in');
-
-  console.log(props);
-
-
   return (
     <Card class="pr" sx={{ maxWidth: 700 }}>
       <img src={props.event.image} id="image-card" />

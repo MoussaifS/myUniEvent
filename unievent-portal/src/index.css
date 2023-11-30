@@ -11,6 +11,7 @@ html {
 #text-field-credentials {
   margin: 15px 0px 15px 0px;
   display: block;
+  
 }
 
 #text-field-form {
@@ -185,7 +186,7 @@ html {
 }
 
 .banerText {
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   font-weight: 800;
   display: flex;
   flex-direction: column;
@@ -193,9 +194,21 @@ html {
   gap: 5px;
 }
 
+.banerText-admin {
+  font-size: 1.8rem;
+  font-weight: 800;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo-admin{
+  font-weight: lighter;
+}
+
 .purple {
   color: #6750a4;
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   font-weight: 800;
   margin: 0;
 }
@@ -281,9 +294,8 @@ html {
   border: 3px solid #6750a4;
   padding: 5px;
   border-radius: 20%;
-  font-size: larger;
   font-weight: bold;
-  margin-right: 5px;
+  
 }
 
 #button {
@@ -363,11 +375,7 @@ button {
   padding-bottom: 15px;
 }
 
-#nav-component {
-  margin: 20px;
-  margin-top: 0px;
-  margin-bottom: 30px;
-}
+
 
 #nav {
   display: flex;
@@ -375,13 +383,12 @@ button {
   font-weight: bolder;
   align-items: center;
   justify-content: space-between;
-  padding: 10px ;
+  padding: 0px ;
+  height: max-content;
   margin-top: 5px;
-  position: sticky;
-  border-radius: 20px;
+  padding: 10px;
+  border-radius: 15px;
   margin-bottom: 20px;
-
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 #noEvent-span {
@@ -477,11 +484,12 @@ button {
 }
 
 #landing-bannar {
-  display: flex;
+  display: flex;  
   background-color: #f6eeff;
   padding: 5px;
   border-radius: 20px;
   margin-bottom: 10px;
+
 }
 
 #landing-text-bannar {
@@ -490,6 +498,39 @@ button {
   letter-spacing: 0.5px;
   line-height: 1.5;
   margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+
+}
+
+#landing-btn-explore {
+  border: none;
+  font-weight: bolder;
+  cursor: pointer;
+  display: inline-block;
+  background-color: #4f378a;
+  color: white;
+  width: 80%;
+  text-align: center;
+  padding: 5px;
+  border-radius: 30px;
+  margin-bottom: 5px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+#landing-btn-create {
+  border: none;
+  font-weight: bolder;
+  cursor: pointer;
+  display: inline-block;
+  background-color: white;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  color: #4f378a;
+  width: 80%;
+  text-align: center;
+  padding: 5px;
+  border-radius: 30px;
+  margin-bottom: 5px;
 }
 
 #landing-btn {
@@ -551,6 +592,5 @@ button {
   border: 1px solid #d0bcff;
   color: #381e72;
   width: 100%;
-  padding: 15px 10px 15px 10px;
-  margin: 0px;
+  padding: 5px 10px 5px 10px;
 }

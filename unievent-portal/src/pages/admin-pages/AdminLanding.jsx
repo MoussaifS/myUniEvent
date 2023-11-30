@@ -10,8 +10,6 @@ import { useState, useEffect } from "react";
 const AdminLanding = () => {
   const luck = ["Sharing", "Managing", "Elevating", "Hosting", "Promoting"];
 
-  const [bannerText, setBannerText] = useState();
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       setBannerText(luck[Math.floor(Math.random() * 5)]);
@@ -23,14 +21,6 @@ const AdminLanding = () => {
     };
   }, []); 
 
-
-  const bannerMotion = {
-    transition: {
-      duration: 1,
-      ease: [0.5, 0.71, 1, 1.01],
-    },
-  };
-
   const [toggle, setToggle] = useState(false);
   const handleToggle = () => {
     setToggle((t) => !t);
@@ -39,14 +29,14 @@ const AdminLanding = () => {
   return (
     <div id="landingPage">
       
-        <Nav />
+        <Nav admin={true}/>
       
 
       <Container maxWidth="lg" id="main-container" sx={{ height: "100%" }}>
         <Container maxWidth="lg" sx={{ height: "100px", margin: "10px" }}>
-          <div className="banerText">
-            <h1 className="purple">University Events</h1>
-            <Typewriter
+          <div className="banerText-admin">
+
+          <Typewriter
               words={[
                 "Sharing",
                 "Managing",
@@ -62,6 +52,10 @@ const AdminLanding = () => {
               deleteSpeed={70}
               delaySpeed={2000}
             />
+
+
+            <h1 className="purple">University Events</h1>
+            
             <span> for</span> <span className="purple"> FREE </span>
           </div>
           <p id="landing-desc-desktop">

@@ -1,7 +1,8 @@
 import { getAuth, signInWithPopup, OAuthProvider } from "firebase/auth";
 import { useState, useRef } from "react";
 import Login from "../../../components/auth/Login";
-import SignUp from "../components/SignUp"
+
+import SignUpUserForm from "../components/SignUpUserForm";
 const UserAuth = () => {
   const [toggle, setToggle] = useState(false);
   const handleToggle = () => {
@@ -23,17 +24,16 @@ const UserAuth = () => {
   //     // Handle error.
   //   });
   return (
-
     <div id="UserAuth-landing">
-    <div id="UserAuth-landing-input">
-      {toggle == false ? <Login /> : <SignUp />}
-      <md-divider></md-divider>
-      <md-filled-tonal-button onClick={handleToggle} id="button">
-        {" "}
-        {toggle == false ? "Create new account" : "I have account"}{" "}
-      </md-filled-tonal-button>
-    </div>
+      <div id="UserAuth-landing-input">
+        {toggle == false ? <Login /> : <SignUpUserForm />}
+        <md-divider></md-divider>
+        <md-filled-tonal-button onClick={handleToggle} id="button">
+          {toggle == false ? "Create new account" : "I have account"}
+        </md-filled-tonal-button>
+      </div>
 
+      
     </div>
   );
 };

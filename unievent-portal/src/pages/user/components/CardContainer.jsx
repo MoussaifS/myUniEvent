@@ -19,6 +19,7 @@ const CardContainer = (props) => {
     try {
       const eventDataQuery = query(
         collection(db, "events"),
+        orderBy("startDate", "asc") // Ordering events by startDate in ascending order
       );
 
       const eventInfoSnapshot = await getDocs(eventDataQuery);
@@ -35,7 +36,6 @@ const CardContainer = (props) => {
     fetchEventData();
   }, []);
 
-  console.log(props.landing);
   return (
     <div id="cards-container">
       {props.landing ? null : <Filter />}

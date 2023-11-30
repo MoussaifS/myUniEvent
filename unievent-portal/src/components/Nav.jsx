@@ -33,15 +33,20 @@ const Nav = (props) => {
     unsubscribe();
   };
 
-  const handleLogin = () => {
-    navigate("/user-auth", { replace: true, state: { from: location } });
+  const handlenavigation = (destination) => {
+    console.log('in')
+    navigate(`/${destination}`, { state: { from: location } });
   };
 
   return (
     <div id="nav">
-      <div>
+      <div onClick={() => handlenavigation("")}>
         <span id="logo">ue</span>
-        <span>UniEvent</span>
+        {props.admin ? (
+          <span id="logoadmin"> Admin</span>
+        ) : (
+          <span> UniEvent</span>
+        )}
       </div>
       <div>
         {userEmail !== undefined ? (
@@ -52,10 +57,16 @@ const Nav = (props) => {
           </md-outlined-icon-button>
         ) : props.login ? (
           <div>
-            <button id="nav-login" onClick={handleLogin}>
+            <button id="nav-login" onClick={()=>handlenavigation("user-auth")}>
               Log in
             </button>
           </div>
+        ) : null}
+
+        {props.admin ? (
+          <button id="nav-login" onClick={()=>handlenavigation("")}>
+            X
+          </button>
         ) : null}
       </div>
     </div>
