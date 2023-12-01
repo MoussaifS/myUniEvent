@@ -1,4 +1,4 @@
-import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
+import { collection, query, where, getDocs, orderBy, limit } from "firebase/firestore";
 import { useState, useEffect, useRef } from "react";
 import { db } from "../../../FireBase";
 
@@ -19,7 +19,8 @@ const CardContainer = (props) => {
     try {
       const eventDataQuery = query(
         collection(db, "events"),
-        orderBy("startDate", "asc") // Ordering events by startDate in ascending order
+        orderBy("startDate", "asc"),
+        limit(5)
       );
 
       const eventInfoSnapshot = await getDocs(eventDataQuery);

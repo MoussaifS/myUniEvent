@@ -11,7 +11,6 @@ html {
 #text-field-credentials {
   margin: 15px 0px 15px 0px;
   display: block;
-  
 }
 
 #text-field-form {
@@ -94,16 +93,16 @@ html {
     0px 4px 8px 3px rgba(0, 0, 0, 0.15);
 }
 
-
-#UserAuth-landing{
+#UserAuth-landing {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-
+  height: 99vh;
 }
 #UserAuth-landing-input {
+  background-color: #f6eeff;
+
   padding: 20px;
   max-width: 800px;
   display: flex;
@@ -144,11 +143,10 @@ html {
   border-radius: 20px;
 }
 
-#filter-secondary-span{
+#filter-secondary-span {
   font-weight: bold;
   font-size: smaller;
-  color: #332D41;
-
+  color: #332d41;
 }
 .filter-chip {
   margin-top: 10px;
@@ -194,6 +192,78 @@ html {
   gap: 5px;
 }
 
+.banerText-user {
+  font-size: 1.8rem;
+  font-weight: 800;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 50px;
+}
+
+#card-title{
+  margin: 0px 10px 0px 10px ;
+  font-size: 1.25rem;
+}
+
+
+#formNavBtns {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+
+}
+
+
+#formSpan {
+  color: #333;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+#formNextBtn {
+  border: none;
+  font-weight: bolder;
+  cursor: pointer;
+  display: inline-block;
+  background-color: #4f378a;
+  color: white;
+  text-align: center;
+  padding: 9px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  border-radius: 20px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+#formBackBtn {
+  border: 0.5px solid;
+  font-weight: bolder;
+  cursor: pointer;
+  display: inline-block;
+  background-color: white;
+  color: #4f378a;
+  text-align: center;
+  padding: 9px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 20px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+
+
+
 .banerText-admin {
   font-size: 1.8rem;
   font-weight: 800;
@@ -202,7 +272,7 @@ html {
   gap: 5px;
 }
 
-.logo-admin{
+.logo-admin {
   font-weight: lighter;
 }
 
@@ -264,7 +334,7 @@ html {
 }
 
 .text-areabutton:focus {
-  color: var(--m-3-sys-light-primary, #F6EEFF);
+  color: var(--m-3-sys-light-primary, #f6eeff);
   color: white;
 }
 
@@ -295,7 +365,6 @@ html {
   padding: 5px;
   border-radius: 20%;
   font-weight: bold;
-  
 }
 
 #button {
@@ -375,15 +444,13 @@ button {
   padding-bottom: 15px;
 }
 
-
-
 #nav {
   display: flex;
   font-size: 18px;
   font-weight: bolder;
   align-items: center;
   justify-content: space-between;
-  padding: 0px ;
+  padding: 0px;
   height: max-content;
   margin-top: 5px;
   padding: 10px;
@@ -403,7 +470,7 @@ button {
 }
 
 #card-btns {
-  margin: 10px;
+  margin: 0px 5px 5px 0px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -431,6 +498,9 @@ button {
 }
 .m-5 {
   margin: 5px;
+}
+
+.ml-5{
   margin-left: 5px;
 }
 
@@ -477,19 +547,19 @@ button {
   border-radius: 20px;
 }
 
-#image-card {
-  object-fit: cover;
+#card-image {
   border-radius: 20px;
   width: 100%;
+  height: 250px;
+  
 }
 
 #landing-bannar {
-  display: flex;  
+  display: flex;
   background-color: #f6eeff;
   padding: 5px;
   border-radius: 20px;
   margin-bottom: 10px;
-
 }
 
 #landing-text-bannar {
@@ -500,7 +570,6 @@ button {
   margin-left: 5px;
   margin-right: 5px;
   text-align: center;
-
 }
 
 #landing-btn-explore {
@@ -515,7 +584,8 @@ button {
   padding: 5px;
   border-radius: 30px;
   margin-bottom: 5px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 #landing-btn-create {
@@ -524,7 +594,8 @@ button {
   cursor: pointer;
   display: inline-block;
   background-color: white;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   color: #4f378a;
   width: 80%;
   text-align: center;
@@ -551,7 +622,7 @@ button {
   position: relative;
   background-color: #f6eeff;
   border-radius: 20px;
- 
+
   margin-left: 10px;
   margin-right: 10px;
   padding-left: 5px;
@@ -561,15 +632,13 @@ button {
 }
 
 #card-horzintal-scroll {
-  display: flex;
-  flex-direction: row ;
-  overflow: auto;
-  white-space: nowrap;
-  padding: 9px;
+  flex-direction: row;
+  margin-top: 1px;  
 }
 
 #tags-horzintal {
   margin-left: 5px;
+  margin-bottom: 5px;
 }
 
 #whatsapp-btn {
@@ -582,7 +651,7 @@ button {
 }
 
 .card-helper-text {
-  margin: 5px;
+  margin: 3px;
   color: #4a4458;
   font-weight: bold;
 }
