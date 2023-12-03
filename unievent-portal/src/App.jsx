@@ -5,6 +5,7 @@ import AdminDashboard from "./pages/admin-pages/AdminDashboard";
 import MainLandingPage from "./pages/MainLandingPage";
 import UserAuth from "./pages/user/user-pages/UserAuth";
 import Events from "./pages/user/user-pages/Events"
+import Event from "./pages/user/user-pages/Event"
 function App() {
   return (
     <Router>
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/admin/dashboard" element={<AdminDashboard />} />
         <Route expact path="/user-auth" element={<UserAuth/>}/>
         <Route expact path="/events" element={<Events/>}/>
+        <Route expact path="/event" element={<Event/>}/>
 
       </Routes>
     </Router>
