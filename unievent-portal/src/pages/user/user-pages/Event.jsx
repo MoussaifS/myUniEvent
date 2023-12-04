@@ -1,11 +1,14 @@
 import Nav from "../../../components/Nav";
-import CardContainer from "../components/CardContainer";
 import "@material/web/tabs/tabs.js";
 import "@material/web/tabs/primary-tab.js";
 import locationIcon from "../../../assets/location-pin-svgrepo-com(1).svg";
 import ShowMoreText from "react-show-more-text";
+import { useParams } from "react-router-dom";
+
+
 
 const Events = () => {
+  console.log(useParams())
   let car = [{}, {}, {}];
   return (
     <div id="event ">

@@ -8,17 +8,14 @@ import Events from "./pages/user/user-pages/Events"
 import Event from "./pages/user/user-pages/Event"
 function App() {
   return (
-    <Router>
       <Routes>
         <Route exact path="/" element={<MainLandingPage/>} />
         <Route exact path="/admin" element={<AdminLanding />} />
         <Route exact path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route expact path="/user-auth" element={<UserAuth/>}/>
-        <Route expact path="/events" element={<Events/>}/>
-        <Route expact path="/event" element={<Event/>}/>
-
+        <Route exact path="/user-auth" element={<UserAuth/>}/>
+        <Route exact path="/events" element={<Events/>}/>
+        <Route exact path="/event/:id" element={<Event/>}/>
       </Routes>
-    </Router>
   );
 }
 
