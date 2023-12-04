@@ -37,9 +37,6 @@ const Cards = (props) => {
             <p className="card-helper-text">for 200 ringit</p>
           </div>
         </div>
-
-
-
       </div>
       
 

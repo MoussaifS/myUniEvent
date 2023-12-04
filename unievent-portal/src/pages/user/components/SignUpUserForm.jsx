@@ -11,6 +11,8 @@ import "@material/web/divider/divider.js";
 import { useState } from "react";
 import { majorList } from "../../../lists/MajorList";
 import { institutionsList } from "../../../lists/InstitutionList";
+import { eventTagList } from "../../../lists/EventTagsList";
+import "@material/web/chips/filter-chip.js";
 
 const SignUpUserForm = () => {
   const { handleSubmit, register } = useForm();
@@ -27,7 +29,7 @@ const SignUpUserForm = () => {
   console.log(currentStepIndex);
 
   return (
-    <form id="">
+    <form id="form-container">
       <div style={currentStepIndex == 0 ? {} : { display: "none" }}>
         <span id="formSpan"> Set up a new account </span>
         {/* full Name */}
@@ -118,9 +120,6 @@ const SignUpUserForm = () => {
           ))}
         </md-outlined-select>
 
-
-
-
         <div id="formNavBtns">
           <span id="formNextBtn" onClick={next}>
             Next
@@ -132,19 +131,59 @@ const SignUpUserForm = () => {
       </div>
 
       <div style={currentStepIndex == 2 ? {} : { display: "none" }}>
-        <span>How would you describe the type of event you prefer? </span>
-        <span></span>
+        <span id="formSpan">
+          Help Us Personalize Every Moment!
+        </span>
 
-        <span>age</span>
-        <span>gender</span>
-
-        <button onClick={back}>back</button>
-        <button onClick={next}>next</button>
+        <div >
+        <span className="signup-helper-text">What type of events you prefer</span>
+        {eventTagList.map((eventTag, index) => (
+          <md-filter-chip
+            id="tags-horzintal"
+            key={index}
+            label={eventTag.tag}
+            elevated
+          ></md-filter-chip>
+        ))}
       </div>
+      
+        <md-outlined-select id="text-field-credentials" required label="Gender">
+          <md-select-option
+            value="male"
+            aria-label="male"
+            {...register("gender")}
+          >
+            <div slot="headline">Male</div>
+          </md-select-option>
 
-      <div style={currentStepIndex == 2 ? {} : { display: "none" }}>
-        <span>How would you describe the type of event you prefer? </span>
-        <span></span>
+          <md-select-option
+            value="female"
+            aria-label="female"
+            {...register("gender")}
+          >
+            <div slot="headline">female</div>
+          </md-select-option>
+        </md-outlined-select>
+
+        <md-outlined-text-field
+          id="text-field-credentials"
+          {...register("age")}
+          required
+          type="number"
+          label="Age"
+          placeholder="Age"
+        ></md-outlined-text-field>
+
+       
+
+        <div id="formNavBtns">
+          <span id="formNextBtn">
+            Submit
+          </span>
+          <span id="formBackBtn" onClick={back}>
+            Back
+          </span>
+        </div>
       </div>
     </form>
   );

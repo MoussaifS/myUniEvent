@@ -6,10 +6,7 @@ import locationIcon from "../../../assets/location-pin-svgrepo-com(1).svg";
 import ShowMoreText from "react-show-more-text";
 
 const Events = () => {
-
-    let car = [
-        {},{} , {}, 
-    ]
+  let car = [{}, {}, {}];
   return (
     <div id="event ">
       <Nav />
@@ -62,41 +59,35 @@ const Events = () => {
               technologies, including generative AI and LLM. Uncover the ways AI
               can propel your career to new heights. Uncover how ChatGPT can
               elevate your career, transforming the way you communicate and
-              innovate. Hear success s{" "}
-              <img src={locationIcon} alt="Share" className="ml-5" />
-              <img src={locationIcon} alt="Share" className="ml-5" />
-              <img src={locationIcon} alt="Share" className="ml-5" />
-              <img src={locationIcon} alt="Share" className="ml-5" />
-              tories of individuals harnessing ChatGPT for creative and
+              innovate. Hear successstories of individuals harnessing ChatGPT for creative and
               professional breakthroughs. Learn best practices for integrating
               ChatGPT into your projects and prompt generation strategies.
             </p>
           </ShowMoreText>
         </div>
 
-        <div id="event-info-card-dark">
-          <div>
-            <span className="card-helper-text-dark">Organizer:</span>
-            <span className="card-helper-text-dark">cs Club</span>
-          </div>
+        <div >
+        <div className="mb-15"> <h4 className="mb-0">Event Tag:</h4>
+        <div id="card-horzintal-scroll">
+          {car.map((tag, index) => (
+            <md-suggestion-chip
+              id="tags-horzintal"
+              key={index}
+              label={tag}
+            ></md-suggestion-chip>
+          ))}
+        </div></div>
+          
 
-          <div className="fd-c">
-            <a id="event-card-btn">Add to Calander</a>
-            <a id="event-card-btn">follow</a>
-          </div>
-        </div>
+          <div id="event-info-card-dark">
+            <div>
+              <span className="card-helper-text-dark">Organizer:</span>
+              <span className="card-helper-text-dark">cs Club</span>
+            </div>
 
-        <div>
-          <div className="">
-          <h4 className="mb-0">Event Tag:</h4>
-            <div id="card-horzintal-scroll">
-              {car.map((tag, index) => (
-                <md-suggestion-chip
-                  id="tags-horzintal"
-                  key={index}
-                  label={tag}
-                ></md-suggestion-chip>
-              ))}
+            <div className="fd-c">
+              <a id="event-card-btn">connact the orgnizer</a>
+              <a id="event-card-btn">follow</a>
             </div>
           </div>
         </div>
