@@ -1,8 +1,6 @@
 import { TextField } from "@mui/material";
-import { useState } from "react";
-
+import { useState , useEffect } from "react";
 const PersonalDetails = (props) => {
-  console.log(props);
 
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
@@ -32,17 +30,25 @@ const PersonalDetails = (props) => {
     }
 
     setErrors(errors);
-    // if (Object.keys(errors).length === 0) {
-    //     props.setCurrentStepIndex(1)
-    // } else {
-    //   console.log("Validation errors:", errors);
-    // }
+    console.log("Validation errors:", errors);
+
+    if (Object.keys(errors).length === 0) {
+      props.setCurrentStepIndex(props.currentStepIndex + 1)
+    } else {
+      console.log("Validation errors:", errors);
+    }
   };
 
-  if (props.validationHandling) {
-    handleValidation();
-    props.validationHandling == false;
-  }
+
+
+  useEffect(() => {
+      
+    console.log(props);
+    props.setValidated(false)
+    if (props.validated) {
+      handleValidation()
+    }
+  }, [props.validated]);
 
   return (
     <div>
@@ -52,6 +58,7 @@ const PersonalDetails = (props) => {
         placeholder="Enter ur Full Name "
         value={fullName}
         type="text"
+        className="mmm"
         onChange={(e) => setFullName(e.target.value)}
       ></TextField>
       {errors.fullName && (

@@ -9,18 +9,16 @@ import "@material/web/select/select-option.js";
 import "@material/web/select/outlined-select.js";
 import "@material/web/divider/divider.js";
 import { useState } from "react";
-import { majorList } from "../../../lists/MajorList";
-import { institutionsList } from "../../../lists/InstitutionList";
 import { eventTagList } from "../../../lists/EventTagsList";
 import "@material/web/chips/filter-chip.js";
-import NewAccountValidation from "./form/PersonalDetails";
+import PersonalDetails from "./form/PersonalDetails";
+import UniversityDetails from "./form/UniverstiyDetails";
+
 
 const SignUpUserForm = () => {
   const { handleSubmit, register } = useForm();
   const [currentStepIndex, setCurrentStepIndex] = useState(1);
   const [shit, setShit] = useState(0);
-  const [validation, setValidation] = useState(false);
-  const [validationHandling, setvalidationHandling] = useState(false);
 
   function next() {
     setCurrentStepIndex(currentStepIndex + 1);
@@ -38,19 +36,22 @@ const SignUpUserForm = () => {
     setShit(shit + 1);
     console.log(shit);
   };
-  console.log(validationHandling);
+
+  const [validated, setValidated] = useState(false);
+  const [validationHandling, setvalidationHandling] = useState(false);
 
   return (
-    <form id="form-container">
+    <form>
       <div style={currentStepIndex == 0 ? {} : { display: "none" }}>
         <span id="formSpan"> Set up a new account </span>
-        <NewAccountValidation
-          validation={validation}
-          validationHandling={validationHandling}
+        <PersonalDetails
+          validated={validated}
+          setValidated={setValidated}
           setCurrentStepIndex={setCurrentStepIndex}
+          currentStepIndex={0}
         />
         <div id="formNavBtns">
-          <span id="formNextBtn" onClick={setvalidationHandling(true)}>
+          <span id="formNextBtn" onClick={() => setValidated(true)}>
             Next
           </span>
         </div>
@@ -58,43 +59,12 @@ const SignUpUserForm = () => {
 
       <div style={currentStepIndex == 1 ? {} : { display: "none" }}>
         <span id="formSpan">What is your Current major?</span>
-
-        <md-outlined-select
-          id="text-field-credentials"
-          required
-          selectIndex="1"
-          label="Select Major"
-        >
-          {majorList.map((e, index) => (
-            <md-select-option
-              key={index}
-              value={e.major}
-              aria-label={e.major}
-              {...register("major")}
-            >
-              <div slot="headline">{e.major}</div>
-            </md-select-option>
-          ))}
-        </md-outlined-select>
-
-        <md-outlined-select
-          id="text-field-credentials"
-          required
-          selectIndex="1"
-          label="Select Your University"
-        >
-          {institutionsList.map((institution, index) => (
-            <md-select-option
-              key={index}
-              value={institution.name}
-              aria-label={institution.name}
-              {...register("institution")}
-            >
-              <div slot="headline">{institution.name}</div>
-            </md-select-option>
-          ))}
-        </md-outlined-select>
-
+        <UniversityDetails
+          validated={validated}
+          setValidated={setValidated}
+          setCurrentStepIndex={setCurrentStepIndex}
+          currentStepIndex={0}
+        />
         <div id="formNavBtns">
           <span id="formNextBtn" onClick={next}>
             Next
