@@ -1,7 +1,5 @@
 import { Select, MenuItem, FormHelperText } from "@mui/material";
 import { useState, useEffect } from "react";
-import "@material/web/select/select-option.js";
-import "@material/web/select/outlined-select.js";
 import { majorList } from "../../../../lists/MajorList";
 import { institutionsList } from "../../../../lists/InstitutionList";
 
@@ -11,34 +9,26 @@ const UniversityDetails = (props) => {
   const [errors, setErrors] = useState(null);
 
   const handleValidation = async () => {
-    setErrors(null)
-    console.log(university )
-    console.log(major )
-    console.log('in')
-
-    if((university ||  major ) == null)
-    {
-        setErrors("Select field can't be Empty");
+    setErrors(null);
+    if ((university || major) == null) {
+      setErrors("Select field can't be Empty");
     }
 
     if (errors === null) {
-        props.setCurrentStepIndex(props.currentStepIndex + 1)
-      } else {
-        console.log("Validation errors:", errors);
-      }
+      props.setCurrentStepIndex(props.currentStepIndex + 1);
+    } else {
+      console.log("Validation errors:", errors);
+    }
   };
 
-
-  
-
   useEffect(() => {
-    props.setValidated(false)
+    props.setValidated(false);
     if (props.validated) {
-      handleValidation()
+      handleValidation();
     }
   }, [props.validated]);
 
-  console.log(university)
+  console.log(university);
   return (
     <div>
       <Select
@@ -66,9 +56,7 @@ const UniversityDetails = (props) => {
           </MenuItem>
         ))}
       </Select>
-      {errors && (
-        <p className="form-error-helper-text">{errors}</p>
-      )}
+      {errors && <p className="form-error-helper-text">{errors}</p>}
     </div>
   );
 };

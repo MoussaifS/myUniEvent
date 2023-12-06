@@ -1,7 +1,6 @@
 import { TextField } from "@mui/material";
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 const PersonalDetails = (props) => {
-
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -21,7 +20,7 @@ const PersonalDetails = (props) => {
     }
     if (!email.includes("edu") && !email.includes("my")) {
       errors.email = 'Email should contain "edu" or "my"';
-    // const dublicateEmailChecker = doc(db, "organizers", "@gmail.com");
+      // const dublicateEmailChecker = doc(db, "organizers", "@gmail.com");
       // const dublicateData = await getDoc(dublicateEmailChecker);
       // console.log(dublicateData.exists());
     }
@@ -33,32 +32,30 @@ const PersonalDetails = (props) => {
     console.log("Validation errors:", errors);
 
     if (Object.keys(errors).length === 0) {
-      props.setCurrentStepIndex(props.currentStepIndex + 1)
+      props.setCurrentStepIndex(props.currentStepIndex + 1);
     } else {
       console.log("Validation errors:", errors);
     }
   };
 
-
-
   useEffect(() => {
-      
     console.log(props);
-    props.setValidated(false)
+    props.setValidated(false);
     if (props.validated) {
-      handleValidation()
+      handleValidation();
     }
   }, [props.validated]);
 
   return (
     <div>
       <TextField
+        margin="dense"
         fullWidth
         label="Full Name"
         placeholder="Enter ur Full Name "
         value={fullName}
         type="text"
-        className="mmm"
+        required
         onChange={(e) => setFullName(e.target.value)}
       ></TextField>
       {errors.fullName && (
@@ -68,6 +65,7 @@ const PersonalDetails = (props) => {
       {/* phone */}
       <TextField
         required
+        margin="dense"
         type="number"
         label="Phone number"
         placeholder="Enter Phone Number"
@@ -81,6 +79,7 @@ const PersonalDetails = (props) => {
       <TextField
         required
         type="email"
+        margin="dense"
         label="Email"
         fullWidth
         placeholder="Enter E-mail"
@@ -93,6 +92,7 @@ const PersonalDetails = (props) => {
         type="Password"
         label="Password"
         fullWidth
+        margin="dense"
         placeholder="Enter Password"
         onChange={(e) => setPassword(e.target.value)}
       ></TextField>

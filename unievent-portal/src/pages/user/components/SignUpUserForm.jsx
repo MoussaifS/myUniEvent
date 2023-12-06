@@ -10,15 +10,14 @@ import "@material/web/select/outlined-select.js";
 import "@material/web/divider/divider.js";
 import { useState } from "react";
 import { eventTagList } from "../../../lists/EventTagsList";
-import "@material/web/chips/filter-chip.js";
 import PersonalDetails from "./form/PersonalDetails";
 import UniversityDetails from "./form/UniverstiyDetails";
-
+import PersonalizitionDetails from "./form/PersonalizitionDetails";
 
 const SignUpUserForm = () => {
   const { handleSubmit, register } = useForm();
-  const [currentStepIndex, setCurrentStepIndex] = useState(1);
-  const [shit, setShit] = useState(0);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [shit, setShit] = useState(2);
 
   function next() {
     setCurrentStepIndex(currentStepIndex + 1);
@@ -42,7 +41,7 @@ const SignUpUserForm = () => {
 
   return (
     <form>
-      <div style={currentStepIndex == 0 ? {} : { display: "none" }}>
+      <div id="form-slide-container"style={currentStepIndex == 0 ? {} : { display: "none" }}>
         <span id="formSpan"> Set up a new account </span>
         <PersonalDetails
           validated={validated}
@@ -77,47 +76,10 @@ const SignUpUserForm = () => {
 
       <div style={currentStepIndex == 2 ? {} : { display: "none" }}>
         <span id="formSpan">Help Us Personalize Every Moment!</span>
-
-        <div>
-          <span className="signup-helper-text">
-            What type of events you prefer
-          </span>
-          {eventTagList.map((eventTag, index) => (
-            <md-filter-chip
-              id="tags-horzintal"
-              key={index}
-              label={eventTag.tag}
-              elevated
-            ></md-filter-chip>
-          ))}
-        </div>
-
-        <md-outlined-select id="text-field-credentials" required label="Gender">
-          <md-select-option
-            value="male"
-            aria-label="male"
-            {...register("gender")}
-          >
-            <div slot="headline">Male</div>
-          </md-select-option>
-
-          <md-select-option
-            value="female"
-            aria-label="female"
-            {...register("gender")}
-          >
-            <div slot="headline">female</div>
-          </md-select-option>
-        </md-outlined-select>
-
-        <md-outlined-text-field
-          id="text-field-credentials"
-          {...register("age")}
-          required
-          type="number"
-          label="Age"
-          placeholder="Age"
-        ></md-outlined-text-field>
+        <PersonalizitionDetails
+          validated={validated}
+          setValidated={setValidated}
+        />
 
         <div id="formNavBtns">
           <span id="formNextBtn">Submit</span>
