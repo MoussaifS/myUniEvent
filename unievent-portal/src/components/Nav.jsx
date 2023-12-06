@@ -34,7 +34,6 @@ const Nav = (props) => {
   };
 
   const handlenavigation = (destination) => {
-    console.log('in')
     navigate(`/${destination}`, { state: { from: location } });
   };
 

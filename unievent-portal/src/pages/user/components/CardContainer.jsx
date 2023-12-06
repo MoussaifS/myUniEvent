@@ -31,8 +31,6 @@ const CardContainer = (props) => {
     }
   };
 
-  console.log(events);
-
   useEffect(() => {
     fetchEventData();
   }, []);
