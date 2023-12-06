@@ -14,9 +14,9 @@ const PersonalDetails = (props) => {
       errors.fullName = "Full Name cannot be empty";
     }
 
-    const phoneRegex = /^\d{10}$/;
+    const phoneRegex = /^\d{11}$/;
     if (!phoneRegex.test(phone)) {
-      errors.phone = "Phone number should be 10 digits";
+      errors.phone = "Phone number should be 11 digits";
     }
     if (!email.includes("edu") && !email.includes("my")) {
       errors.email = 'Email should contain "edu" or "my"';
@@ -24,7 +24,7 @@ const PersonalDetails = (props) => {
       // const dublicateData = await getDoc(dublicateEmailChecker);
       // console.log(dublicateData.exists());
     }
-    if (password.length < 6) {
+    if (password.length < 8) {
       errors.password = "Password should be at least 6 characters";
     }
 
@@ -32,6 +32,12 @@ const PersonalDetails = (props) => {
     console.log("Validation errors:", errors);
 
     if (Object.keys(errors).length === 0) {
+      props.response({
+        phone: phone,
+        fullName: fullName,
+        email: email,
+        password: password,
+      });
       props.setCurrentStepIndex(props.currentStepIndex + 1);
     } else {
       console.log("Validation errors:", errors);
@@ -52,15 +58,14 @@ const PersonalDetails = (props) => {
         margin="dense"
         fullWidth
         label="Full Name"
-        placeholder="Enter ur Full Name "
+        placeholder="Enter your Full Name"
         value={fullName}
         type="text"
         required
+        error={errors.fullName ? true : false}
+        helperText={errors.fullName ? "Full Name cannot be empty" : ""}
         onChange={(e) => setFullName(e.target.value)}
-      ></TextField>
-      {errors.fullName && (
-        <p className="form-error-helper-text">{errors.fullName}</p>
-      )}
+      />
 
       {/* phone */}
       <TextField
@@ -71,9 +76,10 @@ const PersonalDetails = (props) => {
         placeholder="Enter Phone Number"
         value={phone}
         fullWidth
+        error={errors.phone ? true : false}
+        helperText={errors.phone ? "Phone number should be 11 digits": ""}
         onChange={(e) => setPhone(e.target.value)}
       ></TextField>
-      {errors.phone && <p className="form-error-helper-text">{errors.phone}</p>}
 
       {/* email */}
       <TextField
@@ -83,9 +89,10 @@ const PersonalDetails = (props) => {
         label="Email"
         fullWidth
         placeholder="Enter E-mail"
+        error={errors.email ? true : false}
+        helperText={errors.email ? 'Please use an email with ".edu" or "my" domain.': ""}
         onChange={(e) => setEmail(e.target.value)}
       ></TextField>
-      {errors.email && <p className="form-error-helper-text">{errors.email}</p>}
 
       {/* password */}
       <TextField
@@ -94,11 +101,11 @@ const PersonalDetails = (props) => {
         fullWidth
         margin="dense"
         placeholder="Enter Password"
+        error={errors.password ? true : false}
+        helperText={errors.password ? 'Password must have a minimum of 8 characters.': ""}
         onChange={(e) => setPassword(e.target.value)}
       ></TextField>
-      {errors.password && (
-        <p className="form-error-helper-text">{errors.password}</p>
-      )}
+  
     </div>
   );
 };

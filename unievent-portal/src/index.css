@@ -67,6 +67,12 @@ html {
   margin-left: 10px;
 }
 
+#signup-form-container{
+  display: flex;
+  flex-direction: row;
+
+}
+
 #form-date-div {
   display: flex;
   gap: 2px;
@@ -99,13 +105,7 @@ html {
     0px 4px 8px 3px rgba(0, 0, 0, 0.15);
 }
 
-#UserAuth-landing {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 99vh;
-}
+
 #UserAuth-landing-input {
   background-color: #f6eeff;
 
@@ -199,12 +199,12 @@ html {
 }
 
 
-.banerText-user {
+.userAuth-banerText {
   font-size: 1.8rem;
   font-weight: 800;
-  flex-direction: column;
   gap: 5px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
 #card-title {

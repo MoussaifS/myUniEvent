@@ -3,13 +3,7 @@ import { auth, db } from "../../../FireBase";
 //RELAOD FIREBASE
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
-import "@material/web/textfield/outlined-text-field.js";
-import "@material/web/button/outlined-button.js";
-import "@material/web/select/select-option.js";
-import "@material/web/select/outlined-select.js";
-import "@material/web/divider/divider.js";
 import { useState } from "react";
-import { eventTagList } from "../../../lists/EventTagsList";
 import PersonalDetails from "./form/PersonalDetails";
 import UniversityDetails from "./form/UniverstiyDetails";
 import PersonalizitionDetails from "./form/PersonalizitionDetails";
@@ -18,7 +12,8 @@ const SignUpUserForm = () => {
   const { handleSubmit, register } = useForm();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [shit, setShit] = useState(2);
-
+  const [response , setResponse] = useState({})
+  
   function next() {
     setCurrentStepIndex(currentStepIndex + 1);
   }
@@ -38,9 +33,9 @@ const SignUpUserForm = () => {
 
   const [validated, setValidated] = useState(false);
   const [validationHandling, setvalidationHandling] = useState(false);
-
+  console.log(response)
   return (
-    <form>
+    <div id="signup-form-container">
       <div id="form-slide-container"style={currentStepIndex == 0 ? {} : { display: "none" }}>
         <span id="formSpan"> Set up a new account </span>
         <PersonalDetails
@@ -48,6 +43,8 @@ const SignUpUserForm = () => {
           setValidated={setValidated}
           setCurrentStepIndex={setCurrentStepIndex}
           currentStepIndex={0}
+          response={setResponse}
+
         />
         <div id="formNavBtns">
           <span id="formNextBtn" onClick={() => setValidated(true)}>
@@ -88,7 +85,7 @@ const SignUpUserForm = () => {
           </span>
         </div>
       </div>
-    </form>
+    </div>
   );
 };
 
