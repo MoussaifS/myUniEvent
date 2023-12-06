@@ -63,10 +63,10 @@ const SignUpUserForm = () => {
           validated={validated}
           setValidated={setValidated}
           setCurrentStepIndex={setCurrentStepIndex}
-          currentStepIndex={0}
+          currentStepIndex={1}
         />
         <div id="formNavBtns">
-          <span id="formNextBtn" onClick={next}>
+          <span id="formNextBtn" onClick={() => setValidated(true)}>
             Next
           </span>
           <span id="formBackBtn" onClick={back}>

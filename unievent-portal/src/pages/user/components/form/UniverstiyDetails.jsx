@@ -1,51 +1,76 @@
-import { TextField } from "@mui/material";
-import { useState , useEffect } from "react";
+import { Select, MenuItem, FormHelperText } from "@mui/material";
+import { useState, useEffect } from "react";
 import "@material/web/select/select-option.js";
 import "@material/web/select/outlined-select.js";
 import { majorList } from "../../../../lists/MajorList";
 import { institutionsList } from "../../../../lists/InstitutionList";
 
-
 const UniversityDetails = (props) => {
-    return(
-        <div>
-        <md-outlined-select
-          id="text-field-credentials"
-          required
-          selectIndex="1"
-          label="Select Major"
-        >
-          {majorList.map((e, index) => (
-            <md-select-option
-              key={index}
-              value={e.major}
-              aria-label={e.major}
-            >
-              <div slot="headline">{e.major}</div>
-            </md-select-option>
-          ))}
-        </md-outlined-select>
+  const [major, setMajor] = useState(null);
+  const [university, setUniversity] = useState(null);
+  const [errors, setErrors] = useState(null);
 
-        <md-outlined-select
-          id="text-field-credentials"
-          required
-          selectIndex="1"
-          label="Select Your University"
-        >
-          {institutionsList.map((institution, index) => (
-            <md-select-option
-              key={index}
-              value={institution.name}
-              aria-label={institution.name}
-            >
-              <div slot="headline">{institution.name}</div>
-            </md-select-option>
-          ))}
-        </md-outlined-select>
-        </div>
-        
-    )
+  const handleValidation = async () => {
+    setErrors(null)
+    console.log(university )
+    console.log(major )
+    console.log('in')
 
-}
+    if((university ||  major ) == null)
+    {
+        setErrors("Select field can't be Empty");
+    }
+
+    if (errors === null) {
+        props.setCurrentStepIndex(props.currentStepIndex + 1)
+      } else {
+        console.log("Validation errors:", errors);
+      }
+  };
+
+
+  
+
+  useEffect(() => {
+    props.setValidated(false)
+    if (props.validated) {
+      handleValidation()
+    }
+  }, [props.validated]);
+
+  console.log(university)
+  return (
+    <div>
+      <Select
+        label="Select Major"
+        fullWidth
+        onChange={(e) => setUniversity(e.target.value)}
+      >
+        {institutionsList.map((institution, index) => (
+          <MenuItem
+            key={index}
+            value={institution.name}
+            aria-label={institution.name}
+          >
+            <div slot="headline">{institution.name}</div>
+          </MenuItem>
+        ))}
+      </Select>
+
+      <p>select your uni</p>
+      <FormHelperText>Choose the closest major</FormHelperText>
+      <Select label="Select Major" fullWidth>
+        {majorList.map((e, index) => (
+          <MenuItem key={index} value={e.major} aria-label={e.major}>
+            <div slot="headline">{e.major}</div>
+          </MenuItem>
+        ))}
+      </Select>
+      {errors && (
+        <p className="form-error-helper-text">{errors}</p>
+      )}
+    </div>
+  );
+};
 
 export default UniversityDetails;
