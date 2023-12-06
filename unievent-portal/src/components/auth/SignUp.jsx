@@ -12,21 +12,7 @@ import { useState } from "react";
 
 const SignUp = () => {
   const { handleSubmit, register } = useForm();
-  const [step , setStep] = useState(1)
  
-  const prevStep = () => {
-    setStep(step - 1 );
-  }
-
-  const nextStep = () => {
-    setStep(step + 1 );
-  }
-
-
-
-
-
-
   const institutions = [
     { name: "Universiti Sains Islam Malaysia" },
     { name: "Manipal International University" },
@@ -84,7 +70,7 @@ const SignUp = () => {
           required
           type="number"
           label="Phone number"
-          maxlength="10"
+          maxlength="11"
           minlength="2"
           placeholder="Enter Phone Number"
         ></md-outlined-text-field>

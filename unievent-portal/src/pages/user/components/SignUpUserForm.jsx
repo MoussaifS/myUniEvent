@@ -13,10 +13,62 @@ import { majorList } from "../../../lists/MajorList";
 import { institutionsList } from "../../../lists/InstitutionList";
 import { eventTagList } from "../../../lists/EventTagsList";
 import "@material/web/chips/filter-chip.js";
+import { TextField } from "@mui/material";
+import NewAccountValidation from './NewAccountValidation' 
+// import {
+//   query,
+//   where,
+//   getDocs,
+//   doc,
+//   getDoc,
+//   orderBy,
+//   limit,
+// } from "firebase/firestore";
 
 const SignUpUserForm = () => {
   const { handleSubmit, register } = useForm();
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [currentStepIndex, setCurrentStepIndex] = useState(1);
+
+  const [fullName, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+  const [shit, setShit] = useState(0);
+
+  
+  const handleNewAccountValidation = async () => {
+    let errors = {};
+    console.log(fullName);
+    if (!fullName.trim()) {
+      errors.fullName = "Full Name cannot be empty";
+    }
+
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(phone)) {
+      errors.phone = "Phone number should be 10 digits";
+    }
+
+    if (!email.includes("edu") && !email.includes("my")) {
+      errors.email = 'Email should contain "edu" or "my"';
+
+      // const dublicateEmailChecker = doc(db, "organizers", "@gmail.com");
+      // const dublicateData = await getDoc(dublicateEmailChecker);
+
+      // console.log(dublicateData.exists());
+    }
+
+    if (password.length < 6) {
+      errors.password = "Password should be at least 6 characters";
+    }
+    setErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      next();
+    } else {
+      console.log("Validation errors:", errors);
+    }
+  };
 
   function next() {
     setCurrentStepIndex(currentStepIndex + 1);
@@ -26,56 +78,88 @@ const SignUpUserForm = () => {
     setCurrentStepIndex(currentStepIndex - 1);
   }
 
-  console.log(currentStepIndex);
+  const onSubmit = (e) => {
+    console.log("in ", e);
+
+    // createUserWithEmailAndPassword(auth, e.email, e.password)
+    //   .then(async (userCredential) => {
+    //     delete e.password;
+    //     await addDoc(collection(db, "organizers"), e);
+    //     alert("accout is created you will be redirected to login");
+    //     window.location.reload(true);
+    //   })
+    //   .catch((error) => console.log(error));
+  };
+
+  const handleThisShit = ()=>{
+    setShit(shit + 1)
+    console.log(shit)
+  }
+
 
   return (
     <form id="form-container">
+
+
+    <NewAccountValidation handleThisShit={handleThisShit}/>
+
       <div style={currentStepIndex == 0 ? {} : { display: "none" }}>
         <span id="formSpan"> Set up a new account </span>
         {/* full Name */}
-        <md-outlined-text-field
-          id="text-field-credentials"
-          {...register("full name")}
-          required
-          maxlength="20"
-          minlength="2"
-          label="Name"
+        <TextField
+          fullWidth
+          label="Full Name"
           placeholder="Enter ur Full Name "
-        ></md-outlined-text-field>
+          value={fullName}
+          type='text'
+          onChange={(e) => setFullName(e.target.value)}
+        ></TextField>
+        {errors.fullName && (
+          <p className="form-error-helper-text">{errors.fullName}</p>
+        )}
+
 
         {/* phone */}
-        <md-outlined-text-field
-          id="text-field-credentials"
-          {...register("phone")}
+        <TextField
           required
           type="number"
           label="Phone number"
-          maxlength="10"
-          minlength="10"
           placeholder="Enter Phone Number"
-        ></md-outlined-text-field>
+          value={phone}
+          fullWidth
+          onChange={(e) => setPhone(e.target.value)}
+        ></TextField>
+        {errors.phone && (
+          <p className="form-error-helper-text">{errors.phone}</p>
+        )}
 
         {/* email */}
-        <md-outlined-text-field
-          id="text-field-credentials"
-          {...register("email")}
+        <TextField
           required
           type="email"
           label="Email"
+          fullWidth
           placeholder="Enter E-mail"
-        ></md-outlined-text-field>
+          onChange={(e) => setEmail(e.target.value)}
+        ></TextField>
+        {errors.email && (
+          <p className="form-error-helper-text">{errors.email}</p>
+        )}
 
         {/* password */}
-        <md-outlined-text-field
-          id="text-field-credentials"
-          {...register("password")}
-          required
+        <TextField
           type="Password"
           label="Password"
+          fullWidth
           placeholder="Enter Password"
-        ></md-outlined-text-field>
+          onChange={(e) => setPassword(e.target.value)}
+        ></TextField>
+        {errors.password && (
+          <p className="form-error-helper-text">{errors.password}</p>
+        )}
+
         <div id="formNavBtns">
-          <span id="formNextBtn" onClick={next}>
+          <span id="formNextBtn" onClick={handleNewAccountValidation}>
             Next
           </span>
         </div>
@@ -131,22 +215,22 @@ const SignUpUserForm = () => {
       </div>
 
       <div style={currentStepIndex == 2 ? {} : { display: "none" }}>
-        <span id="formSpan">
-          Help Us Personalize Every Moment!
-        </span>
+        <span id="formSpan">Help Us Personalize Every Moment!</span>
 
-        <div >
-        <span className="signup-helper-text">What type of events you prefer</span>
-        {eventTagList.map((eventTag, index) => (
-          <md-filter-chip
-            id="tags-horzintal"
-            key={index}
-            label={eventTag.tag}
-            elevated
-          ></md-filter-chip>
-        ))}
-      </div>
-      
+        <div>
+          <span className="signup-helper-text">
+            What type of events you prefer
+          </span>
+          {eventTagList.map((eventTag, index) => (
+            <md-filter-chip
+              id="tags-horzintal"
+              key={index}
+              label={eventTag.tag}
+              elevated
+            ></md-filter-chip>
+          ))}
+        </div>
+
         <md-outlined-select id="text-field-credentials" required label="Gender">
           <md-select-option
             value="male"
@@ -174,17 +258,14 @@ const SignUpUserForm = () => {
           placeholder="Age"
         ></md-outlined-text-field>
 
-       
-
         <div id="formNavBtns">
-          <span id="formNextBtn">
-            Submit
-          </span>
+          <span id="formNextBtn">Submit</span>
           <span id="formBackBtn" onClick={back}>
             Back
           </span>
         </div>
       </div>
+
     </form>
   );
 };
