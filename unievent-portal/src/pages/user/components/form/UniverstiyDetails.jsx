@@ -33,7 +33,9 @@ const UniversityDetails = (props) => {
     <div>
       <Select
         label="Select Major"
+        margin="dense"
         fullWidth
+        required
         onChange={(e) => setUniversity(e.target.value)}
       >
         {institutionsList.map((institution, index) => (
@@ -49,14 +51,15 @@ const UniversityDetails = (props) => {
 
       <p>select your uni</p>
       <FormHelperText>Choose the closest major</FormHelperText>
-      <Select label="Select Major" fullWidth>
+      <Select 
+      margin="dense"
+      label="Select Major" fullWidth>
         {majorList.map((e, index) => (
           <MenuItem key={index} value={e.major} aria-label={e.major}>
             <div slot="headline">{e.major}</div>
           </MenuItem>
         ))}
       </Select>
-      {errors && <p className="form-error-helper-text">{errors}</p>}
     </div>
   );
 };

@@ -10,7 +10,7 @@ import PersonalizitionDetails from "./form/PersonalizitionDetails";
 
 const SignUpUserForm = () => {
   const { handleSubmit, register } = useForm();
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [currentStepIndex, setCurrentStepIndex] = useState(1);
   const [shit, setShit] = useState(2);
   const [response , setResponse] = useState({})
   
@@ -33,10 +33,10 @@ const SignUpUserForm = () => {
 
   const [validated, setValidated] = useState(false);
   const [validationHandling, setvalidationHandling] = useState(false);
-  console.log(response)
+  console.log(currentStepIndex)
   return (
     <div id="signup-form-container">
-      <div id="form-slide-container"style={currentStepIndex == 0 ? {} : { display: "none" }}>
+      <div id="signup-form-elment" style={currentStepIndex == 0 ? {} : { display: "none" }}>
         <span id="formSpan"> Set up a new account </span>
         <PersonalDetails
           validated={validated}
@@ -44,16 +44,15 @@ const SignUpUserForm = () => {
           setCurrentStepIndex={setCurrentStepIndex}
           currentStepIndex={0}
           response={setResponse}
-
         />
-        <div id="formNavBtns">
+        <div  id="formNavBtns">
           <span id="formNextBtn" onClick={() => setValidated(true)}>
             Next
           </span>
         </div>
       </div>
 
-      <div style={currentStepIndex == 1 ? {} : { display: "none" }}>
+      <div id="signup-form-container" style={currentStepIndex == 1 ? {} : { display: "none" }}>
         <span id="formSpan">What is your Current major?</span>
         <UniversityDetails
           validated={validated}

@@ -9,7 +9,7 @@ const PersonalDetails = (props) => {
 
   const handleValidation = async () => {
     let errors = {};
-
+    setCurrentStepIndex(0)
     if (!fullName.trim()) {
       errors.fullName = "Full Name cannot be empty";
     }
@@ -53,7 +53,7 @@ const PersonalDetails = (props) => {
   }, [props.validated]);
 
   return (
-    <div>
+    <div id="details-forms">
       <TextField
         margin="dense"
         fullWidth
