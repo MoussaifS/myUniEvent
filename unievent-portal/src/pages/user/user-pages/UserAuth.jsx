@@ -14,7 +14,7 @@ const UserAuth = () => {
     setToggle((t) => !t);
   };
   return (
-    <Container maxWidth="md"> 
+    <div> 
     <Nav/>
       <div id="UserAuth-landing">
         <div className="userAuth-banerText">
@@ -39,7 +39,7 @@ const UserAuth = () => {
           {toggle == false ? "Create new account" : "I have account"}
         </md-filled-tonal-button>
       </div>
-    </Container>
+    </div>
   );
 };
 

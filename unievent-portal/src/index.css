@@ -170,6 +170,8 @@ html {
     flex-direction: column;
   }
 
+  
+
   #landing-desc-desktop {
     display: none;
   }
@@ -188,6 +190,12 @@ html {
   #landing-desc-mobile {
     display: none;
   }
+
+  #app{
+    margin-right: 500px;
+    margin-left: 500px;
+  }
+
 
   .banerText {
     font-size: 50px;
