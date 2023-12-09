@@ -21,7 +21,7 @@ const Login = () => {
         const cookies = new Cookies();
         cookies.set("email", e.email, { path: "/" });
         console.log(cookies)
-        navigate("admin/dashboard", { replace: true, state: { from: location } });
+        navigate("/dashboard", { replace: true, state: { from: location } });
         console.log('here')
       })
       .catch(() => {
