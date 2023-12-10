@@ -22,7 +22,7 @@ const PersonalDetails = (props) => {
       errors.email = 'Email should contain "edu" or "my"';
       // const dublicateEmailChecker = doc(db, "organizers", "@gmail.com");
       // const dublicateData = await getDoc(dublicateEmailChecker);
-      // console.log(dublicateData.exists());
+      // console.log(dublicateData.exists());Unassigned
     }
     if (password.length < 8) {
       errors.password = "Password should be at least 6 characters";

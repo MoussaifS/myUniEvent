@@ -6,6 +6,7 @@ import { auth, db } from "../../FireBase";
 import { useLocation, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { useState } from "react";
+import { TextField } from "@mui/material";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,18 +15,18 @@ const Login = () => {
 
   const { handleSubmit, register } = useForm();
   const onSubmit = (e) => {
-    console.log('in')
+    console.log("in");
     signInWithEmailAndPassword(auth, e.email, e.password)
       .then(() => {
-        console.log('in the in')
+        console.log("in the in");
         const cookies = new Cookies();
         cookies.set("email", e.email, { path: "/" });
-        console.log(cookies)
+        console.log(cookies);
         navigate("/dashboard", { replace: true, state: { from: location } });
-        console.log('here')
+        console.log("here");
       })
       .catch(() => {
-        console.log('in the out')
+        console.log("in the out");
         setError(true);
       });
   };
@@ -35,17 +36,20 @@ const Login = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           {/* Email */}
-          <md-outlined-text-field
+          <TextField
             id="text-field-credentials"
             {...register("email")}
             type="email"
             required
             label="Enter Your Email"
+            margin="dense"
+            fullWidth
+            placeholder="Email@domain.edu"
             autocomplete="email"
-          ></md-outlined-text-field>
+          ></TextField>
 
           {/* Password */}
-          <md-outlined-text-field
+          <TextField
             id="text-field-credentials"
             {...register("password")}
             required
@@ -53,8 +57,16 @@ const Login = () => {
             placeholder="Password"
             label="Enter Your Password"
             autocomplete="current-password"
-          ></md-outlined-text-field>
-          <div>{error ?  <div id="error-email-password">Wrong Email Address or Password</div> : null}</div>
+            fullWidth
+            
+            ></TextField>
+          <div>
+            {error ? (
+              <div id="error-email-password">
+                Wrong Email Address or Password
+              </div>
+            ) : null}
+          </div>
         </div>
 
         <md-outlined-button id="button"> Log In </md-outlined-button>

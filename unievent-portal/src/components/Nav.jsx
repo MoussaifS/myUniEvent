@@ -67,6 +67,13 @@ const Nav = (props) => {
             X
           </button>
         ) : null}
+
+        {props.user ? (
+          <button id="nav-login" onClick={()=>handlenavigation("")}>
+            X
+          </button>
+        ) : null}
+
       </div>
     </div>
   );

@@ -3,7 +3,6 @@ import { useState, useRef } from "react";
 import Login from "../../../components/auth/Login";
 import { Typewriter } from "react-simple-typewriter";
 import Nav from "../../../components/Nav";
-import { Container } from "@mui/material";
 
 
 
@@ -14,8 +13,8 @@ const UserAuth = () => {
     setToggle((t) => !t);
   };
   return (
-    <div> 
-    <Nav/>
+    <div className="mt-10"> 
+      <Nav user={"user"}/>
       <div id="UserAuth-landing">
         <div className="userAuth-banerText">
           <span>Login or Sign up to</span>
