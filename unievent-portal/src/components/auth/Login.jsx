@@ -35,31 +35,31 @@ const Login = () => {
     <div id="login">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          {/* Email */}
-          <TextField
-            id="text-field-credentials"
-            {...register("email")}
-            type="email"
-            required
-            label="Enter Your Email"
-            margin="dense"
-            fullWidth
-            placeholder="Email@domain.edu"
-            autocomplete="email"
-          ></TextField>
+          <div id="textField">
+            {/* Email */}
+            <TextField
+              {...register("email")}
+              type="email"
+              required
+              label="Enter Your Email"
+              margin="normal"
+              fullWidth
+              placeholder="Email@domain.edu"
+              autocomplete="email"
+            ></TextField>
+          </div>
 
           {/* Password */}
           <TextField
-            id="text-field-credentials"
             {...register("password")}
             required
+            margin="normal"
             type="password"
             placeholder="Password"
             label="Enter Your Password"
             autocomplete="current-password"
             fullWidth
-            
-            ></TextField>
+          ></TextField>
           <div>
             {error ? (
               <div id="error-email-password">

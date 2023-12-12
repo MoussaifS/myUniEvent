@@ -21,7 +21,10 @@ const SignUp = () => {
     { name: "Other" },
   ];
 
- 
+  const roles = [
+    { role: "University staff member" },
+    { role: "Student Club Representative" },
+  ];
 
   const onSubmit = (e) => {
     console.log(e);

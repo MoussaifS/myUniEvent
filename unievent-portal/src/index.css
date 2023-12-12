@@ -10,6 +10,7 @@ html {
 
 #text-field-credentials {
   display: block;
+
 }
 
 #text-field-form {
@@ -344,7 +345,11 @@ html {
 
 #login {
   margin-top: 25px;
+  width: 320px;
+  text-align: center;
 }
+
+
 
 .container {
   width: 940px;
