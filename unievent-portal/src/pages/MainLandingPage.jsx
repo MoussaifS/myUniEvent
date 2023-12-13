@@ -16,7 +16,7 @@ const MainLandingPage = () => {
     navigate(`/${destination}`, { state: { from: location } });
   };
   return (
-    <div className="fd-c">
+    <div className="df-c">
       <Nav login={true} />
       <Container maxWidth="lg" id="main-container" sx={{ height: "100%" }}>
         <div>

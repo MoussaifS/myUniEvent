@@ -21,7 +21,7 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="fd-c">
+    <div className="df-c">
       <Nav />
       <md-branded-fab
         label="Add New Event"
@@ -37,7 +37,7 @@ const AdminDashboard = () => {
         </svg>
       </md-branded-fab>
       <md-dialog className="zi-99" ref={inputRef}>
-        <div className="fd-c" slot="content" method="dialog">
+        <div className="df-c" slot="content" method="dialog">
           <Form />
           <md-outlined-button onClick={handleCloseFormClick}>
             close

@@ -71,12 +71,6 @@ html {
   margin-left: 10px;
 }
 
-#signup-form-container{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-#signup-form-elment
 
 #form-date-div {
   display: flex;
@@ -190,6 +184,11 @@ html {
     display: none;
   }
 
+  .userAuth-landing-body{
+    height: 100vh;
+    
+  }
+
   #app{
     margin-right: 500px;
     margin-left: 500px;
@@ -212,17 +211,24 @@ html {
 
 
 .userAuth-banerText {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 800;
   gap: 5px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
-#UserAuth-landing {
+.userAuth-banerText-purple{
+  color: #6750a4;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+#userAuth-landing-Page {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  
 }
 
 #details-forms{
@@ -236,7 +242,7 @@ html {
   font-size: 1.25rem;
 }
 
-#formNavBtns {
+#form-btns-navigation {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
@@ -244,17 +250,14 @@ html {
   padding-right: 10px;
 }
 
-#formSpan {
+#form-title-span {
   color: #333;
-  font-size: 1.5rem;
-  font-style:oblique;
-  font-weight: 400;
-  margin-bottom: 100 px;
-  margin-bottom: 20px;
-
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 100px;
 }
 
-#formNextBtn {
+#form-btn-next {
   border: none;
   font-weight: bolder;
   cursor: pointer;
@@ -514,9 +517,16 @@ button {
   gap: 15px;
 }
 
-.fd-c {
+.df-c {
   display: flex;
   flex-direction: column;
+}
+
+.userAuth-landing-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
 }
 
 .fd-r {

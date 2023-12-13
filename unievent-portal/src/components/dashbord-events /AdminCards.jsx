@@ -76,7 +76,7 @@ const Cards = (props) => {
       </div>
       <md-divider inset></md-divider>
 
-      <div className="fd-c">
+      <div className="df-c">
         <div className="m-10">
           <h4 className="m-5">Event Tags:</h4>
           <md-chip-set>

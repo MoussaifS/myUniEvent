@@ -13,9 +13,9 @@ const UserAuth = () => {
     setToggle((t) => !t);
   };
   return (
-    <div className="mt-10"> 
+    <div id="userAuth-landing-Page"> 
       <Nav user={"user"}/>
-      <div id="UserAuth-landing">
+      <div className="userAuth-landing-body">
         <div className="userAuth-banerText">
           <span>Login or Sign up to</span>
           <br></br>
@@ -29,7 +29,7 @@ const UserAuth = () => {
             deleteSpeed={70}
             delaySpeed={9000}
           />
-          <h1 className="purple">University Events</h1>
+          <h1 className="userAuth-banerText-purple">University Events</h1>
         </div>
 
         {toggle == false ? <Login /> : <SignUpUserForm />}

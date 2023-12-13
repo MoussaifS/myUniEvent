@@ -6,8 +6,7 @@ const PersonalDetails = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-
-  const handleValidation = async () => {
+  const handleValidation = () => {
     let errors = {};
     if (!fullName.trim()) {
       errors.fullName = "Full Name cannot be empty";
@@ -31,27 +30,18 @@ const PersonalDetails = (props) => {
     console.log("Validation errors:", errors);
 
     if (Object.keys(errors).length === 0) {
-      props.response({
+       props.response({
         phone: phone,
         fullName: fullName,
         email: email,
         password: password,
       });
       props.setCurrentStepIndex(props.currentStepIndex + 1);
-      console.log('car')
     } else {
+      props.setCurrentStepIndex(props.currentStepIndex + 1);
       console.log("Validation errors:", errors);
     }
   };
-
-  useEffect(() => {
-    console.log(props);
-    props.setValidated(false);
-    if (props.validated) {
-      props.setValidated(false);
-      handleValidation();
-    }
-  }, [props.validated]);
 
   return (
     <div id="details-forms">
@@ -107,6 +97,11 @@ const PersonalDetails = (props) => {
         onChange={(e) => setPassword(e.target.value)}
       ></TextField>
   
+      <div  id="form-btns-navigation">
+          <span id="form-btn-next" onClick={handleValidation}>
+            Next
+          </span>
+        </div>
     </div>
   );
 };

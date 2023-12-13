@@ -88,7 +88,7 @@ const Events = () => {
               <span className="card-helper-text-dark">cs Club</span>
             </div>
 
-            <div className="fd-c">
+            <div className="df-c">
               <a id="event-card-btn">connact the orgnizer</a>
               <a id="event-card-btn">follow</a>
             </div>
