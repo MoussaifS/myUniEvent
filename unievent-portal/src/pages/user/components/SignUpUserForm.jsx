@@ -10,7 +10,7 @@ import PersonalizitionDetails from "./form/PersonalizitionDetails";
 
 const SignUpUserForm = () => {
   const { handleSubmit, register } = useForm();
-  const [currentStepIndex, setCurrentStepIndex] = useState(1);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [shit, setShit] = useState(2);
   const [response , setResponse] = useState({})
   
@@ -61,7 +61,7 @@ const SignUpUserForm = () => {
           currentStepIndex={1}
         />
         <div id="formNavBtns">
-          <span id="formNextBtn" onClick={() => setValidated(true)}>
+          <span id="formNextBtn" >
             Next
           </span>
           <span id="formBackBtn" onClick={back}>

@@ -35,7 +35,19 @@ const PersonalizitionDetails = (props) => {
   //     setErrors("Select field can't be Empty");
   //   }
 
-  //   if (errors === null) {
+  //   if (errors === null) {// useEffect(() => {
+  //   props.setValidated(false);// useEffect(() => {
+  //   props.setValidated(false);
+  //   if (props.validated) {
+  //     handleValidation();
+  //   }
+  // }, [props.validated]);
+
+  //   if (props.validated) {
+  //     handleValidation();
+  //   }
+  // }, [props.validated]);
+
   //     props.setCurrentStepIndex(props.currentStepIndex + 1);
   //   } else {
   //     console.log("Validation errors:", errors);

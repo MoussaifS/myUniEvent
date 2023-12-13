@@ -9,7 +9,6 @@ const PersonalDetails = (props) => {
 
   const handleValidation = async () => {
     let errors = {};
-    setCurrentStepIndex(0)
     if (!fullName.trim()) {
       errors.fullName = "Full Name cannot be empty";
     }
@@ -39,6 +38,7 @@ const PersonalDetails = (props) => {
         password: password,
       });
       props.setCurrentStepIndex(props.currentStepIndex + 1);
+      console.log('car')
     } else {
       console.log("Validation errors:", errors);
     }
@@ -48,6 +48,7 @@ const PersonalDetails = (props) => {
     console.log(props);
     props.setValidated(false);
     if (props.validated) {
+      props.setValidated(false);
       handleValidation();
     }
   }, [props.validated]);
@@ -78,7 +79,7 @@ const PersonalDetails = (props) => {
         fullWidth
         error={errors.phone ? true : false}
         helperText={errors.phone ? "Phone number should be 11 digits": ""}
-        onChange={(e) => setPhone(e.target.value)}
+        onChange={(e) => setPhone(console.log(e.target.value))}
       ></TextField>
 
       {/* email */}
