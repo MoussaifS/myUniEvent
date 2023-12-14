@@ -2,9 +2,11 @@ import { Select, TextField, MenuItem, FormHelperText } from "@mui/material";
 import { useState, useEffect } from "react";
 import "@material/web/chips/filter-chip.js";
 import { eventTagList } from "../../../../lists/EventTagsList";
+import "@material/web/select/select-option.js";
+import "@material/web/select/outlined-select.js";
 
 const PersonalizitionDetails = (props) => {
-  const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
   const [gender, setGender] = useState(null);
 
@@ -23,48 +25,66 @@ const PersonalizitionDetails = (props) => {
   useEffect(() => {
     setSelectedTags(selectedTags);
     console.log(selectedTags);
+    console.log(selectedTags.length == 0);
   }, [selectedTags]);
 
-  // const handleValidation = async () => {
-  //   setErrors(null);
-  //   console.log(gender);
-  //   console.log(major);
-  //   console.log("in");
+  function back() {
+    props.setCurrentStepIndex(props.currentStepIndex - 1);
+  }
 
-  //   if ((gender || major) == null) {
-  //     setErrors("Select field can't be Empty");
-  //   }
+  const handleValidation = async () => {
+    let errors = {};
+    console.log('in')
+    if (selectedTags.length == 0) {
+      errors.tags = "at least select one tag ";
+    }
 
-  //   if (errors === null) {// useEffect(() => {
-  //   props.setValidated(false);// useEffect(() => {
-  //   props.setValidated(false);
-  //   if (props.validated) {
-  //     handleValidation();
-  //   }
-  // }, [props.validated]);
+    if (gender == null) {
+      errors.gender = "field cant be Empty";
+    }
 
-  //   if (props.validated) {
-  //     handleValidation();
-  //   }
-  // }, [props.validated]);
+    setErrors(errors);
+    
+    if (Object.keys(errors).length === 0) {
+      props.setCurrentStepIndex(props.currentStepIndex + 1);
+      console.log(errors)
+    } else {
+      console.log("Validation errors:", errors);
+    }
+  };
 
-  //     props.setCurrentStepIndex(props.currentStepIndex + 1);
-  //   } else {
-  //     console.log("Validation errors:", errors);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   props.setValidated(false);
-  //   if (props.validated) {
-  //     handleValidation();
-  //   }
-  // }, [props.validated]);
 
   return (
-    <div>
-      <div>
-        <md-chip-set id="margin-top" aria-labelledby="dates-label">
+
+    
+    <div id="details-forms">
+
+    <p className="signup-helper-text"> 👩🏼 or 👨🏽:</p>
+    {
+      errors.gender ? <span className="form-helper-text-error">{errors.gender}</span> : null
+    }
+      <md-outlined-select
+        id="text-field-credentials"
+        required
+        selectIndex="1"
+        label="Gender"
+        onInput={(e) => setGender(e.target.value)}
+      >
+        <md-select-option value="male">
+          <div slot="headline">Male</div>
+        </md-select-option>
+        <md-select-option value="male">
+          <div slot="headline">female</div>
+        </md-select-option>
+      </md-outlined-select>
+
+      <p className="signup-helper-text">What types of event you are into?</p>
+      {
+        errors.tags ? <span className="form-helper-text-error">{errors.tags}</span> : <span id="form-helper-text">Choose the closest Event Tag</span>
+      }
+      
+      <div className="tag-chips">
+        <md-chip-set>
           {eventTagList.map((eventTag, index) => (
             <md-filter-chip
               key={index}
@@ -78,17 +98,12 @@ const PersonalizitionDetails = (props) => {
           ))}
         </md-chip-set>
       </div>
+      
 
-      <Select label="Select Major" onChange={(e) => setGender(e.target.value)}>
-        <MenuItem value="Female">
-          <div slot="headline">Female</div>
-        </MenuItem>
-        <MenuItem value="Male">
-          <div slot="headline">Male</div>
-        </MenuItem>
-      </Select>
-
-      <TextField helperText="Please enter your name" label="Age" />
+      <div id="form-btns-navigation">
+        <span id="form-btn-next" onClick={handleValidation} >Create Account</span>
+        <span id="form-btn-back" onClick={back}>Back</span>
+      </div>
     </div>
   );
 };

@@ -6,7 +6,7 @@ import "@material/web/select/select-option.js";
 import "@material/web/select/outlined-select.js";
 
 const UniversityDetails = (props) => {
-  const [major, setMajor] = useState("");
+  const [major, setMajor] = useState(null);
   const [university, setUniversity] = useState(null);
   const [errors, setErrors] = useState({});
   const formRef = useRef();
@@ -15,16 +15,17 @@ const UniversityDetails = (props) => {
     props.setCurrentStepIndex(props.currentStepIndex - 1);
   }
 
+  
   const handleValidation = async () => {
     let errors = {};
     console.log('in')
     if (university == null) {
-      errors.university = "University field can't be Empty";
+      errors.university = "University field cant be Empty";
       
     }
 
     if (major == null) {
-      errors.major = "Major field can't be Empty";
+      errors.major = "Major field cant be Empty";
     }
 
     setErrors(errors);
@@ -40,6 +41,9 @@ const UniversityDetails = (props) => {
   return (
     <div id="details-forms" ref={formRef}>
     <p className="signup-helper-text">Select your University:</p>
+    {
+      errors.university ? <span className="form-helper-text-error">{errors.university}</span> : null
+    }
       <md-outlined-select
         id="text-field-credentials"
         required
@@ -59,8 +63,9 @@ const UniversityDetails = (props) => {
       </md-outlined-select>
       
       <p className="signup-helper-text">Select your Major:</p>
-      <span id="form-helper-text">Choose the closest major</span>
-
+      {
+        errors.major ? <span className="form-helper-text-error">{errors.major}</span> : <span id="form-helper-text">Choose the closest major</span>
+      }
       <md-outlined-select
         id="text-field-credentials"
         required
@@ -74,8 +79,7 @@ const UniversityDetails = (props) => {
           </md-select-option>
         ))}
       </md-outlined-select>
-
-
+   
       <div id="form-btns-navigation">
         <span id="form-btn-next"  onClick={handleValidation}>Next</span>
         <span id="form-btn-back"  onClick={back}>Back</span>

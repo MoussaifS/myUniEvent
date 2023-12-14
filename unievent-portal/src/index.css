@@ -130,10 +130,15 @@ html {
 }
 
 .tag-chips {
+  display: flex;
+  
   flex-wrap: nowrap;
-  max-width: 512px;
-  overflow: scroll;
+  overflow-y: auto; /* Enable vertical scrollbar */
   padding: 8px;
+  height: 90px;
+  margin-bottom: 20px;
+  /* Optionally, you might need to set a max-width or width to the .tag-chips container */
+  /* max-width: 100%; */
 }
 
 .mt-5 {
@@ -443,13 +448,6 @@ button {
   color: #333333;
   font-weight: bold;
 }
-.css-13cymwt-control {
-  background-color: red;
-}
-
-#select-tags {
-  background-color: red !important;
-}
 
 #form-user-container {
   background-color: white;
@@ -731,6 +729,21 @@ button {
   color: #4a4458;
   font-weight: bold;
   text-align: left;
+}
+
+.form-helper-text-error {
+  color: rgba(206, 68, 68, 0.899);
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.66;
+  letter-spacing: 0.03333em;
+  text-align: left;
+  margin-top: 0px;
+  margin-right: 0;
+  margin-bottom: 0px;
+  margin-left: 0;
+  
 }
 
 #form-helper-text{
