@@ -36,6 +36,17 @@ const SignUpUserForm = () => {
         />
       </div>
 
+      <div id="signup-form-container" style={currentStepIndex == 1 ? {} : { display: "none" }}>
+      <span id="form-title-span"> Tell Us about your uni </span>
+  
+      <UniversityDetails
+          setCurrentStepIndex={setCurrentStepIndex}
+          currentStepIndex={1}
+          response={setResponse}
+
+        />
+        
+      </div>
 
     </div>
   );

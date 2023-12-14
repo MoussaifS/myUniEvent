@@ -50,6 +50,9 @@ const SignUp = () => {
           minlength="2"
           label="Name"
           placeholder="Enter First Name "
+          change={(e)=> console.log(e)}
+          closing={(e)=> console.log(e)}
+          onChange={(e) => console.log('Change event:', e)}
         ></md-outlined-text-field>
 
         {/* last name */}

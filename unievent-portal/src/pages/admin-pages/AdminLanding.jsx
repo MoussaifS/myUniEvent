@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 
 const AdminLanding = () => {
   const luck = ["Sharing", "Managing", "Elevating", "Hosting", "Promoting"];
-
+  
   useEffect(() => {
     const intervalId = setInterval(() => {
       setBannerText(luck[Math.floor(Math.random() * 5)]);

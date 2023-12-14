@@ -6,6 +6,7 @@ const PersonalDetails = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+ 
   const handleValidation = () => {
     let errors = {};
     if (!fullName.trim()) {
@@ -97,7 +98,7 @@ const PersonalDetails = (props) => {
         onChange={(e) => setPassword(e.target.value)}
       ></TextField>
   
-      <div  id="form-btns-navigation">
+      <div id="form-btns-navigation">
           <span id="form-btn-next" onClick={handleValidation}>
             Next
           </span>
