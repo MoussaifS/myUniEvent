@@ -1,14 +1,6 @@
 import { TextField, InputAdornment } from "@mui/material";
-import { useState, useEffect } from "react";
-import {
-  collection,
-  addDoc,
-  where,
-  query,
-  getDoc,
-  doc,
-  getDocs,
-} from "firebase/firestore";
+import { useState } from "react";
+import { collection, where, query, getDocs } from "firebase/firestore";
 import { db } from "../../../../FireBase";
 
 const PersonalDetails = (props) => {
@@ -25,16 +17,17 @@ const PersonalDetails = (props) => {
   const handleValidation = async () => {
     let errors = {};
 
-    const citiesRef = collection(db, 'organizers');
-    const q = query(citiesRef, where('email', '==', email));
+    const citiesRef = collection(db, "organizers");
+    const q = query(citiesRef, where("email", "==", email));
     try {
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
-        console.log('Document with the specified email exists');
-        errors.registeredEmail = "The email address is already in use. Please try a different email";
-      } 
+        console.log("Document with the specified email exists");
+        errors.registeredEmail =
+          "The email address is already in use. Please try a different email";
+      }
     } catch (error) {
-      console.error('Error getting documents: ', error);
+      console.error("Error getting documents: ", error);
     }
 
     if (!fullName.trim()) {
@@ -50,8 +43,6 @@ const PersonalDetails = (props) => {
       errors.password = "Password should be at least 6 characters";
     }
     setErrors(errors);
-    console.table(errors)
-
     if (Object.keys(errors).length === 0) {
       props.setResponse({
         ...props.response,
@@ -60,8 +51,10 @@ const PersonalDetails = (props) => {
         email: email,
         password: password,
       });
+      props.submited(true)
     } else {
-      // console.log("Validation errors:", errors);
+
+      console.log("Validation errors:", errors);
     }
   };
 
@@ -110,9 +103,9 @@ const PersonalDetails = (props) => {
         }
         onChange={(e) => setEmail(e.target.value)}
       ></TextField>
-      {
-        errors.registeredEmail ? <span className="form-helper-text-error">{errors.registeredEmail}</span> : null
-      }
+      {errors.registeredEmail ? (
+        <span className="form-helper-text-error">{errors.registeredEmail}</span>
+      ) : null}
 
       {/* password */}
       <TextField

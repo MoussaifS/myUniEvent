@@ -62,7 +62,7 @@ const Login = () => {
           ></TextField>
           <div>
             {error ? (
-              <div id="error-email-password">
+              <div className="form-helper-text-error">
                 Wrong Email Address or Password
               </div>
             ) : null}

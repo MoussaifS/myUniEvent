@@ -6,22 +6,35 @@ import { useState } from "react";
 import PersonalDetails from "./form/PersonalDetails";
 import UniversityDetails from "./form/UniverstiyDetails";
 import PersonalizitionDetails from "./form/PersonalizitionDetails";
+import { useLocation, useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 const SignUpUserForm = () => {
-  const { handleSubmit, register } = useForm();
-  const [currentStepIndex, setCurrentStepIndex] = useState(2);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [submited, setSubmited] = useState(false);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [response, setResponse] = useState({});
-  const [validated, setValidated] = useState(false);
-  console.log(response);
   function next() {
     setCurrentStepIndex(currentStepIndex + 1);
   }
   function back() {
     setCurrentStepIndex(currentStepIndex - 1);
   }
-  const onSubmit = (e) => {
-    console.log("in ", e);
-  };
+
+
+  if(submited){
+    console.log(response);
+    createUserWithEmailAndPassword(auth, response.email, response.password)
+      .then(async (userCredential) => {
+        delete response.password;
+        response.userId = uuidv4(); 
+        await addDoc(collection(db, "users"), response);
+        navigate("/user-auth", { replace: true, state: { from: location } });
+      })
+      .catch((error) => console.log(error));
+    setSubmited(false)
+  }
 
   return (
     <div id="login">
@@ -57,6 +70,7 @@ const SignUpUserForm = () => {
           currentStepIndex={2}
           setResponse={setResponse}
           response={response}
+          submited = {setSubmited}
         />
       </div>
 
