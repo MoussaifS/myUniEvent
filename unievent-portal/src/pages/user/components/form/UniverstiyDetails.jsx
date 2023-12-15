@@ -31,8 +31,12 @@ const UniversityDetails = (props) => {
     setErrors(errors);
     
     if (Object.keys(errors).length === 0) {
-      props.setCurrentStepIndex(props.currentStepIndex + 1);
-      console.log(errors)
+      props.setCurrentStepIndex(props.currentStepIndex + 1);      console.log(errors)
+      props.response({
+        university: university,
+        major: major,
+    });
+
     } else {
       console.log("Validation errors:", errors);
     }

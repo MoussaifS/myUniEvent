@@ -49,9 +49,11 @@ const SignUpUserForm = () => {
 
       <div style={currentStepIndex == 2 ? {} : { display: "none" }}>
       <span id="form-title-span">Help Us Personalize Every Moment!</span>
-       setCurrentStepIndex={setCurrentStepIndex}
-        currentStepIndex={2}
       <PersonalizitionDetails
+      setCurrentStepIndex={setCurrentStepIndex}
+      currentStepIndex={2}
+      response={setResponse}
+      r={response}
       />
     </div>
 
