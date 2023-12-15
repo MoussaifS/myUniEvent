@@ -1,10 +1,10 @@
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { useState, useEffect, useRef } from "react";
-import { db } from "../../FireBase";
+import { db } from "../../../FireBase";
 
 import Cookies from "universal-cookie";
-import Cards from "./AdminCards";
-import Filter from "../Filter";
+import AdminCards from "../components/AdminCards";
+import Filter from "../../../components/Filter";
 
 const CardContainer = () => {
   const [events, setEvents] = useState([]);

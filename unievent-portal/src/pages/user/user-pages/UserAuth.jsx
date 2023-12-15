@@ -6,17 +6,17 @@ import Nav from "../../../components/Nav";
 
 
 
-import SignUpUserForm from "../components/SignUpUserForm";
+import CreateUserForm from "../components/CreateUserForm";
 const UserAuth = () => {
   const [toggle, setToggle] = useState(false);
   const handleToggle = () => {
     setToggle((t) => !t);
   };
   return (
-    <div id="userAuth-landing-Page"> 
+    <div id="auth-landing-Page"> 
       <Nav user={"user"}/>
-      <div className="userAuth-landing-body">
-        <div className="userAuth-banerText">
+      <div className="auth-body">
+        <div className="auth-bannerText">
           <span>Login or Sign up to</span>
           <br></br>
           <Typewriter
@@ -29,10 +29,10 @@ const UserAuth = () => {
             deleteSpeed={70}
             delaySpeed={9000}
           />
-          <h1 className="userAuth-banerText-purple">University Events</h1>
+          <h1 className="auth-bannerText-purple">University Events</h1>
         </div>
 
-        {toggle == false ? <Login /> : <SignUpUserForm />}
+        {toggle == false ? <Login /> : <CreateUserForm />}
         <md-divider></md-divider>
         <md-filled-tonal-button onClick={handleToggle} id="button">
           {toggle == false ? "Create new account" : "I have account"}

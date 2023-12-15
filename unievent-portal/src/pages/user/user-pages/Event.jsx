@@ -9,7 +9,6 @@ import { useParams } from "react-router-dom";
 
 const Events = () => {
   console.log(useParams())
-  let car = [{}, {}, {}];
   return (
     <div id="event ">
       <Nav />

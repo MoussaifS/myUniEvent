@@ -9,17 +9,17 @@ import "@material/web/icon/icon.js";
 import "@material/web/button/outlined-button.js";
 import "@material/web/iconbutton/outlined-icon-button.js";
 import "@material/web/iconbutton/filled-tonal-icon-button.js";
-import DeleteIcon from "../../assets/delete_icon.svg"
+import DeleteIcon from "../../../../src/assets/delete_icon.svg"
 
 import { format } from "date-fns";
 import ShowMoreText from "react-show-more-text";
-import { db } from "../../FireBase";
+import { db } from "../../../FireBase";
 import { doc, deleteDoc } from "firebase/firestore";
 
 import { ref, deleteObject, getStorage } from "firebase/storage";
-import ShareWhatsappBtn from "../buttons/ShareWhatsappBtn";
+import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
 
-const Cards = (props) => {
+const AdminCards = (props) => {
   const deleteEvent = function () {
     const storage = getStorage();
     console.log("in func");
@@ -100,4 +100,4 @@ const Cards = (props) => {
   );
 };
 
-export default Cards;
+export default AdminCards;

@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { db, auth } from "../FireBase";
+import { db, auth } from "../../../FireBase";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 import { setDoc, doc } from "firebase/firestore";
 import "@material/web/textfield/outlined-text-field.js";
@@ -15,7 +15,7 @@ import { useState, useEffect } from "react";
 import { format, parseISO } from "date-fns";
 import { v4 as uuidv4 } from "uuid";
 
-const Form = () => {
+const CreateEventForm = () => {
   const { handleSubmit, register } = useForm();
   const [audienceType, setAudienceType] = useState("");
   const [date, setDate] = useState(null);
@@ -272,4 +272,4 @@ const Form = () => {
     </div>
   );
 };
-export default Form;
+export default CreateEventForm;

@@ -189,7 +189,7 @@ html {
     display: none;
   }
 
-  .userAuth-landing-body{
+  .auth-body{
     height: 100vh;
     
   }
@@ -215,7 +215,7 @@ html {
 }
 
 
-.userAuth-banerText {
+.auth-bannerText {
   font-size: 1.5rem;
   font-weight: 800;
   gap: 5px;
@@ -223,19 +223,19 @@ html {
   text-align: center;
 }
 
-.userAuth-banerText-purple{
+.auth-bannerText-purple{
   color: #6750a4;
   font-size: 1.5rem;
   font-weight: 800;
   margin: 0;
 }
 
-#userAuth-landing-Page {
+#auth-landing-Page {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  
+
 }
 
 #details-forms{
@@ -305,13 +305,7 @@ html {
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
-.banerText-admin {
-  font-size: 1.8rem;
-  font-weight: 800;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-}
+
 
 .logo-admin {
   font-weight: lighter;
@@ -379,7 +373,7 @@ html {
 }
 
 
-#signup-form-container{
+#form-container-create{
 
 }
 .text-areabutton:focus {
@@ -530,7 +524,7 @@ button {
   flex-direction: column;
 }
 
-.userAuth-landing-body{
+.auth-body{
   display: flex;
   flex-direction: column;
   align-items: center;

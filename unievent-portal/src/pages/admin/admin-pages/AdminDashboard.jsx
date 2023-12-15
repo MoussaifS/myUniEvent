@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
-import Nav from "../../components/Nav";
-import Filter from "../../components/Filter";
-import CardContainer from "../../components/dashbord-events /AdminCardContainer";
-import Form from "../../components/Form";
+import Nav from "../../../components/Nav";
+import Filter from "../../../components/Filter";
+import CardContainer from "../components/AdminCardContainer";
+import CreateEventForm from "../components/CreateEventForm";
 import "@material/web/dialog/dialog.js";
 import "@material/web/button/outlined-button.js";
 import "@material/web/fab/fab.js";
@@ -38,7 +38,7 @@ const AdminDashboard = () => {
       </md-branded-fab>
       <md-dialog className="zi-99" ref={inputRef}>
         <div className="df-c" slot="content" method="dialog">
-          <Form />
+          <CreateEventForm />
           <md-outlined-button onClick={handleCloseFormClick}>
             close
           </md-outlined-button>

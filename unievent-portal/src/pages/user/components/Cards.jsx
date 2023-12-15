@@ -19,13 +19,12 @@ import { Link  ,useLocation , useNavigate } from "react-router-dom";
 const Cards = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(navigate , location )
   const handleRedirctEvent = () => {
     navigate(`/event/${encodeURIComponent(props.event.title)}`, {  state: { from: location } });
     <Link to={`/event/${encodeURIComponent(props.event.title)}`} />
-    console.log('shi')
   } 
 
+  console.log(props)
   return (
     <Card class="pr" sx={{ maxWidth: 700 }} onClick={handleRedirctEvent}>
       <img src={props.event.image} id="card-image" />
