@@ -738,12 +738,11 @@ button {
   font-size: 0.75rem;
   line-height: 1.66;
   letter-spacing: 0.03333em;
-  text-align: left;
+  text-align: center;
   margin-top: 0px;
   margin-right: 0;
   margin-bottom: 0px;
-  margin-left: 0;
-  
+  margin-left: 0; 
 }
 
 #form-helper-text{

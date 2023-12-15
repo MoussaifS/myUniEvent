@@ -9,7 +9,7 @@ import PersonalizitionDetails from "./form/PersonalizitionDetails";
 
 const SignUpUserForm = () => {
   const { handleSubmit, register } = useForm();
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [currentStepIndex, setCurrentStepIndex] = useState(2);
   const [response, setResponse] = useState({});
   const [validated, setValidated] = useState(false);
   console.log(response);

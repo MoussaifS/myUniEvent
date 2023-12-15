@@ -18,7 +18,6 @@ const UniversityDetails = (props) => {
   
   const handleValidation = async () => {
     let errors = {};
-    console.log('in')
     if (university == null) {
       errors.university = "University field cant be Empty";
       
@@ -31,7 +30,7 @@ const UniversityDetails = (props) => {
     setErrors(errors);
     
     if (Object.keys(errors).length === 0) {
-      props.setCurrentStepIndex(props.currentStepIndex + 1);      console.log(errors)
+      props.setCurrentStepIndex(props.currentStepIndex + 1);
       props.setResponse({
         ...props.response,
         university: university,

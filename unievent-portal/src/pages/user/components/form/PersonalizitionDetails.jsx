@@ -24,15 +24,12 @@ const PersonalizitionDetails = (props) => {
 
   useEffect(() => {
     setSelectedTags(selectedTags);
-    console.log(selectedTags);
-    console.log(selectedTags.length == 0);
   }, [selectedTags]);
 
  
 
   const handleValidation = async () => {
     let errors = {};
-    console.log("in");
     if (selectedTags.length == 0) {
       errors.tags = "at least select one tag ";
     }
@@ -52,7 +49,6 @@ const PersonalizitionDetails = (props) => {
       props.setCurrentStepIndex(props.currentStepIndex + 1);
     } else {
       console.log("Validation errors:", errors);
-      console.log(props.r);
     }
   };
 
