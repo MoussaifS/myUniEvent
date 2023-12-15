@@ -28,13 +28,11 @@ const PersonalizitionDetails = (props) => {
     console.log(selectedTags.length == 0);
   }, [selectedTags]);
 
-  function back() {
-    props.setCurrentStepIndex(props.currentStepIndex - 1);
-  }
+ 
 
   const handleValidation = async () => {
     let errors = {};
-    console.log('in')
+    console.log("in");
     if (selectedTags.length == 0) {
       errors.tags = "at least select one tag ";
     }
@@ -44,31 +42,26 @@ const PersonalizitionDetails = (props) => {
     }
 
     setErrors(errors);
-    
+
     if (Object.keys(errors).length === 0) {
       props.setResponse({
         ...props.response,
         preferredEvent: selectedTags,
         gender: gender,
-    });
-    console.table(props.response)
-
+      });
+      props.setCurrentStepIndex(props.currentStepIndex + 1);
     } else {
       console.log("Validation errors:", errors);
-      console.log(props.r)
+      console.log(props.r);
     }
   };
 
-
   return (
-
-    
     <div id="details-forms">
-
-    <p className="signup-helper-text"> 👩🏼 or 👨🏽:</p>
-    {
-      errors.gender ? <span className="form-helper-text-error">{errors.gender}</span> : null
-    }
+      <p className="signup-helper-text"> 👩🏼 or 👨🏽:</p>
+      {errors.gender ? (
+        <span className="form-helper-text-error">{errors.gender}</span>
+      ) : null}
       <md-outlined-select
         id="text-field-credentials"
         required
@@ -85,10 +78,12 @@ const PersonalizitionDetails = (props) => {
       </md-outlined-select>
 
       <p className="signup-helper-text">What types of event you are into?</p>
-      {
-        errors.tags ? <span className="form-helper-text-error">{errors.tags}</span> : <span id="form-helper-text">Choose the closest Event Tag</span>
-      }
-      
+      {errors.tags ? (
+        <span className="form-helper-text-error">{errors.tags}</span>
+      ) : (
+        <span id="form-helper-text">Choose the closest Event Tag</span>
+      )}
+
       <div className="tag-chips">
         <md-chip-set>
           {eventTagList.map((eventTag, index) => (
@@ -104,12 +99,14 @@ const PersonalizitionDetails = (props) => {
           ))}
         </md-chip-set>
       </div>
-      
 
       <div id="form-btns-navigation">
-        <span id="form-btn-next" onClick={handleValidation} >Create Account</span>
-        <span id="form-btn-back" onClick={back}>Back</span>
+        <span id="form-btn-next" onClick={handleValidation}>
+          Next
+        </span>
       </div>
+
+      
     </div>
   );
 };
