@@ -13,7 +13,7 @@ const SignUpUserForm = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [response, setResponse] = useState({});
   const [validated, setValidated] = useState(false);
-
+  console.log(response)
   function next() {
     setCurrentStepIndex(currentStepIndex + 1);
   }
@@ -31,7 +31,8 @@ const SignUpUserForm = () => {
         <PersonalDetails
           setCurrentStepIndex={setCurrentStepIndex}
           currentStepIndex={0}
-          response={setResponse}
+          setResponse={setResponse}
+          response = {response}
         />
       </div>
 
@@ -43,7 +44,8 @@ const SignUpUserForm = () => {
         <UniversityDetails
           setCurrentStepIndex={setCurrentStepIndex}
           currentStepIndex={1}
-          response={setResponse}
+          setResponse={setResponse}
+          response = {response}
         />
       </div>
 
@@ -52,8 +54,8 @@ const SignUpUserForm = () => {
       <PersonalizitionDetails
       setCurrentStepIndex={setCurrentStepIndex}
       currentStepIndex={2}
-      response={setResponse}
-      r={response}
+      setResponse={setResponse}
+      response = {response}
       />
     </div>
 

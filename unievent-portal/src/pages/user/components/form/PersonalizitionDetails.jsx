@@ -46,12 +46,12 @@ const PersonalizitionDetails = (props) => {
     setErrors(errors);
     
     if (Object.keys(errors).length === 0) {
-      props.setCurrentStepIndex(props.currentStepIndex + 1);
-      props.response({
+      props.setResponse({
+        ...props.response,
         preferredEvent: selectedTags,
         gender: gender,
     });
-    console.log(props.r)
+    console.table(props.response)
 
     } else {
       console.log("Validation errors:", errors);

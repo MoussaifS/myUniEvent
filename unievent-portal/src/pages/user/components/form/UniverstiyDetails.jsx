@@ -32,7 +32,8 @@ const UniversityDetails = (props) => {
     
     if (Object.keys(errors).length === 0) {
       props.setCurrentStepIndex(props.currentStepIndex + 1);      console.log(errors)
-      props.response({
+      props.setResponse({
+        ...props.response,
         university: university,
         major: major,
     });

@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { TextField ,InputAdornment } from "@mui/material";
 import { useState, useEffect } from "react";
 const PersonalDetails = (props) => {
   const [fullName, setFullName] = useState("");
@@ -12,10 +12,8 @@ const PersonalDetails = (props) => {
     if (!fullName.trim()) {
       errors.fullName = "Full Name cannot be empty";
     }
-
-    const phoneRegex = /^\d{11}$/;
-    if (!phoneRegex.test(phone)) {
-      errors.phone = "Phone number should be 11 digits";
+    if (phone.length < 10 ||phone.length > 10  ) {
+      errors.phone = "Phone number should be 10 digits";
     }
     if (!email.includes("edu") && !email.includes("my")) {
       errors.email = 'Email should contain "edu" or "my"';
@@ -26,20 +24,19 @@ const PersonalDetails = (props) => {
     if (password.length < 8) {
       errors.password = "Password should be at least 6 characters";
     }
-
     setErrors(errors);
     console.log("Validation errors:", errors);
 
     if (Object.keys(errors).length === 0) {
-       props.response({
+       props.setResponse({
+        ...props.response,
         phone: phone,
         fullName: fullName,
         email: email,
-        password: password,
+        password: password
       });
       props.setCurrentStepIndex(props.currentStepIndex + 1);
     } else {
-      props.setCurrentStepIndex(props.currentStepIndex + 1);
       console.log("Validation errors:", errors);
     }
   };
@@ -53,7 +50,6 @@ const PersonalDetails = (props) => {
         placeholder="Enter your Full Name"
         value={fullName}
         type="text"
-        required
         error={errors.fullName ? true : false}
         helperText={errors.fullName ? "Full Name cannot be empty" : ""}
         onChange={(e) => setFullName(e.target.value)}
@@ -64,13 +60,16 @@ const PersonalDetails = (props) => {
         required
         margin="dense"
         type="number"
+        InputProps={{
+          startAdornment: <InputAdornment position="start">+60</InputAdornment>,
+        }}
         label="Phone number"
         placeholder="Enter Phone Number"
         value={phone}
         fullWidth
         error={errors.phone ? true : false}
         helperText={errors.phone ? "Phone number should be 11 digits": ""}
-        onChange={(e) => setPhone(console.log(e.target.value))}
+        onChange={(e) => setPhone(e.target.value)}
       ></TextField>
 
       {/* email */}
