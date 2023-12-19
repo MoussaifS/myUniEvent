@@ -4,19 +4,49 @@ import "@material/web/tabs/primary-tab.js";
 import locationIcon from "../../../assets/location-pin-svgrepo-com(1).svg";
 import ShowMoreText from "react-show-more-text";
 import { useParams } from "react-router-dom";
+import "@material/web/chips/suggestion-chip.js";
 
-
+import {
+  getFirestore,
+  doc,
+  getDoc,
+} from "firebase/firestore";
+import { db } from "../../../FireBase";
+import { useState, useEffect } from "react";
+import { format } from "date-fns";
 
 const Events = () => {
-  console.log(useParams())
+  // console.log(useParams());
+  const title = useParams();
+  const [events, setEvents] = useState([]);
+  const [event, setEvent] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+
+  const fetchEventData = async () => {
+    console.log('in')
+    const db = getFirestore();
+    const docRef = doc(db, "events", "cdf6456e-ada8-4f0b-aef2-7135ba0caaee"    );
+    try {
+      const docSnap = await getDoc(docRef);
+      setEvent(docSnap.data());
+      console.log(docSnap.data())
+    } catch (error) {
+      console.alert(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchEventData();
+  }, []);
+
   return (
     <div id="event ">
       <Nav />
 
       <div id="event-body">
-        <h1 id="event-title">2024 Forex Summit（Kuala Lumpur）</h1>
+        <h1 id="event-title">{event.title}</h1>
         <span></span>
-        <img src="../../../../src/assets/event.jpg" id="event-image" />
+        <img src={event.image} id="event-image" />
 
         <div id="event-info-card">
           <div className="fd-r">
@@ -32,7 +62,7 @@ const Events = () => {
         <div id="event-info-card">
           <div className="fd-r">
             <img src={locationIcon} alt="Share" className="ml-5" />
-            <p className="card-helper-text">sat .thue 20012 5pm</p>
+            <p className="card-helper-text"></p>
           </div>
 
           <div>
@@ -51,35 +81,17 @@ const Events = () => {
             expanded={false}
             truncatedEndingComponent={"... "}
           >
-            <p id="event-description">
-              Welcome to an exclusive webinar that will unravel the capabilities
-              of ChatGPT, a leading-edge language model. Join us as we explore
-              how ChatGPT can not only boost your career, supercharge
-              productivity, but also become a creative force in your
-              entrepreneurial journey through advanced prompt generation. What
-              You'll Discover: Dive into the fascinating landscape of AI
-              technologies, including generative AI and LLM. Uncover the ways AI
-              can propel your career to new heights. Uncover how ChatGPT can
-              elevate your career, transforming the way you communicate and
-              innovate. Hear successstories of individuals harnessing ChatGPT for creative and
-              professional breakthroughs. Learn best practices for integrating
-              ChatGPT into your projects and prompt generation strategies.
-            </p>
+            <p id="event-description">{event.description}</p>
           </ShowMoreText>
         </div>
 
-        <div >
-        <div className="mb-15"> <h4 className="mb-0">Event Tag:</h4>
-        <div id="card-horzintal-scroll">
-          {car.map((tag, index) => (
-            <md-suggestion-chip
-              id="tags-horzintal"
-              key={index}
-              label={tag}
-            ></md-suggestion-chip>
-          ))}
-        </div></div>
-          
+        <div>
+          <div className="mb-15">
+            <h4 className="mb-0">Event Tag:</h4>
+            <div id="card-horzintal-scroll">
+              
+            </div>
+          </div>
 
           <div id="event-info-card-dark">
             <div>

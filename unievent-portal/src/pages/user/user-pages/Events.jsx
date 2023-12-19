@@ -8,9 +8,7 @@ const Events = () => {
   return (
     <div>
       <Nav login={true}/>
-
       <CardContainer/>
-
     </div>
   );
 };

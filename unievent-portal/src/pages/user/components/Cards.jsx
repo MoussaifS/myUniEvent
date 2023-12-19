@@ -24,7 +24,6 @@ const Cards = (props) => {
     <Link to={`/event/${encodeURIComponent(props.event.title)}`} />
   } 
 
-  console.log(props)
   return (
     <Card class="pr" sx={{ maxWidth: 700 }} onClick={handleRedirctEvent}>
       <img src={props.event.image} id="card-image" />

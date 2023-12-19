@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { auth, db } from "../../../FireBase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc , getDocs , doc, getDoc,  query , where} from "firebase/firestore";
+import { getAuth,  createUserWithEmailAndPassword } from "firebase/auth";
+import { collection, addDoc , setDoc, getDocs , doc, getDoc,  query , where} from "firebase/firestore";
 import { useState } from "react";
 import PersonalDetails from "./create_user_from/PersonalDetails";
 import UniversityDetails from "./create_user_from/UniverstiyDetails";
@@ -18,35 +18,72 @@ const CreateUserForm = () => {
   
   const [uniId, setUniID] = useState(null);
 
+  const auth = getAuth();
 
   
   
 
   
+
+
+  const onSubmit = async (data) => {
+    if (errorDate) {
+      console.log("Error: Invalid Date");
+    } else {
+      try {
+        const docId = uuidv4();
+
+        const storage = getStorage();
+        const imageStorageRef = ref(storage, `events/${data.title}:${docId}`);
+        const imageUrlRef = ref(storage, `events/${data.title}:${docId}`);
+
+        await uploadBytes(imageStorageRef, imageUpload).then(() => {
+          getDownloadURL(ref(storage, imageUrlRef)).then(async (url) => {
+            data.image = url;
+            data.email = auth.currentUser.email;
+            data.tags = selectedTags;
+            data.docId = docId;
+            data.audience = audienceType.audience;
+            await setDoc(doc(db, "events", docId), data);
+          });
+        });
+        console.log("Document set");
+      } catch (error) {
+        console.error("Error:", error);
+        console.log(data);
+      }
+    }
+  };
+
 
 
 
 
   if  (submited){   
-  
-    console.log(response);
-    createUserWithEmailAndPassword(auth, response.email, response.password)
-      .then(async (userCredential) => {
-        delete response.password;
-        response.userId = uuidv4();
-        await addDoc(collection(db, "users"), response);
-        await addDoc(collection(db, "university"))
-        
-        await addDoc(collection(db, `university/1/students`), {
-          id: response.userId,
-          email: response.email,
-          major: response.major,
-        });
 
+    createUserWithEmailAndPassword(auth, response.email, response.password).then(async (userCredential) => {
+      
+      
+      
+      console.log("userCredential:", userCredential.uid);
+
+      delete response.password;
+        const userId = userCredential.uid;
+        await setDoc(doc(db, "users", userId), response);
+        
+
+
+        console.log("in this ")
+        // await addDoc(collection(db, `university/1/students`), {
+        //   id: response.userId,
+        //   email: response.email,
+        //   major: response.major,
+        // });
+        
         navigate("/user-auth", { replace: true, state: { from: location } });
       })
       .catch((error) => console.log(error));
-    setSubmited(false);
+      setSubmited(false);
   }
 
   return (

@@ -1,5 +1,5 @@
 import { collection, query, where, getDocs, orderBy, limit } from "firebase/firestore";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { db } from "../../../FireBase";
 
 import Cookies from "universal-cookie";
