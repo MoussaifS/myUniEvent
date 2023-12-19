@@ -41,6 +41,7 @@ const UniversityDetails = (props) => {
         clubName: clubName
       });
     } else {
+      props.setCurrentStepIndex(props.currentStepIndex + 1);
       console.log("Validation errors:", errors);
     }
   };

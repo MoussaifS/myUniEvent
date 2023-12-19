@@ -44,7 +44,7 @@ const SignUp = () => {
         <span id="form-title-span"> Tell Us about your Uni</span>
         <UniversityDetails
           setCurrentStepIndex={setCurrentStepIndex}
-          currentStepIndex={1}
+          currentStepIndex={0}
           setResponse={setResponse}
           response={response}
         />
