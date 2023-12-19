@@ -17,8 +17,8 @@ const PersonalDetails = (props) => {
   const handleValidation = async () => {
     let errors = {};
 
-    const citiesRef = collection(db, "organizers");
-    const q = query(citiesRef, where("email", "==", email));
+    const organizersRef = collection(db, "organizers");
+    const q = query(organizersRef, where("email", "==", email));
     try {
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {

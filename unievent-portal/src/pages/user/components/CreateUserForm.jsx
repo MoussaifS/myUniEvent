@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { auth, db } from "../../../FireBase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc , getDocs , doc, getDoc,  query , where} from "firebase/firestore";
 import { useState } from "react";
 import PersonalDetails from "./create_user_from/PersonalDetails";
 import UniversityDetails from "./create_user_from/UniverstiyDetails";
@@ -15,14 +15,34 @@ const CreateUserForm = () => {
   const [submited, setSubmited] = useState(false);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [response, setResponse] = useState({});
+  
+  const [uniId, setUniID] = useState(null);
 
-  if (submited) {
+
+  
+  
+
+  
+
+
+
+
+  if  (submited){   
+  
     console.log(response);
     createUserWithEmailAndPassword(auth, response.email, response.password)
       .then(async (userCredential) => {
         delete response.password;
         response.userId = uuidv4();
         await addDoc(collection(db, "users"), response);
+        await addDoc(collection(db, "university"))
+        
+        await addDoc(collection(db, `university/1/students`), {
+          id: response.userId,
+          email: response.email,
+          major: response.major,
+        });
+
         navigate("/user-auth", { replace: true, state: { from: location } });
       })
       .catch((error) => console.log(error));
