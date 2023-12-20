@@ -1,8 +1,16 @@
 import { TextField, InputAdornment } from "@mui/material";
 import { useState } from "react";
-import { collection, where, query, getDocs , addDoc ,setDoc , doc }  from "firebase/firestore";
-import { db ,auth } from "../../../../FireBase";
-import { getAuth,  createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  collection,
+  where,
+  query,
+  getDocs,
+  addDoc,
+  setDoc,
+  doc,
+} from "firebase/firestore";
+import { db } from "../../../../FireBase";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const PersonalDetails = (props) => {
   const [fullName, setFullName] = useState("");
@@ -52,10 +60,18 @@ const PersonalDetails = (props) => {
         email: email,
         password: password,
       });
-      onSubmit(props.response)
-
+      props.submited(true);
     } else {
 
+      console.log(props.response)
+      // props.setResponse({
+      //   ...props.response,
+      //   phone: phone,
+      //   fullName: fullName,
+      //   email: email,
+      //   password: password,
+      // });
+      // props.submited(true);
       console.log("Validation errors:", errors);
     }
   };

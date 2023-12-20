@@ -4,9 +4,13 @@ import { majorList } from "../../../../lists/MajorList";
 import { institutionsList } from "../../../../lists/InstitutionList";
 import "@material/web/select/select-option.js";
 import "@material/web/select/outlined-select.js";
+import { db } from "../../../../FireBase";
+import { collection, query, where, getDocs, orderBy, limit } from "firebase/firestore";
 
 const UniversityDetails = (props) => {
   const [major, setMajor] = useState(null);
+  const [uniID, setUniID] = useState(null);
+
   const [university, setUniversity] = useState(null);
   const [errors, setErrors] = useState({});
   const formRef = useRef();
@@ -14,6 +18,23 @@ const UniversityDetails = (props) => {
   function back() {
     props.setCurrentStepIndex(props.currentStepIndex - 1);
   }
+
+    const fetchUniID = async () => {
+    try {
+      console.log(university)
+      const eventDataQuery = query(
+        collection(db, "university"),
+        where("uniName", "==", university),
+      );
+
+      const eventInfoSnapshot = await getDocs(eventDataQuery);
+      eventInfoSnapshot.docs.map((doc) => setUniID(doc.id));
+
+    } catch (error) {
+      console.log("eat a fat dick and fix it:", error);
+    }
+  };
+  
 
   
   const handleValidation = async () => {
@@ -31,13 +52,18 @@ const UniversityDetails = (props) => {
     
     if (Object.keys(errors).length === 0) {
       props.setCurrentStepIndex(props.currentStepIndex + 1);
+      await fetchUniID()
       props.setResponse({
         ...props.response,
         university: university,
         major: major,
+        universityID: uniID
     });
 
+    console.log(props.response)
+
     } else {
+      
       console.log("Validation errors:", errors);
     }
   };
