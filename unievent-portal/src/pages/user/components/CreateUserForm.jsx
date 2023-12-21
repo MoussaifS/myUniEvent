@@ -15,25 +15,18 @@ const CreateUserForm = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(1);
   const [response, setResponse] = useState({});
   
-  const [uniId, setUniID] = useState(null);
+
 
 
   
-  
-
-  
-
-
-
-
-
-
 
   const createUser = async ()=> {
 
   await createUserWithEmailAndPassword(auth, response.email, response.password).then(async(userCredential) => {
         delete response.password;
         await setDoc(doc(db, "users",  userCredential.user.uid), response);
+        await setDoc(doc(db, `university/${response.uniID}/student`,  userCredential.user.uid), response);
+
         alert("accout is created you will be redirected to login");
         // window.location.reload(true);
       })
