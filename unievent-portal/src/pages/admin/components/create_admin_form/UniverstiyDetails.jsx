@@ -4,16 +4,33 @@ import { majorList } from "../../../../lists/MajorList";
 import { institutionsList } from "../../../../lists/InstitutionList.js";
 import "@material/web/select/select-option.js";
 import "@material/web/select/outlined-select.js";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../../../../FireBase.jsx";
 
 const UniversityDetails = (props) => {
   const [role, setRole] = useState(null);
   const [university, setUniversity] = useState(null);
   const [clubName, setClubName] = useState("");
   const [errors, setErrors] = useState({});
+  const [uniID, setUniID] = useState(null);
 
-  function back() {
-    props.setCurrentStepIndex(props.currentStepIndex - 1);
-  }
+  
+  const fetchUniID = async () => {
+    if(university == "Independent"){
+      return setUniversity("Independent")
+    }
+    try {
+      const eventDataQuery = query(
+        collection(db, "university"),
+        where("uniName", "==", university),
+      );
+
+      const eventInfoSnapshot = await getDocs(eventDataQuery);
+      eventInfoSnapshot.docs.map((doc) => setUniID(doc.id));
+    } catch (error) {
+      console.log("eat a fat dick and fix it:", error);
+    }
+  };
 
   const handleValidation = async () => {
     let errors = {};
@@ -35,10 +52,12 @@ const UniversityDetails = (props) => {
 
     if (Object.keys(errors).length === 0) {
       props.setCurrentStepIndex(props.currentStepIndex + 1);
+      await fetchUniID()
       props.setResponse({
         university: university,
         role: role,
-        clubName: clubName
+        clubName: clubName,
+        universityID: uniID
       });
     } else {
       props.setCurrentStepIndex(props.currentStepIndex + 1);

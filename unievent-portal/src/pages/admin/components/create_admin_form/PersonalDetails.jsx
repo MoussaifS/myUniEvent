@@ -51,6 +51,7 @@ const PersonalDetails = (props) => {
         email: email,
         password: password,
       });
+      props.submited(true);
     } else {
 
       console.log("Validation errors:", errors);
