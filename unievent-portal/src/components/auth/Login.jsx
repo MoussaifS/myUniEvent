@@ -12,21 +12,17 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [error, setError] = useState(false);
-
   const { handleSubmit, register } = useForm();
+  
   const onSubmit = (e) => {
-    console.log("in");
     signInWithEmailAndPassword(auth, e.email, e.password)
       .then(() => {
-        console.log("in the in");
         const cookies = new Cookies();
         cookies.set("email", e.email, { path: "/" });
-        console.log(cookies);
+        cookies.set("uid", auth.currentUser.uid, { path: "/" });
         navigate("/admin/dashboard", { replace: true, state: { from: location } });
-        console.log("here");
       })
       .catch(() => {
-        console.log("in the out");
         setError(true);
       });
   };

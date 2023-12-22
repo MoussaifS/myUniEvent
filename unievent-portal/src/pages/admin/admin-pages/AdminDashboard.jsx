@@ -1,6 +1,10 @@
-import { useState, useRef } from "react";
+import { useState, useRef , useEffect } from "react";
 import Nav from "../../../components/Nav";
 import Filter from "../../../components/Filter";
+import { auth, db } from "../../../FireBase"
+import {doc, getDoc , collection, query, where, getDocs, orderBy } from "firebase/firestore";
+import Cookies from "universal-cookie";
+
 import CardContainer from "../components/AdminCardContainer";
 import CreateEventForm from "../components/CreateEventForm";
 import "@material/web/dialog/dialog.js";
@@ -11,6 +15,9 @@ import "@material/web/icon/icon.js";
 import "@material/web/ripple/ripple.js";
 const AdminDashboard = () => {
   const inputRef = useRef(null);
+  const cookies = new Cookies();
+  const uid = cookies.get("uid");
+  const [admin , setAdmin] = useState(null) 
 
   function handleOpenFormClick() {
     inputRef.current.show();
@@ -19,6 +26,23 @@ const AdminDashboard = () => {
   function handleCloseFormClick() {
     inputRef.current.close();
   }
+
+  const fetchOrginizerData = async () => {
+   
+    const docRef = doc(db, 'organizer', uid);
+    await getDoc(docRef).then((docSnapshot) => {
+        if (docSnapshot.exists) {
+            setAdmin(docSnapshot.data());            
+        }else{
+          console.log('work harder')
+        }
+    });
+
+  }
+ 
+  useEffect(()=> {
+    fetchOrginizerData()
+  } , [])
 
   return (
     <div className="df-c">
@@ -38,14 +62,14 @@ const AdminDashboard = () => {
       </md-branded-fab>
       <md-dialog className="zi-99" ref={inputRef}>
         <div className="df-c" slot="content" method="dialog">
-          <CreateEventForm />
+          <CreateEventForm  admin={admin} />
           <md-outlined-button onClick={handleCloseFormClick}>
             close
           </md-outlined-button>
         </div>
       </md-dialog>
 
-      <CardContainer />
+      <CardContainer admin={admin} />
     </div>
   );
 };

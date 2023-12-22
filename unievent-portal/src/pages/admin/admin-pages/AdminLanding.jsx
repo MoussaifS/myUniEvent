@@ -1,11 +1,10 @@
-import { Box, Container, Paper } from "@mui/material";
 import Login from "../../../components/auth/Login";
 import SignUp from "../../../components/auth/SignUp";
 import Nav from "../../../components/Nav";
 import "@material/web/button/filled-tonal-button.js";
 import "@material/web/divider/divider.js";
 import { Typewriter } from "react-simple-typewriter";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const AdminLanding = () => {
   const luck = ["Sharing", "Managing", "Elevating", "Hosting", "Promoting"];

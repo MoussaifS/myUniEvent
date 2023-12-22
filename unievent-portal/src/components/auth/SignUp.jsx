@@ -19,10 +19,13 @@ const SignUp = () => {
       delete response.password;
       response.organizerID = organizerCredential.user.uid
 
-      setDoc(doc(db, "organizer",  organizerCredential.user.uid), response);
-      console.log(response)
+      await setDoc(doc(db, "organizer",  organizerCredential.user.uid), response).then((dd)=>{
+        console.log(response)
+        console.log(dd)
+        console.log('dd')
 
-      console.log('done')
+      })
+      
       
       
           const UniOrganizer = {
@@ -32,12 +35,14 @@ const SignUp = () => {
             clubName: response.clubName,
             name: response.fullName
           }
+         
+      
+      await setDoc(doc(db, `university/${response.universityID}/organizers`,  organizerCredential.user.uid), UniOrganizer).then(()=>{
           console.log(UniOrganizer)
-
-        setDoc(doc(db, `university/${response.universityID}/organizers`,  organizerCredential.user.uid), UniOrganizer);
-
           console.log('sub')
           alert("accout is created you will be redirected to login");
+        });
+
           window.location.reload(true);
         })
         .catch((error) => {
