@@ -26,15 +26,15 @@ const CreateUserForm = () => {
         delete response.password;
         await setDoc(doc(db, "users",  userCredential.user.uid), response);
 
-
-
+        response.studentID = userCredential.user.uid
+        console.log(response.uniID)
         const Unistudent = {
-          stundetID : userCredential.user.uid,
+          stundetID : response.studentID,
           major :response.major,
           email: response.email,
           name: response.fullName
         }
-        await setDoc(doc(db, `university/${response.uniID}/student`,  userCredential.user.uid), Unistudent);
+        await setDoc(doc(db, `university/${response.uniID}/students`,  response.studentID), Unistudent);
 
         alert("accout is created you will be redirected to login");
         // window.location.reload(true);

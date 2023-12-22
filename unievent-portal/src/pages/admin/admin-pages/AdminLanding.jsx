@@ -9,17 +9,17 @@ import { useState, useEffect } from "react";
 
 const AdminLanding = () => {
   const luck = ["Sharing", "Managing", "Elevating", "Hosting", "Promoting"];
+  // const [bannerText, setBannerText] = useState 
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     setBannerText(luck[Math.floor(Math.random() * 5)]);
+  //   }, 3000);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setBannerText(luck[Math.floor(Math.random() * 5)]);
-    }, 3000);
-
-    // Cleanup function to clear the interval when the component unmounts
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+  //   // Cleanup function to clear the interval when the component unmounts
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // }, []);
 
   const [toggle, setToggle] = useState(false);
   const handleToggle = () => {

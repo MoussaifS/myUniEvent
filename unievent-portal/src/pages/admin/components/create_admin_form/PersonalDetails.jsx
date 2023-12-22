@@ -64,7 +64,7 @@ const PersonalDetails = (props) => {
         margin="dense"
         fullWidth
         label="Full Name"
-        placeholder="Enter your Full Name"
+        placeholder="Enter Full Name"
         value={fullName}
         type="text"
         error={errors.fullName ? true : false}
@@ -88,13 +88,16 @@ const PersonalDetails = (props) => {
         helperText={errors.phone ? "Phone number should be 11 digits" : ""}
         onChange={(e) => setPhone(e.target.value)}
       ></TextField>
+      
+        <span id="form-helper-text">Student might get in touch</span>
+      
 
       {/* email */}
       <TextField
         required
         type="email"
         margin="dense"
-        label="Universty Email"
+        label="Club Email"
         fullWidth
         placeholder="email@my.edu"
         error={errors.email ? true : false}
@@ -105,7 +108,9 @@ const PersonalDetails = (props) => {
       ></TextField>
       {errors.registeredEmail ? (
         <span className="form-helper-text-error">{errors.registeredEmail}</span>
-      ) : null}
+      ) : (
+        <span id="form-helper-text">Universities and sponser might get in touch</span>
+      )}
 
       {/* password */}
       <TextField

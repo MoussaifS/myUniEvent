@@ -25,7 +25,7 @@ const Events = () => {
   const fetchEventData = async () => {
     console.log('in')
     const db = getFirestore();
-    const docRef = doc(db, "events", "cdf6456e-ada8-4f0b-aef2-7135ba0caaee"    );
+    const docRef = doc(db, "events", "d2f213c6-417f-405e-9580-c3cd8a66413e"    );
     try {
       const docSnap = await getDoc(docRef);
       setEvent(docSnap.data());
