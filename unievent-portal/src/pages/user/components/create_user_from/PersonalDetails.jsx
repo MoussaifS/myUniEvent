@@ -64,14 +64,14 @@ const PersonalDetails = (props) => {
     } else {
 
       console.log(props.response)
-      // props.setResponse({
-      //   ...props.response,
-      //   phone: phone,
-      //   fullName: fullName,
-      //   email: email,
-      //   password: password,
-      // });
-      // props.submited(true);
+      props.setResponse({
+        ...props.response,
+        phone: phone,
+        fullName: fullName,
+        email: email,
+        password: password,
+      });
+      props.submited(true);
       console.log("Validation errors:", errors);
     }
   };

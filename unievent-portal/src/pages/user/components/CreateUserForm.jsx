@@ -12,7 +12,7 @@ const CreateUserForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [submited, setSubmited] = useState(false);
-  const [currentStepIndex, setCurrentStepIndex] = useState(1);
+  const [currentStepIndex, setCurrentStepIndex] = useState(2);
   const [response, setResponse] = useState({});
   
 
@@ -25,7 +25,16 @@ const CreateUserForm = () => {
   await createUserWithEmailAndPassword(auth, response.email, response.password).then(async(userCredential) => {
         delete response.password;
         await setDoc(doc(db, "users",  userCredential.user.uid), response);
-        await setDoc(doc(db, `university/${response.uniID}/student`,  userCredential.user.uid), response);
+
+
+
+        const Unistudent = {
+          stundetID : userCredential.user.uid,
+          major :response.major,
+          email: response.email,
+          name: response.fullName
+        }
+        await setDoc(doc(db, `university/${response.uniID}/student`,  userCredential.user.uid), Unistudent);
 
         alert("accout is created you will be redirected to login");
         // window.location.reload(true);
