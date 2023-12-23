@@ -75,9 +75,7 @@ const CreateEventForm = (props) => {
   }, [selectedTags]);
 
   const [imageUpload, setImageUpload] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
-
-  console.log(props)
+  
   const onSubmit = async (data) => {
     if (errorDate) {
       console.log("Error: Invalid Date");
@@ -92,30 +90,27 @@ const CreateEventForm = (props) => {
         await uploadBytes(imageStorageRef, imageUpload).then(() => {
           getDownloadURL(ref(storage, imageUrlRef)).then(async (url) => {
             data.image = url;
-            data.email = auth.currentUser.email;
+            data.docId = docId;
+            data.adminEmail = auth.currentUser.email;
             data.adminPhone = props.admin.phone
-            data.adminClub = props.admin.className
+            data.adminClub = props.admin.clubName
             data.adminID = props.admin.organizerID
             data.tags = selectedTags;
-            data.docId = docId;
             data.audience = audienceType.audience;
             await setDoc(doc(db, "events", docId), data);
           });
         });
 
+        console.log(data)
+
         await setDoc(doc(db, `university/${props.admin.universityID}/events`,  docId), data).then(()=>{
-          console.log(data)
           console.log('sub')
-          alert("accout is created you will be redirected to login");
         });
 
         await setDoc(doc(db, `organizer/${props.admin.organizerID}/events`,  docId), data).then(()=>{
           console.log(data)
-          console.log('sub')
-          alert("accout is created you will be redirected to login");
+          console.log('dub')
         });
-
-        
         console.log("Document set");
       } catch (error) {
         console.error("Error:", error);
