@@ -3,7 +3,7 @@ import Nav from "../../../components/Nav";
 import { db } from "../../../FireBase"
 import {doc, getDoc } from "firebase/firestore";
 import Cookies from "universal-cookie";
-import CardContainer from "../components/AdminCardContainer";
+import AdminCardContainer from "../components/AdminCardContainer";
 import CreateEventForm from "../components/CreateEventForm";
 import "@material/web/dialog/dialog.js";
 import "@material/web/button/outlined-button.js";
@@ -67,7 +67,7 @@ const AdminDashboard = () => {
         </div>
       </md-dialog>
 
-      <CardContainer admin={admin} />
+      <AdminCardContainer admin={admin} />
     </div>
   );
 };

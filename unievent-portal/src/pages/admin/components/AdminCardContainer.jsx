@@ -1,55 +1,42 @@
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
-import { useState, useEffect, useRef } from "react";
-import { db } from "../../../FireBase";
-
+import { useState, useEffect } from "react";
+import { db , auth } from "../../../FireBase";
 import Cookies from "universal-cookie";
 import AdminCards from "../components/AdminCards";
 import Filter from "../../../components/Filter";
 
-const CardContainer = () => {
+const AdminCardContainer = (props) => {
   const [events, setEvents] = useState([]);
+  const [admin , setAdmin] = useState(null)
   const [uni, setUni] = useState("");
-  const [user, setUser] = useState();
   const cookies = new Cookies();
   const userEmail = cookies.get("email");
   const [state, setState] = useState(false);
   const [fetch, setFetch] = useState(false);
 
+  
+
+  useEffect(() => {
+      setAdmin(props.admin)
+  }, [props.admin]);
+
   const fetchEventData = async () => {
     try {
       const eventDataQuery = await query(
         collection(db, "events"),
-        where("email", "==", userEmail),
-        orderBy("startDate", "asc") // Add this line to order events by startDate in ascending order.
+        where("adminID", "==", auth.currentUser.uid),
       );
       const eventInfoSnapshot = await getDocs(eventDataQuery);
-
+      console.log(eventInfoSnapshot)
       await setEvents(eventInfoSnapshot.docs.map((doc) => doc.data()));
     } catch (error) {
       console.log("An error occurred:", error);
     }
   };
 
-  const fetchUserInfo = async () => {
-    try {
-      const userInfoQuery = await query(
-        collection(db, "organizers"),
-        where("email", "==", userEmail)
-      );
-      const userInfoSnapshot = await getDocs(userInfoQuery);
-      const userDataArray = await userInfoSnapshot.docs[0].data();
-      await setUser(userDataArray);
-      await setUni(userDataArray.institution);
-      setState(true);
-    } catch (error) {
-      setState(false);
-      console.log("eat a dick and have this", error);
-    }
-  };
 
   useEffect(() => {
     fetchEventData();
-    fetchUserInfo();
     return () => {
       setState({});
     };
@@ -67,7 +54,7 @@ const CardContainer = () => {
             </div>
           ) : (
             events.map((event, index) => (
-              <Cards key={index} user={user} uni={uni} event={event} />
+              <AdminCards key={index} event={event} />
             ))
           )}
         </div>
@@ -76,4 +63,4 @@ const CardContainer = () => {
   );
 };
 
-export default CardContainer;
+export default AdminCardContainer;

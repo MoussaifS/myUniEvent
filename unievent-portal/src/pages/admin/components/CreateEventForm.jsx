@@ -95,6 +95,8 @@ const CreateEventForm = (props) => {
             data.adminPhone = props.admin.phone
             data.adminClub = props.admin.clubName
             data.adminID = props.admin.organizerID
+            data.adminUni = props.admin.university
+            data.adminUniID = props.admin.universityID
             data.tags = selectedTags;
             data.audience = audienceType.audience;
             await setDoc(doc(db, "events", docId), data);
