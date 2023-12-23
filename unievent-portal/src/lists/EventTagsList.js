@@ -1,4 +1,4 @@
-export const eventTagList = [
+export  const eventTagList = [
   { tag: "Academic Events" },
   { tag: "Social Impact" },
   { tag: "Guest Speakers" },

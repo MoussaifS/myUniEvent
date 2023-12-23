@@ -1,10 +1,8 @@
 import { useState, useRef , useEffect } from "react";
 import Nav from "../../../components/Nav";
-import Filter from "../../../components/Filter";
-import { auth, db } from "../../../FireBase"
-import {doc, getDoc , collection, query, where, getDocs, orderBy } from "firebase/firestore";
+import { db } from "../../../FireBase"
+import {doc, getDoc } from "firebase/firestore";
 import Cookies from "universal-cookie";
-
 import CardContainer from "../components/AdminCardContainer";
 import CreateEventForm from "../components/CreateEventForm";
 import "@material/web/dialog/dialog.js";

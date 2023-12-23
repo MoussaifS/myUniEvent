@@ -14,8 +14,15 @@ import "@material/web/divider/divider.js";
 import { useState, useEffect } from "react";
 import { format, parseISO } from "date-fns";
 import { v4 as uuidv4 } from "uuid";
+import ShortUniqueId from 'short-unique-id';
+import { eventTagList } from "../../../lists/EventTagsList.js"
+const CreateEventForm = (props) => {
 
-const CreateEventForm = () => {
+
+
+  const uid = new ShortUniqueId({ length: 10 });
+
+
   const { handleSubmit, register } = useForm();
   const [audienceType, setAudienceType] = useState("");
   const [date, setDate] = useState(null);
@@ -27,17 +34,6 @@ const CreateEventForm = () => {
     { audience: "Open to Everyone" },
   ];
 
-  const eventTags = [
-    { tag: "Academic Events" },
-    { tag: "Career Development" },
-    { tag: "Sports and activity" },
-    { tag: "Social Impact" },
-    { tag: "Guest Speakers" },
-    { tag: "Chill and fun" },
-    { tag: "Workshops" },
-    { tag: "Hackathons" },
-    { tag: "Meetups" },
-  ];
 
   //audience type
   const handleAudience = async (e) => {
@@ -81,39 +77,45 @@ const CreateEventForm = () => {
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
 
-  // const uploadImage = (title, docId) => {
-  //   const storage = getStorage();
-  //   const imageStorageRef = ref(storage, `events/${title}:${docId}`);
-  //   const imageUrlRef = ref(storage, `events/${title}:${docId}`);
-  //   uploadBytes(imageStorageRef, imageUpload).then(() => {
-  //     getDownloadURL(ref(storage, imageUrlRef)).then(async (url) => {
-  //      await setImageUrl(url)
-  //     console.log('in' , imageUrl)
-  //     });
-  //   });
-  // };
-
+  console.log(props)
   const onSubmit = async (data) => {
     if (errorDate) {
       console.log("Error: Invalid Date");
     } else {
       try {
-        const docId = uuidv4();
+        const docId = uid.rnd();
 
         const storage = getStorage();
-        const imageStorageRef = ref(storage, `events/${data.title}:${docId}`);
-        const imageUrlRef = ref(storage, `events/${data.title}:${docId}`);
+        const imageStorageRef = ref(storage, `event/${docId}:${data.title}`);
+        const imageUrlRef = ref(storage, `event/${docId}:${data.title}`);
 
         await uploadBytes(imageStorageRef, imageUpload).then(() => {
           getDownloadURL(ref(storage, imageUrlRef)).then(async (url) => {
             data.image = url;
             data.email = auth.currentUser.email;
+            data.adminPhone = props.admin.phone
+            data.adminClub = props.admin.className
+            data.adminID = props.admin.organizerID
             data.tags = selectedTags;
             data.docId = docId;
             data.audience = audienceType.audience;
             await setDoc(doc(db, "events", docId), data);
           });
         });
+
+        await setDoc(doc(db, `university/${props.admin.universityID}/events`,  docId), data).then(()=>{
+          console.log(data)
+          console.log('sub')
+          alert("accout is created you will be redirected to login");
+        });
+
+        await setDoc(doc(db, `organizer/${props.admin.organizerID}/events`,  docId), data).then(()=>{
+          console.log(data)
+          console.log('sub')
+          alert("accout is created you will be redirected to login");
+        });
+
+        
         console.log("Document set");
       } catch (error) {
         console.error("Error:", error);
@@ -194,7 +196,7 @@ const CreateEventForm = () => {
             aria-labelledby="dates-label"
             supporting-text="Which club do you with Represent"
           >
-            {eventTags.map((tag, index) => (
+            {eventTagList.map((tag, index) => (
               <md-filter-chip
                 key={index}
                 onClick={() => handleTags(tag.tag)}
