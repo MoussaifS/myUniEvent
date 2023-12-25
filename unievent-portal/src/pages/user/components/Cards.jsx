@@ -19,6 +19,7 @@ import { Link  ,useLocation , useNavigate } from "react-router-dom";
 const Cards = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
+  console.log(props)
   const handleRedirctEvent = () => {
     navigate(`/event/${encodeURIComponent(props.event.title)}`, {  state: { from: location } });
     <Link to={`/event/${encodeURIComponent(props.event.title)}`} />
@@ -39,11 +40,11 @@ const Cards = (props) => {
           <h2 id="card-title" >{props.event.title}</h2>
           <div className="fd-r">
             <img src={locationIcon} alt="Share" className="ml-5" />
-            <p className="card-helper-text">manipal internationl university</p>
+            <p className="card-helper-text">{props.event.adminClub} club under "{props.event.adminUni}"  </p> 
           </div>
           <div className="fd-r">
             <img src={FeeIcon} alt="Share" className="ml-5" />
-            <p className="card-helper-text">for 200 ringit</p>
+            <p className="card-helper-text">For {props.event.fees} Ringit</p>
           </div>
         </div>
       </div>
