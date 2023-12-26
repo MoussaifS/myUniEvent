@@ -9,35 +9,40 @@ import "@material/web/chips/suggestion-chip.js";
 import {
   getFirestore,
   doc,
-  getDoc,
+  getDocs,
+  query,
+  collection,
+  where,
+
 } from "firebase/firestore";
 import { db } from "../../../FireBase";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
 
+
 const Events = () => {
-  // console.log(useParams());
   const title = useParams();
   const [events, setEvents] = useState([]);
   const [event, setEvent] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const { id } = useParams();
 
   const fetchEventData = async () => {
-    console.log('in')
-    const db = getFirestore();
-    const docRef = doc(db, "events", "d2f213c6-417f-405e-9580-c3cd8a66413e"    );
     try {
-      const docSnap = await getDoc(docRef);
-      setEvent(docSnap.data());
-      console.log(docSnap.data())
+      const eventDataQuery = query(
+        collection(db, 'events'),
+        where('docId', '==', id)
+      );
+      const eventInfoSnapshot = await getDocs(eventDataQuery);
+      eventInfoSnapshot.docs.map((doc) =>  setEvent(doc.data()));
     } catch (error) {
-      console.alert(error);
+      console.log('Error fetching event data:', error);
     }
   };
 
   useEffect(() => {
     fetchEventData();
-  }, []);
+  }, [id]);
 
   return (
     <div id="event ">
@@ -51,7 +56,7 @@ const Events = () => {
         <div id="event-info-card">
           <div className="fd-r">
             <img src={locationIcon} alt="Share" className="ml-5" />
-            <p className="card-helper-text">manipal internationl university</p>
+            <p className="card-helper-text">{event.adminUni} </p>
           </div>
 
           <div>
@@ -62,7 +67,13 @@ const Events = () => {
         <div id="event-info-card">
           <div className="fd-r">
             <img src={locationIcon} alt="Share" className="ml-5" />
-            <p className="card-helper-text"></p>
+            <p className="card-helper-text">
+            
+            
+          {format(new Date(event.startDate), "iii, LLL d")} •{" "}
+          {event.startTime}
+          
+          </p>
           </div>
 
           <div>
@@ -96,12 +107,12 @@ const Events = () => {
           <div id="event-info-card-dark">
             <div>
               <span className="card-helper-text-dark">Organizer:</span>
-              <span className="card-helper-text-dark">cs Club</span>
+              <span className="card-helper-text-dark"> {event.adminClub}</span>
             </div>
 
             <div className="df-c">
               <a id="event-card-btn">connact the orgnizer</a>
-              <a id="event-card-btn">follow</a>
+              
             </div>
           </div>
         </div>
@@ -110,7 +121,7 @@ const Events = () => {
       <div id="event-attent-card">
         <div>
           <span>This event is </span>
-          <span>from 300rm</span>
+          <span>from  { event.fees} rm</span>
         </div>
 
         <div>
