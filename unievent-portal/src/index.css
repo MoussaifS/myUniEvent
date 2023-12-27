@@ -497,10 +497,10 @@ button {
 #noEvent-span {
   font-size: 25px;
   font-weight: bolder;
+
 }
 
 #noEvent {
-  position: absolute;
   text-align: center;
   width: 300px;
 }
@@ -819,7 +819,7 @@ button {
   margin-bottom: 10px;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.8rem;
   font-style: normal;
   font-weight: 500;
