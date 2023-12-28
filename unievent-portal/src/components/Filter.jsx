@@ -6,6 +6,17 @@ import "@material/web/chips/filter-chip.js";
 import "@material/web/switch/switch.js";
 import { eventTagList } from "../lists/EventTagsList";
 const Filter = (props) => {
+
+  
+  //sudo code 
+  const HandleTag(e)=>{
+    // 1- pass to the query
+    // 2- navigate to the event page with the filter 
+    // 3- if query empty display all 
+    // 4-
+  }
+
+
   return (
     <div id="duck">
       <span id="filter-secondary-span">Categories:</span>
