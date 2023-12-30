@@ -13,7 +13,7 @@ const Filter = (props) => {
     // 1- pass to the query
     // 2- navigate to the event page with the filter 
     // 3- if query empty display all 
-    // 4-
+    // 4- remove the date filters for now 
   }
 
 
