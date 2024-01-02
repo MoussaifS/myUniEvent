@@ -4,7 +4,7 @@ import "@material/web/chips/assist-chip.js";
 import "@material/web/chips/suggestion-chip.js";
 import "@material/web/chips/filter-chip.js";
 import "@material/web/switch/switch.js";
-
+import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 
 import { Accordion, AccordionDetails, AccordionSummary,  Typography  } from "@mui/material";
@@ -13,16 +13,23 @@ import { Accordion, AccordionDetails, AccordionSummary,  Typography  } from "@mu
 
 import { eventTagList } from "../lists/EventTagsList";
 const Filter = (props) => {
+  let [searchParams, setSearchParams] = useSearchParams();
 
   
   //sudo code 
   const handleTag = (e) => {
-    console.log(e.target.label)
     // 1- pass to the query
     // 2- navigate to the event page with the filter 
     // 3- if query empty display all 
     // 4- remove the date filters for now 
+    let params = e.target.label;
+    setSearchParams(params);
+
+    console.log(searchParams)
+
   }
+
+
 
   const [expanded, setExpanded] = useState(false);
 
@@ -34,26 +41,20 @@ const handleChange = (panel) => (event, isExpanded) => {
 
 
   return (
-    <div id="duck">
+    <div id="duck" className="mb-25">
 
-     <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+     <Accordion className="ddddd" expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>
+          <div>
             Filters:
-          </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography>
+          </div>
 
-          <md-filter-chip
-            id="tags-horzintal"
-            
-            label="tag"
-            elevated
-            onClick={(e)=>{handleTag(e)}}
-          ></md-filter-chip>
 
+          
+         
           
         </AccordionSummary>
         <AccordionDetails>
