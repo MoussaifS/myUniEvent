@@ -19,9 +19,15 @@ const CardContainer = (props) => {
     try {
       const eventDataQuery = query(
         collection(db, "events"),
+        { test ? {where("tags", "array-contains","sdsd")} : 23},
         orderBy("startDate", "asc"),
-        limit(5)
+        
       );
+
+
+
+
+
 
       const eventInfoSnapshot = await getDocs(eventDataQuery);
       const eventsData = eventInfoSnapshot.docs.map((doc) => doc.data());
