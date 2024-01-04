@@ -18,9 +18,7 @@ import { Link  ,useLocation , useNavigate } from "react-router-dom";
 
 const Cards = (props) => {
   const navigate = useNavigate();
-  console.log(props)
   const location = useLocation();
-  console.log(props)
   const handleRedirctEvent = () => {
     navigate(`/event/${encodeURIComponent(props.event.docId)}`, {  state: { from: location } });
     <Link to={`/event/${encodeURIComponent(props.event.docId)}`} />

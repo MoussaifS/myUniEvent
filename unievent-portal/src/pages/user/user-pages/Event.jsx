@@ -21,9 +21,7 @@ import { format } from "date-fns";
 
 const Events = () => {
   const title = useParams();
-  const [events, setEvents] = useState([]);
   const [event, setEvent] = useState(null);
-  const [loaded, setLoaded] = useState(false);
   const { id } = useParams();
 
   const fetchEventData = async () => {

@@ -16,15 +16,9 @@ const Filter = (props) => {
   let [searchParams, setSearchParams] = useSearchParams();
 
   
-  //sudo code 
   const handleTag = (e) => {
-    // 1- pass to the query
-    // 2- navigate to the event page with the filter 
-    // 3- if query empty display all 
-    // 4- remove the date filters for now 
     let params = e.target.label;
     setSearchParams(params);
-
     console.log(searchParams)
 
   }

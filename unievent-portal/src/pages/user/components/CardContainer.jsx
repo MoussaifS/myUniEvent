@@ -5,6 +5,7 @@ import { db } from "../../../FireBase";
 import Cookies from "universal-cookie";
 import Cards from "./Cards";
 import Filter from "../../../components/Filter";
+import { useSearchParams } from 'react-router-dom';
 
 const CardContainer = (props) => {
   const [events, setEvents] = useState([]);
@@ -15,16 +16,32 @@ const CardContainer = (props) => {
   const [state, setState] = useState(true);
   const [fetch, setFetch] = useState(false);
 
+  let [searchParams, setSearchParams] = useSearchParams();
+
+  console.log(searchParams); 
+
   const fetchEventData = async () => {
+
+
+
+
     try {
-      const eventDataQuery = query(
-        collection(db, "events"),
-        { test ? {where("tags", "array-contains","sdsd")} : 23},
-        orderBy("startDate", "asc"),
-        
-      );
+      let eventDataQuery = null
 
+      
+        if(eventDataQuery){
+          eventDataQuery = query(
+              collection(db, "events"),
+              where("tags", "array-contains",test),
+              orderBy("startDate", "asc"),
+          );
 
+        }else{
+          eventDataQuery = query(
+              collection(db, "events"),
+              orderBy("startDate", "asc"),
+          );
+        }
 
 
 
