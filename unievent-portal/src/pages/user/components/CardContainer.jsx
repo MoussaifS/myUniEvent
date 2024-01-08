@@ -18,7 +18,7 @@ const CardContainer = (props) => {
 
   let [searchParams, setSearchParams] = useSearchParams();
 
-  console.log(searchParams); 
+  console.log(searchParams.get('q')); 
 
   const fetchEventData = async () => {
 

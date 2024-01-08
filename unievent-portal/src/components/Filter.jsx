@@ -18,8 +18,13 @@ const Filter = (props) => {
   
   const handleTag = (e) => {
     let params = e.target.label;
-    setSearchParams(params);
-    console.log(searchParams)
+    if(searchParams.get('q') !== null){
+      let p = searchParams.getAll('q')
+
+      setSearchParams({'q': `${p.join(', ')}, ${params}`});
+    } else {
+      setSearchParams({'q': params});
+    }
 
   }
 
