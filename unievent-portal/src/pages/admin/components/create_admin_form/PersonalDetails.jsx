@@ -46,7 +46,7 @@ const PersonalDetails = (props) => {
     if (Object.keys(errors).length === 0) {
       props.setResponse({
         ...props.response,
-        phone: phone,
+        phone: '+6'+phone,
         fullName: fullName,
         email: email,
         password: password,
