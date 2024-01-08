@@ -50,6 +50,14 @@ const Events = () => {
     window.open(google(calenderUrl), '_blank');
   };
 
+  const handleContact = () =>{
+    const message =
+    `🌟I hope this message finds all well ${event.adminClub}%0a`+
+    `had a few queries regarding the *${event.title}* and would love to discuss them further.`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${event.adminPhone}&text=${message}`;
+    window.open(whatsappUrl, "_blank");
+  }
+
   useEffect(() => {
     fetchEventData();
     
@@ -131,7 +139,7 @@ const Events = () => {
                 </div>
 
                 <div className="df-c">
-                  <a id="event-card-btn">connact the orgnizer</a>
+                  <a id="event-card-btn" onClick={handleContact}>Get in touch</a>
                 </div>
               </div>
             </div>
