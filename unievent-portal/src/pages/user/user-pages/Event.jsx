@@ -18,6 +18,7 @@ import {
 import { db } from "../../../FireBase";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
+import { google, outlook, office365, yahoo, ics } from "calendar-link";
 
 const Events = () => {
   const title = useParams();
@@ -37,9 +38,24 @@ const Events = () => {
     }
   };
 
+  const handleCalender = () => {
+    const startTime = `${event.startDate} ${event.startTime} +08`
+    const calenderUrl = {
+      title: event.title,
+      description: event.description,
+      start: startTime,
+      duration: [3, "hour"],
+      busy: true
+    };
+    window.open(google(calenderUrl), '_blank');
+  };
+
   useEffect(() => {
     fetchEventData();
+    
+
   }, [id]);
+  console.log(event)
 
   return (
     <div id="event">
@@ -73,7 +89,7 @@ const Events = () => {
               </div>
 
               <div>
-                <a id="event-card-btn">Add to Calander</a>
+                <a id="event-card-btn" onClick={handleCalender}  >Add to Calander</a>
               </div>
             </div>
 
@@ -129,9 +145,6 @@ const Events = () => {
             <div>
               <a id="event-card-attend-btn">Attend</a>
             </div>
-
-            
-
           </div>
         </div>
       ) : null}
