@@ -72,8 +72,19 @@ const Events = () => {
       {event ? (
         <div>
           <div id="event-body">
-            <h1 id="event-title">{event.title}</h1>
-            <span></span>
+          
+          <h1 id="event-title">{event.title}</h1>
+
+
+          {
+            event.audience == "Open to Everyone" ?
+            <span id="event-all-audince">👐Open for All🫂</span>  :  <span id="event-private-audince">🤫Exclusive For {event.adminUni} Members🔐</span>
+          }
+
+
+          
+
+          
             <img src={event.image} id="event-image" />
 
             <div id="event-info-card">

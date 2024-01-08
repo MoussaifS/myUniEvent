@@ -765,7 +765,8 @@ button {
 
 #event-title {
   text-align: left;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
+  margin-top: 0px;
 }
 
 #event-body {
@@ -805,6 +806,32 @@ button {
   text-align: center;
   border-radius: 20px;
 }
+
+
+#event-all-audince {
+  color: var(--m-3-sys-light-on-primary, #002018);
+  background: var(--m-3-sys-light-primary, #BEECDC);
+  margin: 12px;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  border-radius: 20px;
+  font-weight: bolder;
+}
+
+
+#event-private-audince {
+  color: var(--m-3-sys-light-on-primary, #31101D);
+  background: var(--m-3-sys-light-primary, #FFD9E3);
+  margin: 12px;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+
+
 
 .event-description {
   padding: 8px;
