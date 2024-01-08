@@ -8,8 +8,6 @@ import "@material/web/chips/suggestion-chip.js";
 import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
 
 import {
-  getFirestore,
-  doc,
   getDocs,
   query,
   collection,
@@ -18,7 +16,7 @@ import {
 import { db } from "../../../FireBase";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import { google, outlook, office365, yahoo, ics } from "calendar-link";
+import { google } from "calendar-link";
 
 const Events = () => {
   const title = useParams();
@@ -39,31 +37,29 @@ const Events = () => {
   };
 
   const handleCalender = () => {
-    const startTime = `${event.startDate} ${event.startTime} +08`
+    const startTime = `${event.startDate} ${event.startTime} +08`;
     const calenderUrl = {
       title: event.title,
       description: event.description,
       start: startTime,
       duration: [3, "hour"],
-      busy: true
+      busy: true,
     };
-    window.open(google(calenderUrl), '_blank');
+    window.open(google(calenderUrl), "_blank");
   };
 
-  const handleContact = () =>{
+  const handleContact = () => {
     const message =
-    `🌟I hope this message finds all well ${event.adminClub}%0a`+
-    `had a few queries regarding the *${event.title}* and would love to discuss them further.`;
+      `🌟I hope this message finds all well ${event.adminClub}%0a` +
+      `had a few queries regarding the *${event.title}* and would love to discuss them further.`;
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${event.adminPhone}&text=${message}`;
     window.open(whatsappUrl, "_blank");
-  }
+  };
 
   useEffect(() => {
     fetchEventData();
-    
-
   }, [id]);
-  console.log(event)
+  console.log(event);
 
   return (
     <div id="event">
@@ -72,19 +68,16 @@ const Events = () => {
       {event ? (
         <div>
           <div id="event-body">
-          
-          <h1 id="event-title">{event.title}</h1>
+            <h1 id="event-title">{event.title}</h1>
 
+            {event.audience == "Open to Everyone" ? (
+              <span id="event-all-audince">👐Open for All🫂</span>
+            ) : (
+              <span id="event-private-audince">
+                🤫Exclusive For {event.adminUni} Members🔐
+              </span>
+            )}
 
-          {
-            event.audience == "Open to Everyone" ?
-            <span id="event-all-audince">👐Open for All🫂</span>  :  <span id="event-private-audince">🤫Exclusive For {event.adminUni} Members🔐</span>
-          }
-
-
-          
-
-          
             <img src={event.image} id="event-image" />
 
             <div id="event-info-card">
@@ -108,7 +101,9 @@ const Events = () => {
               </div>
 
               <div>
-                <a id="event-card-btn" onClick={handleCalender}  >Add to Calander</a>
+                <a id="event-card-btn" onClick={handleCalender}>
+                  Add to Calander
+                </a>
               </div>
             </div>
 
@@ -150,7 +145,9 @@ const Events = () => {
                 </div>
 
                 <div className="df-c">
-                  <a id="event-card-btn" onClick={handleContact}>Get in touch</a>
+                  <a id="event-card-btn" onClick={handleContact}>
+                    Get in touch
+                  </a>
                 </div>
               </div>
             </div>
@@ -158,7 +155,7 @@ const Events = () => {
 
           <div id="event-attent-card">
             <div>
-              <span>FROM {event.fees} RM</span>
+              <span className="fw">FROM {event.fees} RM</span>
             </div>
 
             <div>

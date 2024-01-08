@@ -876,6 +876,7 @@ button {
   align-items: center;
   margin-left: 0px;
   bottom: 1rem;
+  margin-top: 10px;
   background: var(--m-3-sys-light-surface-container, #f3edf7);
   padding: 10px;
   color: var(--m-3-sys-light-on-surface-variant, #49454f);
@@ -913,4 +914,9 @@ button {
   font-weight: 500;
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.fb{
+  font-weight: bolder;
+
 }
