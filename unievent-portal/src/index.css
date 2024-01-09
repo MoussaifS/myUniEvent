@@ -704,6 +704,21 @@ button {
   margin-bottom: 5px;
 }
 
+
+#card-tag-container {
+  flex-direction: row;
+  margin-top: 1px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+#card-tags{
+  font-weight: bold;
+  font-size: smaller;
+  color: #332d41;
+  margin-bottom: 3px;
+}
+
 #whatsapp-btn {
   border: none; /* Remove borders */
   padding: 10px 10px; /* Some padding */

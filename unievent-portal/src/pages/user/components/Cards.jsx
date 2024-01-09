@@ -57,22 +57,15 @@ const handleTagPrams = (e) =>{
           </div>
         </div>
       </div>
-      
 
-      <div className="">
-        <div id="card-horzintal-scroll">
+        <div id="card-tag-container">
           {props.event.tags.map((tag, index) => (
-            <md-suggestion-chip
-              id="tags-horzintal"
+            <span
+              id="card-tags"
               key={index}
-              label={tag}
-              onClick={(e) => {
-                handleTagPrams(e);
-              }}
-            ></md-suggestion-chip>
+            > | {tag} | </span>
           ))}
         </div>
-      </div>
 
         <div id="card-btns">
           <ShareWhatsappBtn {...props} />

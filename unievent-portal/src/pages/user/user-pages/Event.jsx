@@ -74,21 +74,10 @@ const Events = () => {
 
   const handleTagPrams = (e) =>{
     console.log(e.target.label)
-
-    
-    const tag = e.target.label; // Assuming e.target.label holds the tag value
-    
-    // Update the searchParams object
-    
-  
+    const tag = e.target.label;  
     const url = `/events/?tag=${tag.split(' ').join('+')}`;
-  
     navigate(url, { state: { from: location } });
-  
     return <Link to={url} />;
-
-
-
   }
 
   return (
