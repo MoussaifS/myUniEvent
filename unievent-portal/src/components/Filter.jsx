@@ -12,7 +12,7 @@ import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { eventTagList } from "../lists/EventTagsList";
 const Filter = (props) => {
   let [searchParams, setSearchParams] = useSearchParams();
-  let [selectedTags, setSelectedTags] = useState([]);
+  let [selectedTags, setSelectedTags] = useState(null);
 
   const handleTag = (e) => {
     let params = e.target.label;
@@ -65,6 +65,7 @@ const Filter = (props) => {
 
 
   console.log(searchParams.get("tag"))
+  console.log(selectedTags)
 
 
   return (
@@ -75,7 +76,32 @@ const Filter = (props) => {
         onChange={handleChange("panel1")}
       >
         <AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
-          <div>Filters:<md-input-chip label={searchParams.get("tag")} onClick={()=>handleClearPrams()}></md-input-chip>  </div>
+          <div>Filters:
+          
+          
+          
+          
+          
+          
+          {
+            selectedTags || searchParams.get("tag")?   <md-input-chip  lable={selectedTags? 232  : searchParams.get("tag")} onClick={()=>handleClearPrams()}></md-input-chip>  : null
+             
+
+          }
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          </div>
         </AccordionSummary>
         <AccordionDetails>
           <div>
@@ -85,9 +111,9 @@ const Filter = (props) => {
                 label="This Week"
                 elevated
                 onClick={(e) => {
-                  handleTimeFrame(e);
+                  handleTag(e);
                 }}
-                disabled
+                
               >
                 {" "}
               </md-filter-chip>
@@ -95,7 +121,7 @@ const Filter = (props) => {
                 label="This Month"
                 elevated
                 onClick={(e) => {
-                  handleTimeFrame(e);
+                  handleTag(e);
                 }}
               ></md-filter-chip>
 
@@ -103,7 +129,7 @@ const Filter = (props) => {
                 label="All Events"
                 elevated
                 onClick={(e) => {
-                  handleTimeFrame(e);
+                  handleTag(e);
                 }}
               ></md-filter-chip>
             </div>

@@ -55,7 +55,7 @@ const Events = () => {
   const handleContact = () => {
     const message =
       `🌟I hope this message finds all well ${event.adminClub}%0a` +
-      `had a few queries regarding the *${event.title}* and would love to discuss them further.`;
+      `had a few queries regarding the *${event.title}* event and would love to discuss them further.`;
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${event.adminPhone}&text=${message}`;
     window.open(whatsappUrl, "_blank");
   };
