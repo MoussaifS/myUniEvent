@@ -25,7 +25,7 @@ const CardContainer = (props) => {
 
   let [searchParams, setSearchParams] = useSearchParams();
 
-  console.log(searchParams.get("tag"));
+  // console.log(searchParams.get("tag"));
 
   const fetchEventData = async () => {
     try {
@@ -44,7 +44,7 @@ const CardContainer = (props) => {
           orderBy("startDate", "asc")
         );
       }
-      console.log(eventDataQuery)
+      // console.log(eventDataQuery)
       const eventInfoSnapshot = await getDocs(eventDataQuery);
       const eventsData = eventInfoSnapshot.docs.map((doc) => doc.data());
       setEvents(eventsData);

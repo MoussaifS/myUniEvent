@@ -17,7 +17,6 @@ const Filter = (props) => {
   const handleTag = (e) => {
     let params = e.target.label;
     let tag = e.target.label;
-    console.log(params);
     if (selectedTags.includes(tag)) {
       // If the tag is already selected, remove it
       const updatedTags = selectedTags.filter(
@@ -34,7 +33,6 @@ const Filter = (props) => {
 
       const updatedParams = updatedTags.join(", ");
       setSearchParams({ q: updatedParams });
-      console.log(updatedParams);
     }
   };
 
@@ -64,8 +62,6 @@ const Filter = (props) => {
   // Variable to store the currently selected tag
 
 
-  console.log(searchParams.get("tag"))
-  console.log(selectedTags)
 
 
   return (
