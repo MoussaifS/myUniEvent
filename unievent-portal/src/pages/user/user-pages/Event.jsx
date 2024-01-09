@@ -7,14 +7,9 @@ import { useParams } from "react-router-dom";
 import "@material/web/chips/suggestion-chip.js";
 import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
 import { useSearchParams } from "react-router-dom";
-import { Link  ,useLocation , useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import {
-  getDocs,
-  query,
-  collection,
-  where,
-} from "firebase/firestore";
+import { getDocs, query, collection, where } from "firebase/firestore";
 import { db } from "../../../FireBase";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
@@ -25,7 +20,6 @@ const Events = () => {
   const [event, setEvent] = useState(null);
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-
 
   const fetchEventData = async () => {
     try {
@@ -40,7 +34,7 @@ const Events = () => {
     }
   };
 
-  const handleCalender = () => {
+  const handleCalender = () => {handleAttending
     const startTime = `${event.startDate} ${event.startTime} +08`;
     const calenderUrl = {
       title: event.title,
@@ -51,6 +45,12 @@ const Events = () => {
     };
     window.open(google(calenderUrl), "_blank");
   };
+
+  const handleAttending = () => {
+
+  }
+
+
 
   const handleContact = () => {
     const message =
@@ -63,22 +63,21 @@ const Events = () => {
   useEffect(() => {
     fetchEventData();
   }, [id]);
-  
+
   const navigate = useNavigate();
   const location = useLocation();
 
-
   // http://localhost:5173/event/QAUpjRks63?tag=Sports+and+activity
-  
+
   // http://localhost:5173/events/Guest%20Speakers
 
-  const handleTagPrams = (e) =>{
-    console.log(e.target.label)
-    const tag = e.target.label;  
-    const url = `/events/?tag=${tag.split(' ').join('+')}`;
+  const handleTagPrams = (e) => {
+    console.log(e.target.label);
+    const tag = e.target.label;
+    const url = `/events/?tag=${tag.split(" ").join("+")}`;
     navigate(url, { state: { from: location } });
     return <Link to={url} />;
-  }
+  };
 
   return (
     <div id="event">
@@ -177,11 +176,13 @@ const Events = () => {
 
           <div id="event-attent-card">
             <div>
-              <span className="fw">FROM {event.fees} RM</span>
+              <span className="fb">FROM {event.fees} RM</span>
             </div>
 
             <div>
-              <a id="event-card-attend-btn">Attend</a>
+              <a id="event-card-attend-btn" onClick={handleAttending}>
+                Attend
+              </a>
             </div>
           </div>
         </div>
