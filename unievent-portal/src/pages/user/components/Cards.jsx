@@ -10,6 +10,7 @@ import "@material/web/button/outlined-button.js";
 import "@material/web/iconbutton/outlined-icon-button.js";
 import "@material/web/iconbutton/filled-tonal-icon-button.js";
 import { format } from "date-fns";
+import { useSearchParams } from "react-router-dom";
 
 import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
 import locationIcon from "../../../assets/location-pin-svgrepo-com(1).svg";
@@ -19,13 +20,22 @@ import { Link  ,useLocation , useNavigate } from "react-router-dom";
 const Cards = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const handleRedirctEvent = () => {
     navigate(`/event/${encodeURIComponent(props.event.docId)}`, {  state: { from: location } });
     <Link to={`/event/${encodeURIComponent(props.event.docId)}`} />
   } 
 
+
+const handleTagPrams = (e) =>{
+  setSearchParams({ tag: e.target.label })
+}
+
+  
+
   return (
-    <Card class="pr" sx={{ maxWidth: 700 }} onClick={handleRedirctEvent}>
+    <Card class="pr" sx={{ maxWidth: 700 }} onClick={handleRedirctEvent} >
       <img src={props.event.image} id="card-image" />
       <div className="fd-r">
         <span id="span-card-date">
@@ -56,6 +66,9 @@ const Cards = (props) => {
               id="tags-horzintal"
               key={index}
               label={tag}
+              onClick={(e) => {
+                handleTagPrams(e);
+              }}
             ></md-suggestion-chip>
           ))}
         </div>

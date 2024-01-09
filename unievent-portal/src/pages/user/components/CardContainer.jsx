@@ -1,11 +1,18 @@
-import { collection, query, where, getDocs, orderBy, limit } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  orderBy,
+  limit,
+} from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { db } from "../../../FireBase";
 
 import Cookies from "universal-cookie";
 import Cards from "./Cards";
 import Filter from "../../../components/Filter";
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from "react-router-dom";
 
 const CardContainer = (props) => {
   const [events, setEvents] = useState([]);
@@ -18,34 +25,26 @@ const CardContainer = (props) => {
 
   let [searchParams, setSearchParams] = useSearchParams();
 
-  console.log(searchParams.get('q')); 
+  console.log(searchParams.get("tag"));
 
   const fetchEventData = async () => {
-
-
-
-
     try {
-      let eventDataQuery = null
-
       
-        if(eventDataQuery){
-          eventDataQuery = query(
-              collection(db, "events"),
-              where("tags", "array-contains",test),
-              orderBy("startDate", "asc"),
-          );
-
-        }else{
-          eventDataQuery = query(
-              collection(db, "events"),
-              orderBy("startDate", "asc"),
-          );
-        }
-
-
-
-
+      let eventDataQuery = null
+      if (searchParams.get("tag")) {
+        console.log('sss')
+        eventDataQuery = query(
+          collection(db, "events"),
+          where("tags", "array-contains", searchParams.get("tag") ),
+          orderBy("startDate", "asc")
+        );
+      } else {
+        eventDataQuery = query(
+          collection(db, "events"),
+          orderBy("startDate", "asc")
+        );
+      }
+      console.log(eventDataQuery)
       const eventInfoSnapshot = await getDocs(eventDataQuery);
       const eventsData = eventInfoSnapshot.docs.map((doc) => doc.data());
       setEvents(eventsData);
@@ -56,7 +55,7 @@ const CardContainer = (props) => {
 
   useEffect(() => {
     fetchEventData();
-  }, []);
+  }, [searchParams]);
 
   return (
     <div id="cards-container">
@@ -79,7 +78,6 @@ const CardContainer = (props) => {
             />
           ))
         )}
-        
       </div>
     </div>
   );

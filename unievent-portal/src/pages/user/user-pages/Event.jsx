@@ -6,6 +6,8 @@ import ShowMoreText from "react-show-more-text";
 import { useParams } from "react-router-dom";
 import "@material/web/chips/suggestion-chip.js";
 import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
+import { useSearchParams } from "react-router-dom";
+import { Link  ,useLocation , useNavigate } from "react-router-dom";
 
 import {
   getDocs,
@@ -22,6 +24,8 @@ const Events = () => {
   const title = useParams();
   const [event, setEvent] = useState(null);
   const { id } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
 
   const fetchEventData = async () => {
     try {
@@ -59,7 +63,33 @@ const Events = () => {
   useEffect(() => {
     fetchEventData();
   }, [id]);
-  console.log(event);
+  
+  const navigate = useNavigate();
+  const location = useLocation();
+
+
+  // http://localhost:5173/event/QAUpjRks63?tag=Sports+and+activity
+  
+  // http://localhost:5173/events/Guest%20Speakers
+
+  const handleTagPrams = (e) =>{
+    console.log(e.target.label)
+
+    
+    const tag = e.target.label; // Assuming e.target.label holds the tag value
+    
+    // Update the searchParams object
+    
+  
+    const url = `/events/?tag=${tag.split(' ').join('+')}`;
+  
+    navigate(url, { state: { from: location } });
+  
+    return <Link to={url} />;
+
+
+
+  }
 
   return (
     <div id="event">
@@ -131,6 +161,9 @@ const Events = () => {
                       id="tags-horzintal"
                       key={index}
                       label={tag}
+                      onClick={(e) => {
+                        handleTagPrams(e);
+                      }}
                     ></md-suggestion-chip>
                   ))}
                 </div>

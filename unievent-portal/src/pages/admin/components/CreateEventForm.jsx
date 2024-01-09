@@ -30,8 +30,8 @@ const CreateEventForm = (props) => {
   const [errorDate, setErrorDate] = useState(null);
 
   const eventType = [
-    { audience: "My Uni Students Only" },
-    { audience: "Open to Everyone" },
+    { audience: "Exclusive" },
+    { audience: "Open to All" },
   ];
 
 

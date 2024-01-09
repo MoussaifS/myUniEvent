@@ -158,6 +158,7 @@ html {
   font-weight: bold;
   font-size: smaller;
   color: #332d41;
+  margin-bottom: 3px;
 }
 .filter-chip {
   margin-top: 10px;
@@ -688,6 +689,14 @@ button {
 #card-horzintal-scroll {
   flex-direction: row;
   margin-top: 1px;
+  z-index: 999;
+}
+
+#filter-Upcoming {
+  flex-direction: row;
+  margin-top: 1px;
+  display: flex;
+  justify-content: space-around;
 }
 
 #tags-horzintal {
@@ -807,6 +816,18 @@ button {
   border-radius: 20px;
 }
 
+#filter-btn {
+  color: var(--m-3-sys-light-on-primary, #4A4458);
+  background: var(--m-3-sys-light-primary, #CCC2DB);
+  display: flex;
+  padding: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  
+  font-weight: bolder;
+  font-size: medium;
+  justify-content: center;
+}
 
 #event-all-audince {
   color: var(--m-3-sys-light-on-primary, #002018);
