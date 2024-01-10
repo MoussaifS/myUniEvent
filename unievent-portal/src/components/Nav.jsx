@@ -16,6 +16,7 @@ const Nav = (props) => {
   const [userEmail, setUserEmail] = useState(null);
   // setUserEmail(emailCookie ? null : emailCookie)
 
+  console.log(props)
   useEffect(() => {
     setUserEmail(emailCookie);
   }, [emailCookie]);
@@ -39,14 +40,16 @@ const Nav = (props) => {
 
   return (
     <div id="nav">
-      <div onClick={() => handlenavigation("")}>
+
+      <div>
         <span id="logo">ue</span>
         {props.admin ? (
           <span id="logoadmin"> Admin</span>
         ) : (
-          <span> UniEvent</span>
+          <span onClick={() => handlenavigation("")}> Uni Event</span>
         )}
       </div>
+
       <div>
         {userEmail !== undefined ? (
           <md-outlined-icon-button onClick={() => handleLogout()}>
@@ -75,6 +78,14 @@ const Nav = (props) => {
         ) : null}
 
       </div>
+
+
+
+
+
+
+
+
     </div>
   );
 };

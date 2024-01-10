@@ -1,5 +1,5 @@
-import Login from "../../../components/auth/Login";
-import SignUp from "../../../components/auth/SignUp";
+import AdminLogin from "../components/auth/AdminLogin";
+import AdminSignUp from "../components/auth/AdminSignUp";
 import Nav from "../../../components/Nav";
 import "@material/web/button/filled-tonal-button.js";
 import "@material/web/divider/divider.js";
@@ -50,7 +50,7 @@ const AdminLanding = () => {
         </p>
 
         
-          {toggle == false ? <Login /> : <SignUp />}
+          {toggle == false ? <AdminLogin /> : <AdminSignUp />}
           <md-divider></md-divider>
           <md-filled-tonal-button onClick={handleToggle} id="button">
             {" "}

@@ -761,7 +761,7 @@ button {
   text-align: center;
   margin-top: 0px;
   margin-right: 0;
-  margin-bottom: 0px;
+  margin-bottom: 2px;
   margin-left: 0; 
 }
 
@@ -773,9 +773,8 @@ button {
   line-height: 1.66;
   letter-spacing: 0.03333em;
   text-align: left;
-  margin-top: 0px;
-  margin-right: 0;
-  margin-bottom: 0px;
+
+  margin-bottom: 5px;
   margin-left: 0;
 }
 

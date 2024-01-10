@@ -2,13 +2,13 @@ import "@material/web/textfield/outlined-text-field.js";
 import "@material/web/button/outlined-button.js";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../../FireBase";
+import { auth, db } from "../../../../FireBase";
 import { useLocation, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { useState } from "react";
 import { TextField } from "@mui/material";
 
-const Login = () => {
+const AdminLogin = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [error, setError] = useState(false);
@@ -71,4 +71,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;

@@ -1,4 +1,3 @@
-import { Select, TextField, MenuItem, FormHelperText } from "@mui/material";
 import { useState, useEffect } from "react";
 import "@material/web/chips/filter-chip.js";
 import { eventTagList } from "../../../../lists/EventTagsList";
@@ -25,8 +24,6 @@ const PersonalizitionDetails = (props) => {
   useEffect(() => {
     setSelectedTags(selectedTags);
   }, [selectedTags]);
-
- 
 
   const handleValidation = async () => {
     let errors = {};

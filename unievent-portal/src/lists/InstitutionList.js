@@ -1,7 +1,7 @@
 export const institutionsList = [
-  { name: "INTI International University" },
-  { name: "MILA University" },
-  { name: "Nilai University" },
-  { name: "Universiti Sains Islam Malaysia" },
+  { name: "INTI" },
+  { name: "MILA" },
+  { name: "Nilai" },
+  { name: "USIM" },
   { name: "Other" },
   ];

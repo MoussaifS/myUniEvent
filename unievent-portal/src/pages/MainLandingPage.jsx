@@ -17,7 +17,7 @@ const MainLandingPage = () => {
   };
   return (
     <div className="df-c">
-      <Nav login={true} />
+      <Nav login />
       <Container maxWidth="lg" id="main-container" sx={{ height: "100%" }}>
         <div>
           <div className="banerText">
@@ -35,7 +35,7 @@ const MainLandingPage = () => {
             </div>
             <span className="purple">University Events</span>
             <span> Made Easy with </span>
-            <span className="purple">✨ myUniEvent ✨ </span>
+            <span className="purple">✨ Uni Event ✨ </span>
           </div>
         </div>
       </Container>

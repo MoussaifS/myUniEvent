@@ -1,5 +1,4 @@
-import { Select, MenuItem, FormHelperText } from "@mui/material";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { majorList } from "../../../../lists/MajorList";
 import { institutionsList } from "../../../../lists/InstitutionList";
 import "@material/web/select/select-option.js";
@@ -10,8 +9,6 @@ import {
   query,
   where,
   getDocs,
-  orderBy,
-  limit,
 } from "firebase/firestore";
 
 const UniversityDetails = (props) => {
@@ -36,6 +33,7 @@ const UniversityDetails = (props) => {
 
       const eventInfoSnapshot = await getDocs(eventDataQuery);
       eventInfoSnapshot.docs.map((doc) => setUniID(doc.id));
+      console.log(uniID)
     } catch (error) {
       console.log("eat a fat dick and fix it:", error);
     }
@@ -62,7 +60,6 @@ const UniversityDetails = (props) => {
         major: major,
         universityID: uniID,
       });
-
       console.log(props.response);
     } else {
       console.log("Validation errors:", errors);

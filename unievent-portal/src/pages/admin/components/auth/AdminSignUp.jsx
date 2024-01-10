@@ -1,12 +1,12 @@
-import { auth, db } from "../../FireBase";
+import { auth, db } from "../../../../FireBase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState , useEffect } from "react";
-import PersonalDetails from "../../pages/admin/components/create_admin_form/PersonalDetails";
-import UniversityDetails from "../../pages/admin/components/create_admin_form/UniverstiyDetails";
+import PersonalDetails from "../create_admin_form/PersonalDetails";
+import UniversityDetails from "../create_admin_form/UniverstiyDetails";
 import { setDoc, doc} from "firebase/firestore";
 
 
-const SignUp = () => {
+const CreateAdminForm = () => {
   const [submited, setSubmited] = useState(false);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [response, setResponse] = useState({});
@@ -25,8 +25,6 @@ const SignUp = () => {
         console.log('dd')
 
       })
-      
-      
       
           const UniOrganizer = {
             stundetID : organizerCredential.user.uid,
@@ -80,8 +78,6 @@ const SignUp = () => {
         />
       </div>
       
-
-
       <div
       id="form-container-create"
       style={currentStepIndex == 1 ? {} : { display: "none" }}
@@ -100,4 +96,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default CreateAdminForm;

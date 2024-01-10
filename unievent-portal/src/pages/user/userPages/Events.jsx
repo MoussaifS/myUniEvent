@@ -35,7 +35,7 @@ const Events = () => {
 
   return (
     <div>
-    <Nav/>
+    <Nav login/>
       <div>
         <span onClick={() => handleTabClick(0)}>Explore</span>
         <span onClick={() => handleTabClick(1)}>Attending</span>

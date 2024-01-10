@@ -1,6 +1,6 @@
 import { getAuth,  signInWithPopup, OAuthProvider } from "firebase/auth";
 import { useState, useRef } from "react";
-import Login from "../../../components/auth/Login";
+import UserLogin from "../components/auth/UserLogin";
 import { Typewriter } from "react-simple-typewriter";
 import Nav from "../../../components/Nav";
 
@@ -32,7 +32,7 @@ const UserAuth = () => {
           <h1 className="auth-bannerText-purple">University Events</h1>
         </div>
 
-        {toggle == false ? <Login /> : <CreateUserForm />}
+        {toggle == false ? <UserLogin /> : <CreateUserForm />}
         <md-divider></md-divider>
         <md-filled-tonal-button onClick={handleToggle} id="button">
           {toggle == false ? "Create new account" : "I have account"}
