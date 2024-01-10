@@ -1,12 +1,6 @@
+import { useState } from "react";
 import Nav from "../../../components/Nav";
 import CardContainer from "../components/CardContainer";
-import "@material/web/tabs/tabs.js";
-import "@material/web/tabs/primary-tab.js";
-import { useState } from "react";
-import { Box, Tabs, Tab} from "@mui/material";
-
-
-
 
 const Events = () => {
   const [activeTab, setActiveTab] = useState(0);

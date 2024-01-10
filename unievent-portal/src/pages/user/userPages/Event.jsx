@@ -1,25 +1,35 @@
+import { useState, useEffect, useRef } from "react";
+import { getDocs, query, collection, where, addDoc, setDoc, doc, getDoc, documentId} from "firebase/firestore";
+import { db } from "../../../FireBase";
+import { format } from "date-fns";
+import { useParams, Link, useLocation, useNavigate, useSearchParams,} from "react-router-dom";
+import { google } from "calendar-link";
+import ShowMoreText from "react-show-more-text";
+import Cookies from "universal-cookie";
 import Nav from "../../../components/Nav";
+import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
+import locationIcon from "../../../assets/location-pin-svgrepo-com(1).svg";
 import "@material/web/tabs/tabs.js";
 import "@material/web/tabs/primary-tab.js";
-import locationIcon from "../../../assets/location-pin-svgrepo-com(1).svg";
-import ShowMoreText from "react-show-more-text";
-import { useParams } from "react-router-dom";
 import "@material/web/chips/suggestion-chip.js";
-import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
-import { useSearchParams } from "react-router-dom";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-
-import { getDocs, query, collection, where, addDoc , setDoc,  doc, getDoc, } from "firebase/firestore";
-import { db } from "../../../FireBase";
-import { useState, useEffect } from "react";
-import { format } from "date-fns";
-import { google } from "calendar-link";
+import "@material/web/button/text-button.js";
+import "@material/web/dialog/dialog.js";
+import "@material/web/fab/branded-fab.js";
 
 const Events = () => {
+  const inputRef = useRef(null);
+
   const title = useParams();
   const [event, setEvent] = useState(null);
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [user, setUser] = useState();
+  const [errorMessage , setErrorMessage] = useState("")
+  const [attending , setAttending] = useState(false)
+  const cookies = new Cookies();
+  const uid = cookies.get("uid");
+
+
 
   const fetchEventData = async () => {
     try {
@@ -34,7 +44,19 @@ const Events = () => {
     }
   };
 
-  const handleCalender = () => {handleAttending
+  const fetchUserData = async () => {
+    const docRef = doc(db, "users", uid);
+    try {
+      await getDoc(docRef).then((docSnapshot) => {
+        setUser(docSnapshot.data());
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleCalender = () => {
+    handleAttending;
     const startTime = `${event.startDate} ${event.startTime} +08`;
     const calenderUrl = {
       title: event.title,
@@ -46,19 +68,65 @@ const Events = () => {
     window.open(google(calenderUrl), "_blank");
   };
 
-  console.log(event)
+  
 
-  const handleAttending = async() => {
-      
-    // const attendee = {
 
-    // } 
 
-    // await setDoc(doc(db, `events/${docId}/attendees`,  response.studentID), );
+ 
 
+
+
+  const fetchUserHistory = async () => {
+    const eventsRef = collection(db, "users", uid, "events"); // Subcollection reference
+    const eventDocRef = doc(eventsRef, id); // Reference to the specific document in the subcollection
+    try {
+      const eventDocSnapshot = await getDoc(eventDocRef);
+      setAttending(eventDocSnapshot.exists());
+    } catch (error) {
+      console.error("Error fetching user history:", error);
+    }
+  };
+  
+  
+
+
+
+
+  const handleAttending = async () => {
+    if (uid) {
+      const attendeeInfo = {
+        name: user.fullName,
+        university: user.university,
+        major: user.major,
+        gender: user.gender,
+        email: user.email,
+      };
+      const eventInfo = {
+        title: event.title,
+        fees: event.fees,
+        id: event.docId,
+        image: event.image,
+        startDate: event.startDate,
+        startTime: event.startTime,
+      };
+        try {
+          await setDoc( doc(db, `events/${event.docId}/attendees`, `${uid}`), attendeeInfo );
+          await setDoc( doc(db, `organizer/${event.adminID}/events/${id}/attendees`, `${uid}`),attendeeInfo);
+          await setDoc( doc(db, `users/${uid}/events`, `${id}`), eventInfo);
+        } catch (error) {
+          console.log(error)
+          handleOpenFormClick();
+        }
+    }
+  };
+
+  function handleOpenFormClick() {
+    inputRef.current.show();
   }
 
-
+  function handleCloseFormClick() {
+    inputRef.current.close();
+  }
 
   const handleContact = () => {
     const message =
@@ -70,17 +138,14 @@ const Events = () => {
 
   useEffect(() => {
     fetchEventData();
+    fetchUserData();
+    fetchUserHistory()
   }, [id]);
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  // http://localhost:5173/event/QAUpjRks63?tag=Sports+and+activity
-
-  // http://localhost:5173/events/Guest%20Speakers
-
   const handleTagPrams = (e) => {
-    console.log(e.target.label);
     const tag = e.target.label;
     const url = `/events/?tag=${tag.split(" ").join("+")}`;
     navigate(url, { state: { from: location } });
@@ -188,9 +253,19 @@ const Events = () => {
             </div>
 
             <div>
-              <a id="event-card-attend-btn" onClick={handleAttending}>
+              <a id={attending ?   'event-card-attend-btn': 'event-card-attend-btn'} onClick={handleAttending}>
                 Attend
               </a>
+
+              
+              <md-dialog className="zi-99" ref={inputRef}>
+                <div className="df-c" slot="content" method="dialog">
+                      plz log in
+                  <md-outlined-button onClick={handleCloseFormClick}>
+                    close
+                  </md-outlined-button>
+                </div>
+              </md-dialog>
             </div>
           </div>
         </div>

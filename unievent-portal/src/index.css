@@ -939,6 +939,24 @@ button {
 }
 
 
+#event-card-attend-btn {
+  background:  #CCC2DB;
+  color:  #332D41;
+  font-weight: bolder;
+  font-size: x-large;
+  pointer-events: none;
+  width: 250px;
+  display: inline-flex;
+  min-height: 2.4rem;
+  padding: 0.4rem 0.8rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 0.4rem;
+}
+
+
 
 #suggestion-chip{
   

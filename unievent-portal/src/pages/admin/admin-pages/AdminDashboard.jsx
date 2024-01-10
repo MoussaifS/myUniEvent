@@ -26,7 +26,6 @@ const AdminDashboard = () => {
   }
 
   const fetchOrginizerData = async () => {
-   
     const docRef = doc(db, 'organizer', uid);
     await getDoc(docRef).then((docSnapshot) => {
         if (docSnapshot.exists) {
