@@ -9,7 +9,7 @@ import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
 import { useSearchParams } from "react-router-dom";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { getDocs, query, collection, where } from "firebase/firestore";
+import { getDocs, query, collection, where, addDoc , setDoc,  doc, getDoc, } from "firebase/firestore";
 import { db } from "../../../FireBase";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
@@ -46,7 +46,15 @@ const Events = () => {
     window.open(google(calenderUrl), "_blank");
   };
 
-  const handleAttending = () => {
+  console.log(event)
+
+  const handleAttending = async() => {
+      
+    // const attendee = {
+
+    // } 
+
+    // await setDoc(doc(db, `events/${docId}/attendees`,  response.studentID), );
 
   }
 
