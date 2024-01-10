@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { majorList } from "../../../../lists/MajorList";
 import { institutionsList } from "../../../../lists/InstitutionList";
 import "@material/web/select/select-option.js";
@@ -24,13 +24,13 @@ const UniversityDetails = (props) => {
   }
 
   const fetchUniID = async () => {
+    console.log(university)
+
     try {
-      console.log(university);
       const eventDataQuery = query(
         collection(db, "university"),
         where("uniName", "==", university)
       );
-
       const eventInfoSnapshot = await getDocs(eventDataQuery);
       eventInfoSnapshot.docs.map((doc) => setUniID(doc.id));
       console.log(uniID)
@@ -38,6 +38,10 @@ const UniversityDetails = (props) => {
       console.log("eat a fat dick and fix it:", error);
     }
   };
+
+  useEffect(()=> {
+    fetchUniID()
+  } , [university])
 
   const handleValidation = async () => {
     let errors = {};

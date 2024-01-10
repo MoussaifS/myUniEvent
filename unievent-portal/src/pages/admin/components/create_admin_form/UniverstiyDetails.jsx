@@ -7,7 +7,6 @@ import "@material/web/select/outlined-select.js";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../../../FireBase.jsx";
 import { useEffect, useState } from "react";
-import { Await } from "react-router-dom";
 
 const UniversityDetails = (props) => {
   const [role, setRole] = useState(null);

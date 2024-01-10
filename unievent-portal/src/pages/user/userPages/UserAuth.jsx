@@ -6,7 +6,7 @@ import Nav from "../../../components/Nav";
 
 
 
-import CreateUserForm from "../components/CreateUserForm";
+import CreateUserForm from "../components/UserSignUp";
 const UserAuth = () => {
   const [toggle, setToggle] = useState(false);
   const handleToggle = () => {

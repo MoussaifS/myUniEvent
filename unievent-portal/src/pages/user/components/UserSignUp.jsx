@@ -25,9 +25,9 @@ const CreateUserForm = () => {
     )
       .then(async (userCredential) => {
         delete response.password;
-        await setDoc(doc(db, "users", userCredential.user.uid), response);
-
         response.studentID = userCredential.user.uid;
+
+        await setDoc(doc(db, "users", userCredential.user.uid), response);
         console.log(response.uniID);
         const UniStudent = {
           stundetID: response.studentID,
@@ -39,8 +39,6 @@ const CreateUserForm = () => {
           doc(db, `university/${response.uniID}/students`, response.studentID),
           UniStudent
         );
-
-        
         window.location.reload(true);
       })
       .catch((error) => {
@@ -50,8 +48,6 @@ const CreateUserForm = () => {
           alert("The email address is not valid.");
         } else if (error.code == "auth/operation-not-allowed") {
           alert("Operation not allowed.");
-        } else if (error.code == "auth/weak-password") {
-          alert("The password is too weak.");
         }
       });
   };
