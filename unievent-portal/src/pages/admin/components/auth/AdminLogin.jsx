@@ -18,8 +18,8 @@ const AdminLogin = () => {
     signInWithEmailAndPassword(auth, e.email, e.password)
       .then(() => {
         const cookies = new Cookies();
-        cookies.set("email", e.email, { path: "/" });
-        cookies.set("uid", auth.currentUser.uid, { path: "/" });
+        cookies.set("a_email", e.email, { path: "/" });
+        cookies.set("a_id", auth.currentUser.uid, { path: "/" });
         navigate("/admin/dashboard", { replace: true, state: { from: location } });
       })
       .catch(() => {

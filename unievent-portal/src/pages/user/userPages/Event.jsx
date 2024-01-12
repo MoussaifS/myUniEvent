@@ -29,7 +29,7 @@ const Events = () => {
   const cookies = new Cookies();
   const uid = cookies.get("uid");
 
-
+console.log(cookies.get("uid") == null)
 
   const fetchEventData = async () => {
     try {
@@ -56,6 +56,11 @@ const Events = () => {
   };
 
   const handleCalender = () => {
+
+    if(uid == null){
+      inputRef.current.show();
+    }
+
     handleAttending;
     const startTime = `${event.startDate} ${event.startTime} +08`;
     const calenderUrl = {
@@ -132,7 +137,7 @@ const Events = () => {
     const message =
       `🌟I hope this message finds all well ${event.adminClub}%0a` +
       `had a few queries regarding the *${event.title}* event and would love to discuss them further.`;
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=${event.adminPhone}&text=${message}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=+60${event.adminPhone}&text=${message}`;
     window.open(whatsappUrl, "_blank");
   };
 
@@ -141,6 +146,8 @@ const Events = () => {
     fetchUserData();
     fetchUserHistory()
   }, [id]);
+
+  
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -252,15 +259,16 @@ const Events = () => {
               <span className="fb">FROM {event.fees} RM</span>
             </div>
 
-            <div>
+            <div>{
+              
+
+            }
               <a id={attending ?   'event-card-attend-btn': 'event-card-attend-btn'} onClick={handleAttending}>
                 Attend
               </a>
-
-              
               <md-dialog className="zi-99" ref={inputRef}>
                 <div className="df-c" slot="content" method="dialog">
-                      plz log in
+                      <h3>You need to log in to attend</h3>
                   <md-outlined-button onClick={handleCloseFormClick}>
                     close
                   </md-outlined-button>

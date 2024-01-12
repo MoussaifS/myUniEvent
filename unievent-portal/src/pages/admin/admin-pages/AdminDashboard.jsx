@@ -1,10 +1,13 @@
 import { useState, useRef , useEffect } from "react";
 import Nav from "../../../components/Nav";
-import { db } from "../../../FireBase"
+import { db ,auth } from "../../../FireBase"
 import {doc, getDoc } from "firebase/firestore";
 import Cookies from "universal-cookie";
 import AdminCardContainer from "../components/AdminCardContainer";
 import CreateEventForm from "../components/CreateEventForm";
+import { onAuthStateChanged } from "firebase/auth";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import "@material/web/dialog/dialog.js";
 import "@material/web/button/outlined-button.js";
 import "@material/web/fab/fab.js";
@@ -14,8 +17,11 @@ import "@material/web/ripple/ripple.js";
 const AdminDashboard = () => {
   const inputRef = useRef(null);
   const cookies = new Cookies();
-  const uid = cookies.get("uid");
+  const aid = cookies.get("a_id");
   const [admin , setAdmin] = useState(null) 
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   function handleOpenFormClick() {
     inputRef.current.show();
@@ -26,7 +32,7 @@ const AdminDashboard = () => {
   }
 
   const fetchOrginizerData = async () => {
-    const docRef = doc(db, 'organizer', uid);
+    const docRef = doc(db, 'organizer', aid);
     await getDoc(docRef).then((docSnapshot) => {
         if (docSnapshot.exists) {
             setAdmin(docSnapshot.data());            
@@ -40,6 +46,11 @@ const AdminDashboard = () => {
   useEffect(()=> {
     fetchOrginizerData()
   } , [])
+
+  
+    
+ 
+
 
   return (
     <div className="df-c">

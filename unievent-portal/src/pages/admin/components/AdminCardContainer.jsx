@@ -10,8 +10,8 @@ const AdminCardContainer = (props) => {
   const [events, setEvents] = useState([]);
   const [admin , setAdmin] = useState(null)
   const cookies = new Cookies();
-  const userEmail = cookies.get("email");
-  const uid = cookies.get("uid");
+  const userEmail = cookies.get("a-email");
+  const uid = cookies.get("a_id");
   const [state, setState] = useState(false);
   const [fetch, setFetch] = useState(false);
 

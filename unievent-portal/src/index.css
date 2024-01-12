@@ -863,6 +863,7 @@ button {
   padding: 10px;
   justify-content: center;
   border-radius: 20px;
+  text-wrap: nowrap;
 }
 
 
