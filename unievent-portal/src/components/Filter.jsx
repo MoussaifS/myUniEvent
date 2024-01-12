@@ -5,7 +5,7 @@ import "@material/web/chips/suggestion-chip.js";
 import "@material/web/chips/filter-chip.js";
 import "@material/web/switch/switch.js";
 import { useSearchParams } from "react-router-dom";
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 
@@ -36,33 +36,19 @@ const Filter = (props) => {
     }
   };
 
-
-  useEffect(() => {
-    
-  }, [searchParams]);
-  
+  useEffect(() => {}, [searchParams]);
 
   const [expanded, setExpanded] = useState(false);
-
-
-
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-
-  const handleClearPrams = () =>  {
-    searchParams.delete("tag")
+  const handleClearPrams = () => {
+    searchParams.delete("tag");
   };
 
-  
-  
-
   // Variable to store the currently selected tag
-
-
-
 
   return (
     <div id="duck" className="mb-25">
@@ -72,31 +58,14 @@ const Filter = (props) => {
         onChange={handleChange("panel1")}
       >
         <AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
-          <div>Filters:
-          
-          
-          
-          
-          
-          
-          {
-            selectedTags || searchParams.get("tag")?   <md-input-chip  lable={selectedTags? 232  : searchParams.get("tag")} onClick={()=>handleClearPrams()}></md-input-chip>  : null
-             
-
-          }
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
+          <div>
+            Filters:
+            {selectedTags || searchParams.get("tag") ? (
+              <md-input-chip
+                lable={selectedTags ? 232 : searchParams.get("tag")}
+                onClick={() => handleClearPrams()}
+              ></md-input-chip>
+            ) : null}
           </div>
         </AccordionSummary>
         <AccordionDetails>
@@ -109,7 +78,6 @@ const Filter = (props) => {
                 onClick={(e) => {
                   handleTag(e);
                 }}
-                
               >
                 {" "}
               </md-filter-chip>

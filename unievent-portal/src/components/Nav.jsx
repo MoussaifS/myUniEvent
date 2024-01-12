@@ -16,7 +16,6 @@ const Nav = (props) => {
   const [userEmail, setUserEmail] = useState(null);
   // setUserEmail(emailCookie ? null : emailCookie)
 
-  console.log(props)
   useEffect(() => {
     setUserEmail(emailCookie);
   }, [emailCookie]);

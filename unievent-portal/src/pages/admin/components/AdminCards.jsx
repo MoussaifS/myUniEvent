@@ -9,7 +9,9 @@ import "@material/web/icon/icon.js";
 import "@material/web/button/outlined-button.js";
 import "@material/web/iconbutton/outlined-icon-button.js";
 import "@material/web/iconbutton/filled-tonal-icon-button.js";
-import DeleteIcon from "../../../../src/assets/delete_icon.svg"
+import DeleteIcon from "../../../../src/assets/delete_icon.svg";
+import { Typography ,Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { useState, useEffect } from "react";
 
 import { format } from "date-fns";
 import ShowMoreText from "react-show-more-text";
@@ -20,6 +22,17 @@ import { ref, deleteObject, getStorage } from "firebase/storage";
 import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
 
 const AdminCards = (props) => {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+  const handleClearPrams = () => {
+    searchParams.delete("tag");
+  };
+  console.log('jj')
+
   const deleteEvent = function () {
     const storage = getStorage();
     console.log("in func");
@@ -95,6 +108,42 @@ const AdminCards = (props) => {
         </md-outlined-icon-button>
 
         <ShareWhatsappBtn {...props} />
+      </div>
+      <div>
+        <Accordion
+          className="ddddd"
+          expanded={expanded === "panel1"}
+          onChange={handleChange("panel1")}
+        >
+          <AccordionSummary
+            aria-controls="panel1bh-content"
+            id="panel1bh-header"
+          >
+          <Typography level="h4" noWrap={false} variant="soft">
+          Event analytics
+              </Typography>
+
+           
+          </AccordionSummary>
+          <AccordionDetails>
+            <div>
+              <div id="filter-secondary-span">Attendance Metrics:</div>
+              <div id="filter-Upcoming">
+                dfdfdfdfdfdfdfdf
+              </div>
+            </div>
+          </AccordionDetails>
+
+          <AccordionDetails>
+            <div id="filter-secondary-span">Tags:</div>
+            <div id="card-horzintal-scroll">
+             ererrererre
+            </div>
+          </AccordionDetails>
+          <div>
+            <span id="filter-btn">Download CSV Sheet</span>
+          </div>
+        </Accordion>
       </div>
     </Card>
   );
