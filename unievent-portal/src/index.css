@@ -972,3 +972,30 @@ button {
 .fb{
   font-weight: bolder;
 }
+
+#tabs{
+  display: flex;
+  justify-content: space-around;
+  padding: 8px;
+  background-color: #CCC2DB;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+
+#tabs-btns{
+    font-size: larger;
+    font-weight: bolder;
+    background-color: #4D3D75;
+    color: #E9DDFF;
+    padding: 11px;
+    border-radius: 20px;
+}
+
+#attending-card-details{
+  display: flex;
+  text-align: left;
+  justify-content: center;
+  margin-left: 5px;
+  flex-direction: column;
+}

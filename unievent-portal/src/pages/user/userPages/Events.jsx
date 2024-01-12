@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Nav from "../../../components/Nav";
 import CardContainer from "../components/CardContainer";
-
+import AttendingHistory from "./AttendingHistory";
 const Events = () => {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -17,10 +17,7 @@ const Events = () => {
         );
       case 1:
         return (
-          <div>
-            <h2>Tab 2 Content</h2>
-            <p>Content for Tab 2 goes here...</p>
-          </div>
+          <AttendingHistory/>
         );
       default:
         return null;
@@ -30,10 +27,9 @@ const Events = () => {
   return (
     <div>
     <Nav login/>
-      <div>
-        <span onClick={() => handleTabClick(0)}>Explore</span>
-        <span onClick={() => handleTabClick(1)}>Attending</span>
-        {/* Add more buttons for additional tabs */}
+      <div id="tabs">
+        <span id="tabs-btns" onClick={() => handleTabClick(0)}>Explore</span>
+        <span id="tabs-btns" onClick={() => handleTabClick(1)}>Attending</span>
       </div>
       <div>
         {renderTabContent()}
