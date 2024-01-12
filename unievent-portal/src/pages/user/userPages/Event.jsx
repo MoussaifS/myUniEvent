@@ -45,7 +45,6 @@ const Events = () => {
   const cookies = new Cookies();
   const uid = cookies.get("uid");
 
-  console.log(cookies.get("uid") == null);
 
   const fetchEventData = async () => {
     try {
@@ -70,6 +69,9 @@ const Events = () => {
       console.log(error);
     }
   };
+
+
+
 
   const handleCalender = () => {
     if (uid == null) {
@@ -97,8 +99,27 @@ const Events = () => {
     }
   };
 
+
+  console.log(user)
+  console.log(event)
+
+
+
+
   const handleAttending = async () => {
-    if (uid) {
+
+  
+
+    if (uid == null) {
+      setErrorMessage("You need to log in to attend this event")
+      handleOpenFormClick()
+    } else if(event.adminUniID != user.universityID && event.audience == "Exclusive"){
+      setErrorMessage(`This event is Exclusive to ${event.adminUni} mebmers only 😔`)
+      handleOpenFormClick()
+    }
+    else
+
+    {
       const attendeeInfo = {
         name: user.fullName,
         university: user.university,
@@ -277,14 +298,13 @@ const Events = () => {
                 <a id= "event-card-attended-btn" onClick={handleAttending}> Attended </a> 
                 :
                 <a id= "event-card-attend-btn" onClick={handleAttending}> Attend </a> 
-                
               }
 
 
 
               <md-dialog className="zi-99" ref={inputRef}>
                 <div className="df-c" slot="content" method="dialog">
-                  <h3>You need to log in to attend</h3>
+                  <h3 className="ta-c" >{errorMessage}</h3>
                   <md-outlined-button onClick={handleCloseFormClick}>
                     close
                   </md-outlined-button>

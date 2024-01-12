@@ -1000,3 +1000,7 @@ button {
   margin-left: 5px;
   flex-direction: column;
 }
+
+.ta-c{
+  text-align: center;
+}
