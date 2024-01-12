@@ -940,9 +940,9 @@ button {
 }
 
 
-#event-card-attend-btn {
-  background:  #CCC2DB;
-  color:  #332D41;
+#event-card-attended-btn {
+  color:  #CCC2DB;
+  background:  #332D41;
   font-weight: bolder;
   font-size: x-large;
   pointer-events: none;

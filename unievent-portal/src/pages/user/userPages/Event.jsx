@@ -1,8 +1,24 @@
 import { useState, useEffect, useRef } from "react";
-import { getDocs, query, collection, where, addDoc, setDoc, doc, getDoc, documentId} from "firebase/firestore";
+import {
+  getDocs,
+  query,
+  collection,
+  where,
+  addDoc,
+  setDoc,
+  doc,
+  getDoc,
+  documentId,
+} from "firebase/firestore";
 import { db } from "../../../FireBase";
 import { format } from "date-fns";
-import { useParams, Link, useLocation, useNavigate, useSearchParams,} from "react-router-dom";
+import {
+  useParams,
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { google } from "calendar-link";
 import ShowMoreText from "react-show-more-text";
 import Cookies from "universal-cookie";
@@ -24,12 +40,12 @@ const Events = () => {
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const [user, setUser] = useState();
-  const [errorMessage , setErrorMessage] = useState("")
-  const [attending , setAttending] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("");
+  const [attended, setAttended] = useState(false);
   const cookies = new Cookies();
   const uid = cookies.get("uid");
 
-console.log(cookies.get("uid") == null)
+  console.log(cookies.get("uid") == null);
 
   const fetchEventData = async () => {
     try {
@@ -56,12 +72,9 @@ console.log(cookies.get("uid") == null)
   };
 
   const handleCalender = () => {
-
-    if(uid == null){
+    if (uid == null) {
       inputRef.current.show();
     }
-
-    handleAttending;
     const startTime = `${event.startDate} ${event.startTime} +08`;
     const calenderUrl = {
       title: event.title,
@@ -73,29 +86,16 @@ console.log(cookies.get("uid") == null)
     window.open(google(calenderUrl), "_blank");
   };
 
-  
-
-
-
- 
-
-
-
   const fetchUserHistory = async () => {
     const eventsRef = collection(db, "users", uid, "events"); // Subcollection reference
     const eventDocRef = doc(eventsRef, id); // Reference to the specific document in the subcollection
     try {
       const eventDocSnapshot = await getDoc(eventDocRef);
-      setAttending(eventDocSnapshot.exists());
+      setAttended(eventDocSnapshot.exists());
     } catch (error) {
       console.error("Error fetching user history:", error);
     }
   };
-  
-  
-
-
-
 
   const handleAttending = async () => {
     if (uid) {
@@ -114,14 +114,24 @@ console.log(cookies.get("uid") == null)
         startDate: event.startDate,
         startTime: event.startTime,
       };
-        try {
-          await setDoc( doc(db, `events/${event.docId}/attendees`, `${uid}`), attendeeInfo );
-          await setDoc( doc(db, `organizer/${event.adminID}/events/${id}/attendees`, `${uid}`),attendeeInfo);
-          await setDoc( doc(db, `users/${uid}/events`, `${id}`), eventInfo);
-        } catch (error) {
-          console.log(error)
-          handleOpenFormClick();
-        }
+      try {
+        await setDoc(
+          doc(db, `events/${event.docId}/attendees`, `${uid}`),
+          attendeeInfo
+        );
+        await setDoc(
+          doc(
+            db,
+            `organizer/${event.adminID}/events/${id}/attendees`,
+            `${uid}`
+          ),
+          attendeeInfo
+        );
+        await setDoc(doc(db, `users/${uid}/events`, `${id}`), eventInfo);
+      } catch (error) {
+        console.log(error);
+        handleOpenFormClick();
+      }
     }
   };
 
@@ -144,10 +154,8 @@ console.log(cookies.get("uid") == null)
   useEffect(() => {
     fetchEventData();
     fetchUserData();
-    fetchUserHistory()
+    fetchUserHistory();
   }, [id]);
-
-  
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -259,16 +267,24 @@ console.log(cookies.get("uid") == null)
               <span className="fb">FROM {event.fees} RM</span>
             </div>
 
-            <div>{
+            <div>
               
 
-            }
-              <a id={attending ?   'event-card-attend-btn': 'event-card-attend-btn'} onClick={handleAttending}>
-                Attend
-              </a>
+
+
+              {
+                attended ?
+                <a id= "event-card-attended-btn" onClick={handleAttending}> Attended </a> 
+                :
+                <a id= "event-card-attend-btn" onClick={handleAttending}> Attend </a> 
+                
+              }
+
+
+
               <md-dialog className="zi-99" ref={inputRef}>
                 <div className="df-c" slot="content" method="dialog">
-                      <h3>You need to log in to attend</h3>
+                  <h3>You need to log in to attend</h3>
                   <md-outlined-button onClick={handleCloseFormClick}>
                     close
                   </md-outlined-button>
