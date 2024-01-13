@@ -16,7 +16,10 @@ import { useState } from "react";
 import { format } from "date-fns";
 import ShowMoreText from "react-show-more-text";
 import { db } from "../../../FireBase";
-import { doc, deleteDoc, updateDoc, ref, deleteObject, getStorage } from "firebase/firestore";
+
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+
+import { ref, deleteObject, getStorage } from "firebase/storage";
 import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
 import EventAnalytics from "./EventAnalytics";
 
