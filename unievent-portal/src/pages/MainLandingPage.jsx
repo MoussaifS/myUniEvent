@@ -1,7 +1,6 @@
 import { Container } from "@mui/material";
 import "@material/web/divider/divider.js";
 import { Typewriter } from "react-simple-typewriter";
-import { Divider } from "antd";
 import CardContainer from "./user/components/CardContainer";
 import Nav from "../components/Nav";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -76,7 +75,6 @@ const MainLandingPage = () => {
         </p>
       </div>
 
-      <Divider />
       <span id="popular-events">Popular Events around You 🇲🇾</span>
       <CardContainer card={cards} landing={true} />
     </div>
