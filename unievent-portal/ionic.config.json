@@ -1,0 +1,7 @@
+{
+    "name": "unievent",
+    "integrations": {
+      "capacitor": {}
+    },
+    "type": "react"
+  }
