@@ -78,6 +78,8 @@ const handleApprovel = () =>{
   }
 }
 
+console.log(event)
+
 
 
   return (
@@ -105,11 +107,16 @@ const handleApprovel = () =>{
       <div id="card-btns">
 
         <md-filter-chip
-                label="Approve"
+                label={event.approved ?"Approved" : "Approve" }
                 elevated
+                selected={event.approved} 
                 onClick={(e) => {
                   handleApprovel(e);
-                }}
+        }}
+
+
+
+
         ></md-filter-chip>
             
 
