@@ -508,11 +508,12 @@ button {
 }
 
 #card-btns {
-  margin: 0px 5px 5px 0px;
+  margin: 5px ;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   gap: 10px;
+  align-items: center;
 }
 
 #card-container {
@@ -721,7 +722,7 @@ button {
 
 #whatsapp-btn {
   border: none; /* Remove borders */
-  padding: 10px 10px; /* Some padding */
+  padding: 8px; /* Some padding */
   cursor: pointer; /* Mouse pointer on hover */
   word-wrap: break-word;
   width: auto;

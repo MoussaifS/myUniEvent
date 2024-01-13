@@ -10,20 +10,26 @@ import "@material/web/button/outlined-button.js";
 import "@material/web/iconbutton/outlined-icon-button.js";
 import "@material/web/iconbutton/filled-tonal-icon-button.js";
 import DeleteIcon from "../../../../src/assets/delete_icon.svg";
-import { Typography ,Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import {
+  Typography,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+} from "@mui/material";
 import { useState, useEffect } from "react";
 
 import { format } from "date-fns";
 import ShowMoreText from "react-show-more-text";
 import { db } from "../../../FireBase";
-import { doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 
 import { ref, deleteObject, getStorage } from "firebase/storage";
 import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
 
 const AdminCards = (props) => {
   const [expanded, setExpanded] = useState(false);
-
+  const event = props.event
+  console.log(event)
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -31,7 +37,6 @@ const AdminCards = (props) => {
   const handleClearPrams = () => {
     searchParams.delete("tag");
   };
-  console.log('jj')
 
   const deleteEvent = function () {
     const storage = getStorage();
@@ -52,15 +57,31 @@ const AdminCards = (props) => {
       });
   };
 
-  return (
-    <Card sx={{ maxWidth: 700 }}>
-      <div className="fd-r">
-        <span id="span-card-date">
-          {format(new Date(props.event.startDate), "iii , LLL d")} •{" "}
-          {props.event.startTime}
-        </span>
-      </div>
 
+  // firebase v8
+
+// //firebase v9
+
+
+
+
+const handleApprovel = () =>{
+  try {
+    const updateEvent = async () => {
+      await updateDoc(doc(db, "events", `${event.docId}` ), { approved: true });
+      await updateDoc(doc(db, `organizer/${event.adminID}/events`, `${event.docId}` ), { approved: true });
+      await updateDoc(doc(db, `university/${event.adminUniID}/events`, `${event.docId}` ), { approved: true });
+    };
+      updateEvent();
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+
+  return (
+    <Card variant="outlined" sx={{ maxWidth: 700 }}>
       <div className="fd-r">
         <img src={props.event.image} width="150" height="150" />
         <div>
@@ -70,37 +91,29 @@ const AdminCards = (props) => {
               label={props.event.audience}
             ></md-suggestion-chip>
           </div>
+
+          <div className="m-10">
+            <span id="span-card-date">
+              {format(new Date(props.event.startDate), "iii , LLL d")} •{" "}
+              {props.event.startTime}
+            </span>
+          </div>
         </div>
       </div>
 
-      <div className="m-10">
-        <ShowMoreText
-          /* Default options */
-          lines={2}
-          more="Show more"
-          less="Show less"
-          className="content-css"
-          anchorClass="show-more-less-clickable"
-          expanded={false}
-          truncatedEndingComponent={"... "}
-        >
-          <p id="card-description">{props.event.description}</p>
-        </ShowMoreText>
-      </div>
-      <md-divider inset></md-divider>
-
-      <div className="df-c">
-        <div className="m-10">
-          <h4 className="m-5">Event Tags:</h4>
-          <md-chip-set>
-            {props.event.tags.map((tag, index) => (
-              <md-suggestion-chip key={index} label={tag}></md-suggestion-chip>
-            ))}
-          </md-chip-set>
-        </div>
-      </div>
-      <md-divider inset></md-divider>
+      
       <div id="card-btns">
+
+        <md-filter-chip
+                label="Approve"
+                elevated
+                onClick={(e) => {
+                  handleApprovel(e);
+                }}
+        ></md-filter-chip>
+            
+
+
         <md-outlined-icon-button onClick={() => deleteEvent()}>
           <md-icon>
             <img src={DeleteIcon} alt="delete" />
@@ -110,6 +123,17 @@ const AdminCards = (props) => {
         <ShareWhatsappBtn {...props} />
       </div>
       <div>
+
+
+
+
+
+
+
+
+
+
+
         <Accordion
           className="ddddd"
           expanded={expanded === "panel1"}
@@ -119,26 +143,71 @@ const AdminCards = (props) => {
             aria-controls="panel1bh-content"
             id="panel1bh-header"
           >
-          <Typography level="h4" noWrap={false} variant="soft">
-          Event analytics
-              </Typography>
+            <Typography level="h4" noWrap={false} variant="soft">
+              Details
+            </Typography>
+          </AccordionSummary>
 
-           
+          <div className="m-10">
+            <ShowMoreText
+              /* Default options */
+              lines={2}
+              more="Show more"
+              less="Show less"
+              className="content-css"
+              anchorClass="show-more-less-clickable"
+              expanded={false}
+              truncatedEndingComponent={"... "}
+            >
+              <p id="filter-secondary-span">{props.event.description}</p>
+            </ShowMoreText>
+          </div>
+
+          <div className="df-c">
+            <div className="m-10">
+              <h4 className="filter-secondary-span">Event Tags:</h4>
+              <md-chip-set>
+                {props.event.tags.map((tag, index) => (
+                  <md-suggestion-chip
+                    key={index}
+                    label={tag}
+                  ></md-suggestion-chip>
+                ))}
+              </md-chip-set>
+            </div>
+          </div>
+
+          <AccordionDetails>
+            <div id="filter-secondary-span">Tags:</div>
+            <div id="card-horzintal-scroll">ererrererre</div>
+          </AccordionDetails>
+          
+        </Accordion>
+      </div>
+      <div>
+        <Accordion
+          className="ddddd"
+          expanded={expanded === "panel2"}
+          onChange={handleChange("panel2")}
+        >
+          <AccordionSummary
+            aria-controls="panel1bh-content"
+            id="panel1bh-header"
+          >
+            <Typography level="h4" noWrap={false} variant="soft">
+              Event analytics
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <div>
               <div id="filter-secondary-span">Attendance Metrics:</div>
-              <div id="filter-Upcoming">
-                dfdfdfdfdfdfdfdf
-              </div>
+              <div id="filter-Upcoming">dfdfdfdfdfdfdfdf</div>
             </div>
           </AccordionDetails>
 
           <AccordionDetails>
             <div id="filter-secondary-span">Tags:</div>
-            <div id="card-horzintal-scroll">
-             ererrererre
-            </div>
+            <div id="card-horzintal-scroll">ererrererre</div>
           </AccordionDetails>
           <div>
             <span id="filter-btn">Download CSV Sheet</span>

@@ -23,7 +23,6 @@ import { google } from "calendar-link";
 import ShowMoreText from "react-show-more-text";
 import Cookies from "universal-cookie";
 import Nav from "../../../components/Nav";
-import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
 import locationIcon from "../../../assets/location-pin-svgrepo-com(1).svg";
 import "@material/web/tabs/tabs.js";
 import "@material/web/tabs/primary-tab.js";
@@ -74,9 +73,7 @@ const Events = () => {
 
 
   const handleCalender = () => {
-    if (uid == null) {
-      inputRef.current.show();
-    }
+   
     const startTime = `${event.startDate} ${event.startTime} +08`;
     const calenderUrl = {
       title: event.title,

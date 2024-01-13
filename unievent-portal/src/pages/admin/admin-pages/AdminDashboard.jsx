@@ -54,7 +54,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="df-c">
-      <Nav />
+      <Nav admin />
       <md-branded-fab
         label="Add New Event"
         id="createNewEvent-btn"

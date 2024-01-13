@@ -13,20 +13,15 @@ const Nav = (props) => {
   const location = useLocation();
   const cookies = new Cookies();
   const emailCookie = cookies.get("email");
-  const [userEmail, setUserEmail] = useState(null);
-  // setUserEmail(emailCookie ? null : emailCookie)
 
-  useEffect(() => {
-    setUserEmail(emailCookie);
-  }, [emailCookie]);
 
+ 
   const handleLogout = () => {
-    setUserEmail(null);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       auth.signOut().then(() => {
         console.log("Logged out successfully");
-        cookies.remove("userName");
         cookies.remove("email");
+        cookies.remove("uid");
         navigate("/", { replace: true, state: { from: location } });
       });
     });
@@ -36,6 +31,7 @@ const Nav = (props) => {
   const handlenavigation = (destination) => {
     navigate(`/${destination}`, { state: { from: location } });
   };
+
 
   return (
     <div id="nav">
@@ -49,8 +45,9 @@ const Nav = (props) => {
         )}
       </div>
 
+      
       <div>
-        {userEmail !== undefined ? (
+        {emailCookie !== undefined ? (
           <md-outlined-icon-button onClick={() => handleLogout()}>
             <md-icon>
               <img src={LogoutIcone} alt="Logout" />

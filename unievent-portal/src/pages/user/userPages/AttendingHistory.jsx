@@ -1,10 +1,8 @@
-import Card from "@mui/joy/Card";
-import AspectRatio from "@mui/joy/AspectRatio";
-import Chip from "@mui/joy/Chip";
-import Typography from "@mui/joy/Typography";
-import CardContent from "@mui/joy/CardContent";
-import { Link  ,useLocation , useNavigate } from "react-router-dom";
 
+import { Link  ,useLocation , useNavigate } from "react-router-dom";
+import {
+  Typography ,Card 
+} from "@mui/material";
 import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
 import { format } from "date-fns";
 import {
@@ -59,9 +57,8 @@ const AttendingHistory = () => {
           <Card className="fd-r" color="neutral" key={index} variant="outlined"  onClick={()=>handleRedirctEvent(event.id)}  >
             <div className="fd-r" key={index}>
          
-              <AspectRatio sx={{ width: 150 }}>
                 <img loading="lazy" src={event.image} width={150} />
-              </AspectRatio>
+             
               <div id="attending-card-details">
                 <Typography level="h4" noWrap={false} variant="soft">
                   this is the title{" "}
