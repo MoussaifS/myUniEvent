@@ -28,6 +28,7 @@
     "framer-motion": "^10.16.4",
     "generate-unique-id": "^2.0.3",
     "react": "^17.0.2",
+    "react-big-calendar": "^1.8.6",
     "react-client-session": "^0.0.8",
     "react-cookie": "^4.1.1",
     "react-day-picker": "^8.9.1",

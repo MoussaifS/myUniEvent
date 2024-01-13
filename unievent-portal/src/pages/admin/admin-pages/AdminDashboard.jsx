@@ -1,7 +1,7 @@
-import { useState, useRef , useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Nav from "../../../components/Nav";
-import { db ,auth } from "../../../FireBase"
-import {doc, getDoc } from "firebase/firestore";
+import { db, auth } from "../../../FireBase";
+import { doc, getDoc } from "firebase/firestore";
 import Cookies from "universal-cookie";
 import AdminCardContainer from "../components/AdminCardContainer";
 import CreateEventForm from "../components/CreateEventForm";
@@ -18,10 +18,8 @@ const AdminDashboard = () => {
   const inputRef = useRef(null);
   const cookies = new Cookies();
   const aid = cookies.get("a_id");
-  const [admin , setAdmin] = useState(null) 
-
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [admin, setAdmin] = useState(null);
+  const [fetch, setFetch] = useState(false);
 
   function handleOpenFormClick() {
     inputRef.current.show();
@@ -32,25 +30,20 @@ const AdminDashboard = () => {
   }
 
   const fetchOrginizerData = async () => {
-    const docRef = doc(db, 'organizer', aid);
+    const docRef = doc(db, "organizer", aid);
     await getDoc(docRef).then((docSnapshot) => {
-        if (docSnapshot.exists) {
-            setAdmin(docSnapshot.data());            
-        }else{
-          console.log('work harder')
-        }
+      if (docSnapshot.exists) {
+        setAdmin(docSnapshot.data());
+      } else {
+        console.log("work harder");
+      }
     });
+  };
 
-  }
- 
-  useEffect(()=> {
-    fetchOrginizerData()
-  } , [])
-
-  
-    
- 
-
+  useEffect(() => {
+    fetchOrginizerData();
+    setFetch(true);
+  }, []);
 
   return (
     <div className="df-c">
@@ -70,14 +63,13 @@ const AdminDashboard = () => {
       </md-branded-fab>
       <md-dialog className="zi-99" ref={inputRef}>
         <div className="df-c" slot="content" method="dialog">
-          <CreateEventForm  admin={admin} />
+          <CreateEventForm admin={admin} />
           <md-outlined-button onClick={handleCloseFormClick}>
             close
           </md-outlined-button>
         </div>
       </md-dialog>
-
-      <AdminCardContainer admin={admin} />
+      {fetch ? <AdminCardContainer admin={admin} /> : null}
     </div>
   );
 };
