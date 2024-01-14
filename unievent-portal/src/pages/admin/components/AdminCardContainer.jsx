@@ -13,13 +13,14 @@ const AdminCardContainer = (props) => {
   const cookies = new Cookies();
   const uid = cookies.get("a_id");
 
-  const fetchEventData = async () => {   
+  const fetchEventData = async (a) => { 
+    console.log(a.supervisor)  
     try {
       var eventDataQuery = null
-      if(admin.supervisor){
+      if(a.supervisor){
         eventDataQuery = await query(
           collection(db, "events"),
-          where("adminUniID", "==", admin.universityID),
+          where("adminUniID", "==", a.universityID),
           orderBy("startDate", "asc")
         );
       }else{
@@ -39,8 +40,9 @@ const AdminCardContainer = (props) => {
   };
 
   useEffect(() => {
-    fetchEventData();
     setAdmin(props.admin)
+    fetchEventData(admin);
+    
   }, []);
 
   return (
