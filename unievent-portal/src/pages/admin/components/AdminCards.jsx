@@ -28,10 +28,6 @@ const AdminCards = (props) => {
   const event = props.event;
   const admin = props.admin;
 
-
-  console.log(props)
-
-
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -173,7 +169,7 @@ const AdminCards = (props) => {
       </div>
       
 
-      <EventAnalytics docId={event.docId}/>
+      <EventAnalytics docId={event.docId} />
     </Card>
   );
 };

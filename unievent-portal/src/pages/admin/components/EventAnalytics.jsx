@@ -11,38 +11,54 @@ import { db } from "../../../FireBase";
 
 const EventAnalytics = (props) => {
   const [expanded, setExpanded] = useState(false);
+  const [audience, setAudience] = useState([]);
   const docId = props.docId;
+  let gender = [];
+  let attending = 0;
+  let university = []
+
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-
-  const [audience , setAudience] = useState([])
-
-  const fetchAudienceData = async (a) => {   
+  const fetchAudienceData = async (a) => {
     try {
       const audienceDataQuery = await query(
-          collection(db, `events/${docID}/attendees`),
-          orderBy("name", "asc")
-        );
-     
+        collection(db, `events/${docId}/attendees`),
+        orderBy("name", "asc")
+      );
       const audienceInfoSnapshot = await getDocs(audienceDataQuery);
-      console.log(audienceInfoSnapshot)
-      await setAudience(audienceInfoSnapshot.docs.map((doc) =>doc.data())  );
+      await setAudience(audienceInfoSnapshot.docs.map((doc) => doc.data()));
+
     } catch (error) {
       console.log("An error occurred:", error);
     }
-  };  
-
-  console.log(audience)
+  };
 
 
- useEffect(() => {
+  const [attendingMessage  , setAttendingMessage ] = useState('')
+  
+
+
+  
+
+  useEffect(() => {
     fetchAudienceData();
-  }, [props.admin]);
+    console.log(audience.length)
 
 
+    switch (audience.length){
+      case 1 : 
+        setAttendingMessage("1 student is attending your event.")
+        break
+      case  audience.length > 1 : 
+        setAttendingMessage(`${audience.length} students are attending your event.`)
+        break
+      default: 
+        setAttendingMessage('no attendees yet')
+    }
+  }, [expanded]);
 
   return (
     <div>
@@ -59,7 +75,9 @@ const EventAnalytics = (props) => {
         <AccordionDetails>
           <div>
             <div id="filter-secondary-span">Attendance:</div>
-            <div id="filter-Upcoming">dfdfdfdfdfdfdfdf</div>
+
+           
+            <div id="filter-Upcoming">{attendingMessage}</div>
           </div>
         </AccordionDetails>
 
