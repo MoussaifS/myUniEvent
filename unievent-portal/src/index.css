@@ -117,8 +117,6 @@ html {
 }
 
 #main-container {
-  display: flex;
-  flex-direction: row;
   border-radius: 25px;
   margin-bottom: 30px;
 }
@@ -191,8 +189,9 @@ html {
   }
 
   #app {
-    margin-right: 500px;
-    margin-left: 500px;
+    margin-right: 15%;
+    margin-left: 15%;
+
   }
 
   .banerText {
@@ -511,7 +510,7 @@ button {
 
 @media (min-width: 768px) { /* Target tablet-sized screens and larger */
   #card-container {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Create flexible rows for cards */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Create flexible rows for cards */
     flex-direction: row; /* Not needed for grid layout */
     justify-content: center;
     gap: 15px;
