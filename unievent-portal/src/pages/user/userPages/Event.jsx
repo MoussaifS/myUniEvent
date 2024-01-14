@@ -178,6 +178,7 @@ const Events = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+
   const handleTagPrams = (e) => {
     const tag = e.target.label;
     const url = `/events/?tag=${tag.split(" ").join("+")}`;

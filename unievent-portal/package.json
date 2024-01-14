@@ -16,6 +16,7 @@
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@material/web": "^1.1.1",
+    "@mui/icons-material": "^5.15.4",
     "@mui/material": "^5.15.4",
     "calendar-link": "^2.6.0",
     "classnames": "^2.5.1",

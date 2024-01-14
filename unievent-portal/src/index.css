@@ -38,10 +38,9 @@ html {
   margin-top: 10px;
 }
 
-.mmm{
+.mmm {
   background-color: red;
   margin: 20px;
-  
 }
 
 #card-description {
@@ -55,7 +54,7 @@ html {
   margin-bottom: 0px;
 }
 
-.red{
+.red {
   background-color: rebeccapurple;
 }
 
@@ -67,12 +66,9 @@ html {
   margin: 15px 0px 15px 0px;
 }
 
-
-
 .margin-left {
   margin-left: 10px;
 }
-
 
 #form-date-div {
   display: flex;
@@ -102,13 +98,12 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3),
+  box-shadow:
+    0px 1px 3px 0px rgba(0, 0, 0, 0.3),
     0px 4px 8px 3px rgba(0, 0, 0, 0.15);
 }
 
-
 #UserAuth-landing-input {
-  
   padding: 20px;
   max-width: 800px;
   display: flex;
@@ -116,7 +111,8 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3),
+  box-shadow:
+    0px 1px 3px 0px rgba(0, 0, 0, 0.3),
     0px 4px 8px 3px rgba(0, 0, 0, 0.15);
 }
 
@@ -133,7 +129,7 @@ html {
 
 .tag-chips {
   display: flex;
-  
+
   flex-wrap: nowrap;
   overflow-y: auto; /* Enable vertical scrollbar */
   padding: 8px;
@@ -171,8 +167,6 @@ html {
     flex-direction: column;
   }
 
-  
-
   #landing-desc-desktop {
     display: none;
   }
@@ -192,16 +186,14 @@ html {
     display: none;
   }
 
-  .auth-body{
+  .auth-body {
     height: 100vh;
-    
   }
 
-  #app{
+  #app {
     margin-right: 500px;
     margin-left: 500px;
   }
-
 
   .banerText {
     font-size: 50px;
@@ -217,7 +209,6 @@ html {
   gap: 5px;
 }
 
-
 .auth-bannerText {
   font-size: 1.5rem;
   font-weight: 800;
@@ -226,7 +217,7 @@ html {
   text-align: center;
 }
 
-.auth-bannerText-purple{
+.auth-bannerText-purple {
   color: #6750a4;
   font-size: 1.5rem;
   font-weight: 800;
@@ -238,17 +229,13 @@ html {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-
 }
 
-#details-forms{
+#details-forms {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
 }
-
-
-
 
 #card-title {
   margin: 0px 10px 0px 10px;
@@ -285,10 +272,10 @@ html {
   border-radius: 20px;
   margin-top: 5px;
   margin-bottom: 20px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
-
 
 #form-btn-back {
   border: 0.5px solid;
@@ -304,11 +291,10 @@ html {
   border-radius: 20px;
   margin-top: 5px;
   margin-bottom: 20px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
-
-
 
 .logo-admin {
   font-weight: lighter;
@@ -360,8 +346,6 @@ html {
   text-align: center;
 }
 
-
-
 .container {
   width: 940px;
   height: 100%;
@@ -375,9 +359,7 @@ html {
   background-color: #333333;
 }
 
-
-#form-container-create{
-
+#form-container-create {
 }
 .text-areabutton:focus {
   color: var(--m-3-sys-light-primary, #f6eeff);
@@ -400,7 +382,8 @@ html {
   border-radius: 10rem;
   margin-top: 15px;
   margin-bottom: 15px;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3),
+  box-shadow:
+    0px 1px 3px 0px rgba(0, 0, 0, 0.3),
     0px 4px 8px 3px rgba(0, 0, 0, 0.15);
   border: 0px;
   max-width: 320px;
@@ -508,7 +491,7 @@ button {
 }
 
 #card-btns {
-  margin: 5px ;
+  margin: 5px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -528,7 +511,7 @@ button {
   flex-direction: column;
 }
 
-.auth-body{
+.auth-body {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -563,22 +546,21 @@ button {
   margin-bottom: 0px;
 }
 
-.mtb-10
+
 
 #span-card-date {
-  margin: 10px;
+  margin: 4px;
   font-weight: bold;
   color: white;
   padding: 5px;
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 20px;
-  font-size: large;
+  font-size: small;
   background-color: #6750a4;
-  top: 0;
-  right: 0;
-  position: absolute;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  box-shadow:
+    rgba(0, 0, 0, 0.16) 0px 3px 6px,
+    rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .grid-container {
   display: grid;
@@ -640,7 +622,8 @@ button {
   padding: 5px;
   border-radius: 30px;
   margin-bottom: 5px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
@@ -650,7 +633,8 @@ button {
   cursor: pointer;
   display: inline-block;
   background-color: white;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   color: #4f378a;
   width: 80%;
@@ -678,12 +662,13 @@ button {
   position: relative;
   background-color: #f6eeff;
   border-radius: 20px;
-
+  width: 320px;
   margin-left: 10px;
   margin-right: 10px;
   padding-left: 5px;
   padding-right: 5px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
@@ -705,7 +690,6 @@ button {
   margin-bottom: 5px;
 }
 
-
 #card-tag-container {
   flex-direction: row;
   margin-top: 1px;
@@ -713,7 +697,7 @@ button {
   margin-bottom: 10px;
 }
 
-#card-tags{
+#card-tags {
   font-weight: bold;
   font-size: smaller;
   color: #332d41;
@@ -735,13 +719,11 @@ button {
   font-weight: bold;
 }
 
-
 .form-error-helper-text {
   margin: 0px;
   color: #690005;
   font-weight: bold;
-  font-size:small;
-
+  font-size: small;
 }
 
 .signup-helper-text {
@@ -754,7 +736,7 @@ button {
 
 .form-helper-text-error {
   color: rgba(206, 68, 68, 0.899);
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 400;
   font-size: 0.75rem;
   line-height: 1.66;
@@ -763,12 +745,12 @@ button {
   margin-top: 0px;
   margin-right: 0;
   margin-bottom: 2px;
-  margin-left: 0; 
+  margin-left: 0;
 }
 
-#form-helper-text{
+#form-helper-text {
   color: rgba(0, 0, 0, 0.6);
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 400;
   font-size: 0.75rem;
   line-height: 1.66;
@@ -805,7 +787,8 @@ button {
 }
 
 #event-info-card {
-  box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.15),
+  box-shadow:
+    0px 2px 6px 2px rgba(0, 0, 0, 0.15),
     0px 1px 2px 0px rgba(0, 0, 0, 0.3);
   border-radius: 1.2rem;
   background: var(--m-3-sys-light-surface-container, #f3edf7);
@@ -832,13 +815,13 @@ button {
 }
 
 #filter-btn {
-  color: var(--m-3-sys-light-on-primary, #4A4458);
-  background: var(--m-3-sys-light-primary, #CCC2DB);
+  color: var(--m-3-sys-light-on-primary, #4a4458);
+  background: var(--m-3-sys-light-primary, #ccc2db);
   display: flex;
   padding: 10px;
   padding-top: 15px;
   padding-bottom: 15px;
-  
+
   font-weight: bolder;
   font-size: medium;
   justify-content: center;
@@ -846,7 +829,7 @@ button {
 
 #event-all-audince {
   color: var(--m-3-sys-light-on-primary, #002018);
-  background: var(--m-3-sys-light-primary, #BEECDC);
+  background: var(--m-3-sys-light-primary, #beecdc);
   margin: 12px;
   display: flex;
   padding: 10px;
@@ -855,10 +838,9 @@ button {
   font-weight: bolder;
 }
 
-
 #event-private-audince {
-  color: var(--m-3-sys-light-on-primary, #31101D);
-  background: var(--m-3-sys-light-primary, #FFD9E3);
+  color: var(--m-3-sys-light-on-primary, #31101d);
+  background: var(--m-3-sys-light-primary, #ffd9e3);
   margin: 12px;
   display: flex;
   padding: 10px;
@@ -867,16 +849,14 @@ button {
   text-wrap: nowrap;
 }
 
-
-
-
 .event-description {
   padding: 8px;
   word-wrap: break-word;
 }
 
 #event-info-card-dark {
-  box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.15),
+  box-shadow:
+    0px 2px 6px 2px rgba(0, 0, 0, 0.15),
     0px 1px 2px 0px rgba(0, 0, 0, 0.3);
   border-radius: 1.2rem;
   background: var(--m-3-sys-light-surface-container, #f3edf7);
@@ -894,7 +874,6 @@ button {
   font-size: 16px;
   border-radius: 1.2rem;
   background: var(--m-3-sys-dark-surface-container, #211f26);
-
 }
 
 .card-helper-text-dark {
@@ -917,9 +896,12 @@ button {
   background: var(--m-3-sys-light-surface-container, #f3edf7);
   padding: 10px;
   color: var(--m-3-sys-light-on-surface-variant, #49454f);
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow:
+    rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 #event-card-attend-btn {
@@ -927,7 +909,8 @@ button {
   color: var(--m-3-sys-light-inverse-on-surface, #f5eff7);
   font-weight: bolder;
   font-size: x-large;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   width: 250px;
   display: inline-flex;
@@ -940,10 +923,9 @@ button {
   border-radius: 0.4rem;
 }
 
-
 #event-card-attended-btn {
-  color:  #CCC2DB;
-  background:  #332D41;
+  color: #ccc2db;
+  background: #332d41;
   font-weight: bolder;
   font-size: x-large;
   pointer-events: none;
@@ -958,43 +940,39 @@ button {
   border-radius: 0.4rem;
 }
 
-
-
-#suggestion-chip{
-  
-  height:32px;
+#suggestion-chip {
+  height: 32px;
   color: #1d1b20;
-  background-color: #f7f2fa ;
+  background-color: #f7f2fa;
   box-shadow: #000;
   font-weight: 500;
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
 
-.fb{
+.fb {
   font-weight: bolder;
 }
 
-#tabs{
+#tabs {
   display: flex;
   justify-content: space-around;
   padding: 8px;
-  background-color: #CCC2DB;
+  background-color: #ccc2db;
   border-radius: 10px;
   margin-bottom: 20px;
 }
 
-
-#tabs-btns{
-    font-size: larger;
-    font-weight: bolder;
-    background-color: #4D3D75;
-    color: #E9DDFF;
-    padding: 11px;
-    border-radius: 20px;
+#tabs-btns {
+  font-size: larger;
+  font-weight: bolder;
+  background-color: #4d3d75;
+  color: #e9ddff;
+  padding: 11px;
+  border-radius: 20px;
 }
 
-#attending-card-details{
+#attending-card-details {
   display: flex;
   text-align: left;
   justify-content: center;
@@ -1002,6 +980,12 @@ button {
   flex-direction: column;
 }
 
-.ta-c{
+.ta-c {
   text-align: center;
+}
+
+#verified-Icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }

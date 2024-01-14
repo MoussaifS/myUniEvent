@@ -11,32 +11,40 @@ import "@material/web/iconbutton/outlined-icon-button.js";
 import "@material/web/iconbutton/filled-tonal-icon-button.js";
 import { format } from "date-fns";
 import { useSearchParams } from "react-router-dom";
-
+import VerifiedIcon from "@mui/icons-material/Verified";
 import ShareWhatsappBtn from "../../../components/buttons/ShareWhatsappBtn";
 import locationIcon from "../../../assets/location-pin-svgrepo-com(1).svg";
 import FeeIcon from "../../../assets/fee-label-price-svgrepo-com.svg";
-import { Link  ,useLocation , useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Cards = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
 
+  console.log(props.event);
+
   const handleRedirctEvent = () => {
-    navigate(`/event/${encodeURIComponent(props.event.docId)}`, {  state: { from: location } });
-    <Link to={`/event/${encodeURIComponent(props.event.docId)}`} />
-  } 
+    navigate(`/event/${encodeURIComponent(props.event.docId)}`, {
+      state: { from: location },
+    });
+    <Link to={`/event/${encodeURIComponent(props.event.docId)}`} />;
+  };
 
-
-const handleTagPrams = (e) =>{
-  setSearchParams({ tag: e.target.label })
-}
-
-  
+  const handleTagPrams = (e) => {
+    setSearchParams({ tag: e.target.label });
+  };
 
   return (
-    <Card class="pr" sx={{ maxWidth: 700 }} onClick={handleRedirctEvent} >
+    <Card class="pr" sx={{ maxWidth: 700 }} onClick={handleRedirctEvent}>
+      {props.event.approved ? (
+        <VerifiedIcon id="verified-Icon" color="primary" fontSize="large" />
+      ) : null}
+
       <img src={props.event.image} id="card-image" />
+      
+
+
       <div className="fd-r">
         <span id="span-card-date">
           {format(new Date(props.event.startDate), "iii, LLL d")} •{" "}
@@ -44,12 +52,15 @@ const handleTagPrams = (e) =>{
         </span>
       </div>
 
+
       <div className="fd-r">
         <div>
-          <h2 id="card-title" >{props.event.title}</h2>
+          <h2 id="card-title">{props.event.title}</h2>
           <div className="fd-r">
             <img src={locationIcon} alt="Share" className="ml-5" />
-            <p className="card-helper-text">{props.event.adminClub} club under "{props.event.adminUni}"  </p> 
+            <p className="card-helper-text">
+              {props.event.adminClub} club under "{props.event.adminUni}"{" "}
+            </p>
           </div>
           <div className="fd-r">
             <img src={FeeIcon} alt="Share" className="ml-5" />
@@ -58,18 +69,18 @@ const handleTagPrams = (e) =>{
         </div>
       </div>
 
-        <div id="card-tag-container">
-          {props.event.tags.map((tag, index) => (
-            <span
-              id="card-tags"
-              key={index}
-            > | {tag} | </span>
-          ))}
-        </div>
+      <div id="card-tag-container">
+        {props.event.tags.map((tag, index) => (
+          <span id="card-tags" key={index}>
+            {" "}
+            | {tag} |{" "}
+          </span>
+        ))}
+      </div>
 
-        <div id="card-btns">
-          <ShareWhatsappBtn {...props} />
-        </div>
+      <div id="card-btns">
+        <ShareWhatsappBtn {...props} />
+      </div>
     </Card>
   );
 };
