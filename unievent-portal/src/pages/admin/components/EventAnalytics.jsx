@@ -5,8 +5,8 @@ import {
   AccordionSummary,
 } from "@mui/material";
 import { useState, useEffect } from "react";
+import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 
-import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../../FireBase";
 
 const EventAnalytics = (props) => {
@@ -16,6 +16,33 @@ const EventAnalytics = (props) => {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+
+
+  const [audience , setAudience] = useState([])
+
+  const fetchAudienceData = async (a) => {   
+    try {
+      const audienceDataQuery = await query(
+          collection(db, `events/${docID}/attendees`),
+          orderBy("name", "asc")
+        );
+     
+      const audienceInfoSnapshot = await getDocs(audienceDataQuery);
+      console.log(audienceInfoSnapshot)
+      await setAudience(audienceInfoSnapshot.docs.map((doc) =>doc.data())  );
+    } catch (error) {
+      console.log("An error occurred:", error);
+    }
+  };  
+
+  console.log(audience)
+
+
+ useEffect(() => {
+    fetchAudienceData();
+  }, [props.admin]);
+
+
 
   return (
     <div>

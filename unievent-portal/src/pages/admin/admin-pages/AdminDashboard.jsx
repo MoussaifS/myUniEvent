@@ -14,6 +14,13 @@ import "@material/web/fab/fab.js";
 import "@material/web/fab/branded-fab.js";
 import "@material/web/icon/icon.js";
 import "@material/web/ripple/ripple.js";
+
+
+
+import EventCalender from "../components/EventCalendar";
+
+
+
 const AdminDashboard = () => {
   const inputRef = useRef(null);
   const cookies = new Cookies();
@@ -30,24 +37,25 @@ const AdminDashboard = () => {
   }
 
   const fetchOrginizerData = async () => {
-    const docRef = doc(db, "organizer", aid);
-    await getDoc(docRef).then((docSnapshot) => {
-      if (docSnapshot.exists) {
+    try {
+      const docRef = doc(db, "organizer", aid);
+      await getDoc(docRef).then((docSnapshot) => {
         setAdmin(docSnapshot.data());
-      } else {
-        console.log("work harder");
-      }
-    });
+        setFetch(true);
+      })
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     fetchOrginizerData();
-    setFetch(true);
-  }, []);
+  }, [fetch]);
 
   return (
     <div className="df-c">
       <Nav admin />
+      
       <md-branded-fab
         label="Add New Event"
         id="createNewEvent-btn"

@@ -29,6 +29,8 @@ const AdminCards = (props) => {
   const admin = props.admin;
 
 
+  console.log(props)
+
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -45,8 +47,8 @@ const AdminCards = (props) => {
     deleteObject(imageStorageRef)
       .then(async () => {
         await deleteDoc(doc(db, "events", props.event.docId));
-        window.location.reload();
         console.log("Event and image deleted successfully");
+        props.setFetch(false)
       })
       .catch((error) => {
         console.error("Error deleting image or event:", error);
@@ -68,8 +70,10 @@ const AdminCards = (props) => {
           doc(db, `university/${event.adminUniID}/events`, `${event.docId}`),
           { approved: true }
         );
+        
       };
       updateEvent();
+      props.setFetch(false)
     } catch (error) {
       console.log(error);
     }

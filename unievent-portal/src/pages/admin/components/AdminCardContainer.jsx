@@ -9,12 +9,11 @@ import Filter from "../../../components/Filter";
 const AdminCardContainer = (props) => {
   const [events, setEvents] = useState([]);
   const [admin , setAdmin] = useState(null)
-  const [fetch, setFetch] = useState(false);
   const cookies = new Cookies();
   const uid = cookies.get("a_id");
+  const [fetch, setFetch] = useState(false);
 
-  const fetchEventData = async (a) => { 
-    console.log(a.supervisor)  
+  const fetchEventData = async (a) => {  
     try {
       var eventDataQuery = null
       if(a.supervisor){
@@ -32,8 +31,8 @@ const AdminCardContainer = (props) => {
       }
     
       const eventInfoSnapshot = await getDocs(eventDataQuery);
-      console.log(eventInfoSnapshot)
       await setEvents(eventInfoSnapshot.docs.map((doc) =>doc.data())  );
+      setFetch(true)
     } catch (error) {
       console.log("An error occurred:", error);
     }
@@ -42,20 +41,19 @@ const AdminCardContainer = (props) => {
   useEffect(() => {
     setAdmin(props.admin)
     fetchEventData(admin);
-    
-  }, []);
+  }, [props.admin , fetch]);
 
   return (
     <div id="cards-container">
         <div id="card-container">
-          {events.length == 0 ? (
+          { !fetch ? (
             <div id="noEvent">
               <span id="noEvent-span">No events found 😕</span>
               <p>To create a new event, please click the button below 🚀.</p>
             </div>
           ) : (
             events.map((event, index) => (
-              <AdminCards key={index} event={event} admin={admin} />
+              <AdminCards key={index} event={event} admin={admin}  setFetch={setFetch} />
             ))
           )}
         </div>
