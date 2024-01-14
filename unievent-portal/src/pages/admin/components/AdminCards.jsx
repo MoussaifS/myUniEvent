@@ -41,9 +41,9 @@ const AdminCards = (props) => {
     console.log("in func");
     const imageStorageRef = ref(
       storage,
-      `events/${props.event.title}:${props.event.docId}`
+      `event/${event.docId}:${event.title}`
     );
-
+    
     deleteObject(imageStorageRef)
       .then(async () => {
         await deleteDoc(doc(db, "events", props.event.docId));
