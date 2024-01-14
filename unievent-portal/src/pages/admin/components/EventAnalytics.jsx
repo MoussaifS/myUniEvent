@@ -8,15 +8,19 @@ import { useState, useEffect } from "react";
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 
 import { db } from "../../../FireBase";
+import { BarChart ,PieChart } from "@mui/x-charts";
 
 const EventAnalytics = (props) => {
   const [expanded, setExpanded] = useState(false);
   const [audience, setAudience] = useState([]);
+  const [counts, setCounts] = useState({
+    genders: { male: 0, female: 0 },
+    majors: {},
+  });
   const docId = props.docId;
   let gender = [];
   let attending = 0;
-  let university = []
-
+  let university = [];
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -30,34 +34,56 @@ const EventAnalytics = (props) => {
       );
       const audienceInfoSnapshot = await getDocs(audienceDataQuery);
       await setAudience(audienceInfoSnapshot.docs.map((doc) => doc.data()));
-
+      console.log(audience);
     } catch (error) {
       console.log("An error occurred:", error);
     }
   };
 
 
-  const [attendingMessage  , setAttendingMessage ] = useState('')
-  
+ 
 
 
-  
+
+  const [attendingMessage, setAttendingMessage] = useState("");
 
   useEffect(() => {
     fetchAudienceData();
-    console.log(audience.length)
+    console.log(audience.length);
 
-
-    switch (audience.length){
-      case 1 : 
-        setAttendingMessage("1 student is attending your event.")
-        break
-      case  audience.length > 1 : 
-        setAttendingMessage(`${audience.length} students are attending your event.`)
-        break
-      default: 
-        setAttendingMessage('no attendees yet')
+    switch (audience.length) {
+      case 1:
+        setAttendingMessage("1 student is attending your event.");
+        break;
+      case audience.length > 1:
+        setAttendingMessage(
+          `${audience.length} students are attending your event.`
+        );
+        break;
+      default:
+        setAttendingMessage("no attendees yet");
     }
+
+    function countAttributes(data) {
+      const result = {
+        genders: { male: 0, female: 0 },
+        majors: {},
+      };
+
+      data.forEach((entry) => {
+        // Count genders
+        const gender = entry.gender.toLowerCase();
+        result.genders[gender] = (result.genders[gender] || 0) + 1;
+
+        // Count majors
+        const major = entry.major.toLowerCase();
+        result.majors[major] = (result.majors[major] || 0) + 1;
+      });
+
+      setCounts(result);
+    }
+    countAttributes(audience);
+    console.log(counts);
   }, [expanded]);
 
   return (
@@ -76,21 +102,38 @@ const EventAnalytics = (props) => {
           <div>
             <div id="filter-secondary-span">Attendance:</div>
 
-           
             <div id="filter-Upcoming">{attendingMessage}</div>
           </div>
         </AccordionDetails>
 
         <AccordionDetails>
           <div id="filter-secondary-span">Gender:</div>
-          <div id="card-horzintal-scroll">ererrererre</div>
+          <div id="card-horzintal-scroll">
+            <BarChart
+              xAxis={[
+                {
+                  id: "barCategories",
+                  data: ["female", "male"],
+                  scaleType: "band",
+                },
+              ]}
+              series={[
+                {
+                  data: [counts.genders.female, counts.genders.male],
+                },
+              ]}
+              width={300}
+              height={200}
+            />
+          </div>
         </AccordionDetails>
 
         <AccordionDetails>
           <div id="filter-secondary-span">university:</div>
-          <div id="card-horzintal-scroll">ererrererre</div>
+          <div id="card-horzintal-scroll">
+          </div>
         </AccordionDetails>
-        <div>
+        <div >
           <span id="filter-btn">Detailed CSV Sheet</span>
         </div>
       </Accordion>

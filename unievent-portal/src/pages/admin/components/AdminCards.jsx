@@ -128,7 +128,7 @@ const AdminCards = (props) => {
             id="panel1bh-header"
           >
             <Typography level="h4" noWrap={false} variant="soft">
-              Details
+              Details:
             </Typography>
           </AccordionSummary>
 
@@ -160,11 +160,6 @@ const AdminCards = (props) => {
               </md-chip-set>
             </div>
           </div>
-
-          <AccordionDetails>
-            <div id="filter-secondary-span">Tags:</div>
-            <div id="card-horzintal-scroll">ererrererre</div>
-          </AccordionDetails>
         </Accordion>
       </div>
       
