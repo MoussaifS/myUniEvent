@@ -97,10 +97,6 @@ const Events = () => {
   };
 
 
-  console.log(user)
-  console.log(event)
-
-
 
 
   const handleAttending = async () => {

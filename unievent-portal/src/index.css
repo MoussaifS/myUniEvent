@@ -189,9 +189,8 @@ html {
   }
 
   #app {
-    margin-right: 15%;
-    margin-left: 15%;
-
+    margin-right: 20%;
+    margin-left: 20%;
   }
 
   .banerText {
@@ -507,19 +506,6 @@ button {
 }
 
 
-
-@media (min-width: 768px) { /* Target tablet-sized screens and larger */
-  #card-container {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Create flexible rows for cards */
-    flex-direction: row; /* Not needed for grid layout */
-    justify-content: center;
-    gap: 15px;
-    align-items: start;
-    justify-items: center;
-  }
-}
-
-
 .df-c {
   display: flex;
   flex-direction: column;
@@ -594,11 +580,7 @@ button {
   text-align: center;
 }
 
-#landing-image {
-  width: 50%;
-  object-fit: cover;
-  border-radius: 20px;
-}
+
 
 #card-image {
   border-radius: 20px;
@@ -606,23 +588,6 @@ button {
   height: 250px;
 }
 
-#landing-bannar {
-  display: flex;
-  background-color: #f6eeff;
-  padding: 5px;
-  border-radius: 20px;
-  margin-bottom: 10px;
-}
-
-#landing-text-bannar {
-  font-size: large;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-  line-height: 1.5;
-  margin-left: 5px;
-  margin-right: 5px;
-  text-align: center;
-}
 
 #landing-btn-explore {
   border: none;
@@ -642,20 +607,21 @@ button {
 }
 
 #landing-btn-create {
+  background-color: white;
+  color: #4f378a;
   border: none;
   font-weight: bolder;
   cursor: pointer;
   display: inline-block;
-  background-color: white;
-  box-shadow:
-    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  color: #4f378a;
   width: 80%;
   text-align: center;
   padding: 5px;
   border-radius: 30px;
   margin-bottom: 5px;
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
 }
 
 #landing-btn {
@@ -1002,4 +968,49 @@ button {
   position: absolute;
   right: 10px;
   top: 10px;
+}
+
+
+
+
+#landing-bannar {
+  display: flex;
+  background-color: #f6eeff;
+  padding: 5px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+#landing-text-bannar {
+  font-size: large;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+}
+
+#landing-image {
+  width: 200px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+
+@media (min-width: 768px) { /* Target tablet-sized screens and larger */
+  #card-container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Create flexible rows for cards */
+    flex-direction: row; /* Not needed for grid layout */
+    justify-content: center;
+    gap: 15px;
+    align-items: start;
+    justify-items: center;
+  }
+
+  #landing-bannar-container{
+    display: flex;
+  }
+
+
 }

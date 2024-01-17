@@ -6,11 +6,12 @@ import {
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
-
+import * as jsonexport from "jsonexport/dist"
 import { db } from "../../../FireBase";
 import { BarChart ,PieChart } from "@mui/x-charts";
-
 const EventAnalytics = (props) => {
+  
+
   const [expanded, setExpanded] = useState(false);
   const [audience, setAudience] = useState([]);
   const [counts, setCounts] = useState({
@@ -40,6 +41,37 @@ const EventAnalytics = (props) => {
     }
   };
 
+
+  const handleCSV = () => {
+    jsonexport(audience, function(err, csv){
+      if (err) return console.error(err);
+  
+      // Create a Blob from the CSV data
+      const blob = new Blob([csv], { type: 'text/csv' });
+  
+      // Create a download link
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      
+      // Set the filename for the download
+      link.download = 'audience_data.csv';
+  
+      // Append the link to the document
+      document.body.appendChild(link);
+  
+      // Trigger the click event on the link to start the download
+      link.click();
+  
+      // Remove the link from the document
+      document.body.removeChild(link);
+    });
+  };
+
+ 
+
+  console.log(audience)
+
+ 
 
  
 
@@ -127,14 +159,8 @@ const EventAnalytics = (props) => {
             />
           </div>
         </AccordionDetails>
-
-        <AccordionDetails>
-          <div id="filter-secondary-span">university:</div>
-          <div id="card-horzintal-scroll">
-          </div>
-        </AccordionDetails>
-        <div >
-          <span id="filter-btn">Detailed CSV Sheet</span>
+        <div>
+          <span id="filter-btn" onClick={handleCSV}>Detailed CSV Sheet</span>
         </div>
       </Accordion>
     </div>

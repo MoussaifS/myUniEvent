@@ -9,32 +9,11 @@ import { useState, useEffect } from "react";
 
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 
-import { eventTagList } from "../lists/EventTagsList";
 const Filter = (props) => {
   let [searchParams, setSearchParams] = useSearchParams();
   let [selectedTags, setSelectedTags] = useState(null);
 
-  const handleTag = (e) => {
-    let params = e.target.label;
-    let tag = e.target.label;
-    if (selectedTags.includes(tag)) {
-      // If the tag is already selected, remove it
-      const updatedTags = selectedTags.filter(
-        (selectedTag) => selectedTag !== tag
-      );
-      setSelectedTags(updatedTags);
 
-      const updatedParams = updatedTags.join(", ");
-      setSearchParams({ q: updatedParams });
-    } else {
-      // If the tag is not selected, add it
-      const updatedTags = [...selectedTags, tag];
-      setSelectedTags(updatedTags);
-
-      const updatedParams = updatedTags.join(", ");
-      setSearchParams({ q: updatedParams });
-    }
-  };
 
   useEffect(() => {}, [searchParams]);
 
@@ -100,22 +79,7 @@ const Filter = (props) => {
           </div>
         </AccordionDetails>
 
-        <AccordionDetails>
-          <div id="filter-secondary-span">Tags:</div>
-          <div id="card-horzintal-scroll">
-            {eventTagList.map((eventTag, index) => (
-              <md-filter-chip
-                id="tags-horzintal"
-                key={index}
-                label={eventTag.tag}
-                elevated
-                onClick={(e) => {
-                  handleTag(e);
-                }}
-              ></md-filter-chip>
-            ))}
-          </div>
-        </AccordionDetails>
+  
         <div>
           <span id="filter-btn">Apply</span>
         </div>

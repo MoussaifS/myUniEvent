@@ -38,6 +38,13 @@ const MainLandingPage = () => {
           </div>
         </div>
       </Container>
+
+
+
+
+      <div id="landing-bannar-container" >
+      
+      
       <div id="landing-bannar">
         <p id="landing-text-bannar">
           <a
@@ -74,6 +81,10 @@ const MainLandingPage = () => {
           and Share your upcoming events with us
         </p>
       </div>
+
+      
+      </div>
+      
 
       <span id="popular-events">Popular Events around You 🇲🇾</span>
       <CardContainer card={cards} landing={true} />
