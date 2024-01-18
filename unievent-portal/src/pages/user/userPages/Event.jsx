@@ -44,6 +44,8 @@ const Events = () => {
   const cookies = new Cookies();
   const uid = cookies.get("uid");
 
+  const [uni, setUni] = useState(null);
+
   const fetchEventData = async () => {
     try {
       const eventDataQuery = query(
@@ -80,6 +82,44 @@ const Events = () => {
     window.open(google(calenderUrl), "_blank");
   };
 
+
+  // const fetchUnitData = async () => {
+  //   try {
+  //     const eventDataQuery = query(
+  //       collection(db, "university"),
+  //       where("uniName", "==", event.adminUni)
+  //     );
+  //     const eventInfoSnapshot = await getDocs(eventDataQuery);
+  //     eventInfoSnapshot.docs.map((doc) => setUni(doc.data()));
+  //   } catch (error) {
+  //     console.log("Error fetching event data:", error);
+  //   }
+  // };
+
+
+  const handleLocation = async () => {
+    try {
+      const eventDataQuery = query(
+        collection(db, "university"),
+        where("uniName", "==", event.adminUni)
+      );
+  
+      const eventInfoSnapshot = await getDocs(eventDataQuery);
+  
+      if (eventInfoSnapshot.docs.length > 0) {
+        const universityData = eventInfoSnapshot.docs[0].data();  
+        const address = universityData.location;
+        const encodedAddress = encodeURIComponent(address);
+        const mapsURL = `https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`;
+        window.open(mapsURL, "_blank");
+      } else {
+        console.log("University not found.");
+      }
+    } catch (error) {
+      console.error("Error fetching university data:", error);
+    }
+  };
+  
   const fetchUserHistory = async () => {
     const eventsRef = collection(db, "users", uid, "events"); // Subcollection reference
     const eventDocRef = doc(eventsRef, id); // Reference to the specific document in the subcollection
@@ -165,7 +205,12 @@ const Events = () => {
     fetchEventData();
     fetchUserData();
     fetchUserHistory();
+    
   }, [id]);
+
+
+
+
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -202,8 +247,10 @@ const Events = () => {
                 <p className="card-helper-text">{event.adminUni} </p>
               </div>
 
-              <div>
-                <a id="event-card-btn" OnClick={handleLocation} >Open Map</a>
+              <div onClick={handleLocation}>
+                <a id="event-card-btn" >
+                  Open Map
+                </a>
               </div>
             </div>
 
