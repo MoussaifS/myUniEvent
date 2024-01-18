@@ -22,7 +22,6 @@ const Cards = (props) => {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  console.log(props.event);
 
   const handleRedirctEvent = () => {
     navigate(`/event/${encodeURIComponent(props.event.docId)}`, {

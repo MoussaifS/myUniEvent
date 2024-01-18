@@ -8,7 +8,7 @@ import {
 } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { db } from "../../../FireBase";
-
+import EventCarousel from "../components/EventCarousel"
 import Cookies from "universal-cookie";
 import Cards from "./Cards";
 import Filter from "../../../components/Filter";
@@ -66,6 +66,10 @@ const CardContainer = (props) => {
 
   return (
     <div id="cards-container">
+    
+    
+    <EventCarousel/>
+    
       {props.landing ? null : <Filter />}
 
       <div id="card-container">

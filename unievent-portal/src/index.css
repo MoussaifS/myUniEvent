@@ -521,6 +521,7 @@ button {
 .fd-r {
   display: flex;
   flex-direction: row;
+  
 }
 
 .m-10 {
@@ -1013,4 +1014,22 @@ button {
   }
 
 
+}
+
+#eventCarousel {
+  overflow: auto;
+  white-space: nowrap;
+  margin-bottom: 15px;
+  width: auto;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    margin-bottom: 15px;
+}
+
+  
+#cardCarouse {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
 }
