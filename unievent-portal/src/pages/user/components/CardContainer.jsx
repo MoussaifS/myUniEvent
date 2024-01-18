@@ -13,6 +13,9 @@ import Cookies from "universal-cookie";
 import Cards from "./Cards";
 import Filter from "../../../components/Filter";
 import { useSearchParams } from "react-router-dom";
+import { startOfWeek, endOfWeek, startOfMonth, endOfMonth } from 'date-fns';
+
+
 
 const CardContainer = (props) => {
   const [events, setEvents] = useState([]);
@@ -29,34 +32,67 @@ const CardContainer = (props) => {
 
   const fetchEventData = async () => {
     try {
-      
-      let eventDataQuery = null
-      if (searchParams.get("tag")) {
-        console.log('sss')
+      let eventDataQuery = null;
+  
+      if (searchParams.get("time")) {
+        let time = searchParams.get("time");
+        switch (time) {
+          case "This Week": {
+            const startOfWeekDate = startOfWeek(new Date(), { weekStartsOn: 1 });
+            const endOfWeekDate = endOfWeek(new Date(), { weekStartsOn: 1 });
+  
+            eventDataQuery = query(
+              collection(db, "events"),
+              where("startDate", ">=", startOfWeekDate),
+              where("startDate", "<=", endOfWeekDate),
+              orderBy("startDate", "asc")
+            );
+            break;
+          }
+  
+          case "This Month": {
+            const startOfMonthDate = startOfMonth(new Date());
+            const endOfMonthDate = endOfMonth(new Date());
+  
+            eventDataQuery = query(
+              collection(db, "events"),
+              where("startDate", ">=", startOfMonthDate),
+              where("startDate", "<=", endOfMonthDate),
+              orderBy("startDate", "asc")
+            );
+            break;
+          }
+  
+          default:
+            eventDataQuery = query(
+              collection(db, "events"),
+              orderBy("startDate", "asc")
+            );
+        }
+      } else if (searchParams.get("tag")) {
+        console.log('sss');
         eventDataQuery = query(
           collection(db, "events"),
-          where("tags", "array-contains", searchParams.get("tag") ),
+          where("tags", "array-contains", searchParams.get("tag")),
           orderBy("startDate", "asc")
         );
-      } 
-      
-      else if (props.varified){
-        
+      } else if (props.varified) {
         eventDataQuery = query(
           collection(db, "events"),
           orderBy("approved", "asc")
         );
-      }else {
+      } else {
         eventDataQuery = query(
           collection(db, "events"),
           orderBy("startDate", "asc")
         );
       }
+  
       const eventInfoSnapshot = await getDocs(eventDataQuery);
       const eventsData = eventInfoSnapshot.docs.map((doc) => doc.data());
       setEvents(eventsData);
     } catch (error) {
-      console.log("eat a fat dick and fix it:", error);
+      console.error("An error occurred while fetching event data:", error);
     }
   };
 
@@ -67,8 +103,8 @@ const CardContainer = (props) => {
   return (
     <div id="cards-container">
     
-    
-    <EventCarousel/>
+    {!userEmail? null :  <EventCarousel/>  }
+   
     
       {props.landing ? null : <Filter />}
 

@@ -58,13 +58,11 @@ const CreateEventForm = (props) => {
   //tags
   const handleTags = (tag) => {
     if (selectedTags.includes(tag)) {
-      // If the tag is already selected, remove it
       const updatedTags = selectedTags.filter(
         (selectedTag) => selectedTag !== tag
       );
       setSelectedTags(updatedTags);
     } else {
-      // If the tag is not selected, add it
       const updatedTags = [...selectedTags, tag];
       setSelectedTags(updatedTags);
     }

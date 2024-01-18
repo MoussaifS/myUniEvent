@@ -1011,6 +1011,7 @@ button {
   #landing-bannar-container{
     display: flex;
     gap: 10px;
+    justify-content: center;
   }
 
 
@@ -1032,4 +1033,5 @@ button {
   display: inline-block;
   vertical-align: middle;
   margin-right: 5px;
+  max-width: 300px;
 }

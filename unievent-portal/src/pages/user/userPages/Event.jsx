@@ -44,7 +44,6 @@ const Events = () => {
   const cookies = new Cookies();
   const uid = cookies.get("uid");
 
-
   const fetchEventData = async () => {
     try {
       const eventDataQuery = query(
@@ -69,11 +68,7 @@ const Events = () => {
     }
   };
 
-
-
-
   const handleCalender = () => {
-   
     const startTime = `${event.startDate} ${event.startTime} +08`;
     const calenderUrl = {
       title: event.title,
@@ -96,23 +91,19 @@ const Events = () => {
     }
   };
 
-
-
-
   const handleAttending = async () => {
-
-  
-
     if (uid == null) {
-      setErrorMessage("You need to log in to attend this event")
-      handleOpenFormClick()
-    } else if(event.adminUniID != user.universityID && event.audience == "Exclusive"){
-      setErrorMessage(`This event is Exclusive to ${event.adminUni} mebmers only 😔`)
-      handleOpenFormClick()
-    }
-    else
-
-    {
+      setErrorMessage("You need to log in to attend this event");
+      handleOpenFormClick();
+    } else if (
+      event.adminUniID != user.universityID &&
+      event.audience == "Exclusive"
+    ) {
+      setErrorMessage(
+        `This event is Exclusive to ${event.adminUni} mebmers only 😔`
+      );
+      handleOpenFormClick();
+    } else {
       const attendeeInfo = {
         name: user.fullName,
         university: user.university,
@@ -158,11 +149,16 @@ const Events = () => {
   }
 
   const handleContact = () => {
-    const message =
-      `🌟I hope this message finds all well ${event.adminClub}%0a` +
-      `had a few queries regarding the *${event.title}* event and would love to discuss them further.`;
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=+60${event.adminPhone}&text=${message}`;
-    window.open(whatsappUrl, "_blank");
+    if (uid == null) {
+      setErrorMessage("You need to log in to attend this event");
+      handleOpenFormClick();
+    } else {
+      const message =
+        `🌟I hope this message finds all well ${event.adminClub}%0a` +
+        `had a few queries regarding the *${event.title}* event and would love to discuss them further.`;
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=${event.adminPhone}&text=${message}`;
+      window.open(whatsappUrl, "_blank");
+    }
   };
 
   useEffect(() => {
@@ -173,7 +169,6 @@ const Events = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-
 
   const handleTagPrams = (e) => {
     const tag = e.target.label;
@@ -283,22 +278,21 @@ const Events = () => {
             </div>
 
             <div>
-              
-
-
-
-              {
-                attended ?
-                <a id= "event-card-attended-btn" onClick={handleAttending}> Attended </a> 
-                :
-                <a id= "event-card-attend-btn" onClick={handleAttending}> Attend </a> 
-              }
-
-
+              {attended ? (
+                <a id="event-card-attended-btn" onClick={handleAttending}>
+                  {" "}
+                  Attended{" "}
+                </a>
+              ) : (
+                <a id="event-card-attend-btn" onClick={handleAttending}>
+                  {" "}
+                  Attend{" "}
+                </a>
+              )}
 
               <md-dialog className="zi-99" ref={inputRef}>
                 <div className="df-c" slot="content" method="dialog">
-                  <h3 className="ta-c" >{errorMessage}</h3>
+                  <h3 className="ta-c">{errorMessage}</h3>
                   <md-outlined-button onClick={handleCloseFormClick}>
                     close
                   </md-outlined-button>

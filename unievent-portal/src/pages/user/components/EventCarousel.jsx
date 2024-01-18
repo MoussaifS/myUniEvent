@@ -1,8 +1,6 @@
 import Cookies from "universal-cookie";
 import { db } from "../../../FireBase";
-import {
-    Typography ,Card 
-  } from "@mui/material";
+import { Typography, Card } from "@mui/material";
 import {
   getDocs,
   query,
@@ -17,15 +15,14 @@ import {
 } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import { Link  ,useLocation , useNavigate } from "react-router-dom";
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const EventCarousel = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const cookies = new Cookies();
-  const [events, setEvents] = useState([]);
   const uid = cookies.get("uid");
+  const [events, setEvents] = useState([]);
   const [user, setUser] = useState(null);
   const [fetch, setFetch] = useState(false);
 
@@ -36,11 +33,9 @@ const EventCarousel = () => {
       await getDoc(docRef).then((docSnapshot) => {
         setUser(docSnapshot.data());
       });
-
     } catch (error) {
       console.log(error);
     }
-
   };
 
   useEffect(() => {
@@ -68,43 +63,38 @@ const EventCarousel = () => {
       fetchEventData();
     }
   }, [user]);
-  
+
   const handleRedirctEvent = (id) => {
-    navigate(`/event/${encodeURIComponent(id)}`, {  state: { from: location } });
-    <Link to={`/event/${encodeURIComponent(id)}`} />
-  }
+    navigate(`/event/${encodeURIComponent(id)}`, { state: { from: location } });
+    <Link to={`/event/${encodeURIComponent(id)}`} />;
+  };
 
   return (
-<div id="eventCarousel">
-    {events.map((event, index) => (
-    <Card className="fd-r" id="cardCarouse" color="neutral" key={index} variant="outlined"  onClick={()=>handleRedirctEvent(event.docId)}  >
-            <div className="fd-r" key={index}>
-         
-                <img loading="lazy" src={event.image} width={120} />
+    <div id="eventCarousel">
+    <div id="filter-secondary-span">based on your preferred event:</div>
+      {events.map((event, index) => (
+        <Card
+          className="fd-r"
+          id="cardCarouse"
+          color="neutral"
+          key={index}
+          variant="outlined"
+          onClick={() => handleRedirctEvent(event.docId)}
+        >
+          <div className="fd-r" key={index}>
+            <img loading="lazy" src={event.image} width={120} />
 
-              <div id="attending-card-details">
-                <p className="card-helper-text">
-                  {event.title}
-                </p>
+            <div id="attending-card-details">
+              <p className="card-helper-text">{event.title}</p>
 
-                <p id="card-tags">
-                  {format(new Date(event.startDate), "iii, LLL d")} •{" "}
-                  {event.startTime}
-                </p>
-              </div>
+              <p id="card-tags">
+                {format(new Date(event.startDate), "iii, LLL d")}
+              </p>
             </div>
-    </Card>
-    ))}
-
-
-    
-
-    
-
-
-  </div>
-
-  
+          </div>
+        </Card>
+      ))}
+    </div>
   );
 };
 
