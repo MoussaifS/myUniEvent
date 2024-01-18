@@ -13,8 +13,6 @@ const Filter = (props) => {
   let [searchParams, setSearchParams] = useSearchParams();
   let [selectedTags, setSelectedTags] = useState(null);
 
-
-
   useEffect(() => {}, [searchParams]);
 
   const [expanded, setExpanded] = useState(false);
@@ -23,6 +21,9 @@ const Filter = (props) => {
     setExpanded(isExpanded ? panel : false);
   };
 
+  const handleTag = (e) => {
+    console.log(e.target.value);
+  };
   const handleClearPrams = () => {
     searchParams.delete("tag");
   };
@@ -33,6 +34,7 @@ const Filter = (props) => {
     <div id="duck" className="mb-25">
       <Accordion
         className="ddddd"
+        value="car"
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}
       >
@@ -79,7 +81,6 @@ const Filter = (props) => {
           </div>
         </AccordionDetails>
 
-  
         <div>
           <span id="filter-btn">Apply</span>
         </div>

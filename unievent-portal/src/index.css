@@ -974,7 +974,6 @@ button {
 
 
 #landing-bannar {
-  display: flex;
   background-color: #f6eeff;
   padding: 5px;
   border-radius: 20px;
@@ -1010,6 +1009,7 @@ button {
 
   #landing-bannar-container{
     display: flex;
+    gap: 10px;
   }
 
 

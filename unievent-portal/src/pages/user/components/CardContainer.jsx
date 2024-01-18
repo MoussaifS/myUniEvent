@@ -38,13 +38,20 @@ const CardContainer = (props) => {
           where("tags", "array-contains", searchParams.get("tag") ),
           orderBy("startDate", "asc")
         );
-      } else {
+      } 
+      
+      else if (props.varified){
+        
+        eventDataQuery = query(
+          collection(db, "events"),
+          orderBy("approved", "asc")
+        );
+      }else {
         eventDataQuery = query(
           collection(db, "events"),
           orderBy("startDate", "asc")
         );
       }
-      // console.log(eventDataQuery)
       const eventInfoSnapshot = await getDocs(eventDataQuery);
       const eventsData = eventInfoSnapshot.docs.map((doc) => doc.data());
       setEvents(eventsData);
