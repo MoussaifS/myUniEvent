@@ -4,18 +4,21 @@ import {
   where,
   getDocs,
   orderBy,
-  limit,
 } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { db } from "../../../FireBase";
-import EventCarousel from "../components/EventCarousel"
+import EventCarousel from "../components/EventCarousel";
 import Cookies from "universal-cookie";
 import Cards from "./Cards";
 import Filter from "../../../components/Filter";
 import { useSearchParams } from "react-router-dom";
-import { startOfWeek, endOfWeek, startOfMonth, endOfMonth } from 'date-fns';
-
-
+import {
+  format,
+  startOfWeek,
+  endOfWeek,
+  startOfMonth,
+  endOfMonth,
+} from "date-fns";
 
 const CardContainer = (props) => {
   const [events, setEvents] = useState([]);
@@ -33,36 +36,36 @@ const CardContainer = (props) => {
   const fetchEventData = async () => {
     try {
       let eventDataQuery = null;
-  
+
       if (searchParams.get("time")) {
         let time = searchParams.get("time");
+        const startOfWeekDate = startOfWeek(new Date(), { weekStartsOn: 1 });
+        const endOfWeekDate = endOfWeek(new Date(), { weekStartsOn: 1 });
         switch (time) {
           case "This Week": {
-            const startOfWeekDate = startOfWeek(new Date(), { weekStartsOn: 1 });
-            const endOfWeekDate = endOfWeek(new Date(), { weekStartsOn: 1 });
-  
+            console.log(startOfWeekDate, endOfWeekDate);
             eventDataQuery = query(
               collection(db, "events"),
-              where("startDate", ">=", startOfWeekDate),
-              where("startDate", "<=", endOfWeekDate),
+              where("startDate", ">=", format(startOfWeekDate, "yyyy-MM-dd")),
+              where("startDate", "<=", format(endOfWeekDate, "yyyy-MM-dd")),
               orderBy("startDate", "asc")
             );
             break;
           }
-  
+
           case "This Month": {
             const startOfMonthDate = startOfMonth(new Date());
             const endOfMonthDate = endOfMonth(new Date());
-  
+            console.log(format(endOfMonthDate, "yyyy-MM-dd"));
             eventDataQuery = query(
               collection(db, "events"),
-              where("startDate", ">=", startOfMonthDate),
-              where("startDate", "<=", endOfMonthDate),
+              where("startDate", ">=", format(startOfMonthDate, "yyyy-MM-dd")),
+              where("startDate", "<=", format(endOfMonthDate, "yyyy-MM-dd")),
               orderBy("startDate", "asc")
             );
             break;
           }
-  
+
           default:
             eventDataQuery = query(
               collection(db, "events"),
@@ -70,7 +73,7 @@ const CardContainer = (props) => {
             );
         }
       } else if (searchParams.get("tag")) {
-        console.log('sss');
+        console.log("sss");
         eventDataQuery = query(
           collection(db, "events"),
           where("tags", "array-contains", searchParams.get("tag")),
@@ -87,7 +90,7 @@ const CardContainer = (props) => {
           orderBy("startDate", "asc")
         );
       }
-  
+
       const eventInfoSnapshot = await getDocs(eventDataQuery);
       const eventsData = eventInfoSnapshot.docs.map((doc) => doc.data());
       setEvents(eventsData);
@@ -102,10 +105,8 @@ const CardContainer = (props) => {
 
   return (
     <div id="cards-container">
-    
-    {!userEmail? null :  <EventCarousel/>  }
-   
-    
+      {!userEmail ? null : <EventCarousel />}
+
       {props.landing ? null : <Filter />}
 
       <div id="card-container">
