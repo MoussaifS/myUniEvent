@@ -203,7 +203,7 @@ const Events = () => {
               </div>
 
               <div>
-                <a id="event-card-btn">Open Map</a>
+                <a id="event-card-btn" OnClick={handleLocation} >Open Map</a>
               </div>
             </div>
 

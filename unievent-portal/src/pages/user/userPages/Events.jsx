@@ -24,6 +24,8 @@ const Events = () => {
     }
   };
 
+  
+
   return (
     <div>
     <Nav login/>
