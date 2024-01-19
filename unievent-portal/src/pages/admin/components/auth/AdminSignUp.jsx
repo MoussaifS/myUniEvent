@@ -4,13 +4,15 @@ import { useState , useEffect } from "react";
 import PersonalDetails from "../create_admin_form/PersonalDetails";
 import UniversityDetails from "../create_admin_form/UniverstiyDetails";
 import { setDoc, doc} from "firebase/firestore";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const CreateAdminForm = () => {
   const [submited, setSubmited] = useState(false);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [response, setResponse] = useState({});
-  
+  const navigate = useNavigate();
+  const location = useLocation();
 
 
   const createUser = async ()=> {
@@ -40,8 +42,7 @@ const CreateAdminForm = () => {
           console.log('sub')
           alert("accout is created you will be redirected to login");
         });
-
-          window.location.reload(true);
+          navigate("/user-auth", { replace: true, state: { from: location } });
         })
         .catch((error) => {
           if (error.code == "auth/email-dd-in-use") {
@@ -69,7 +70,7 @@ const CreateAdminForm = () => {
         id="form-container-create"
         style={currentStepIndex == 0 ? {} : { display: "none" }}
       >
-        <span id="form-title-span"> Tell Us about your Uni</span>
+        <span id="form-title-span"> Tell Us about your club and Uni</span>
         <UniversityDetails
           setCurrentStepIndex={setCurrentStepIndex}
           currentStepIndex={0}
@@ -82,13 +83,13 @@ const CreateAdminForm = () => {
       id="form-container-create"
       style={currentStepIndex == 1 ? {} : { display: "none" }}
     >
-      <span id="form-title-span"> Tell Us about your Uni</span>
+      <span id="form-title-span"> Set up the New Account</span>
       <PersonalDetails
         setCurrentStepIndex={setCurrentStepIndex}
         currentStepIndex={1}
         setResponse={setResponse}
         response={response}
-        submited={setSubmited}d2f213c6-417f-405e-9580-c3cd8a66413e
+        submited={setSubmited}
 
       />
     </div> 

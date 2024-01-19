@@ -84,7 +84,7 @@ const MainLandingPage = () => {
       </div>
       
 
-      <span id="popular-events">Upcoming Varifit Events: 🇲🇾</span>
+      <span id="popular-events">Upcoming Verified Events: 🇲🇾</span>
       <CardContainer card={cards} landing={true} varified />
     </div>
   );

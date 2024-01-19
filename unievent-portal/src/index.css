@@ -191,6 +191,7 @@ html {
   #app {
     margin-right: 20%;
     margin-left: 20%;
+    margin-bottom: 30px;
   }
 
   .banerText {
@@ -503,6 +504,7 @@ button {
   justify-content: center;
   gap: 15px;
   align-items: center;
+  margin-bottom: 30px;
 }
 
 

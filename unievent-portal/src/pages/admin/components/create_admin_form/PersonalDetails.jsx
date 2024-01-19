@@ -46,7 +46,7 @@ const PersonalDetails = (props) => {
     if (Object.keys(errors).length === 0) {
       props.setResponse({
         ...props.response,
-        phone: phone,
+        phone: `+60${phone}`,
         fullName: fullName,
         email: email,
         password: password,
@@ -85,7 +85,7 @@ const PersonalDetails = (props) => {
         value={phone}
         fullWidth
         error={errors.phone ? true : false}
-        helperText={errors.phone ? "Phone number should be 11 digits" : ""}
+        helperText={errors.phone ? "Phone number should be 10 digits" : ""}
         onChange={(e) => setPhone(e.target.value)}
       ></TextField>
       
