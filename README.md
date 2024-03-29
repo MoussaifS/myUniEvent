@@ -33,9 +33,12 @@ We welcome contributions via pull requests. If you're considering major changes,
 
 Here are some next steps for the project:
 
-- Migrate to AWS for improved scalability and reliability.
+- Migrate to AWS for hosting to maintian better future scalability .
+- clean over the CSS mess :)
 - Add test cases to ensure robustness and maintainability.
-- 
+- Refactor the code to follow standard design patterns and principles.
+- re-design the user flow (sign up and log in)
+- Introduce redis for memoization (to avoid expensive query processing).
 
 ## License
 

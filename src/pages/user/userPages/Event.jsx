@@ -190,7 +190,7 @@ const Events = () => {
 
   const handleContact = () => {
     if (uid == null) {
-      setErrorMessage("You need to log in to attend this event");
+      setErrorMessage("log in to contact the organizers ");
       handleOpenFormClick();
     } else {
       const message =
